@@ -127,6 +127,9 @@ else
   colorscheme solarized
 endif
 
+set guifont=Inconsolata-dz\ Regular:h12
+set guioptions-=L
+set transparency=10
 
 " Mini Buffer some settigns."
 let g:miniBufExplMapWindowNavVim = 1
@@ -136,7 +139,8 @@ let g:miniBufExplModSelTarget = 1
 
 " Mapping to NERDTree
 nmap <C-n> :NERDTreeToggle<CR>
-let NERDTreeIgnore=['\.vim$', '\~$', '\.git$', 'htaccess', '.DS_Store']
+let NERDTreeShowHidden=1
+let NERDTreeIgnore=['\.vim$', '\~$', '\.git$', '.DS_Store']
 
 " Mapping to minibuffer
 nmap <C-t> :bn<CR>
