@@ -125,11 +125,11 @@ else
   syntax enable
   set background=dark
   colorscheme solarized
+  set transparency=10
 endif
 
 set guifont=Inconsolata-dz\ Regular:h12
 set guioptions-=L
-set transparency=10
 
 " Mini Buffer some settigns."
 let g:miniBufExplMapWindowNavVim = 1
