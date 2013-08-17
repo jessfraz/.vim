@@ -27,18 +27,52 @@ set formatoptions=qrn1
 set number
 "set norelativenumber
 
+
+set autoindent
+set complete-=i
+set showmatch
+set smarttab
+
+set nrformats-=octal
+set shiftround
+
+set ttimeout
+set ttimeoutlen=50
+
 if has("vms")
   set nobackup		" do not keep a backup file, use versions instead
 else
   set backup		" keep a backup file
 endif
-set history=50		" keep 50 lines of command line history
+
+if &history < 1000
+  set history=50
+endif
+
+if &tabpagemax < 50
+  set tabpagemax=50
+endif
+
+if !empty(&viminfo)
+  set viminfo^=!
+endif
+
+set laststatus=2
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
 set nobackup
 set nowritebackup
 au FocusLost * :wa		" Set vim to save the file on focus out.
+
+if !&scrolloff
+  set scrolloff=1
+endif
+if !&sidescrolloff
+  set sidescrolloff=5
+endif
+set display+=lastline
+
 
 " For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
 " let &guioptions = substitute(&guioptions, "t", "", "g")
@@ -92,8 +126,6 @@ if has("autocmd")
 
 else
 
-  set autoindent		" always set autoindenting on
-
 endif " has("autocmd")
 
 " Convenient command to see the difference between the current buffer and the
@@ -128,6 +160,28 @@ else
   set transparency=10
 endif
 
+if &encoding ==# 'latin1' && has('gui_running')
+  set encoding=utf-8
+endif
+
+if &t_Co == 8 && $TERM !~# '^linux'
+  set t_Co=16
+endif
+
+if &listchars ==# 'eol:$'
+  set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+  if !has('win32') && (&termencoding ==# 'utf-8' || &encoding ==# 'utf-8')
+    let &listchars = "tab:\u21e5 ,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u00b7"
+  endif
+endif
+
+if &shell =~# 'fish$'
+  set shell=/bin/bash
+endif
+
+set autoread
+set fileformats+=mac
+
 set guifont=Inconsolata-dz\ Regular:h12
 set guioptions-=L
 
@@ -147,6 +201,11 @@ nmap <C-t> :bn<CR>
 
 " Fixes for .less files
 au BufNewFile,BufRead *.less set filetype=less
+
+" Load matchit.vim, but only if the user hasn't installed a newer version.
+if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
+  runtime! macros/matchit.vim
+endif
 	
 " Wildmenu completion "
 set wildignore+=.hg,.git,.svn " Version Controls"
