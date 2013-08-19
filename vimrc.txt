@@ -33,6 +33,10 @@ set complete-=i
 set showmatch
 set smarttab
 
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
 set nrformats-=octal
 set shiftround
 
@@ -210,7 +214,7 @@ endif
 " Wildmenu completion "
 set wildignore+=.hg,.git,.svn " Version Controls"
 set wildignore+=*.aux,*.out,*.toc "Latex Indermediate files"
-set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg "Binary Imgs"
+" set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg "Binary Imgs"
 set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest "Compiled Object files"
 set wildignore+=*.spl "Compiled speolling world list"
 set wildignore+=*.sw? "Vim swap files"
