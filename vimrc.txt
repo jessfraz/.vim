@@ -186,7 +186,7 @@ endif
 set autoread
 set fileformats+=mac
 
-set guifont=Inconsolata-dz\ Regular:h12
+set guifont=Consolas:h13
 set guioptions-=L
 
 " Mini Buffer some settigns."
