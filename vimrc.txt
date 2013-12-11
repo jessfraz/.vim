@@ -205,11 +205,6 @@ nmap <C-t> :bn<CR>
 
 " Fixes for .less files
 au BufNewFile,BufRead *.less set filetype=less
-
-" Load matchit.vim, but only if the user hasn't installed a newer version.
-if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
-  runtime! macros/matchit.vim
-endif
 	
 " Wildmenu completion "
 set wildignore+=.hg,.git,.svn " Version Controls"
