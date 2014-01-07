@@ -10,3 +10,4 @@ Just run the following commands via terminal to get perfectly set up:
     $ mv ~/.vim/vimrc.txt ~/.vimrc
 
 
+[![Analytics](https://ga-beacon.appspot.com/UA-29404280-16/.vim/README.md)](https://github.com/jfrazelle/.vim)
