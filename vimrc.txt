@@ -33,6 +33,7 @@ set complete-=i
 set showmatch
 set smarttab
 
+set et
 set tabstop=4
 set shiftwidth=4
 set expandtab
@@ -76,10 +77,6 @@ if !&sidescrolloff
   set sidescrolloff=5
 endif
 set display+=lastline
-
-
-" For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
-" let &guioptions = substitute(&guioptions, "t", "", "g")
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
@@ -140,37 +137,9 @@ if !exists(":DiffOrig")
 		  \ | wincmd p | diffthis
 endif
 
-" IMPORTANT: Uncomment one of the following lines to force
-" using 256 colors (or 88 colors) if your terminal supports it,
-" but does not automatically use 256 colors by default.
-set t_Co=256
-"set t_Co=88
-if (&t_Co == 256 || &t_Co == 88) && !has('gui_running') &&
-  \ filereadable(expand("$HOME/.vim/plugin/guicolorscheme.vim"))
-  " Use the guicolorscheme plugin to makes 256-color or 88-color
-  " terminal use GUI colors rather than cterm colors.
-  " runtime! plugin/guicolorscheme.vim
-  syntax enable
-  set background=dark
-  let g:solarized_termcolors=256
-  colorschem solarized
-  " GuiColorScheme solarized
-else
-  " For 8-color 16-color terminals or for gvim, just use the
-  " regular :colorscheme command.
-  syntax enable
-  set background=dark
-  colorscheme solarized
-  set transparency=10
-endif
-
-if &encoding ==# 'latin1' && has('gui_running')
-  set encoding=utf-8
-endif
-
-if &t_Co == 8 && $TERM !~# '^linux'
-  set t_Co=16
-endif
+syntax enable
+set background=dark
+colorscheme solarized
 
 if &listchars ==# 'eol:$'
   set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
@@ -186,7 +155,7 @@ endif
 set autoread
 set fileformats+=mac
 
-set guifont=Consolas:h13
+set guifont=Inconsolata:h15
 set guioptions-=L
 
 " Mini Buffer some settigns."
@@ -199,6 +168,7 @@ let g:miniBufExplModSelTarget = 1
 nmap <C-n> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\.vim$', '\~$', '\.git$', '.DS_Store']
+let NERDChristmasTree=1
 
 " Mapping to minibuffer
 nmap <C-t> :bn<CR>
@@ -214,7 +184,7 @@ set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest "Compiled Object files"
 set wildignore+=*.spl "Compiled speolling world list"
 set wildignore+=*.sw? "Vim swap files"
 set wildignore+=*.DS_Store "OSX SHIT"
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " Linux/MacOSX
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.tmp     " Linux/MacOSX
 set wildignore+=*.luac "Lua byte code"
 set wildignore+=migrations "Django migrations"
 set wildignore+=*.pyc "Python Object codes"
