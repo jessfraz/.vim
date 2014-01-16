@@ -64,3 +64,9 @@
 [submodule "bundle/vim-matchit"]
 	path = bundle/vim-matchit
 	url = git@github.com:tsaleh/vim-matchit.git
+[submodule "bundle/ack"]
+	path = bundle/ack
+    url = git@github.com:mileszs/ack.vim.git
+[submodule "bundle/vim-commentary"]
+	path = bundle/vim-commentary
+	url = git://github.com/tpope/vim-commentary.git
