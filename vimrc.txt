@@ -135,12 +135,14 @@ endif
 
 syntax enable
 if has('gui_running')
-    set transparency=4
+    set transparency=3
 endif
 set background=dark
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
-colorscheme solarized
+" let g:hybrid_use_Xresources = 1
+" let g:rehash256 = 1
+colorscheme solarized 
 
 if &listchars ==# 'eol:$'
   set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
@@ -174,8 +176,11 @@ let NERDChristmasTree=1
 " Mapping to minibuffer
 nmap <C-t> :bn<CR>
 
-" Set html highlighting to handlebars
+" Set html highlighting to mustache
 autocmd BufNewFile,BufRead *.html set ft=mustache
+
+" Javascript Libraries Used
+let g:used_javascript_libs = 'underscore,jquery'
 
 " Markdown turn off folding
 let g:vim_markdown_folding_disabled=1
