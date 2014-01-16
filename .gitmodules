@@ -61,3 +61,6 @@
 [submodule "bundle/javascript-libraries-syntax"]
 	path = bundle/javascript-libraries-syntax
 	url = git@github.com:othree/javascript-libraries-syntax.vim.git
+[submodule "bundle/vim-matchit"]
+	path = bundle/vim-matchit
+	url = git@github.com:tsaleh/vim-matchit.git
