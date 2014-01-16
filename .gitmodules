@@ -46,3 +46,6 @@
 [submodule "/Users/macinator/.vim/bundle/vim-json"]
 	path = /Users/macinator/.vim/bundle/vim-json
 	url = git@github.com:elzr/vim-json.git
+[submodule "/Users/macinator/.vim/bundle/vim-javascript"]
+	path = /Users/macinator/.vim/bundle/vim-javascript
+	url = git@github.com:pangloss/vim-javascript.git
