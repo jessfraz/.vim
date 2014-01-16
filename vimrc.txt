@@ -174,12 +174,6 @@ let NERDChristmasTree=1
 " Mapping to minibuffer
 nmap <C-t> :bn<CR>
 
-" Fixes for .less files
-" au BufNewFile,BufRead *.less set ft=less
-
-" Set json highlighting to javascript
-autocmd BufNewFile,BufRead *.json set ft=javascript
-
 " Set html highlighting to handlebars
 autocmd BufNewFile,BufRead *.html set ft=mustache
 
@@ -202,3 +196,4 @@ set wildignore+=*.luac "Lua byte code"
 set wildignore+=migrations "Django migrations"
 set wildignore+=*.pyc "Python Object codes"
 set wildignore+=*.orig "Merge resolution files"
+
