@@ -46,3 +46,18 @@
 [submodule "bundle/vim-json"]
 	path = bundle/vim-json
 	url = git@github.com:elzr/vim-json.git
+[submodule "bundle/vim-hybrid"]
+	path = bundle/vim-hybrid
+	url = git@github.com:w0ng/vim-hybrid.git
+[submodule "bundle/vim-molokai"]
+	path = bundle/vim-molokai
+	url = git@github.com:tomasr/molokai.git
+[submodule "bundle/vim-node"]
+	path = bundle/vim-node
+	url = git@github.com:moll/vim-node.git
+[submodule "bundle/vim-javascript-syntax"]
+	path = bundle/vim-javascript-syntax
+	url = git@github.com:jelera/vim-javascript-syntax.git
+[submodule "bundle/javascript-libraries-syntax"]
+	path = bundle/javascript-libraries-syntax
+	url = git@github.com:othree/javascript-libraries-syntax.vim.git
