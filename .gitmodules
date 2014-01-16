@@ -1,3 +1,45 @@
 [submodule "bundle/mustache"]
 	path = bundle/mustache
 	url = git://github.com/mustache/vim-mustache-handlebars.git
+[submodule "bundle/nerdtree"]
+	path = bundle/nerdtree
+    url = git@github.com:scrooloose/nerdtree.git
+[submodule "bundle/syntastic"]
+	path = bundle/syntastic
+    url = git@github.com:scrooloose/syntastic.git
+[submodule "bundle/tabular"]
+	path = bundle/tabular
+    url = git@github.com:godlygeek/tabular.git
+[submodule "bundle/vim-airline"]
+	path = bundle/vim-airline
+    url = git@github.com:bling/vim-airline.git
+[submodule "bundle/vim-colors-solarized"]
+	path = bundle/vim-colors-solarized
+    url = git@github.com:altercation/vim-colors-solarized.git
+[submodule "bundle/vim-css3-syntax"]
+	path = bundle/vim-css3-syntax
+    url = git@github.com:hail2u/vim-css3-syntax.git
+[submodule "bundle/vim-endwise"]
+	path = bundle/vim-endwise
+    url = git@github.com:tpope/vim-endwise.git
+[submodule "bundle/vim-fugitive"]
+	path = bundle/vim-fugitive
+    url = git@github.com:tpope/vim-fugitive.git
+[submodule "bundle/vim-gitgutter"]
+	path = bundle/vim-gitgutter
+    url = git@github.com:airblade/vim-gitgutter.git
+[submodule "bundle/vim-less"]
+	path = bundle/vim-less
+    url = git@github.com:groenewege/vim-less.git
+[submodule "bundle/vim-markdown"]
+	path = bundle/vim-markdown
+    url = git@github.com:plasticboy/vim-markdown.git
+[submodule "bundle/delimitMate.vim"]
+	path = bundle/delimitMate.vim
+    url = git@github.com:vim-scripts/delimitMate.vim.git
+[submodule "bundle/goyo.vim"]
+	path = bundle/goyo.vim
+    url = git@github.com:junegunn/goyo.vim.git
+[submodule "bundle/minibufexpl.vim"]
+	path = bundle/minibufexpl.vim
+    url = git@github.com:fholgado/minibufexpl.vim.git
