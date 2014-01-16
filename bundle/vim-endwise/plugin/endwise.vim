@@ -18,9 +18,8 @@ augroup endwise " {{{1
         \ let b:endwise_syngroups = 'luaFunction,luaStatement,luaCond'
   autocmd FileType elixir
         \ let b:endwise_addition = '\=submatch(0)=="{" ? "}" : "end"' |
-        \ let b:endwise_words = 'case,cond,bc,lc,inlist,inbits,if,unless,try,receive,function' |
-                                                      
-        \ let b:endwise_pattern = '^\(.*=\)\?\s*\zs\%(case\|cond\|bc\|lc\|inlist\|inbits\|if\|unless\|try\|receive\|function\)\>\%(.*[^.:@$]\<end\>\)\@!\|\<do\ze\%(\s*|.*|\)\=\s*$' |
+        \ let b:endwise_words = 'case,cond,bc,lc,inlist,inbits,if,unless,try,receive,function,fn' |
+        \ let b:endwise_pattern = '^\(.*=\)\?\s*\zs\%(case\|cond\|bc\|lc\|inlist\|inbits\|if\|unless\|try\|receive\|function\|fn\)\>\%(.*[^.:@$]\<end\>\)\@!\|\<do\ze\%(\s*|.*|\)\=\s*$' |
         \ let b:endwise_syngroups = 'elixirKeyword'
   autocmd FileType ruby
         \ let b:endwise_addition = '\=submatch(0)=="{" ? "}" : "end"' |
@@ -46,6 +45,10 @@ augroup endwise " {{{1
         \ let b:endwise_words = '#if,#ifdef,#ifndef' |
         \ let b:endwise_pattern = '^\s*#\%(if\|ifdef\|ifndef\)\s\+.\+$' |
         \ let b:endwise_syngroups = 'cPreCondit,cCppInWrapper,xdefaultsPreProc'
+  autocmd FileType matlab
+        \ let b:endwise_addition = '\=submatch(0)=="{" ? "}" : "end"' |
+        \ let b:endwise_words = 'function,if,for' |
+        \ let b:endwise_syngroups = 'matlabStatement,matlabFunction,matlabConditional,matlabRepeat'
 augroup END " }}}1
 
 " Maps {{{1
@@ -63,7 +66,7 @@ if !exists('g:endwise_no_mappings')
   elseif maparg('<CR>','i') =~ '<CR>'
     exe "imap <script> <C-X><CR> ".maparg('<CR>','i')."<SID>AlwaysEnd"
     exe "imap <script> <CR>      ".maparg('<CR>','i')."<SID>DiscretionaryEnd"
-  elseif maparg('<CR>','i') =~ '<Plug>delimitMateCR'
+  elseif maparg('<CR>','i') =~ '<Plug>\w\+CR'
     exe "imap <C-X><CR> ".maparg('<CR>', 'i')."<Plug>AlwaysEnd"
     exe "imap <CR> ".maparg('<CR>', 'i')."<Plug>DiscretionaryEnd"
   else

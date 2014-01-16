@@ -15,7 +15,7 @@ if exists("g:loaded_syntastic_c_ycm_checker")
 endif
 let g:loaded_syntastic_c_ycm_checker = 1
 
-function! SyntaxCheckers_c_ycm_IsAvailable()
+function! SyntaxCheckers_c_ycm_IsAvailable() dict
     return exists('g:loaded_youcompleteme')
 endfunction
 
@@ -23,10 +23,12 @@ if !exists('g:loaded_youcompleteme')
     finish
 endif
 
-function! SyntaxCheckers_c_ycm_GetLocList()
+function! SyntaxCheckers_c_ycm_GetLocList() dict
     return youcompleteme#CurrentFileDiagnostics()
 endfunction
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({
     \ 'filetype': 'c',
     \ 'name': 'ycm'})
+
+" vim: set et sts=4 sw=4:

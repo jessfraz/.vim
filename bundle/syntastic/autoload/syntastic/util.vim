@@ -1,4 +1,4 @@
-if exists("g:loaded_syntastic_util_autoload")
+if exists('g:loaded_syntastic_util_autoload')
     finish
 endif
 let g:loaded_syntastic_util_autoload = 1
@@ -6,17 +6,46 @@ let g:loaded_syntastic_util_autoload = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
-if !exists("g:syntastic_debug")
-    let g:syntastic_debug = 0
+if !exists('g:syntastic_delayed_redraws')
+    let g:syntastic_delayed_redraws = 0
 endif
 
-let s:deprecationNoticesIssued = []
+" strwidth() was added in Vim 7.3; if it doesn't exist, we use strlen()
+" and hope for the best :)
+let s:width = function(exists('*strwidth') ? 'strwidth' : 'strlen')
+
+let s:redraw_delayed = 0
+let s:redraw_full = 0
+
+if g:syntastic_delayed_redraws
+    " CursorHold / CursorHoldI events are triggered if user doesn't press a
+    " key for &updatetime ms.  We change it only if current value is the default
+    " value, that is 4000 ms.
+    if &updatetime == 4000
+        let &updatetime = 500
+    endif
+
+    augroup syntastic
+        autocmd CursorHold,CursorHoldI * call syntastic#util#redrawHandler()
+    augroup END
+endif
+
+" Public functions {{{1
+
+function! syntastic#util#isRunningWindows()
+    return has('win16') || has('win32') || has('win64')
+endfunction
 
 function! syntastic#util#DevNull()
-    if has('win32')
+    if syntastic#util#isRunningWindows()
         return 'NUL'
     endif
     return '/dev/null'
+endfunction
+
+" Get directory separator
+function! syntastic#util#Slash() abort
+    return !exists("+shellslash") || &shellslash ? '/' : '\'
 endfunction
 
 "search the first 5 lines of the file for a magic number and return a map
@@ -34,8 +63,8 @@ function! syntastic#util#parseShebang()
         let line = getline(lnum)
 
         if line =~ '^#!'
-            let exe = matchstr(line, '^#!\s*\zs[^ \t]*')
-            let args = split(matchstr(line, '^#!\s*[^ \t]*\zs.*'))
+            let exe = matchstr(line, '\m^#!\s*\zs[^ \t]*')
+            let args = split(matchstr(line, '\m^#!\s*[^ \t]*\zs.*'))
             return {'exe': exe, 'args': args}
         endif
     endfor
@@ -43,10 +72,15 @@ function! syntastic#util#parseShebang()
     return {'exe': '', 'args': []}
 endfunction
 
+" Parse a version string.  Return an array of version components.
+function! syntastic#util#parseVersion(version)
+    return split(matchstr( a:version, '\v^\D*\zs\d+(\.\d+)+\ze' ), '\m\.')
+endfunction
+
 " Run 'command' in a shell and parse output as a version string.
 " Returns an array of version components.
-function! syntastic#util#parseVersion(command)
-    return split(matchstr( system(a:command), '\v^\D*\zs\d+(\.\d+)+\ze' ), '\.')
+function! syntastic#util#getVersion(command)
+    return syntastic#util#parseVersion(system(a:command))
 endfunction
 
 " Verify that the 'installed' version is at least the 'required' version.
@@ -80,24 +114,23 @@ function! syntastic#util#wideMsg(msg)
     let old_ruler = &ruler
     let old_showcmd = &showcmd
 
-    "convert tabs to spaces so that the tabs count towards the window width
-    "as the proper amount of characters
-    let msg = substitute(a:msg, "\t", repeat(" ", &tabstop), "g")
-    let msg = strpart(msg, 0, winwidth(0)-1)
+    "This is here because it is possible for some error messages to
+    "begin with \n which will cause a "press enter" prompt.
+    let msg = substitute(a:msg, "\n", "", "g")
 
-    "This is here because it is possible for some error messages to begin with
-    "\n which will cause a "press enter" prompt. I have noticed this in the
-    "javascript:jshint checker and have been unable to figure out why it
-    "happens
-    let msg = substitute(msg, "\n", "", "g")
+    "convert tabs to spaces so that the tabs count towards the window
+    "width as the proper amount of characters
+    let chunks = split(msg, "\t", 1)
+    let msg = join(map(chunks[:-2], 'v:val . repeat(" ", &ts - s:width(v:val) % &ts)'), '') . chunks[-1]
+    let msg = strpart(msg, 0, winwidth(0) - 1)
 
     set noruler noshowcmd
-    redraw
+    call syntastic#util#redraw(0)
 
     echo msg
 
-    let &ruler=old_ruler
-    let &showcmd=old_showcmd
+    let &ruler = old_ruler
+    let &showcmd = old_showcmd
 endfunction
 
 " Check whether a buffer is loaded, listed, and not hidden
@@ -124,12 +157,20 @@ endfunction
 function! syntastic#util#findInParent(what, where)
     let here = fnamemodify(a:where, ':p')
 
+    let root = syntastic#util#Slash()
+    if syntastic#util#isRunningWindows() && here[1] == ':'
+        " The drive letter is an ever-green source of fun.  That's because
+        " we don't care about running syntastic on Amiga these days. ;)
+        let root = fnamemodify(root, ':p')
+        let root = here[0] . root[1:]
+    endif
+
     while !empty(here)
         let p = split(globpath(here, a:what), '\n')
 
         if !empty(p)
             return fnamemodify(p[0], ':p')
-        elseif here == '/'
+        elseif here ==? root
             break
         endif
 
@@ -156,46 +197,99 @@ endfunction
 
 " A less noisy shellescape()
 function! syntastic#util#shescape(string)
-    return a:string =~ '\m^[A-Za-z0-9_/.-]\+$' ? a:string : shellescape(a:string, 1)
+    return a:string =~ '\m^[A-Za-z0-9_/.-]\+$' ? a:string : shellescape(a:string)
 endfunction
 
 " A less noisy shellescape(expand())
 function! syntastic#util#shexpand(string)
-    return syntastic#util#shescape(escape(expand(a:string), '|'))
+    return syntastic#util#shescape(expand(a:string))
 endfunction
 
-function! syntastic#util#debug(msg)
-    if g:syntastic_debug
-        echomsg "syntastic: debug: " . a:msg
+" decode XML entities
+function! syntastic#util#decodeXMLEntities(string)
+    let str = a:string
+    let str = substitute(str, '\m&lt;', '<', 'g')
+    let str = substitute(str, '\m&gt;', '>', 'g')
+    let str = substitute(str, '\m&quot;', '"', 'g')
+    let str = substitute(str, '\m&apos;', "'", 'g')
+    let str = substitute(str, '\m&amp;', '\&', 'g')
+    return str
+endfunction
+
+" On older Vim versions calling redraw while a popup is visible can make
+" Vim segfault, so move redraws to a CursorHold / CursorHoldI handler.
+function! syntastic#util#redraw(full)
+    if !g:syntastic_delayed_redraws || !pumvisible()
+        call s:doRedraw(a:full)
+        let s:redraw_delayed = 0
+        let s:redraw_full = 0
+    else
+        let s:redraw_delayed = 1
+        let s:redraw_full = s:redraw_full || a:full
     endif
 endfunction
 
-function! syntastic#util#info(msg)
-    echomsg "syntastic: info: " . a:msg
-endfunction
-
-function! syntastic#util#warn(msg)
-    echohl WarningMsg
-    echomsg "syntastic: warning: " . a:msg
-    echohl None
-endfunction
-
-function! syntastic#util#error(msg)
-    execute "normal \<Esc>"
-    echohl ErrorMsg
-    echomsg "syntastic: error: " . a:msg
-    echohl None
-endfunction
-
-function! syntastic#util#deprecationWarn(msg)
-    if index(s:deprecationNoticesIssued, a:msg) >= 0
-        return
+function! syntastic#util#redrawHandler()
+    if s:redraw_delayed && !pumvisible()
+        call s:doRedraw(s:redraw_full)
+        let s:redraw_delayed = 0
+        let s:redraw_full = 0
     endif
+endfunction
 
-    call add(s:deprecationNoticesIssued, a:msg)
-    call syntastic#util#warn(a:msg)
+function! syntastic#util#dictFilter(errors, filter)
+    let rules = s:translateFilter(a:filter)
+    " call syntastic#log#debug(g:SyntasticDebugFilters, "applying filter:", rules)
+    try
+        call filter(a:errors, rules)
+    catch /\m^Vim\%((\a\+)\)\=:E/
+        let msg = matchstr(v:exception, '\m^Vim\%((\a\+)\)\=:\zs.*')
+        call syntastic#log#error('quiet_messages: ' . msg)
+    endtry
+endfunction
+
+" Private functions {{{1
+
+"Redraw in a way that doesnt make the screen flicker or leave anomalies behind.
+"
+"Some terminal versions of vim require `redraw!` - otherwise there can be
+"random anomalies left behind.
+"
+"However, on some versions of gvim using `redraw!` causes the screen to
+"flicker - so use redraw.
+function! s:doRedraw(full)
+    if a:full
+        redraw!
+    else
+        redraw
+    endif
+endfunction
+
+function! s:translateFilter(filters)
+    let conditions = []
+    for [k, v] in items(a:filters)
+        if type(v) == type([])
+            call extend(conditions, map(copy(v), 's:translateElement(k, v:val)'))
+        else
+            call add(conditions, s:translateElement(k, v))
+        endif
+    endfor
+    return len(conditions) == 1 ? conditions[0] : join(map(conditions, '"(" . v:val . ")"'), ' && ')
+endfunction
+
+function! s:translateElement(key, term)
+    if a:key ==? 'level'
+        let ret = 'v:val["type"] !=? ' . string(a:term[0])
+    elseif a:key ==? 'type'
+        let ret = a:term ==? 'style' ? 'get(v:val, "subtype", "") !=? "style"' : 'has_key(v:val, "subtype")'
+    elseif a:key ==? 'regex'
+        let ret = 'v:val["text"] !~? ' . string(a:term)
+    elseif a:key ==? 'file'
+        let ret = 'bufname(str2nr(v:val["bufnr"])) !~# ' . string(a:term)
+    endif
+    return ret
 endfunction
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
-" vim: set et sts=4 sw=4:
+" vim: set et sts=4 sw=4 fdm=marker:

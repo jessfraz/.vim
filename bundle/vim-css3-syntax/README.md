@@ -1,11 +1,14 @@
 vim-css3-syntax
 ===============
 
-Add CSS3 syntax support to vim's built-in `syntax/css.vim`.
+Add CSS3 syntax support to [Vim][1]'s built-in `syntax/css.vim`.
 
 
 INSTALLATION
 ------------
+
+I **strongly** recommend to install this plugin on *Vim 7.4 or higher with default runtime files*.
+
 
 ### Manual Installation
 
@@ -18,8 +21,10 @@ Download from GitHub, extract `vim-css3-syntax.tar.gz`, and copy the contents to
     $ git clone https://github.com/hail2u/vim-css3-syntax.git
 
 
-About Vendor Prefixes
----------------------
+NOTES
+-----
+
+### Vendor Prefixes
 
 I do not plan to support CSS3 properties (or functions) with vendor prefixes, such as `-webkit-` or `-moz-`, etc. These are hard to maintain because they are:
 
@@ -27,7 +32,7 @@ I do not plan to support CSS3 properties (or functions) with vendor prefixes, su
   * Changed unexpectedly
   * Removed silently
 
-These must be supported by seperate syntax plugins. Or, if you want to highlight prefixed properties or functions, `:highlight` and `:match` would help.
+These must be supported by separate syntax plugins (Vim 7.4's default CSS syntax file supports this). If you want to highlight prefixed properties or functions manually, `:highlight` and `:match` would help:
 
     :highlight VendorPrefix guifg=#00ffff gui=bold
     :match VendorPrefix /-\(moz\|webkit\|o\|ms\)-[a-zA-Z-]\+/
@@ -35,12 +40,26 @@ These must be supported by seperate syntax plugins. Or, if you want to highlight
 These commands highlight vendor prefixed properties and functions instantly with cyan and bold (on gVim).
 
 
+### CSS Preprocessors: [Sass][2], [LESS][3], and [Stylus][4]
+
+`vim-css3-syntax` supports Sass's SCSS syntax only. If you want use this plugin with LESS, install [VIM-LESS][5]. Sass's indent synatx and Stylus are not supported.
+
+
 HISTORY
 -------
 
-### v0.9 (in progress)
+### v0.9
 
+  * Add Compositing and Blending Level 1 features
   * Add CSS Fonts Module Level 3 features
+  * Add CSS Speech Module features
+  * Add Selectors Level 4 features
+  * Split CSS Counter Styles Level 3 features from `css3-lists.vim`
+  * Follow spec updates
+  * Add missing values
+  * Add notes about CSS preprocessors
+  * Fix test
+  * Add version checking
 
 
 ### v0.8
@@ -126,3 +145,10 @@ LICENSE
 -------
 
 MIT: http://hail2u.mit-license.org/2011
+
+
+[1]: http://www.vim.org/
+[2]: http://sass-lang.com/
+[3]: http://lesscss.org/
+[4]: http://learnboost.github.io/stylus/
+[5]: https://github.com/groenewege/vim-less

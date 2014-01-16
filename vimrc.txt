@@ -1,10 +1,6 @@
-filetype off
-call pathogen#incubate()
-call pathogen#infect()
-Helptags
+execute pathogen#infect()
+syntax on
 filetype plugin indent on
-filetype plugin on
-filetype on
 
 " When started as "evim", evim.vim will already have done these settings.
 if v:progname =~? "evim"
@@ -138,7 +134,12 @@ if !exists(":DiffOrig")
 endif
 
 syntax enable
+if has('gui_running')
+    set transparency=4
+endif
 set background=dark
+let g:solarized_termcolors=256
+let g:solarized_termtrans=1
 colorscheme solarized
 
 if &listchars ==# 'eol:$'
@@ -175,6 +176,12 @@ nmap <C-t> :bn<CR>
 
 " Fixes for .less files
 au BufNewFile,BufRead *.less set filetype=less
+
+" Markdown turn off folding
+let g:vim_markdown_folding_disabled=1
+
+" dont save .netrwhist history
+let g:netrw_dirhistmax=0
 	
 " Wildmenu completion "
 set wildignore+=.hg,.git,.svn " Version Controls"
@@ -189,3 +196,4 @@ set wildignore+=*.luac "Lua byte code"
 set wildignore+=migrations "Django migrations"
 set wildignore+=*.pyc "Python Object codes"
 set wildignore+=*.orig "Merge resolution files"
+

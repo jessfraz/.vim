@@ -23,31 +23,26 @@
 " - g:syntastic_tex_chktex_args (string; default: empty)
 "   command line options to pass to chktex
 
-if exists("g:loaded_syntastic_tex_chktex_checker")
+if exists('g:loaded_syntastic_tex_chktex_checker')
     finish
 endif
 let g:loaded_syntastic_tex_chktex_checker = 1
+
+let s:save_cpo = &cpo
+set cpo&vim
 
 if !exists('g:syntastic_tex_chktex_showmsgs')
     let g:syntastic_tex_chktex_showmsgs = 1
 endif
 
-function! SyntaxCheckers_tex_chktex_IsAvailable()
-    return executable("chktex")
-endfunction
-
-function! SyntaxCheckers_tex_chktex_GetLocList()
-    let makeprg = syntastic#makeprg#build({
-        \ 'exe': 'chktex',
-        \ 'post_args': '-q -v1',
-        \ 'filetype': 'tex',
-        \ 'subchecker': 'chktex' })
+function! SyntaxCheckers_tex_chktex_GetLocList() dict
+    let makeprg = self.makeprgBuild({ 'post_args': '-q -v1' })
 
     let errorformat =
-        \ '%EError\ %\\d%\\+\ in\ %f\ line\ %l:\ %m,' .
-        \ '%WWarning\ %\\d%\\+\ in\ %f\ line\ %l:\ %m,' .
-        \ (g:syntastic_tex_chktex_showmsgs ? '%WMessage\ %\\d%\\+\ in\ %f\ line %l:\ %m,' : '') .
-        \ '%+Z%p^,' .
+        \ '%EError %n in %f line %l: %m,' .
+        \ '%WWarning %n in %f line %l: %m,' .
+        \ (g:syntastic_tex_chktex_showmsgs ? '%WMessage %n in %f line %l: %m,' : '') .
+        \ '%Z%p^,' .
         \ '%-G%.%#'
 
     return SyntasticMake({
@@ -60,3 +55,8 @@ endfunction
 call g:SyntasticRegistry.CreateAndRegisterChecker({
     \ 'filetype': 'tex',
     \ 'name': 'chktex'})
+
+let &cpo = s:save_cpo
+unlet s:save_cpo
+
+" vim: set et sts=4 sw=4:

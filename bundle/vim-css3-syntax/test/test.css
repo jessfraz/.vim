@@ -62,13 +62,31 @@
 }
 
 .cascade {
-  all: default;
+  all: unset;
 }
 
 .colors {
   opacity: rgba(0, 0, 0, 1);
-  display: hsla(0, 0, 0, 1)
+  display: hsla(0, 0, 0, 1);
   display: currentColor;
+}
+
+.compositing {
+  mix-blend-mode: multiply;
+  isolation: screen;
+  background-blend-mode: overlay;
+  display: darken;
+  display: lighten;
+  display: color-dodge;
+  display: color-burn;
+  display: hard-light;
+  display: soft-light;
+  display: difference;
+  display: exclusion;
+  display: hue;
+  display: saturation;
+  display: color;
+  display: luminosity;
 }
 
 .content {
@@ -76,6 +94,18 @@
   page-policy: here;
   display: first;
   display: last;
+}
+
+.counter-styles {
+  negative: disclosure-open;
+  prefix: disclosure-closed;
+  suffix: simp-chinese-informal;
+  range: simp-chinese-formal;
+  pad: trad-chinese-informal;
+  fallback: trad-chinese-formal;
+  symbols: ethiopic-numeric;
+  additive-symbols: symbols("*" "\2020" "\2021" "\A7");
+  speak-as: auto;
 }
 
 .exclusions {
@@ -144,19 +174,22 @@
 }
 
 .grid-layout {
-  grid-after: grid;
-  grid-area: subgrid;
-  grid-auto-columns: rows;
-  grid-auto-flow: inline-grid;
-  grid-auto-rows: auto;
-  grid-before: auto;
+  grid-template-columns: grid;
+  grid-template-rows: inline-grid;
+  grid-template-areas: minmax(0, 1);
+  grid-template: repeat(4);
+  grid-auto-columns: 0.2fr;
+  grid-auto-rows: subgrid;
+  grid-auto-flow: rows;
+  grid-auto-position: columns;
+  grid: dense;
+  grid-row-start: span;
+  grid-column-start: auto;
+  grid-row-end: auto;
+  grid-column-end: auto;
   grid-column: auto;
-  grid-definition-columns: auto;
-  grid-definition-rows: auto;
-  grid-end: auto;
   grid-row: auto;
-  grid-start: auto;
-  grid-template: auto;
+  grid-area: auto;
 }
 
 .hyperlinks {
@@ -209,119 +242,7 @@
 }
 
 .lists::marker {
-  type: box;
-  negative: check;
-  prefix: afar;
-  suffix: agaw;
-  range: ancient-tamil;
-  fallback: arabic-indic;
-  glyphs: ari;
-  additive-glyphs: asterisks;
-  display: bengali;
-  display: binary;
-  display: blin;
-  display: burmese;
-  display: cambodian;
-  display: circled-decimal;
-  display: circled-korean-consonants;
-  display: circled-korean-syllables;
-  display: circled-lower-latin;
-  display: circled-upper-latin;
-  display: cjk-decimal;
-  display: cjk-earthly-branch;
-  display: cjk-heavenly-stem;
-  display: dash;
-  display: devanagari;
-  display: diamond;
-  display: dizi;
-  display: dotted-decimal;
-  display: double-circled-decimal;
-  display: eastern-nagari;
-  display: filled-circled-decimal;
-  display: footnotes;
-  display: fullwidth-decimal;
-  display: fullwidth-lower-alpha;
-  display: fullwidth-lower-roman;
-  display: fullwidth-upper-alpha;
-  display: fullwidth-upper-roman;
-  display: gedeo;
-  display: greek;
-  display: gujarati;
-  display: gumuz;
-  display: gurmukhi;
-  display: hadiyya;
-  display: harari;
-  display: hindi;
-  display: japanese-formal;
-  display: japanese-informal;
-  display: kaffa;
-  display: kannada;
-  display: kebena;
-  display: kembata;
-  display: khmer;
-  display: konso;
-  display: korean-consonant;
-  display: korean-hangul-formal;
-  display: korean-hanja-formal;
-  display: korean-hanja-informal;
-  display: korean-syllable;
-  display: kunama;
-  display: lao;
-  display: lepcha;
-  display: lower-alpha-symbolic;
-  display: lower-armenian;
-  display: lower-belorussian;
-  display: lower-bulgarian;
-  display: lower-hexadecimal;
-  display: lower-macedonian;
-  display: lower-oromo-qubee;
-  display: lower-russian;
-  display: lower-russian-full;
-  display: lower-serbo-croatian;
-  display: lower-ukrainian;
-  display: lower-ukrainian-full;
-  display: malayalam;
-  display: marathi;
-  display: meen;
-  display: mongolian;
-  display: myanmar;
-  display: new-base-60;
-  display: octal;
-  display: oriya;
-  display: oromo;
-  display: parenthesized-decimal;
-  display: parenthesized-hangul-consonants;
-  display: parenthesized-hangul-syllable;
-  display: parenthesized-lower-latin;
-  display: persian;
-  display: persian-abjad;
-  display: persian-alphabetic;
-  display: saho;
-  display: sidama;
-  display: silti;
-  display: simple-lower-roman;
-  display: simple-upper-roman;
-  display: super-decimal;
-  display: tamil;
-  display: telugu;
-  display: thai;
-  display: thai-alphabetic;
-  display: tibetan;
-  display: tigre;
-  display: upper-alpha-symbolic;
-  display: upper-armenian;
-  display: upper-belorussian;
-  display: upper-bulgarian;
-  display: upper-hexadecimal;
-  display: upper-macedonian;
-  display: upper-oromo-qubee;
-  display: upper-russian;
-  display: upper-russian-full;
-  display: upper-serbo-croatian;
-  display: upper-ukrainian;
-  display: upper-ukrainian-full;
-  display: wolaita;
-  display: yemsa;
+  display: auto;
 }
 
 .marquee {
@@ -335,11 +256,11 @@
 }
 
 .masking {
-  mask-image: evenodd;
+  mask-image: alpha;
   mask-source-type: luminance;
-  mask-repeat: alpha;
-  mask-position: auto;
-  mask-clip: auto;
+  mask-repeat: no-clip;
+  mask-position: nonzero;
+  mask-clip: evenodd;
   mask-origin: auto;
   mask-size: auto;
   mask: auto;
@@ -395,60 +316,68 @@
 }
 
 .ruby {
-  ruby-align: start;
-  ruby-overhang: end;
-  ruby-position: distribute-letter;
-  ruby-span: distribute-space;
-  display: line-edge;
+  ruby-merge: ruby-text-container;
+  ruby-align: inter-character;
+  ruby-position: ruby-base-container;
 }
 
-.selectors:not([DISABLED]),
-.selectors:matches(:hover, :focus),
-.selectors:any-link,
-.selectors:local-link,
-.selectors:local-link(0),
-.selectors:target,
-.selectors:scope,
-.selectors:current,
-.selectors:current(p, li, dt, dd),
-.selectors:past,
-.selectors:future,
-.selectors:enabled,
-.selectors:disabled,
-.selectors:checked,
-.selectors:indeterminate,
-.selectors:default,
-.selecors:in-range,
-.selectors:out-of-range,
-.selectors:required,
-.selectors:optional,
-.selectors:read-only,
-.selectors:read-write,
-.selectors:root,
-.selectors:empty,
-.selectors:nth-child(2n+1),
-.selectors:last-child,
-.selectors:nth-last-child(-n+2),
-.selectors:only-child,
-.selectors:first-of-type,
-.selectors:nth-of-type(2n+1),
-.selectors:last-of-type,
-.selectors:nth-last-of-type(n+2),
-.selectors:only-of-type,
-.selectors:nth-match(2n+1),
-.selectors:nth-last-match(-n+2),
-.selectors:column(p, li, dt, dd),
-.selectors:nth-column(2n+1),
-.selectors:nth-last-column(-n+2) {
+.selectors3:not([DISABLED]),
+.selectors3:matches(:hover, :focus),
+.selectors3:any-link,
+.selectors3:local-link,
+.selectors3:local-link(0),
+.selectors3:target,
+.selectors3:scope,
+.selectors3:current,
+.selectors3:current(p, li, dt, dd),
+.selectors3:past,
+.selectors3:future,
+.selectors3:enabled,
+.selectors3:disabled,
+.selectors3:checked,
+.selectors3:indeterminate,
+.selectors3:default,
+.selectors3:in-range,
+.selectors3:out-of-range,
+.selectors3:required,
+.selectors3:optional,
+.selectors3:read-only,
+.selectors3:read-write,
+.selectors3:root,
+.selectors3:empty,
+.selectors3:nth-child(2n+1),
+.selectors3:last-child,
+.selectors3:nth-last-child(-n+2),
+.selectors3:only-child,
+.selectors3:first-of-type,
+.selectors3:nth-of-type(2n+1),
+.selectors3:last-of-type,
+.selectors3:nth-last-of-type(n+2),
+.selectors3:only-of-type,
+.selectors3:nth-match(2n+1),
+.selectors3:nth-last-match(-n+2),
+.selectors3:column(p, li, dt, dd),
+.selectors3:nth-column(2n+1),
+.selectors3:nth-last-column(-n+2) {
+  display: auto;
+}
+
+foo | h1,
+.selectors4:dir(ltr),
+.selectors4:active-drop-target,
+.selectors4:valid-drop-target,
+.selectors4:invalid-drop-target,
+.selectors4:placeholder-shown,
+.selectors4:user-error {
   display: auto;
 }
 
 .shapes {
-  shape-image-threshold: rectangle(1px 1px 1198px 398px);
-  shape-inside: inset-rectangle(400px 100px 400px 200px);
-  shape-outside: circle(600px 200px 100px);
+  shape-outside: margin-box;
+  shape-image-threshold: inset(50% 50% 50% 50%);
+  shape-margin: circle(100px 50px 100px);
   display: ellipse(0 0 250px 100px);
-  display: polygon(350px,75px  379px,161px 469px,161px 397px,215px 423px,301px 350px,250px 277px,301px 303px,215px 231px,161px 321px,161px);
+  display: polygon(0 0, 100% 100%, 0 100%);
 }
 
 .sizing {
@@ -457,6 +386,23 @@
   display: fill-available;
   display: repudiate-floats;
   display: contain-floats;
+}
+
+.speech {
+  voice-volume: 10dB;
+  voice-balance: literal-punctuation;
+  rest-before: no-punctuation;
+  rest-after: x-weak;
+  rest: weak;
+  voice-rate: strong;
+  voice-pitch: x-strong;
+  voice-range: young;
+  voice-stress: old;
+  voice-duration: neutral;
+  display: preserve;
+  display: 10st;
+  display: moderate;
+  display: reduced;
 }
 
 @supports (display: auto) or
@@ -468,24 +414,13 @@
 }
 
 .text {
-  hanging-punctuation: loose;
-  line-break: strict;
-  word-wrap: auto;
-  overflow-wrap: hanging;
-  tab-size: distribute;
-  text-align-last: kashida;
-  text-autospace: preserve;
-  text-justify: each-line;
-  text-shadow: allow-end;
-  text-underline-position: keep-all;
-  word-break: double-circle;
-  display: inter-word;
-  display: inter-ideograph;
-  display: inter-cluster;
-  display: preserve-breaks;
+  hyphens: manual;
+  line-break: loose;
+  overflow-wrap: strict;
+  tab-size: match-parent;
+  display: hanging;
+  display: each-line;
   display: full-width;
-  display: break-all;
-  display: break-word;
 }
 
 .text-decor-3 {
