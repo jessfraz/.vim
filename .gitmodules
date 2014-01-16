@@ -43,9 +43,6 @@
 [submodule "bundle/minibufexpl.vim"]
 	path = bundle/minibufexpl.vim
     url = git@github.com:fholgado/minibufexpl.vim.git
-[submodule "/Users/macinator/.vim/bundle/vim-json"]
-	path = /Users/macinator/.vim/bundle/vim-json
+[submodule "bundle/vim-json"]
+	path = bundle/vim-json
 	url = git@github.com:elzr/vim-json.git
-[submodule "/Users/macinator/.vim/bundle/vim-javascript"]
-	path = /Users/macinator/.vim/bundle/vim-javascript
-	url = git@github.com:pangloss/vim-javascript.git
