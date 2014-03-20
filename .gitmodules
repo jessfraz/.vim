@@ -76,3 +76,6 @@
 [submodule "bundle/vim-indent-lines"]
     path = bundle/vim-indent-lines
 	url = git@github.com:Yggdroot/indentLine.git
+[submodule "bundle/Dockerfile"]
+	path = bundle/Dockerfile
+	url = https://github.com/ekalinin/Dockerfile.vim.git
