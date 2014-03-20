@@ -67,9 +67,6 @@
 [submodule "bundle/ack"]
 	path = bundle/ack
     url = git@github.com:mileszs/ack.vim.git
-[submodule "bundle/vim-commentary"]
-	path = bundle/vim-commentary
-    url = git://github.com/tpope/vim-commentary.git
 [submodule "bundle/jshint.vim"]
 	path = bundle/jshint.vim
     url = git@github.com:wookiehangover/jshint.vim.git
