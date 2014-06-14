@@ -37,21 +37,12 @@
 [submodule "bundle/delimitMate.vim"]
 	path = bundle/delimitMate.vim
     url = git@github.com:vim-scripts/delimitMate.vim.git
-[submodule "bundle/goyo.vim"]
-	path = bundle/goyo.vim
-    url = git@github.com:junegunn/goyo.vim.git
 [submodule "bundle/minibufexpl.vim"]
 	path = bundle/minibufexpl.vim
     url = git@github.com:fholgado/minibufexpl.vim.git
 [submodule "bundle/vim-json"]
 	path = bundle/vim-json
 	url = git@github.com:elzr/vim-json.git
-[submodule "bundle/vim-hybrid"]
-	path = bundle/vim-hybrid
-	url = git@github.com:w0ng/vim-hybrid.git
-[submodule "bundle/vim-molokai"]
-	path = bundle/vim-molokai
-	url = git@github.com:tomasr/molokai.git
 [submodule "bundle/vim-node"]
 	path = bundle/vim-node
 	url = git@github.com:moll/vim-node.git
@@ -61,9 +52,6 @@
 [submodule "bundle/javascript-libraries-syntax"]
 	path = bundle/javascript-libraries-syntax
 	url = git@github.com:othree/javascript-libraries-syntax.vim.git
-[submodule "bundle/vim-matchit"]
-	path = bundle/vim-matchit
-	url = git@github.com:tsaleh/vim-matchit.git
 [submodule "bundle/ack"]
 	path = bundle/ack
     url = git@github.com:mileszs/ack.vim.git
