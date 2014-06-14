@@ -55,9 +55,6 @@
 [submodule "bundle/ack"]
 	path = bundle/ack
     url = git@github.com:mileszs/ack.vim.git
-[submodule "bundle/jshint.vim"]
-	path = bundle/jshint.vim
-    url = git@github.com:wookiehangover/jshint.vim.git
 [submodule "bundle/vim-indent-lines"]
     path = bundle/vim-indent-lines
 	url = git@github.com:Yggdroot/indentLine.git
