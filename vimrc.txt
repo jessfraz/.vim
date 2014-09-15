@@ -87,6 +87,12 @@ if has('mouse')
   set mouse=a
 endif
 
+" If linux then set ttymouse
+let s:uname = system("echo -n \"$(uname)\"")
+if !v:shell_error && s:uname == "Linux"
+  set ttymouse=xterm
+endif
+
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
@@ -146,7 +152,7 @@ let g:solarized_termcolors=256
 let g:solarized_termtrans=1
 " let g:hybrid_use_Xresources = 1
 " let g:rehash256 = 1
-colorscheme solarized 
+colorscheme solarized
 
 if &listchars ==# 'eol:$'
   set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
@@ -180,18 +186,12 @@ let NERDChristmasTree=1
 " Mapping to minibuffer
 nmap <C-t> :bn<CR>
 
-" Set html highlighting to mustache
-autocmd BufNewFile,BufRead *.html set ft=mustache
-
-" Javascript Libraries Used
-let g:used_javascript_libs = 'underscore,jquery'
-
 " Markdown turn off folding
 let g:vim_markdown_folding_disabled=1
 
 " dont save .netrwhist history
 let g:netrw_dirhistmax=0
-	
+
 " Wildmenu completion "
 set wildignore+=.hg,.git,.svn " Version Controls"
 set wildignore+=*.aux,*.out,*.toc "Latex Indermediate files"
@@ -206,3 +206,19 @@ set wildignore+=migrations "Django migrations"
 set wildignore+=*.pyc "Python Object codes"
 set wildignore+=*.orig "Merge resolution files"
 
+" Enable neocomplete on start
+if has("lua")
+  " Disable AutoComplPop.
+  let g:acp_enableAtStartup = 0
+  let g:neocomplete#enable_omni_fallback=0
+
+  " Use neocomplete.
+  let g:neocomplete#enable_at_startup = 1
+
+  " Use smartcase.
+  let g:neocomplete#enable_smart_case = 1
+
+  " Set minimum syntax keyword length.
+  let g:neocomplete#sources#syntax#min_keyword_length = 3
+  let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+endif

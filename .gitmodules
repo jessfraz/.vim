@@ -1,6 +1,3 @@
-[submodule "bundle/mustache"]
-	path = bundle/mustache
-	url = git://github.com/mustache/vim-mustache-handlebars.git
 [submodule "bundle/nerdtree"]
 	path = bundle/nerdtree
     url = git@github.com:scrooloose/nerdtree.git
@@ -16,9 +13,6 @@
 [submodule "bundle/vim-colors-solarized"]
 	path = bundle/vim-colors-solarized
     url = git@github.com:altercation/vim-colors-solarized.git
-[submodule "bundle/vim-css3-syntax"]
-	path = bundle/vim-css3-syntax
-    url = git@github.com:hail2u/vim-css3-syntax.git
 [submodule "bundle/vim-endwise"]
 	path = bundle/vim-endwise
     url = git@github.com:tpope/vim-endwise.git
@@ -40,18 +34,6 @@
 [submodule "bundle/minibufexpl.vim"]
 	path = bundle/minibufexpl.vim
     url = git@github.com:fholgado/minibufexpl.vim.git
-[submodule "bundle/vim-json"]
-	path = bundle/vim-json
-	url = git@github.com:elzr/vim-json.git
-[submodule "bundle/vim-node"]
-	path = bundle/vim-node
-	url = git@github.com:moll/vim-node.git
-[submodule "bundle/vim-javascript"]
-	path = bundle/vim-javascript
-    url = git@github.com:pangloss/vim-javascript.git
-[submodule "bundle/javascript-libraries-syntax"]
-	path = bundle/javascript-libraries-syntax
-	url = git@github.com:othree/javascript-libraries-syntax.vim.git
 [submodule "bundle/ack"]
 	path = bundle/ack
     url = git@github.com:mileszs/ack.vim.git
@@ -64,3 +46,9 @@
 [submodule "bundle/vim-go"]
 	path = bundle/vim-go
 	url = git@github.com:fatih/vim-go.git
+[submodule "bundle/vim-json"]
+	path = bundle/vim-json
+	url = git@github.com:leshill/vim-json.git
+[submodule "bundle/neocomplete"]
+	path = bundle/neocomplete
+	url = git@github.com:Shougo/neocomplete.vim.git
