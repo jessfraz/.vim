@@ -25,9 +25,6 @@
 [submodule "bundle/vim-less"]
 	path = bundle/vim-less
     url = git@github.com:groenewege/vim-less.git
-[submodule "bundle/vim-markdown"]
-	path = bundle/vim-markdown
-    url = git@github.com:plasticboy/vim-markdown.git
 [submodule "bundle/delimitMate.vim"]
 	path = bundle/delimitMate.vim
     url = git@github.com:vim-scripts/delimitMate.vim.git
