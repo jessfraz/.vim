@@ -46,3 +46,6 @@
 [submodule "bundle/neocomplete"]
 	path = bundle/neocomplete
 	url = git@github.com:Shougo/neocomplete.vim.git
+[submodule "bundle/vim-cfmt"]
+	path = bundle/vim-cfmt
+	url = https://github.com/crosbymichael/vim-cfmt

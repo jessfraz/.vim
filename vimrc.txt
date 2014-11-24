@@ -206,6 +206,10 @@ set wildignore+=migrations "Django migrations"
 set wildignore+=*.pyc "Python Object codes"
 set wildignore+=*.orig "Merge resolution files"
 
+" cfmt
+let g:cfmt_style = '-linux'
+autocmd BufWritePre *.c,*.h Cfmt
+
 " Enable neocomplete on start
 if has("lua")
   " Disable AutoComplPop.
