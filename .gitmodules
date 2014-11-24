@@ -43,9 +43,6 @@
 [submodule "bundle/vim-json"]
 	path = bundle/vim-json
 	url = git@github.com:leshill/vim-json.git
-[submodule "bundle/neocomplete"]
-	path = bundle/neocomplete
-	url = git@github.com:Shougo/neocomplete.vim.git
 [submodule "bundle/vim-cfmt"]
 	path = bundle/vim-cfmt
 	url = https://github.com/crosbymichael/vim-cfmt
