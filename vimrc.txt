@@ -24,7 +24,6 @@ set formatoptions=qrn1
 set number
 "set norelativenumber
 
-
 set autoindent
 set complete-=i
 set showmatch
