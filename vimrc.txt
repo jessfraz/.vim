@@ -24,6 +24,8 @@ set formatoptions=qrn1
 set number
 "set norelativenumber
 
+" mail line wrapping
+au BufRead /tmp/mutt-* set tw=72
 
 set autoindent
 set complete-=i
