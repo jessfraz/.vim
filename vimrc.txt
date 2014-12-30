@@ -228,3 +228,6 @@ au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 " close nerdtree and vim on close file
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
+" for shellscripts and Dockerfiles use tabs
+au FileType Dockerfile set noexpandtab
+au FileType sh set noexpandtab
