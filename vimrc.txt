@@ -232,4 +232,5 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 " for shellscripts and Dockerfiles use tabs
 au FileType Dockerfile set noexpandtab
 au FileType MAINTAINERS set noexpandtab
+au BufRead,BufNewFile MAINTAINERS set ft=toml
 au FileType sh set noexpandtab

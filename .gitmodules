@@ -46,3 +46,6 @@
 [submodule "bundle/vim-cfmt"]
 	path = bundle/vim-cfmt
 	url = https://github.com/crosbymichael/vim-cfmt
+[submodule "bundle/vim-toml"]
+	path = bundle/vim-toml
+	url = git@github.com:cespare/vim-toml.git

@@ -2,3 +2,4 @@
 *.swp
 .git/
 .git
+bundle/Dockerfile/doc/tags
