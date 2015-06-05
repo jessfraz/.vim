@@ -230,7 +230,8 @@ au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " for shellscripts and Dockerfiles use tabs
-autocmd FileType Dockerfile set noexpandtab
+autocmd FileType dockerfile set noexpandtab
 autocmd FileType toml set noexpandtab
 autocmd FileType sh set noexpandtab
+autocmd FileType conf set noexpandtab
 au BufRead,BufNewFile MAINTAINERS set ft=toml
