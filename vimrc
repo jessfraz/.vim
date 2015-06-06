@@ -229,6 +229,11 @@ au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 " close nerdtree and vim on close file
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
+" On linux make copy paste work with xclip
+set paste
+imap <C-c> y: call system("xclip -i -selection clipboard", getreg("\""))<CR>
+imap <C-v> :call setreg("\"",system("xclip -o -selection clipboard"))<CR>p
+
 " for shellscripts and Dockerfiles use tabs
 autocmd FileType dockerfile set noexpandtab
 autocmd FileType toml set noexpandtab
