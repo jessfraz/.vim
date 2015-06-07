@@ -231,8 +231,11 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 " On linux make copy paste work with xclip
 set paste
-imap <C-c> y: call system("xclip -i -selection clipboard", getreg("\""))<CR>
-imap <C-v> :call setreg("\"",system("xclip -o -selection clipboard"))<CR>p
+vmap <C-c> y: call system("xclip -i -selection clipboard", getreg("\""))<CR>
+nmap <C-v> :call setreg("\"",system("xclip -o -selection clipboard"))<CR>p
+" remap shift insert
+map <S-Insert> <MiddleMouse>
+map! <S-Insert> <MiddleMouse>
 
 " for shellscripts and Dockerfiles use tabs
 autocmd FileType dockerfile set noexpandtab
