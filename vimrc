@@ -239,5 +239,5 @@ map! <S-Insert> <MiddleMouse>
 
 " for shellscripts and Dockerfiles use tabs
 autocmd FileType dockerfile set noexpandtab
-autocmd FileType conf,sh,toml,vim set noexpandtab
+autocmd FileType conf,gitconfig,sh,toml,vim set noexpandtab
 au BufRead,BufNewFile MAINTAINERS set ft=toml
