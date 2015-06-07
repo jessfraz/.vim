@@ -5,7 +5,7 @@ filetype plugin indent on
 
 " When started as "evim", evim.vim will already have done these settings.
 if v:progname =~? "evim"
-  finish
+	finish
 endif
 
 " Use Vim settings, rather than Vi settings (much better!).
@@ -44,21 +44,21 @@ set ttimeout
 set ttimeoutlen=50
 
 if has("vms")
-  set nobackup		" do not keep a backup file, use versions instead
+	set nobackup		" do not keep a backup file, use versions instead
 else
-  set backup		" keep a backup file
+	set backup		" keep a backup file
 endif
 
 if &history < 1000
-  set history=50
+	set history=50
 endif
 
 if &tabpagemax < 50
-  set tabpagemax=50
+	set tabpagemax=50
 endif
 
 if !empty(&viminfo)
-  set viminfo^=!
+	set viminfo^=!
 endif
 
 set laststatus=2
@@ -70,65 +70,65 @@ set nowritebackup
 au FocusLost * :wa		" Set vim to save the file on focus out.
 
 if !&scrolloff
-  set scrolloff=1
+	set scrolloff=1
 endif
 if !&sidescrolloff
-  set sidescrolloff=5
+	set sidescrolloff=5
 endif
 set display+=lastline
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
 
-" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
+" CTRL-U in insert mode deletes a lot.	Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
 inoremap <C-U> <C-G>u<C-U>
 
 " In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')
-  set mouse=a
+	set mouse=a
 endif
 
 " If linux then set ttymouse
 let s:uname = system("echo -n \"$(uname)\"")
 if !v:shell_error && s:uname == "Linux"
-  set ttymouse=xterm
+	set ttymouse=xterm
 endif
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
-  syntax on
-  set hlsearch
+	syntax on
+	set hlsearch
 endif
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
 
-  " Enable file type detection.
-  " Use the default filetype settings, so that mail gets 'tw' set to 72,
-  " 'cindent' is on in C files, etc.
-  " Also load indent files, to automatically do language-dependent indenting.
-  filetype plugin indent on
+	" Enable file type detection.
+	" Use the default filetype settings, so that mail gets 'tw' set to 72,
+	" 'cindent' is on in C files, etc.
+	" Also load indent files, to automatically do language-dependent indenting.
+	filetype plugin indent on
 
-  " Put these in an autocmd group, so that we can delete them easily.
-  augroup vimrcEx
-  au!
+	" Put these in an autocmd group, so that we can delete them easily.
+	augroup vimrcEx
+		au!
 
-  " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
+		" For all text files set 'textwidth' to 78 characters.
+		autocmd FileType text setlocal textwidth=78
 
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it when the position is invalid or when inside an event handler
-  " (happens when dropping a file on gvim).
-  " Also don't do it when the mark is in the first line, that is the default
-  " position when opening a file.
-  autocmd BufReadPost *
-    \ if line("'\"") > 1 && line("'\"") <= line("$") |
-    \   exe "normal! g`\"" |
-    \ endif
+		" When editing a file, always jump to the last known cursor position.
+		" Don't do it when the position is invalid or when inside an event handler
+		" (happens when dropping a file on gvim).
+		" Also don't do it when the mark is in the first line, that is the default
+		" position when opening a file.
+		autocmd BufReadPost *
+					\ if line("'\"") > 1 && line("'\"") <= line("$") |
+					\	exe "normal! g`\"" |
+					\ endif
 
-  augroup END
+	augroup END
 
 else
 
@@ -138,16 +138,16 @@ endif " has("autocmd")
 " file it was loaded from, thus the changes you made.
 " Only define it when not defined already.
 if !exists(":DiffOrig")
-  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-		  \ | wincmd p | diffthis
+	command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+				\ | wincmd p | diffthis
 endif
 
 syntax enable
 if has('gui_running')
-    set transparency=3
-    " fix js regex syntax
-    set regexpengine=1
-    syntax enable
+	set transparency=3
+	" fix js regex syntax
+	set regexpengine=1
+	syntax enable
 endif
 set background=dark
 let g:solarized_termcolors=256
@@ -157,14 +157,14 @@ let g:solarized_termtrans=1
 colorscheme solarized
 
 if &listchars ==# 'eol:$'
-  set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
-  if !has('win32') && (&termencoding ==# 'utf-8' || &encoding ==# 'utf-8')
-    let &listchars = "tab:\u21e5 ,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u00b7"
-  endif
+	set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+	if !has('win32') && (&termencoding ==# 'utf-8' || &encoding ==# 'utf-8')
+		let &listchars = "tab:\u21e5 ,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u00b7"
+	endif
 endif
 
 if &shell =~# 'fish$'
-  set shell=/bin/bash
+	set shell=/bin/bash
 endif
 
 set autoread
@@ -205,7 +205,7 @@ set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest "Compiled Object files"
 set wildignore+=*.spl "Compiled speolling world list"
 set wildignore+=*.sw? "Vim swap files"
 set wildignore+=*.DS_Store "OSX SHIT"
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.tmp     " Linux/MacOSX
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.tmp	   " Linux/MacOSX
 set wildignore+=*.luac "Lua byte code"
 set wildignore+=migrations "Django migrations"
 set wildignore+=*.pyc "Python Object codes"
@@ -239,7 +239,5 @@ map! <S-Insert> <MiddleMouse>
 
 " for shellscripts and Dockerfiles use tabs
 autocmd FileType dockerfile set noexpandtab
-autocmd FileType toml set noexpandtab
-autocmd FileType sh set noexpandtab
-autocmd FileType conf set noexpandtab
+autocmd FileType conf,sh,toml,vim set noexpandtab
 au BufRead,BufNewFile MAINTAINERS set ft=toml
