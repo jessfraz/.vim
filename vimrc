@@ -230,12 +230,23 @@ au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " On linux make copy paste work with xclip
-set paste
 vmap <C-c> y: call system("xclip -i -selection clipboard", getreg("\""))<CR>
 nmap <C-v> :call setreg("\"",system("xclip -o -selection clipboard"))<CR>p
 " remap shift insert
 map <S-Insert> <MiddleMouse>
 map! <S-Insert> <MiddleMouse>
+
+" never do this again --> :set paste <ctrl-v> :set no paste
+let &t_SI .= "\<Esc>[?2004h"
+let &t_EI .= "\<Esc>[?2004l"
+
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+
+function! XTermPasteBegin()
+	set pastetoggle=<Esc>[201~
+	set paste
+	return ""
+endfunction
 
 " for shellscripts and Dockerfiles use tabs
 autocmd FileType dockerfile set noexpandtab
