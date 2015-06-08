@@ -49,3 +49,6 @@
 [submodule "bundle/vim-toml"]
 	path = bundle/vim-toml
 	url = git@github.com:cespare/vim-toml.git
+[submodule "bundle/vim-systemd"]
+	path = bundle/vim-systemd
+	url = git://fedorapeople.org/home/fedora/wwoods/public_git/vim-scripts.git

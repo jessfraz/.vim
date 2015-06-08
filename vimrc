@@ -250,5 +250,6 @@ endfunction
 
 " for shellscripts and Dockerfiles use tabs
 autocmd FileType dockerfile set noexpandtab
-autocmd FileType conf,fstab,gitconfig,sh,toml,vim set noexpandtab
+autocmd FileType fstab,systemd set noexpandtab
+autocmd FileType gitconfig,sh,toml,vim set noexpandtab
 au BufRead,BufNewFile MAINTAINERS set ft=toml
