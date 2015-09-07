@@ -10,5 +10,3 @@ $ cd ~/
 $ git clone --recursive https://github.com/jfrazelle/.vim.git .vim
 $ ln -sf $HOME/.vim/vimrc $HOME/.vimrc
 ```
-
-[![Analytics](https://ga-beacon.appspot.com/UA-29404280-16/.vim/README.md)](https://github.com/jfrazelle/.vim)
