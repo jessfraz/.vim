@@ -1,57 +1,57 @@
 [submodule "bundle/nerdtree"]
 	path = bundle/nerdtree
-    url = git@github.com:scrooloose/nerdtree.git
+    url = https://github.com/scrooloose/nerdtree.git
 [submodule "bundle/syntastic"]
 	path = bundle/syntastic
-    url = git@github.com:scrooloose/syntastic.git
+    url = https://github.com/scrooloose/syntastic.git
 [submodule "bundle/tabular"]
 	path = bundle/tabular
-    url = git@github.com:godlygeek/tabular.git
+    url = https://github.com/godlygeek/tabular.git
 [submodule "bundle/vim-airline"]
 	path = bundle/vim-airline
-    url = git@github.com:bling/vim-airline.git
+    url = https://github.com/bling/vim-airline.git
 [submodule "bundle/vim-colors-solarized"]
 	path = bundle/vim-colors-solarized
-    url = git@github.com:altercation/vim-colors-solarized.git
+    url = https://github.com/altercation/vim-colors-solarized.git
 [submodule "bundle/vim-endwise"]
 	path = bundle/vim-endwise
-    url = git@github.com:tpope/vim-endwise.git
+    url = https://github.com/tpope/vim-endwise.git
 [submodule "bundle/vim-fugitive"]
 	path = bundle/vim-fugitive
-    url = git@github.com:tpope/vim-fugitive.git
+    url = https://github.com/tpope/vim-fugitive.git
 [submodule "bundle/vim-gitgutter"]
 	path = bundle/vim-gitgutter
-    url = git@github.com:airblade/vim-gitgutter.git
+    url = https://github.com/airblade/vim-gitgutter.git
 [submodule "bundle/vim-less"]
 	path = bundle/vim-less
-    url = git@github.com:groenewege/vim-less.git
+    url = https://github.com/groenewege/vim-less.git
 [submodule "bundle/delimitMate.vim"]
 	path = bundle/delimitMate.vim
-    url = git@github.com:vim-scripts/delimitMate.vim.git
+    url = https://github.com/vim-scripts/delimitMate.vim.git
 [submodule "bundle/minibufexpl.vim"]
 	path = bundle/minibufexpl.vim
-    url = git@github.com:fholgado/minibufexpl.vim.git
+    url = https://github.com/fholgado/minibufexpl.vim.git
 [submodule "bundle/ack"]
 	path = bundle/ack
-    url = git@github.com:mileszs/ack.vim.git
+    url = https://github.com/mileszs/ack.vim.git
 [submodule "bundle/vim-indent-lines"]
     path = bundle/vim-indent-lines
-	url = git@github.com:Yggdroot/indentLine.git
+	url = https://github.com/Yggdroot/indentLine.git
 [submodule "bundle/vim-go"]
 	path = bundle/vim-go
-	url = git@github.com:fatih/vim-go.git
+	url = https://github.com/fatih/vim-go.git
 [submodule "bundle/vim-json"]
 	path = bundle/vim-json
-	url = git@github.com:leshill/vim-json.git
+	url = https://github.com/leshill/vim-json.git
 [submodule "bundle/vim-cfmt"]
 	path = bundle/vim-cfmt
 	url = https://github.com/crosbymichael/vim-cfmt
 [submodule "bundle/vim-toml"]
 	path = bundle/vim-toml
-	url = git@github.com:cespare/vim-toml.git
+	url = https://github.com/cespare/vim-toml.git
 [submodule "bundle/vim-systemd"]
 	path = bundle/vim-systemd
 	url = git://fedorapeople.org/home/fedora/wwoods/public_git/vim-scripts.git
 [submodule "bundle/vim-better-whitespace"]
 	path = bundle/vim-better-whitespace
-	url = git@github.com:ntpeters/vim-better-whitespace.git
+	url = https://github.com/ntpeters/vim-better-whitespace.git
