@@ -28,6 +28,7 @@
 [submodule "bundle/delimitMate.vim"]
 	path = bundle/delimitMate.vim
     url = https://github.com/vim-scripts/delimitMate.vim.git
+	ignore = dirty
 [submodule "bundle/minibufexpl.vim"]
 	path = bundle/minibufexpl.vim
     url = https://github.com/fholgado/minibufexpl.vim.git
