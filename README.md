@@ -36,6 +36,6 @@ Currently using version 2.2 of Pathogen
 * [vim-go](https://github.com/fatih/vim-go) - Go support
 * [vim-indent-lines](https://github.com/Yggdroot/indentLine) - Display space
   indentation levels
-* [vim-json](https://github.com/leshill/vim-json) - JSON support
+* [vim-json](https://github.com/elzr/vim-json) - JSON support
 * [vim-systemd](https://fedorapeople.org/cgit/wwoods/public_git/vim-scripts.git) - Fedora Support
 * [vim-toml](https://github.com/cespare/vim-toml) - TOML support
