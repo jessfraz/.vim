@@ -247,5 +247,6 @@ autocmd FileType fstab,systemd set noexpandtab
 autocmd FileType gitconfig,sh,toml,vim set noexpandtab
 au BufRead,BufNewFile MAINTAINERS set ft=toml
 
-" auto strip whitespace
-autocmd BufWritePre * StripWhitespace
+" auto strip whitespace except for file with extention blacklisted
+let blacklist = ['markdown', 'md']
+autocmd BufWritePre * if index(blacklist, &ft) < 0 | StripWhitespace
