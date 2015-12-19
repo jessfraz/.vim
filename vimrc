@@ -250,3 +250,10 @@ au BufRead,BufNewFile MAINTAINERS set ft=toml
 " auto strip whitespace except for file with extention blacklisted
 let blacklist = ['markdown', 'md']
 autocmd BufWritePre * if index(blacklist, &ft) < 0 | StripWhitespace
+
+" set 80 character line limit
+if exists('+colorcolumn')
+	set colorcolumn=80
+else
+	au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+endif
