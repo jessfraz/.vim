@@ -216,15 +216,27 @@ let g:cfmt_style = '-linux'
 autocmd BufWritePre *.c,*.h Cfmt
 
 " vim-go mappings
+let g:go_fmt_fail_silently = 0
 let g:go_fmt_command = "goimports"
-au FileType go nmap <Leader>s <Plug>(go-implements)
-au FileType go nmap <Leader>i <Plug>(go-info)
-au FileType go nmap <Leader>gd <Plug>(go-doc)
-au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
-au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
-au FileType go nmap <Leader>ds <Plug>(go-def-split)
-au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
-au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+let g:go_autodetect_gopath = 1
+
+let g:go_highlight_space_tab_error = 0
+let g:go_highlight_array_whitespace_error = 0
+let g:go_highlight_trailing_whitespace_error = 0
+let g:go_highlight_extra_types = 0
+let g:go_highlight_operators = 0
+
+au FileType go nmap <Leader>s <Plug>(go-def-split)
+au FileType go nmap <Leader>v <Plug>(go-def-vertical)
+au FileType go nmap <Leader>in <Plug>(go-info)
+au FileType go nmap <Leader>ii <Plug>(go-implements)
+
+au FileType go nmap <leader>r  <Plug>(go-run)
+au FileType go nmap <leader>b  <Plug>(go-build)
+au FileType go nmap <leader>g  <Plug>(go-gbbuild)
+au FileType go nmap <leader>t  <Plug>(go-test-compile)
+au FileType go nmap <Leader>d <Plug>(go-doc)
+au FileType go nmap <Leader>f :GoImports<CR>
 
 " close nerdtree and vim on close file
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
