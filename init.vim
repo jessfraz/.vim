@@ -1,1 +1,1 @@
-/home/jessie/.vimrc
+/root/.vim/vimrc
