@@ -4,3 +4,4 @@
 .git
 bundle/Dockerfile/doc/tags
 bundle/delimitMate.vim/doc/tags
+init.vim
