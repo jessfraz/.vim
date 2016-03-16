@@ -258,9 +258,6 @@ au FileType nginx setlocal noet ts=4 sw=4 sts=4
 " Go settings
 au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
 
-" coffeescript settings
-autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
-
 " scala settings
 autocmd BufNewFile,BufReadPost *.scala setl shiftwidth=2 expandtab
 
