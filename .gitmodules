@@ -13,9 +13,6 @@
 [submodule "bundle/vim-fugitive"]
 	path = bundle/vim-fugitive
     url = https://github.com/tpope/vim-fugitive.git
-[submodule "bundle/vim-gitgutter"]
-	path = bundle/vim-gitgutter
-    url = https://github.com/airblade/vim-gitgutter.git
 [submodule "bundle/vim-less"]
 	path = bundle/vim-less
     url = https://github.com/groenewege/vim-less.git
@@ -58,3 +55,9 @@
 [submodule "bundle/delimitMate"]
 	path = bundle/delimitMate
 	url = https://github.com/Raimondi/delimitMate.git
+[submodule "bundle/vim-bbye"]
+	path = bundle/vim-bbye
+	url = https://github.com/moll/vim-bbye.git
+[submodule "bundle/vim-sayonara"]
+	path = bundle/vim-sayonara
+	url = https://github.com/mhinz/vim-sayonara.git

@@ -2,6 +2,5 @@
 *.swp
 .git/
 .git
-bundle/Dockerfile/doc/tags
-bundle/delimitMate.vim/doc/tags
+bundle/*/doc/tags
 init.vim

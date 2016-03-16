@@ -156,6 +156,12 @@ set guioptions-=L
 let mapleader = ","
 let g:mapleader = ","
 
+" This trigger takes advantage of the fact that the quickfix window can be
+" easily distinguished by its file-type, qf. The wincmd J command is
+" equivalent to the Ctrl+W, Shift+J shortcut telling Vim to move a window to
+" the very bottom (see :help :wincmd and :help ^WJ).
+autocmd FileType qf wincmd J
+
 " Dont show me any output when I build something
 " Because I am using quickfix for errors
 "nmap <leader>m :make<CR><enter>
@@ -168,7 +174,39 @@ let g:mapleader = ","
 map <C-n> :cn<CR>
 map <C-m> :cp<CR>
 
-"nnoremap <silent> <leader>q :Sayonara<CR>
+nnoremap <silent> <leader>q :Sayonara<CR>
+
+" Replace the current buffer with the given new file. That means a new file
+" will be open in a buffer while the old one will be deleted
+com! -nargs=1 -complete=file Breplace edit <args>| bdelete #
+
+function! DeleteInactiveBufs()
+    "From tabpagebuflist() help, get a list of all buffers in all tabs
+    let tablist = []
+    for i in range(tabpagenr('$'))
+        call extend(tablist, tabpagebuflist(i + 1))
+    endfor
+
+    "Below originally inspired by Hara Krishna Dara and Keith Roberts
+    "http://tech.groups.yahoo.com/group/vim/message/56425
+    let nWipeouts = 0
+    for i in range(1, bufnr('$'))
+        if bufexists(i) && !getbufvar(i,"&mod") && index(tablist, i) == -1
+        "bufno exists AND isn't modified AND isn't in the list of buffers open in windows and tabs
+            silent exec 'bwipeout' i
+            let nWipeouts = nWipeouts + 1
+        endif
+    endfor
+    echomsg nWipeouts . ' buffer(s) wiped out'
+endfunction
+
+command! Ball :call DeleteInactiveBufs()
+
+" Close quickfix easily
+nnoremap <leader>a :cclose<CR>
+
+" Remove search highlight
+nnoremap <leader><space> :nohlsearch<CR>
 
 " Better split switching
 map <C-j> <C-W>j
@@ -387,7 +425,7 @@ let g:delimitMate_smart_quotes = 1
 let g:delimitMate_expand_inside_quotes = 0
 let g:delimitMate_smart_matchpairs = '^\%(\w\|\$\)'
 
-" imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
+"imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
 
 " ==================== Vim-json ====================
 let g:vim_json_syntax_conceal = 0
