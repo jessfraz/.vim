@@ -19,10 +19,6 @@
 [submodule "bundle/vim-less"]
 	path = bundle/vim-less
     url = https://github.com/groenewege/vim-less.git
-[submodule "bundle/delimitMate.vim"]
-	path = bundle/delimitMate.vim
-    url = https://github.com/vim-scripts/delimitMate.vim.git
-	ignore = dirty
 [submodule "bundle/minibufexpl.vim"]
 	path = bundle/minibufexpl.vim
     url = https://github.com/fholgado/minibufexpl.vim.git
@@ -56,3 +52,9 @@
 [submodule "bundle/ag.vim"]
 	path = bundle/ag.vim
 	url = https://github.com/rking/ag.vim.git
+[submodule "bundle/lightline.vim"]
+	path = bundle/lightline.vim
+	url = https://github.com/itchyny/lightline.vim.git
+[submodule "bundle/delimitMate"]
+	path = bundle/delimitMate
+	url = https://github.com/Raimondi/delimitMate.git
