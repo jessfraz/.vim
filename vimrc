@@ -51,7 +51,7 @@ set nocursorline
 syntax sync minlines=256
 set synmaxcol=300
 set re=1
-"set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
 " open help vertically
 command! -nargs=* -complete=help Help vertical belowright help <args>
