@@ -59,3 +59,6 @@
 [submodule "bundle/vim-nginx"]
 	path = bundle/vim-nginx
 	url = https://github.com/fatih/vim-nginx.git
+[submodule "bundle/ag.vim"]
+	path = bundle/ag.vim
+	url = https://github.com/rking/ag.vim.git
