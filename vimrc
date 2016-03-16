@@ -51,7 +51,7 @@ set nocursorline
 syntax sync minlines=256
 set synmaxcol=300
 set re=1
-set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+"set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
 " open help vertically
 command! -nargs=* -complete=help Help vertical belowright help <args>
@@ -129,10 +129,10 @@ endif
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
 " Only define it when not defined already.
-if !exists(":DiffOrig")
-	command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-				\ | wincmd p | diffthis
-endif
+"if !exists(":DiffOrig")
+""	command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+""				\ | wincmd p | diffthis
+"endif
 
 syntax enable
 if has('gui_running')
