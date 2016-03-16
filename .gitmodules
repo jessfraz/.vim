@@ -61,3 +61,6 @@
 [submodule "bundle/vim-sayonara"]
 	path = bundle/vim-sayonara
 	url = https://github.com/mhinz/vim-sayonara.git
+[submodule "bundle/vim-gitgutter"]
+	path = bundle/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter.git
