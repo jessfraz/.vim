@@ -1,19 +1,55 @@
+" load plugins
 execute pathogen#infect()
 call pathogen#helptags()
-syntax on
-filetype plugin indent on
 
-" When started as "evim", evim.vim will already have done these settings.
-if v:progname =~? "evim"
-	finish
-endif
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-" Use Vim settings, rather than Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
-set nocompatible
+filetype plugin indent on    " required
 
-" allow backspacing over everything in insert mode
-set backspace=indent,eol,start
+"
+" Settings
+"
+set noerrorbells                " No beeps
+set number                      " Show line numbers
+set backspace=indent,eol,start  " Makes backspace key more powerful.
+set showcmd                     " Show me what I'm typing
+set showmode                    " Show current mode.
+
+set noswapfile                  " Don't use swapfile
+set nobackup					" Don't create annoying backup files
+set splitright                  " Split vertical windows right to the current windows
+set splitbelow                  " Split horizontal windows below to the current windows
+set encoding=utf-8              " Set default encoding to UTF-8
+set autowrite                   " Automatically save before :next, :make etc.
+set autoread                    " Automatically reread changed files without asking me anything
+set laststatus=2
+set hidden
+
+set fileformats=unix,dos,mac    " Prefer Unix over Windows over OS 9 formats
+
+set noshowmatch                 " Do not show matching brackets by flickering
+set noshowmode                  " We show the mode with airlien or lightline
+set incsearch                   " Shows the match while typing
+set hlsearch                    " Highlight found searches
+set ignorecase                  " Search case insensitive...
+set smartcase                   " ... but not when search pattern contains upper case characters
+set ttyfast
+" set ttyscroll=3               " noop on linux ?
+set lazyredraw          	      " Wait to redraw "
+
+" speed up syntax highlighting
+set nocursorcolumn
+set nocursorline
+
+syntax sync minlines=256
+set synmaxcol=300
+set re=1
+set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+
+" open help vertically
+command! -nargs=* -complete=help Help vertical belowright help <args>
+autocmd FileType help wincmd L
 
 " Make Vim to handle long lines nicely.
 set wrap
@@ -21,7 +57,6 @@ set textwidth=79
 set formatoptions=qrn1
 "set colorcolumn=79
 "set relativenumber
-set number
 "set norelativenumber
 
 " mail line wrapping
@@ -40,14 +75,15 @@ set expandtab
 set nrformats-=octal
 set shiftround
 
+" Time out on key codes but not mappings.
+" Basically this makes terminal Vim work sanely.
+set notimeout
 set ttimeout
-set ttimeoutlen=50
+set ttimeoutlen=10
 
-if has("vms")
-	set nobackup		" do not keep a backup file, use versions instead
-else
-	set backup		" keep a backup file
-endif
+" Better Completion
+set complete=.,w,b,u,t
+set completeopt=longest,menuone
 
 if &history < 1000
 	set history=50
@@ -61,11 +97,7 @@ if !empty(&viminfo)
 	set viminfo^=!
 endif
 
-set laststatus=2
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
-set incsearch		" do incremental searching
-set nobackup
+set ruler				" show the cursor position all the time
 set nowritebackup
 au FocusLost * :wa		" Set vim to save the file on focus out.
 
@@ -76,9 +108,6 @@ if !&sidescrolloff
 	set sidescrolloff=5
 endif
 set display+=lastline
-
-" Don't use Ex mode, use Q for formatting
-map Q gq
 
 " CTRL-U in insert mode deletes a lot.	Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
@@ -94,45 +123,6 @@ let s:uname = system("echo -n \"$(uname)\"")
 if !v:shell_error && s:uname == "Linux" && !has('nvim')
 	set ttymouse=xterm
 endif
-
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if &t_Co > 2 || has("gui_running")
-	syntax on
-	set hlsearch
-endif
-
-" Only do this part when compiled with support for autocommands.
-if has("autocmd")
-
-	" Enable file type detection.
-	" Use the default filetype settings, so that mail gets 'tw' set to 72,
-	" 'cindent' is on in C files, etc.
-	" Also load indent files, to automatically do language-dependent indenting.
-	filetype plugin indent on
-
-	" Put these in an autocmd group, so that we can delete them easily.
-	augroup vimrcEx
-		au!
-
-		" For all text files set 'textwidth' to 78 characters.
-		autocmd FileType text setlocal textwidth=78
-
-		" When editing a file, always jump to the last known cursor position.
-		" Don't do it when the position is invalid or when inside an event handler
-		" (happens when dropping a file on gvim).
-		" Also don't do it when the mark is in the first line, that is the default
-		" position when opening a file.
-		autocmd BufReadPost *
-					\ if line("'\"") > 1 && line("'\"") <= line("$") |
-					\	exe "normal! g`\"" |
-					\ endif
-
-	augroup END
-
-else
-
-endif " has("autocmd")
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
@@ -155,41 +145,75 @@ let g:solarized_termtrans=1
 " let g:hybrid_use_Xresources = 1
 " let g:rehash256 = 1
 colorscheme solarized
-
-if &listchars ==# 'eol:$'
-	set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
-	if !has('win32') && (&termencoding ==# 'utf-8' || &encoding ==# 'utf-8')
-		let &listchars = "tab:\u21e5 ,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u00b7"
-	endif
-endif
-
-if &shell =~# 'fish$'
-	set shell=/bin/bash
-endif
-
-set autoread
-set fileformats+=mac
-
 set guifont=Inconsolata:h15
 set guioptions-=L
 
-" Mini Buffer some settigns."
-let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMapWindowNavArrows = 1
-let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplModSelTarget = 1
+" This comes first, because we have mappings that depend on leader
+" With a map leader it's possible to do extra key combinations
+" i.e: <leader>w saves the current file
+let mapleader = ","
+let g:mapleader = ","
 
-" Mapping to NERDTree
-nmap <C-n> :NERDTreeToggle<CR>
-let NERDTreeShowHidden=1
-let NERDTreeIgnore=['\.vim$', '\~$', '\.git$', '.DS_Store']
-let NERDChristmasTree=1
+" Dont show me any output when I build something
+" Because I am using quickfix for errors
+"nmap <leader>m :make<CR><enter>
 
-" Mapping to minibuffer
-nmap <C-t> :bn<CR>
+" Some useful quickfix shortcuts
+":cc      see the current error
+":cn      next error
+":cp      previous error
+":clist   list all errors
+map <C-n> :cn<CR>
+map <C-m> :cp<CR>
 
-" Markdown turn off folding
-let g:vim_markdown_folding_disabled=1
+"nnoremap <silent> <leader>q :Sayonara<CR>
+
+" Better split switching
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+" Fast saving
+nmap <leader>w :w!<cr>
+
+" Center the screen
+nnoremap <space> zz
+
+" Move up and down on splitted lines (on small width screens)
+map <Up> gk
+map <Down> gj
+map k gk
+map j gj
+
+" Just go out in insert mode
+imap jk <ESC>l
+
+nnoremap <F6> :setlocal spell! spell?<CR>
+
+" Select search pattern howewever do not jump to the next one
+nnoremap <leader>c :TComment<CR>
+
+" Search mappings: These will make it so that going to the next one in a
+" search will center on the line it's found in.
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+"nnoremap <leader>. :lcd %:p:h<CR>
+autocmd BufEnter * silent! lcd %:p:h
+
+" trim all whitespaces away
+nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+
+" Act like D and C
+nnoremap Y y$
+
+" Do not show stupid q: window
+map q: :q
+
+" sometimes this happens and I hate it
+map :Vs :vs
+map :Sp :sp
 
 " dont save .netrwhist history
 let g:netrw_dirhistmax=0
@@ -197,25 +221,145 @@ let g:netrw_dirhistmax=0
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
 
-" Wildmenu completion "
-set wildignore+=.hg,.git,.svn " Version Controls"
-set wildignore+=*.aux,*.out,*.toc "Latex Indermediate files"
-" set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg "Binary Imgs"
-set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest "Compiled Object files"
-set wildignore+=*.spl "Compiled speolling world list"
-set wildignore+=*.sw? "Vim swap files"
-set wildignore+=*.DS_Store "OSX SHIT"
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.tmp	   " Linux/MacOSX
-set wildignore+=*.luac "Lua byte code"
-set wildignore+=migrations "Django migrations"
-set wildignore+=*.pyc "Python Object codes"
-set wildignore+=*.orig "Merge resolution files"
+" never do this again --> :set paste <ctrl-v> :set no paste
+let &t_SI .= "\<Esc>[?2004h"
+let &t_EI .= "\<Esc>[?2004l"
 
-" cfmt
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+
+function! XTermPasteBegin()
+	set pastetoggle=<Esc>[201~
+	set paste
+	return ""
+endfunction
+
+" set 80 character line limit
+if exists('+colorcolumn')
+	set colorcolumn=80
+else
+	au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+endif
+
+" ----------------------------------------- "
+" File Type settings 			    		"
+" ----------------------------------------- "
+
+au BufNewFile,BufRead *.vim setlocal noet ts=4 sw=4 sts=4
+au BufNewFile,BufRead *.txt setlocal noet ts=4 sw=4
+au BufNewFile,BufRead *.md setlocal noet ts=4 sw=4
+
+augroup filetypedetect
+  au BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
+  au BufNewFile,BufRead .nginx.conf*,nginx.conf* setf nginx
+augroup END
+
+au FileType nginx setlocal noet ts=4 sw=4 sts=4
+
+" Go settings
+au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
+
+" coffeescript settings
+autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+
+" scala settings
+autocmd BufNewFile,BufReadPost *.scala setl shiftwidth=2 expandtab
+
+" lua settings
+autocmd BufNewFile,BufRead *.lua setlocal noet ts=4 sw=4 sts=4
+
+" Dockerfile settings
+autocmd FileType dockerfile set noexpandtab
+
+" shell/config/systemd settings
+autocmd FileType fstab,systemd set noexpandtab
+autocmd FileType gitconfig,sh,toml set noexpandtab
+
+" toml settings
+au BufRead,BufNewFile MAINTAINERS set ft=toml
+
+" Wildmenu completion {{{
+set wildmenu
+" set wildmode=list:longest
+set wildmode=list:full
+
+set wildignore+=.hg,.git,.svn                    " Version control
+set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
+set wildignore+=*.spl                            " compiled spelling word lists
+set wildignore+=*.sw?                            " Vim swap files
+set wildignore+=*.DS_Store                       " OSX bullshit
+set wildignore+=*.luac                           " Lua byte code
+set wildignore+=migrations                       " Django migrations
+set wildignore+=go/pkg                       " Go static files
+set wildignore+=go/bin                       " Go bin files
+set wildignore+=go/bin-vagrant               " Go bin-vagrant files
+set wildignore+=*.pyc                            " Python byte code
+set wildignore+=*.orig                           " Merge resolution files
+
+
+" ----------------------------------------- "
+" Plugin configs 			    			"
+" ----------------------------------------- "
+
+" ==================== CtrlP ====================
+let g:ctrlp_cmd = 'CtrlPMRU'
+let g:ctrlp_match_func  = {'match' : 'matcher#cmatch'}
+"  let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
+" let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_max_height = 10		" maxiumum height of match window
+let g:ctrlp_switch_buffer = 'et'	" jump to a file if it's open already
+let g:ctrlp_mruf_max=450 		" number of recently opened files
+let g:ctrlp_max_files=0  		" do not limit the number of searchable files
+let g:ctrlp_use_caching = 1
+let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
+
+let g:ctrlp_buftag_types = {
+			\ 'go'     	   : '--language-force=go --golang-types=ftv',
+			\ 'coffee'     : '--language-force=coffee --coffee-types=cmfvf',
+			\ 'markdown'   : '--language-force=markdown --markdown-types=hik',
+			\ 'objc'       : '--language-force=objc --objc-types=mpci',
+			\ 'rc'         : '--language-force=rust --rust-types=fTm'
+			\ }
+
+func! MyCtrlPTag()
+	let g:ctrlp_prompt_mappings = {
+				\ 'AcceptSelection("e")': ['<cr>', '<2-LeftMouse>'],
+				\ 'AcceptSelection("t")': ['<c-t>'],
+				\ }
+	CtrlPBufTag
+endfunc
+command! MyCtrlPTag call MyCtrlPTag()
+
+nmap <C-f> :CtrlPCurWD<cr>
+imap <C-f> <esc>:CtrlPCurWD<cr>
+
+nmap <C-b> :CtrlPBuffer<cr>
+imap <C-b> <esc>:CtrlPBuffer<cr>
+
+" ==================== Fugitive ====================
+nnoremap <leader>ga :Git add %:p<CR><CR>
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gp :Gpush<CR>
+vnoremap <leader>gb :Gblame<CR>
+
+" ============== MiniBufExpl =====================
+
+let g:miniBufExplMapWindowNavVim = 1
+let g:miniBufExplMapWindowNavArrows = 1
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplModSelTarget = 1
+
+" Mapping to minibuffer
+nmap <C-t> :bn<CR>
+
+" =================== Vim-cfmt ===================
 let g:cfmt_style = '-linux'
 autocmd BufWritePre *.c,*.h Cfmt
 
-" vim-go mappings
+" ==================== Vim-go ====================
 let g:go_fmt_fail_silently = 0
 let g:go_fmt_command = "goimports"
 let g:go_autodetect_gopath = 1
@@ -238,34 +382,33 @@ au FileType go nmap <leader>t  <Plug>(go-test-compile)
 au FileType go nmap <Leader>d <Plug>(go-doc)
 au FileType go nmap <Leader>f :GoImports<CR>
 
-" close nerdtree and vim on close file
+" ==================== delimitMate ====================
+let g:delimitMate_expand_cr = 1
+let g:delimitMate_expand_space = 1
+let g:delimitMate_smart_quotes = 1
+let g:delimitMate_expand_inside_quotes = 0
+let g:delimitMate_smart_matchpairs = '^\%(\w\|\$\)'
+
+" imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
+
+" ==================== Vim-json ====================
+let g:vim_json_syntax_conceal = 0
+
+" ==================== NerdTree ====================
+" For toggling
+nmap <C-n> :NERDTreeToggle<CR>
+
+let NERDTreeShowHidden=1
+let NERDTreeIgnore=['\.vim$', '\~$', '\.git$', '.DS_Store']
+
+" Close nerdtree and vim on close file
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-" never do this again --> :set paste <ctrl-v> :set no paste
-let &t_SI .= "\<Esc>[?2004h"
-let &t_EI .= "\<Esc>[?2004l"
-
-inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
-
-function! XTermPasteBegin()
-	set pastetoggle=<Esc>[201~
-	set paste
-	return ""
-endfunction
-
-" for shellscripts and Dockerfiles use tabs
-autocmd FileType dockerfile set noexpandtab
-autocmd FileType fstab,systemd set noexpandtab
-autocmd FileType gitconfig,sh,toml,vim set noexpandtab
-au BufRead,BufNewFile MAINTAINERS set ft=toml
+" ========= vim-better-whitespace ==================
 
 " auto strip whitespace except for file with extention blacklisted
-let blacklist = ['markdown', 'md']
-autocmd BufWritePre * if index(blacklist, &ft) < 0 | StripWhitespace
+" let blacklist = ['markdown', 'md']
+" autocmd BufWritePre * if index(blacklist, &ft) < 0 | StripWhitespace
 
-" set 80 character line limit
-if exists('+colorcolumn')
-	set colorcolumn=80
-else
-	au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-endif
+
+" vim:ts=2:sw=2:et
