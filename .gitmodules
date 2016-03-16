@@ -32,9 +32,6 @@
 [submodule "bundle/minibufexpl.vim"]
 	path = bundle/minibufexpl.vim
     url = https://github.com/fholgado/minibufexpl.vim.git
-[submodule "bundle/ack"]
-	path = bundle/ack
-    url = https://github.com/mileszs/ack.vim.git
 [submodule "bundle/vim-indent-lines"]
     path = bundle/vim-indent-lines
 	url = https://github.com/Yggdroot/indentLine.git
