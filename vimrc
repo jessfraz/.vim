@@ -2,6 +2,8 @@
 execute pathogen#infect()
 call pathogen#helptags()
 
+changes
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -17,7 +19,8 @@ set showcmd                     " Show me what I'm typing
 set showmode                    " Show current mode.
 
 set noswapfile                  " Don't use swapfile
-set nobackup					" Don't create annoying backup files
+set nobackup					          " Don't create annoying backup files
+set nowritebackup
 set splitright                  " Split vertical windows right to the current windows
 set splitbelow                  " Split horizontal windows below to the current windows
 set encoding=utf-8              " Set default encoding to UTF-8
@@ -25,6 +28,9 @@ set autowrite                   " Automatically save before :next, :make etc.
 set autoread                    " Automatically reread changed files without asking me anything
 set laststatus=2
 set hidden
+
+set ruler                       " Show the cursor position all the time
+au FocusLost * :wa              " Set vim to save the file on focus out.
 
 set fileformats=unix,dos,mac    " Prefer Unix over Windows over OS 9 formats
 
@@ -96,10 +102,6 @@ endif
 if !empty(&viminfo)
 	set viminfo^=!
 endif
-
-set ruler				" show the cursor position all the time
-set nowritebackup
-au FocusLost * :wa		" Set vim to save the file on focus out.
 
 if !&scrolloff
 	set scrolloff=1
@@ -300,9 +302,9 @@ set wildignore+=*.orig                           " Merge resolution files
 " ----------------------------------------- "
 
 " ==================== CtrlP ====================
-let g:ctrlp_cmd = 'CtrlPMRU'
-let g:ctrlp_match_func  = {'match' : 'matcher#cmatch'}
-"  let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
+" let g:ctrlp_cmd = 'CtrlPMRU'
+" let g:ctrlp_match_func  = {'match' : 'matcher#cmatch'}
+" let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
 " let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_max_height = 10		" maxiumum height of match window
@@ -315,7 +317,6 @@ let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
 
 let g:ctrlp_buftag_types = {
 			\ 'go'     	   : '--language-force=go --golang-types=ftv',
-			\ 'coffee'     : '--language-force=coffee --coffee-types=cmfvf',
 			\ 'markdown'   : '--language-force=markdown --markdown-types=hik',
 			\ 'objc'       : '--language-force=objc --objc-types=mpci',
 			\ 'rc'         : '--language-force=rust --rust-types=fTm'
