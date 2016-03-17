@@ -441,8 +441,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 " ========= vim-better-whitespace ==================
 
 " auto strip whitespace except for file with extention blacklisted
-" let blacklist = ['markdown', 'md']
-" autocmd BufWritePre * if index(blacklist, &ft) < 0 | StripWhitespace
-
+let blacklist = ['markdown', 'md']
+autocmd BufWritePre * if index(blacklist, &ft) < 0 | StripWhitespace
 
 " vim:ts=2:sw=2:et
