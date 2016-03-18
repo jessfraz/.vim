@@ -49,7 +49,6 @@ set nocursorline
 syntax sync minlines=256
 set synmaxcol=300
 set re=1
-set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
 " open help vertically
 command! -nargs=* -complete=help Help vertical belowright help <args>
@@ -369,10 +368,7 @@ set wildignore+=*.orig                           " Merge resolution files
 " ----------------------------------------- "
 
 " ==================== CtrlP ====================
-" let g:ctrlp_cmd = 'CtrlPMRU'
-" let g:ctrlp_match_func  = {'match' : 'matcher#cmatch'}
-" let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
-" let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+let g:ctrlp_cmd = 'CtrlPMRU'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_max_height = 10		" maxiumum height of match window
 let g:ctrlp_switch_buffer = 'et'	" jump to a file if it's open already
@@ -382,27 +378,22 @@ let g:ctrlp_use_caching = 1
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
 
-let g:ctrlp_buftag_types = {
-			\ 'go'     	   : '--language-force=go --golang-types=ftv',
-			\ 'markdown'   : '--language-force=markdown --markdown-types=hik',
-			\ 'objc'       : '--language-force=objc --objc-types=mpci',
-			\ 'rc'         : '--language-force=rust --rust-types=fTm'
-			\ }
+let g:ctrlp_buftag_types = {'go' : '--language-force=go --golang-types=ftv'}
 
 func! MyCtrlPTag()
-	let g:ctrlp_prompt_mappings = {
-				\ 'AcceptSelection("e")': ['<cr>', '<2-LeftMouse>'],
-				\ 'AcceptSelection("t")': ['<c-t>'],
-				\ }
-	CtrlPBufTag
+  let g:ctrlp_prompt_mappings = {
+        \ 'AcceptSelection("e")': ['<cr>', '<2-LeftMouse>'],
+        \ 'AcceptSelection("t")': ['<c-t>'],
+        \ }
+  CtrlPBufTag
 endfunc
 command! MyCtrlPTag call MyCtrlPTag()
 
-nmap <C-f> :CtrlPCurWD<cr>
-imap <C-f> <esc>:CtrlPCurWD<cr>
+nmap <C-g> :MyCtrlPTag<cr>
+imap <C-g> <esc>:MyCtrlPTag<cr>
 
-nmap <C-b> :CtrlPBuffer<cr>
-imap <C-b> <esc>:CtrlPBuffer<cr>
+nmap <C-b> :CtrlPCurWD<cr>
+imap <C-b> <esc>:CtrlPCurWD<cr>
 
 " ==================== Fugitive ====================
 nnoremap <leader>ga :Git add %:p<CR><CR>
@@ -428,24 +419,35 @@ autocmd BufWritePre *.c,*.h Cfmt
 let g:go_fmt_fail_silently = 0
 let g:go_fmt_command = "goimports"
 let g:go_autodetect_gopath = 1
-
+let g:go_term_enabled = 1
+let g:go_snippet_engine = "neosnippet"
 let g:go_highlight_space_tab_error = 0
 let g:go_highlight_array_whitespace_error = 0
 let g:go_highlight_trailing_whitespace_error = 0
 let g:go_highlight_extra_types = 0
 let g:go_highlight_operators = 0
+let g:go_highlight_build_constraints = 1
+
 
 au FileType go nmap <Leader>s <Plug>(go-def-split)
 au FileType go nmap <Leader>v <Plug>(go-def-vertical)
-au FileType go nmap <Leader>in <Plug>(go-info)
-au FileType go nmap <Leader>ii <Plug>(go-implements)
+au FileType go nmap <Leader>i <Plug>(go-info)
+au FileType go nmap <Leader>l <Plug>(go-metalinter)
 
 au FileType go nmap <leader>r  <Plug>(go-run)
+
 au FileType go nmap <leader>b  <Plug>(go-build)
-au FileType go nmap <leader>g  <Plug>(go-gbbuild)
-au FileType go nmap <leader>t  <Plug>(go-test-compile)
+au FileType go nmap <leader>t  <Plug>(go-test)
+au FileType go nmap <leader>dt  <Plug>(go-test-compile)
 au FileType go nmap <Leader>d <Plug>(go-doc)
-au FileType go nmap <Leader>f :GoImports<CR>
+
+" I like these more!
+augroup go
+    autocmd!
+    autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
+    autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
+    autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
+augroup END
 
 " ==================== delimitMate ====================
 let g:delimitMate_expand_cr = 1
@@ -454,20 +456,145 @@ let g:delimitMate_smart_quotes = 1
 let g:delimitMate_expand_inside_quotes = 0
 let g:delimitMate_smart_matchpairs = '^\%(\w\|\$\)'
 
-"imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
+" ==================== Lightline ====================
+"
+let g:lightline = {
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste'],
+      \             [ 'fugitive', 'filename', 'modified', 'ctrlpmark' ],
+      \             [ 'go'] ],
+      \   'right': [ [ 'lineinfo' ],
+      \              [ 'percent' ],
+      \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \ },
+      \ 'inactive': {
+      \   'left': [ [ 'go'] ],
+      \ },
+      \ 'component_function': {
+      \   'lineinfo': 'LightLineInfo',
+      \   'percent': 'LightLinePercent',
+      \   'modified': 'LightLineModified',
+      \   'filename': 'LightLineFilename',
+      \   'go': 'LightLineGo',
+      \   'fileformat': 'LightLineFileformat',
+      \   'filetype': 'LightLineFiletype',
+      \   'fileencoding': 'LightLineFileencoding',
+      \   'mode': 'LightLineMode',
+      \   'fugitive': 'LightLineFugitive',
+      \   'ctrlpmark': 'CtrlPMark',
+      \ },
+      \ }
 
-" ==================== Vim-json ====================
-let g:vim_json_syntax_conceal = 0
+function! LightLineModified()
+  if &filetype == "help"
+    return ""
+  elseif &modified
+    return "+"
+  elseif &modifiable
+    return ""
+  else
+    return ""
+  endif
+endfunction
+
+function! LightLineFileformat()
+  return winwidth(0) > 70 ? &fileformat : ''
+endfunction
+
+function! LightLineFiletype()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+endfunction
+
+function! LightLineFileencoding()
+  return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+endfunction
+
+function! LightLineInfo()
+  return winwidth(0) > 60 ? printf("%3d:%-2d", line('.'), col('.')) : ''
+endfunction
+
+function! LightLinePercent()
+  return &ft =~? 'vimfiler' ? '' : (100 * line('.') / line('$')) . '%'
+endfunction
+
+function! LightLineFugitive()
+  return exists('*fugitive#head') ? fugitive#head() : ''
+endfunction
+
+function! LightLineGo()
+  " return ''
+  return exists('*go#jobcontrol#Statusline') ? go#jobcontrol#Statusline() : ''
+endfunction
+
+function! LightLineMode()
+  let fname = expand('%:t')
+  return fname == 'ControlP' ? 'CtrlP' :
+        \ &ft == 'vimfiler' ? 'VimFiler' :
+        \ winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
+
+function! LightLineFilename()
+  let fname = expand('%:t')
+  if mode() == 't'
+    return ''
+  endif
+
+  return fname == 'ControlP' ? g:lightline.ctrlp_item :
+        \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
+        \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+        \ ('' != fname ? fname : '[No Name]')
+endfunction
+
+function! LightLineReadonly()
+  return &ft !~? 'help' && &readonly ? 'RO' : ''
+endfunction
+
+function! CtrlPMark()
+  if expand('%:t') =~ 'ControlP'
+    call lightline#link('iR'[g:lightline.ctrlp_regex])
+    return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
+          \ , g:lightline.ctrlp_next], 0)
+  else
+    return ''
+  endif
+endfunction
+
+let g:ctrlp_status_func = {
+      \ 'main': 'CtrlPStatusFunc_1',
+      \ 'prog': 'CtrlPStatusFunc_2',
+      \ }
+
+function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
+  let g:lightline.ctrlp_regex = a:regex
+  let g:lightline.ctrlp_prev = a:prev
+  let g:lightline.ctrlp_item = a:item
+  let g:lightline.ctrlp_next = a:next
+  return lightline#statusline(0)
+endfunction
+
+function! CtrlPStatusFunc_2(str)
+  return lightline#statusline(0)
+endfunction
+
+
+" Trigger a highlight in the appropriate direction when pressing these keys:
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 " ==================== NerdTree ====================
 " For toggling
 nmap <C-n> :NERDTreeToggle<CR>
+noremap <Leader>n :NERDTreeToggle<cr>
+noremap <Leader>f :NERDTreeFind<cr>
 
 let NERDTreeShowHidden=1
+
 let NERDTreeIgnore=['\.vim$', '\~$', '\.git$', '.DS_Store']
 
 " Close nerdtree and vim on close file
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+" ==================== vim-json ====================
+let g:vim_json_syntax_conceal = 0
 
 " ========= vim-better-whitespace ==================
 
