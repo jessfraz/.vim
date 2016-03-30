@@ -316,6 +316,8 @@ au BufNewFile,BufRead *.vim setlocal noet ts=4 sw=4 sts=4
 au BufNewFile,BufRead *.txt setlocal noet ts=4 sw=4
 au BufNewFile,BufRead *.md setlocal noet ts=4 sw=4
 au BufNewFile,BufRead *.yml setlocal expandtab ts=2 sw=2
+au BufNewFile,BufRead *.cpp setlocal expandtab ts=2 sw=2
+au BufNewFile,BufRead *.hpp setlocal expandtab ts=2 sw=2
 
 augroup filetypedetect
   au BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
@@ -600,7 +602,13 @@ let g:vim_json_syntax_conceal = 0
 " ========= vim-better-whitespace ==================
 
 " auto strip whitespace except for file with extention blacklisted
-let blacklist = ['markdown', 'md']
-autocmd BufWritePre * if index(blacklist, &ft) < 0 | StripWhitespace
+"let blacklist = ['markdown', 'md']
+autocmd BufWritePre * StripWhitespace
+
+" ========= clang-format ==================
+
+map <C-K> :pyf /usr/share/vim/addons/syntax/clang-format-3.8.py<cr>
+imap <C-K> <c-o>:pyf /usr/share/vim/addons/syntax/clang-format-3.8.py<cr>
+autocmd BufWritePre *.cpp,*.hpp pyf /usr/share/vim/addons/syntax/clang-format-3.8.py
 
 " vim:ts=2:sw=2:et
