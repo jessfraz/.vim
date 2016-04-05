@@ -406,10 +406,10 @@ vnoremap <leader>gb :Gblame<CR>
 
 " ============== MiniBufExpl =====================
 
-let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMapWindowNavArrows = 1
-let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplModSelTarget = 1
+"let g:miniBufExplMapWindowNavVim = 1
+"let g:miniBufExplMapWindowNavArrows = 1
+"let g:miniBufExplMapCTabSwitchBufs = 1
+"let g:miniBufExplModSelTarget = 1
 
 " Mapping to minibuffer
 nmap <C-t> :bn<CR>

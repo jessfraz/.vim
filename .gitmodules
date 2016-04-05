@@ -16,9 +16,6 @@
 [submodule "bundle/vim-less"]
 	path = bundle/vim-less
     url = https://github.com/groenewege/vim-less.git
-[submodule "bundle/minibufexpl.vim"]
-	path = bundle/minibufexpl.vim
-    url = https://github.com/fholgado/minibufexpl.vim.git
 [submodule "bundle/vim-indent-lines"]
     path = bundle/vim-indent-lines
 	url = https://github.com/Yggdroot/indentLine.git
