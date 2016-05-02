@@ -332,6 +332,9 @@ au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
 " scala settings
 autocmd BufNewFile,BufReadPost *.scala setl shiftwidth=2 expandtab
 
+" Markdown Settings
+autocmd BufNewFile,BufReadPost *.md setl ts=4 sw=4 sts=4 expandtab
+
 " lua settings
 autocmd BufNewFile,BufRead *.lua setlocal noet ts=4 sw=4 sts=4
 
