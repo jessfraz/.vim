@@ -74,8 +74,8 @@ set showmatch
 set smarttab
 
 set et
-set tabstop=2
-set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
 set expandtab
 
 set nrformats-=octal
@@ -90,9 +90,6 @@ set ttimeoutlen=10
 " Better Completion
 set complete=.,w,b,u,t
 set completeopt=longest,menuone
-
-" for Windows and X11 clipboard compatibility
-set clipboard=unnamed
 
 if &history < 1000
 	set history=50
