@@ -88,6 +88,9 @@ set ttimeoutlen=10
 set complete=.,w,b,u,t
 set completeopt=longest,menuone
 
+" for Windows and X11 clipboard compatibility
+set clipboard=unnamed
+
 if &history < 1000
 	set history=50
 endif
