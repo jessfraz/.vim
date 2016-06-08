@@ -62,6 +62,9 @@ set formatoptions=qrn1
 "set relativenumber
 "set norelativenumber
 
+" for Windows and X11 compatibility
+set clipboard=unnamed
+
 " mail line wrapping
 au BufRead /tmp/mutt-* set tw=72
 
@@ -71,8 +74,8 @@ set showmatch
 set smarttab
 
 set et
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set expandtab
 
 set nrformats-=octal
