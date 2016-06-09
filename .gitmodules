@@ -67,3 +67,9 @@
 [submodule "bundle/vim-markdownfmt"]
 	path = bundle/vim-markdownfmt
 	url = https://github.com/moorereason/vim-markdownfmt.git
+[submodule "bundle/deoplete.nvim"]
+	path = bundle/deoplete.nvim
+	url = https://github.com/Shougo/deoplete.nvim.git
+[submodule "bundle/deoplete-go"]
+	path = bundle/deoplete-go
+	url = https://github.com/zchee/deoplete-go.git
