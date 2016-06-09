@@ -605,6 +605,9 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 " ==================== vim-json ====================
 let g:vim_json_syntax_conceal = 0
 
+" ==================== vim-mardownfmt ====================
+let g:markdownfmt_autosave = 1
+
 " ========= vim-better-whitespace ==================
 
 " auto strip whitespace except for file with extention blacklisted
