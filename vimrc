@@ -632,7 +632,7 @@ if has('nvim')
 endif
 
 " ==================== vim-mardownfmt ====================
-let g:markdownfmt_autosave = 1
+"let g:markdownfmt_autosave = 1
 
 " ========= vim-better-whitespace ==================
 
