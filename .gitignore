@@ -1,4 +1,5 @@
 .DS_Store
+*-rplugin~
 *.swp
 .git/
 .git
