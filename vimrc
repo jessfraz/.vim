@@ -385,7 +385,7 @@ set wildignore+=*.orig                           " Merge resolution files
 " ----------------------------------------- "
 
 " ==================== CtrlP ====================
-let g:ctrlp_cmd = 'CtrlPMRU'
+let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_max_height = 10		" maxiumum height of match window
 let g:ctrlp_switch_buffer = 'et'	" jump to a file if it's open already
