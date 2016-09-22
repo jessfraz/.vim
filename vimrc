@@ -641,13 +641,20 @@ endif
 " ==================== vim-mardownfmt ====================
 "let g:markdownfmt_autosave = 1
 
+" ==================== vim-multiple-cursors ====================
+let g:multi_cursor_use_default_mapping=0
+let g:multi_cursor_next_key='<C-i>'
+let g:multi_cursor_prev_key='<C-y>'
+let g:multi_cursor_skip_key='<C-b>'
+let g:multi_cursor_quit_key='<Esc>'
+
 " ========= vim-better-whitespace ==================
 
 " auto strip whitespace except for file with extention blacklisted
 let blacklist = ['markdown', 'md']
 autocmd BufWritePre * StripWhitespace
 
-" ========= clang-format ==================
+" ================= clang-format ==================
 
 map <C-K> :pyf /usr/share/vim/addons/syntax/clang-format-3.8.py<cr>
 imap <C-K> <c-o>:pyf /usr/share/vim/addons/syntax/clang-format-3.8.py<cr>
