@@ -76,3 +76,6 @@
 [submodule "bundle/vim-multiple-cursors"]
 	path = bundle/vim-multiple-cursors
 	url = https://github.com/terryma/vim-multiple-cursors.git
+[submodule "bundle/vim-hclfmt"]
+	path = bundle/vim-hclfmt
+	url = https://github.com/fatih/vim-hclfmt.git
