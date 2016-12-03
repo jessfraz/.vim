@@ -418,16 +418,6 @@ nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gp :Gpush<CR>
 vnoremap <leader>gb :Gblame<CR>
 
-" ============== MiniBufExpl =====================
-
-"let g:miniBufExplMapWindowNavVim = 1
-"let g:miniBufExplMapWindowNavArrows = 1
-"let g:miniBufExplMapCTabSwitchBufs = 1
-"let g:miniBufExplModSelTarget = 1
-
-" Mapping to minibuffer
-nmap <C-t> :bn<CR>
-
 " =================== Vim-cfmt ===================
 let g:cfmt_style = '-linux'
 autocmd BufWritePre *.c,*.h Cfmt
@@ -486,32 +476,20 @@ let g:delimitMate_smart_matchpairs = '^\%(\w\|\$\)'
 "
 let g:lightline = {
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste'],
-      \             [ 'fugitive', 'filename', 'modified', 'ctrlpmark' ],
-      \             [ 'go'] ],
-      \   'right': [ [ 'lineinfo' ],
-      \              [ 'percent' ],
-      \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
-      \ },
-      \ 'inactive': {
-      \   'left': [ [ 'go'] ],
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'fugitive', 'filename' ] ]
       \ },
       \ 'component_function': {
-      \   'lineinfo': 'LightLineInfo',
-      \   'percent': 'LightLinePercent',
-      \   'modified': 'LightLineModified',
-      \   'filename': 'LightLineFilename',
-      \   'go': 'LightLineGo',
-      \   'fileformat': 'LightLineFileformat',
-      \   'filetype': 'LightLineFiletype',
-      \   'fileencoding': 'LightLineFileencoding',
-      \   'mode': 'LightLineMode',
-      \   'fugitive': 'LightLineFugitive',
-      \   'ctrlpmark': 'CtrlPMark',
+      \   'fugitive': 'LightlineFugitive',
+      \   'readonly': 'LightlineReadonly',
+      \   'modified': 'LightlineModified',
+      \   'filename': 'LightlineFilename'
       \ },
+      \ 'separator': { 'left': '⮀', 'right': '⮂' },
+      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
       \ }
 
-function! LightLineModified()
+function! LightlineModified()
   if &filetype == "help"
     return ""
   elseif &modified
@@ -523,90 +501,31 @@ function! LightLineModified()
   endif
 endfunction
 
-function! LightLineFileformat()
-  return winwidth(0) > 70 ? &fileformat : ''
-endfunction
-
-function! LightLineFiletype()
-  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
-endfunction
-
-function! LightLineFileencoding()
-  return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
-endfunction
-
-function! LightLineInfo()
-  return winwidth(0) > 60 ? printf("%3d:%-2d", line('.'), col('.')) : ''
-endfunction
-
-function! LightLinePercent()
-  return &ft =~? 'vimfiler' ? '' : (100 * line('.') / line('$')) . '%'
-endfunction
-
-function! LightLineFugitive()
-  return exists('*fugitive#head') ? fugitive#head() : ''
-endfunction
-
-function! LightLineGo()
-  " return ''
-  return exists('*go#jobcontrol#Statusline') ? go#jobcontrol#Statusline() : ''
-endfunction
-
-function! LightLineMode()
-  let fname = expand('%:t')
-  return fname == 'ControlP' ? 'CtrlP' :
-        \ &ft == 'vimfiler' ? 'VimFiler' :
-        \ winwidth(0) > 60 ? lightline#mode() : ''
-endfunction
-
-function! LightLineFilename()
-  let fname = expand('%:t')
-  if mode() == 't'
-    return ''
-  endif
-
-  return fname == 'ControlP' ? g:lightline.ctrlp_item :
-        \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
-        \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-        \ ('' != fname ? fname : '[No Name]')
-endfunction
-
-function! LightLineReadonly()
-  return &ft !~? 'help' && &readonly ? 'RO' : ''
-endfunction
-
-function! CtrlPMark()
-  if expand('%:t') =~ 'ControlP'
-    call lightline#link('iR'[g:lightline.ctrlp_regex])
-    return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
-          \ , g:lightline.ctrlp_next], 0)
+function! LightlineReadonly()
+  if &filetype == "help"
+    return ""
+  elseif &readonly
+    return "⭤"
   else
-    return ''
+    return ""
   endif
 endfunction
 
-let g:ctrlp_status_func = {
-      \ 'main': 'CtrlPStatusFunc_1',
-      \ 'prog': 'CtrlPStatusFunc_2',
-      \ }
-
-function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
-  let g:lightline.ctrlp_regex = a:regex
-  let g:lightline.ctrlp_prev = a:prev
-  let g:lightline.ctrlp_item = a:item
-  let g:lightline.ctrlp_next = a:next
-  return lightline#statusline(0)
+function! LightlineFugitive()
+  if exists("*fugitive#head")
+    let branch = fugitive#head()
+    return branch !=# '' ? '⭠ '.branch : ''
+  endif
+  return ''
 endfunction
 
-function! CtrlPStatusFunc_2(str)
-  return lightline#statusline(0)
+function! LightlineFilename()
+  return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
+        \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
+        \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
 endfunction
 
-
-" Trigger a highlight in the appropriate direction when pressing these keys:
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-
-" ==================== NerdTree ====================
+"==================== NerdTree ====================
 " For toggling
 nmap <C-n> :NERDTreeToggle<CR>
 noremap <Leader>n :NERDTreeToggle<cr>
