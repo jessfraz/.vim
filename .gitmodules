@@ -43,9 +43,6 @@
 [submodule "bundle/vim-nginx"]
 	path = bundle/vim-nginx
 	url = https://github.com/fatih/vim-nginx.git
-[submodule "bundle/lightline.vim"]
-	path = bundle/lightline.vim
-	url = https://github.com/itchyny/lightline.vim.git
 [submodule "bundle/delimitMate"]
 	path = bundle/delimitMate
 	url = https://github.com/Raimondi/delimitMate.git
