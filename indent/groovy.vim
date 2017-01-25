@@ -15,6 +15,10 @@ setlocal cindent cinoptions& cinoptions+=j1
 " The "extends" and "implements" lines start off with the wrong indent.
 setlocal indentkeys& indentkeys+=0=extends indentkeys+=0=implements
 
+" Don't de-indent things that look like labels (e.g., 'given:',
+" 'when:', 'then:', etc., as found in Spock tests)
+setlocal cinoptions+=L0
+
 " Set the function to do the work.
 setlocal indentexpr=GetGroovyIndent()
 
@@ -133,7 +137,7 @@ function GetGroovyIndent()
       let theIndent = indent(lnum)
     endif
 
-    " if last line end with ( 
+    " if last line end with (
     if getline(lnum) =~ '[\(]\s*$'
       let theIndent = indent(lnum) + &sw
     endif
