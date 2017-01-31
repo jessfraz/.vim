@@ -333,7 +333,7 @@ au FileType nginx setlocal noet ts=4 sw=4 sts=4
 
 " Go settings
 au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
-autocmd BufEnter *.go colorscheme nofrils-dark
+" autocmd BufEnter *.go colorscheme nofrils-dark
 
 " scala settings
 autocmd BufNewFile,BufReadPost *.scala setl shiftwidth=2 expandtab
@@ -420,7 +420,7 @@ nnoremap <leader>gp :Gpush<CR>
 vnoremap <leader>gb :Gblame<CR>
 
 " =================== Vim-cfmt ===================
-let g:cfmt_style = '-linux'
+let g:cfmt_style = '-linux -kr -i8'
 autocmd BufWritePre *.c,*.h Cfmt
 
 " ==================== Vim-go ====================
