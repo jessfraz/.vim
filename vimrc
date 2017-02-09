@@ -420,8 +420,11 @@ nnoremap <leader>gp :Gpush<CR>
 vnoremap <leader>gb :Gblame<CR>
 
 " =================== Vim-cfmt ===================
-let g:cfmt_style = '-linux -kr -i8'
-autocmd BufWritePre *.c,*.h Cfmt
+let g:cfmt_style = '-linux'
+"autocmd BufWritePre *.c,*.h Cfmt
+
+" ================== linuxsty ====================
+"let g:linuxsty_patterns = ['/usr/src/', '/linux']
 
 " ==================== Vim-go ====================
 let g:go_fmt_fail_silently = 0
