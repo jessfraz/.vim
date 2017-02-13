@@ -82,9 +82,6 @@
 [submodule "bundle/vim-airline-themes"]
 	path = bundle/vim-airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes.git
-[submodule "bundle/tagbar"]
-	path = bundle/tagbar
-	url = https://github.com/majutsushi/tagbar.git
 [submodule "bundle/linuxsty.vim"]
 	path = bundle/linuxsty.vim
 	url = https://github.com/vivien/vim-linux-coding-style.git
