@@ -85,3 +85,6 @@
 [submodule "bundle/linuxsty.vim"]
 	path = bundle/linuxsty.vim
 	url = https://github.com/vivien/vim-linux-coding-style.git
+[submodule "bundle/vim-pug"]
+	path = bundle/vim-pug
+	url = https://github.com/digitaltoad/vim-pug.git
