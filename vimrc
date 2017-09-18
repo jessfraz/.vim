@@ -513,9 +513,6 @@ if has('nvim')
   call deoplete#custom#set('_', 'disabled_syntaxes', ['Comment', 'String'])
 endif
 
-" ==================== vim-mardownfmt ====================
-"let g:markdownfmt_autosave = 1
-
 " ==================== vim-multiple-cursors ====================
 let g:multi_cursor_use_default_mapping=0
 let g:multi_cursor_next_key='<C-i>'
