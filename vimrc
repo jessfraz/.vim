@@ -538,7 +538,7 @@ endfunction
 
 " auto strip whitespace except for file with extention blacklisted
 let blacklist = ['markdown', 'md']
-autocmd BufWritePre * StripWhitespace
+autocmd BufWritePre * if index(blacklist, &ft) < 0 | StripWhitespace
 
 " ================= clang-format ==================
 
