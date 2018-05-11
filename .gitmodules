@@ -28,9 +28,6 @@
 [submodule "bundle/vim-toml"]
 	path = bundle/vim-toml
 	url = https://github.com/cespare/vim-toml.git
-[submodule "bundle/vim-systemd"]
-	path = bundle/vim-systemd
-	url = https://github.com/wgwoods/vim-systemd-syntax.git
 [submodule "bundle/vim-better-whitespace"]
 	path = bundle/vim-better-whitespace
 	url = https://github.com/ntpeters/vim-better-whitespace.git
