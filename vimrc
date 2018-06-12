@@ -556,4 +556,14 @@ if !g:remoteSession
   let g:airline_powerline_fonts=1
 endif
 
+" =================== rust.vim ========================
+
+" Enable automatic running of :RustFmt when a buffer is saved.
+let g:rustfmt_autosave = 1
+
+" The :RustPlay command will send the current selection, or if nothing is
+" selected the current buffer, to the Rust playpen. Then copy the url to the
+" clipboard.
+let g:rust_clip_command = 'xclip -selection clipboard'
+
 " vim:ts=2:sw=2:et
