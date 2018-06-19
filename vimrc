@@ -566,4 +566,9 @@ let g:rustfmt_autosave = 1
 " clipboard.
 let g:rust_clip_command = 'xclip -selection clipboard'
 
+" =================== vim-terraform ========================
+
+" Allow vim-terraform to override your .vimrc indentation syntax for matching files.
+let g:terraform_align=1
+
 " vim:ts=2:sw=2:et
