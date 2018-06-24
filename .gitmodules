@@ -91,3 +91,6 @@
 [submodule "bundle/vim-terraform"]
 	path = bundle/vim-terraform
 	url = https://github.com/hashivim/vim-terraform.git
+[submodule "bundle/nerdtree-git-plugin"]
+	path = bundle/nerdtree-git-plugin
+	url = https://github.com/Xuyuanp/nerdtree-git-plugin.git
