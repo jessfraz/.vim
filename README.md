@@ -18,6 +18,18 @@ The vim dot files make use of the excellent [Pathogen](https://github.com/tpope/
 
 Currently using version 2.4 of Pathogen
 
+## Updating and Installing
+
+You can use the [`Makefile`](Makefile) to run a series of commands.
+
+```console
+$ make help
+install                        Sets up symlink for user and root .vimrc for vim and neovim
+README.md                      Generates and updates plugin info in README.md
+update-pathogen                Updates pathogen
+update                         Updates all plugins
+```
+
 ## Plugins Used
 
 * [Dockerfile](https://github.com/docker/docker/tree/master/contrib/syntax/vim)
