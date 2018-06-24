@@ -16,22 +16,29 @@ endif
 let g:loaded_pathogen = 1
 
 " Point of entry for basic default usage.  Give a relative path to invoke
-" pathogen#interpose() (defaults to "bundle/{}"), or an absolute path to invoke
-" pathogen#surround().  Curly braces are expanded with pathogen#expand():
-" "bundle/{}" finds all subdirectories inside "bundle" inside all directories
-" in the runtime path.
+" pathogen#interpose() or an absolute path to invoke pathogen#surround().
+" Curly braces are expanded with pathogen#expand(): "bundle/{}" finds all
+" subdirectories inside "bundle" inside all directories in the runtime path.
+" If no arguments are given, defaults "bundle/{}", and also "pack/{}/start/{}"
+" on versions of Vim without native package support.
 function! pathogen#infect(...) abort
-  for path in a:0 ? filter(reverse(copy(a:000)), 'type(v:val) == type("")') : ['bundle/{}']
-    if path =~# '^\%({\=[$~\\/]\|{\=\w:[\\/]\).*[{}*]'
+  if a:0
+    let paths = filter(reverse(copy(a:000)), 'type(v:val) == type("")')
+  else
+    let paths = ['bundle/{}', 'pack/{}/start/{}']
+  endif
+  if has('packages')
+    call filter(paths, 'v:val !~# "^pack/[^/]*/start/[^/]*$"')
+  endif
+  let static = '^\%([$~\\/]\|\w:[\\/]\)[^{}*]*$'
+  for path in filter(copy(paths), 'v:val =~# static')
+    call pathogen#surround(path)
+  endfor
+  for path in filter(copy(paths), 'v:val !~# static')
+    if path =~# '^\%([$~\\/]\|\w:[\\/]\)'
       call pathogen#surround(path)
-    elseif path =~# '^\%([$~\\/]\|\w:[\\/]\)'
-      call s:warn('Change pathogen#infect('.string(path).') to pathogen#infect('.string(path.'/{}').')')
-      call pathogen#surround(path . '/{}')
-    elseif path =~# '[{}*]'
-      call pathogen#interpose(path)
     else
-      call s:warn('Change pathogen#infect('.string(path).') to pathogen#infect('.string(path.'/{}').')')
-      call pathogen#interpose(path . '/{}')
+      call pathogen#interpose(path)
     endif
   endfor
   call pathogen#cycle_filetype()
@@ -97,9 +104,7 @@ function! pathogen#is_disabled(path) abort
     return 1
   endif
   let sep = pathogen#slash()
-  let blacklist =
-        \ get(g:, 'pathogen_blacklist', get(g:, 'pathogen_disabled', [])) +
-        \ pathogen#split($VIMBLACKLIST)
+  let blacklist = get(g:, 'pathogen_blacklist', get(g:, 'pathogen_disabled', [])) + pathogen#split($VIMBLACKLIST)
   if !empty(blacklist)
     call map(blacklist, 'substitute(v:val, "[\\/]$", "", "")')
   endif
@@ -176,19 +181,20 @@ endfunction
 " and globbed.  Actual globs are preserved.
 function! pathogen#expand(pattern, ...) abort
   let after = a:0 ? a:1 : ''
-  if a:pattern =~# '{[^{}]\+}'
-    let [pre, pat, post] = split(substitute(a:pattern, '\(.\{-\}\){\([^{}]\+\)}\(.*\)', "\\1\001\\2\001\\3", ''), "\001", 1)
+  let pattern = substitute(a:pattern, '^[~$][^\/]*', '\=expand(submatch(0))', '')
+  if pattern =~# '{[^{}]\+}'
+    let [pre, pat, post] = split(substitute(pattern, '\(.\{-\}\){\([^{}]\+\)}\(.*\)', "\\1\001\\2\001\\3", ''), "\001", 1)
     let found = map(split(pat, ',', 1), 'pre.v:val.post')
     let results = []
     for pattern in found
       call extend(results, pathogen#expand(pattern))
     endfor
-  elseif a:pattern =~# '{}'
-    let pat = matchstr(a:pattern, '^.*{}[^*]*\%($\|[\\/]\)')
-    let post = a:pattern[strlen(pat) : -1]
+  elseif pattern =~# '{}'
+    let pat = matchstr(pattern, '^.*{}[^*]*\%($\|[\\/]\)')
+    let post = pattern[strlen(pat) : -1]
     let results = map(split(glob(substitute(pat, '{}', '*', 'g')), "\n"), 'v:val.post')
   else
-    let results = [a:pattern]
+    let results = [pattern]
   endif
   let vf = pathogen#slash() . 'vimfiles'
   call map(results, 'v:val =~# "\\*" ? v:val.after : isdirectory(v:val.vf.after) ? v:val.vf.after : isdirectory(v:val.after) ? v:val.after : ""')
@@ -254,100 +260,5 @@ function! pathogen#runtime_findfile(file,count) abort
     return fnamemodify(file,':p')
   endif
 endfunction
-
-" Section: Deprecated
-
-function! s:warn(msg) abort
-  echohl WarningMsg
-  echomsg a:msg
-  echohl NONE
-endfunction
-
-" Prepend all subdirectories of path to the rtp, and append all 'after'
-" directories in those subdirectories.  Deprecated.
-function! pathogen#runtime_prepend_subdirectories(path) abort
-  call s:warn('Change pathogen#runtime_prepend_subdirectories('.string(a:path).') to pathogen#infect('.string(a:path.'/{}').')')
-  return pathogen#surround(a:path . pathogen#slash() . '{}')
-endfunction
-
-function! pathogen#incubate(...) abort
-  let name = a:0 ? a:1 : 'bundle/{}'
-  call s:warn('Change pathogen#incubate('.(a:0 ? string(a:1) : '').') to pathogen#infect('.string(name).')')
-  return pathogen#interpose(name)
-endfunction
-
-" Deprecated alias for pathogen#interpose().
-function! pathogen#runtime_append_all_bundles(...) abort
-  if a:0
-    call s:warn('Change pathogen#runtime_append_all_bundles('.string(a:1).') to pathogen#infect('.string(a:1.'/{}').')')
-  else
-    call s:warn('Change pathogen#runtime_append_all_bundles() to pathogen#infect()')
-  endif
-  return pathogen#interpose(a:0 ? a:1 . '/{}' : 'bundle/{}')
-endfunction
-
-if exists(':Vedit')
-  finish
-endif
-
-let s:vopen_warning = 0
-
-function! s:find(count,cmd,file,lcd)
-  let rtp = pathogen#join(1,pathogen#split(&runtimepath))
-  let file = pathogen#runtime_findfile(a:file,a:count)
-  if file ==# ''
-    return "echoerr 'E345: Can''t find file \"".a:file."\" in runtimepath'"
-  endif
-  if !s:vopen_warning
-    let s:vopen_warning = 1
-    let warning = '|echohl WarningMsg|echo "Install scriptease.vim to continue using :V'.a:cmd.'"|echohl NONE'
-  else
-    let warning = ''
-  endif
-  if a:lcd
-    let path = file[0:-strlen(a:file)-2]
-    execute 'lcd `=path`'
-    return a:cmd.' '.pathogen#fnameescape(a:file) . warning
-  else
-    return a:cmd.' '.pathogen#fnameescape(file) . warning
-  endif
-endfunction
-
-function! s:Findcomplete(A,L,P)
-  let sep = pathogen#slash()
-  let cheats = {
-        \'a': 'autoload',
-        \'d': 'doc',
-        \'f': 'ftplugin',
-        \'i': 'indent',
-        \'p': 'plugin',
-        \'s': 'syntax'}
-  if a:A =~# '^\w[\\/]' && has_key(cheats,a:A[0])
-    let request = cheats[a:A[0]].a:A[1:-1]
-  else
-    let request = a:A
-  endif
-  let pattern = substitute(request,'/\|\'.sep,'*'.sep,'g').'*'
-  let found = {}
-  for path in pathogen#split(&runtimepath)
-    let path = expand(path, ':p')
-    let matches = split(glob(path.sep.pattern),"\n")
-    call map(matches,'isdirectory(v:val) ? v:val.sep : v:val')
-    call map(matches,'expand(v:val, ":p")[strlen(path)+1:-1]')
-    for match in matches
-      let found[match] = 1
-    endfor
-  endfor
-  return sort(keys(found))
-endfunction
-
-command! -bar -bang -range=1 -nargs=1 -complete=customlist,s:Findcomplete Ve       :execute s:find(<count>,'edit<bang>',<q-args>,0)
-command! -bar -bang -range=1 -nargs=1 -complete=customlist,s:Findcomplete Vedit    :execute s:find(<count>,'edit<bang>',<q-args>,0)
-command! -bar -bang -range=1 -nargs=1 -complete=customlist,s:Findcomplete Vopen    :execute s:find(<count>,'edit<bang>',<q-args>,1)
-command! -bar -bang -range=1 -nargs=1 -complete=customlist,s:Findcomplete Vsplit   :execute s:find(<count>,'split',<q-args>,<bang>1)
-command! -bar -bang -range=1 -nargs=1 -complete=customlist,s:Findcomplete Vvsplit  :execute s:find(<count>,'vsplit',<q-args>,<bang>1)
-command! -bar -bang -range=1 -nargs=1 -complete=customlist,s:Findcomplete Vtabedit :execute s:find(<count>,'tabedit',<q-args>,<bang>1)
-command! -bar -bang -range=1 -nargs=1 -complete=customlist,s:Findcomplete Vpedit   :execute s:find(<count>,'pedit',<q-args>,<bang>1)
-command! -bar -bang -range=1 -nargs=1 -complete=customlist,s:Findcomplete Vread    :execute s:find(<count>,'read',<q-args>,<bang>1)
 
 " vim:set et sw=2 foldmethod=expr foldexpr=getline(v\:lnum)=~'^\"\ Section\:'?'>1'\:getline(v\:lnum)=~#'^fu'?'a1'\:getline(v\:lnum)=~#'^endf'?'s1'\:'=':
