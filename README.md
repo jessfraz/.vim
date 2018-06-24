@@ -53,6 +53,7 @@ update                         Updates all plugins
 * [github.com/altercation/vim-colors-solarized](https://github.com/altercation/vim-colors-solarized.git)
 * [github.com/tpope/vim-endwise](https://github.com/tpope/vim-endwise.git)
 * [github.com/tpope/vim-five.git](https://github.com/tpope/vim-fugitive.git)
+* [github.com/tpope/vim.git](https://github.com/tpope/vim-git.git)
 * [github.com/airblade/vimgutter.git](https://github.com/airblade/vim-gitgutter.git)
 * [github.com/fatih/vim-go](https://github.com/fatih/vim-go.git)
 * [github.com/fatih/vim-hclfmt](https://github.com/fatih/vim-hclfmt.git)
