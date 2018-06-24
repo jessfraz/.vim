@@ -59,6 +59,7 @@ update                         Updates all plugins
 * [github.com/fatih/vim-hclfmt](https://github.com/fatih/vim-hclfmt.git)
 * [github.com/Yggdroot/indentLine](https://github.com/Yggdroot/indentLine.git)
 * [github.com/elzr/vim-json](https://github.com/elzr/vim-json.git)
+* [github.com/plasticboy/vim-markdown](https://github.com/plasticboy/vim-markdown.git)
 * [github.com/terryma/vim-multiple-cursors](https://github.com/terryma/vim-multiple-cursors.git)
 * [github.com/hynek/vim-python-pep8-indent](https://github.com/hynek/vim-python-pep8-indent.git)
 * [github.com/mhinz/vim-sayonara](https://github.com/mhinz/vim-sayonara.git)
