@@ -16,7 +16,7 @@ $ git submodule update --init
 ## Pathogen
 The vim dot files make use of the excellent [Pathogen](https://github.com/tpope/vim-pathogen) runtime path manager to install plugins and runtime files into their own private directiories.
 
-Currently using version 2.2 of Pathogen
+Currently using version 2.4 of Pathogen
 
 ## Plugins Used
 
