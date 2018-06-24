@@ -79,9 +79,6 @@
 [submodule "bundle/linuxsty.vim"]
 	path = bundle/linuxsty.vim
 	url = https://github.com/vivien/vim-linux-coding-style.git
-[submodule "bundle/vim-pug"]
-	path = bundle/vim-pug
-	url = https://github.com/digitaltoad/vim-pug.git
 [submodule "bundle/vim-systemd"]
 	path = bundle/vim-systemd
 	url = https://github.com/wgwoods/vim-systemd-syntax.git
