@@ -68,3 +68,4 @@ update                         Updates all plugins
 * [github.com/wgwoods/vim-systemd-syntax](https://github.com/wgwoods/vim-systemd-syntax.git)
 * [github.com/hashivim/vim-terraform](https://github.com/hashivim/vim-terraform.git)
 * [github.com/cespare/vim-toml](https://github.com/cespare/vim-toml.git)
+* [github.com/stephpy/vim-yaml](https://github.com/stephpy/vim-yaml.git)

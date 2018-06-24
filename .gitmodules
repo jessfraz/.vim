@@ -103,3 +103,6 @@
 [submodule "bundle/vim-protobuf"]
 	path = bundle/vim-protobuf
 	url = https://github.com/uarun/vim-protobuf.git
+[submodule "bundle/vim-yaml"]
+	path = bundle/vim-yaml
+	url = https://github.com/stephpy/vim-yaml.git
