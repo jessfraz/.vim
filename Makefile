@@ -18,7 +18,7 @@ update: ## Updates all plugins
 	git submodule foreach git pull --recurse-submodules origin master
 
 .PHONY: update-pathogen
-update-pathogen: ## Updates pathogen.
+update-pathogen: ## Updates pathogen
 	curl -LSso $(CURDIR)/autoload/pathogen.vim https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim
 
 .PHONY: README.md
