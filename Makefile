@@ -1,7 +1,7 @@
 XDG_CONFIG_HOME := $(HOME)/.config
 
 .PHONY: install
-install: ## Sets up symlink for user and root .vimrc for vim and neovim
+install: ## Sets up symlink for user and root .vimrc for vim and neovim.
 	ln -snf "$(HOME)/.vim/vimrc" "$(HOME)/.vimrc"
 	mkdir -p "$(XDG_CONFIG_HOME)"
 	ln -snf "$(HOME)/.vim" "$(XDG_CONFIG_HOME)/nvim"
@@ -13,16 +13,16 @@ install: ## Sets up symlink for user and root .vimrc for vim and neovim
 	sudo ln -snf "$(HOME)/.vimrc" /root/.config/nvim/init.vim
 
 .PHONY: update
-update: ## Updates all plugins
+update: ## Updates all plugins.
 	git submodule update --init --recursive
 	git submodule foreach git pull --recurse-submodules origin master
 
 .PHONY: update-pathogen
-update-pathogen: ## Updates pathogen
+update-pathogen: ## Updates pathogen.
 	curl -LSso $(CURDIR)/autoload/pathogen.vim https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim
 
 .PHONY: README.md
-README.md: ## Generates and updates plugin info in README.md
+README.md: ## Generates and updates plugin info in README.md.
 	@sed -i '/Dockerfile/q' $@
 	@git  submodule --quiet foreach bash -c "echo -e \"* [\$$(git config --get remote.origin.url | sed 's#https://##' | sed 's#git://##' | sed 's/.git//')](\$$(git config --get remote.origin.url))\"" >> $@
 
@@ -35,7 +35,7 @@ __check_defined = \
 				  required by target `$@')))
 
 .PHONY: remove-submodule
-remove-submodule: ## Removes a git submodule (ex MODULE=bundle/nginx.vim)
+remove-submodule: ## Removes a git submodule (ex MODULE=bundle/nginx.vim).
 	@:$(call check_defined, MODULE, path of module to remove)
 	mv $(MODULE) $(MODULE).tmp
 	git submodule deinit -f -- $(MODULE)
