@@ -24,11 +24,12 @@ You can use the [`Makefile`](Makefile) to run a series of commands.
 
 ```console
 $ make help
-install                        Sets up symlink for user and root .vimrc for vim and neovim
-README.md                      Generates and updates plugin info in README.md
-remove-submodule               Removes a git submodule (ex MODULE=bundle/nginx.vim)
-update-pathogen                Updates pathogen
-update                         Updates all plugins
+install                        Sets up symlink for user and root .vimrc for vim and neovim.
+README.md                      Generates and updates plugin info in README.md.
+remove-submodule               Removes a git submodule (ex MODULE=bundle/nginx.vim).
+update-pathogen                Updates pathogen.
+update-plugins                 Updates all plugins.
+update                         Updates pathogen and all plugins.
 ```
 
 ## Plugins Used
