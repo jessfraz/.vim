@@ -106,3 +106,6 @@
 [submodule "bundle/vim-yaml"]
 	path = bundle/vim-yaml
 	url = https://github.com/stephpy/vim-yaml.git
+[submodule "bundle/vim-mipssyntax"]
+	path = bundle/vim-mipssyntax
+	url = https://github.com/harenome/vim-mipssyntax.git
