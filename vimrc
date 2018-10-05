@@ -364,6 +364,9 @@ au BufRead,BufNewFile MAINTAINERS set ft=toml
 " hcl settings
 au BufRead,BufNewFile *.workflow set ft=hcl
 
+" mips settings
+au BufRead,BufNewFile *.mips set ft=mips
+
 " spell check for git commits
 autocmd FileType gitcommit setlocal spell
 
