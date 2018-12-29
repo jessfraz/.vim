@@ -7,6 +7,13 @@ My vim dot files. the `.vimrc` file is saved to [vimrc](https://github.com/jessf
 
 <!-- toc -->
 
+- [About](#about)
+  * [Installing](#installing)
+  * [Pathogen](#pathogen)
+  * [Plugins Used](#plugins-used)
+- [Contributing](#contributing)
+  * [Using the `Makefile`](#using-the-makefile)
+
 <!-- tocstop -->
 
 ## About
@@ -84,4 +91,3 @@ update-pathogen                Updates pathogen.
 update-plugins                 Updates all plugins.
 update                         Updates pathogen and all plugins.
 ```
-
