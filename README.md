@@ -67,6 +67,7 @@ update                         Updates pathogen and all plugins.
 * [github.com/hynek/vim-python-pep8-indent](https://github.com/hynek/vim-python-pep8-indent.git)
 * [github.com/mhinz/vim-sayonara](https://github.com/mhinz/vim-sayonara.git)
 * [github.com/tpope/vim-sensible](https://github.com/tpope/vim-sensible.git)
+* [github.com/tpope/vim-surround](https://github.com/tpope/vim-surround.git)
 * [github.com/wgwoods/vim-systemd-syntax](https://github.com/wgwoods/vim-systemd-syntax.git)
 * [github.com/hashivim/vim-terraform](https://github.com/hashivim/vim-terraform.git)
 * [github.com/cespare/vim-toml](https://github.com/cespare/vim-toml.git)
