@@ -266,9 +266,6 @@ imap jk <ESC>l
 
 nnoremap <F6> :setlocal spell! spell?<CR>
 
-" Select search pattern howewever do not jump to the next one
-nnoremap <leader>c :TComment<CR>
-
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.
 nnoremap n nzzzv
