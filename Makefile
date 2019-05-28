@@ -1,4 +1,4 @@
-XDG_CONFIG_HOME := $(HOME)/.config
+XDG_CONFIG_HOME ?= $(HOME)/.config
 
 .PHONY: install
 install: ## Sets up symlink for user and root .vimrc for vim and neovim.
