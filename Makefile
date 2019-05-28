@@ -26,8 +26,15 @@ update-pathogen: ## Updates pathogen.
 
 .PHONY: README.md
 README.md: ## Generates and updates plugin info in README.md.
-	@sed '/Dockerfile/q' $@ > $@.new && mv $@.new $@
-	@git submodule --quiet foreach 'git remote get-url origin | sed -e "s#https://\\(.*\\)#* [\\1](&)#" -e "s#git://\\(.*\\)#* [\\1](&)#" -e "s/\\.git//"' >> $@
+	@{ \
+		sed '/Dockerfile/q' $@; \
+		git submodule --quiet foreach '\
+			git remote get-url origin \
+			| sed -e "s#https://\\(.*\\)#* [\\1](&)#" -e "s#git://\\(.*\\)#* [\\1](&)#" -e "s/\\.git//" \
+		'; \
+		echo; \
+		sed -n '/## Contributing/,$$p' $@; \
+	} >> $@.tmp && mv $@.tmp $@
 
 check_defined = \
 				$(strip $(foreach 1,$1, \
