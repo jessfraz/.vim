@@ -106,7 +106,3 @@
 [submodule "bundle/vim-surround"]
 	path = bundle/vim-surround
 	url = https://github.com/tpope/vim-surround.git
-[submodule "bundle/coc.nvim"]
-	path = bundle/coc.nvim
-	url = https://github.com/neoclide/coc.nvim.git
-	branch = release
