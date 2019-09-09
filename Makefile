@@ -18,7 +18,7 @@ update: update-pathogen update-plugins ## Updates pathogen and all plugins.
 .PHONY: update-plugins
 update-plugins: ## Updates all plugins.
 	git submodule update --init --recursive
-	git submodule foreach git pull --recurse-submodules
+	git submodule update --remote --merge
 
 .PHONY: update-pathogen
 update-pathogen: ## Updates pathogen.
