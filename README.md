@@ -35,7 +35,23 @@ The vim dot files make use of the excellent [Pathogen](https://github.com/tpope/
 
 Currently using version 2.4 of Pathogen
 
-### Plugins Used
+## Contributing
+
+### Using the `Makefile`
+
+You can use the [`Makefile`](Makefile) to run a series of commands.
+
+```console
+$ make help
+install                        Sets up symlink for user and root .vimrc for vim and neovim.
+README.md                      Generates and updates plugin info in README.md.
+remove-submodule               Removes a git submodule (ex MODULE=bundle/nginx.vim).
+update-pathogen                Updates pathogen.
+update-plugins                 Updates all plugins.
+update                         Updates pathogen and all plugins.
+```
+
+## Plugins Used
 
 * [Dockerfile](https://github.com/docker/docker/tree/master/contrib/syntax/vim)
 * [github.com/neoclide/coc.nvim](https://github.com/neoclide/coc.nvim.git)
@@ -74,19 +90,3 @@ Currently using version 2.4 of Pathogen
 * [github.com/hashivim/vim-terraform](https://github.com/hashivim/vim-terraform.git)
 * [github.com/cespare/vim-toml](https://github.com/cespare/vim-toml.git)
 * [github.com/stephpy/vim-yaml](https://github.com/stephpy/vim-yaml.git)
-
-## Contributing
-
-### Using the `Makefile`
-
-You can use the [`Makefile`](Makefile) to run a series of commands.
-
-```console
-$ make help
-install                        Sets up symlink for user and root .vimrc for vim and neovim.
-README.md                      Generates and updates plugin info in README.md.
-remove-submodule               Removes a git submodule (ex MODULE=bundle/nginx.vim).
-update-pathogen                Updates pathogen.
-update-plugins                 Updates all plugins.
-update                         Updates pathogen and all plugins.
-```
