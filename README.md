@@ -38,10 +38,9 @@ Currently using version 2.4 of Pathogen
 ### Plugins Used
 
 * [Dockerfile](https://github.com/docker/docker/tree/master/contrib/syntax/vim)
+* [github.com/neoclide/coc.nvim](https://github.com/neoclide/coc.nvim.git)
 * [github.com/ctrlpvim/ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim.git)
 * [github.com/Raimondi/delimitMate](https://github.com/Raimondi/delimitMate.git)
-* [github.com/zchee/deoplete-go](https://github.com/zchee/deoplete-go.git)
-* [github.com/Shougo/deoplete.nvim](https://github.com/Shougo/deoplete.nvim.git)
 * [github.com/vivien/vim-linux-coding-style](https://github.com/vivien/vim-linux-coding-style.git)
 * [github.com/scrooloose/nerdtree](https://github.com/scrooloose/nerdtree.git)
 * [github.com/Xuyuanp/nerdtree-plugin.git](https://github.com/Xuyuanp/nerdtree-git-plugin.git)
