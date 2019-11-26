@@ -543,6 +543,7 @@ let g:vim_markdown_toc_autofit = 1
 
 " Disable conceal
 let g:vim_markdown_conceal = 0
+let g:vim_markdown_conceal_code_blocks = 0
 
 " Allow the ge command to follow named anchors in links of the form
 " file#anchor or just #anchor, where file may omit the .md extension as usual
