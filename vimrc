@@ -364,6 +364,9 @@ au BufRead,BufNewFile *.workflow set ft=hcl
 " mips settings
 au BufRead,BufNewFile *.mips set ft=mips
 
+" settings for njk
+au BufRead,BufNewFile *.njk set ft=html
+
 " Binary settings: edit binary using xxd-format
 augroup Binary
   au!
