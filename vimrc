@@ -73,7 +73,6 @@ set complete-=i
 set showmatch
 set smarttab
 
-set et
 set tabstop=4
 set shiftwidth=4
 set expandtab
