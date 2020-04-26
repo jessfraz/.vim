@@ -236,6 +236,8 @@ nnoremap <leader>a :cclose<CR>
 " Remove search highlight
 nnoremap <leader><space> :nohlsearch<CR>
 
+nnoremap <leader>d :r! date<CR>
+
 " Buffer prev/next
 nnoremap <C-x> :bnext<CR>
 nnoremap <C-z> :bprev<CR>
