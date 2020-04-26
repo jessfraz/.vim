@@ -236,7 +236,8 @@ nnoremap <leader>a :cclose<CR>
 " Remove search highlight
 nnoremap <leader><space> :nohlsearch<CR>
 
-nnoremap <leader>d :r! date<CR>
+" Add a date timestamp between two new lines.
+nnoremap <leader>d :r! echo "" && date && echo ""<CR>
 
 " Buffer prev/next
 nnoremap <C-x> :bnext<CR>
