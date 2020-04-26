@@ -62,14 +62,14 @@ autocmd FileType help wincmd L
 " Make Vim to handle long lines nicely.
 set wrap
 set textwidth=80
-set formatoptions=qrn1
-"set relativenumber
-"set norelativenumber
+set formatoptions=qrn1t
 
-" mail line wrapping
-au BufRead /tmp/mutt-* set tw=72
+" Do not use relative numbers to where the cursor is.
+set norelativenumber
 
+" Apply the indentation of the current line to the next line.
 set autoindent
+set smartindent
 set complete-=i
 set showmatch
 set smarttab
@@ -313,6 +313,9 @@ augroup filetypedetect
 augroup END
 
 au FileType nginx setlocal noet ts=4 sw=4 sts=4
+
+" mutt mail line wrapping
+au BufRead /tmp/mutt-* set textwidth=80
 
 " Go settings
 au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
