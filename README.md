@@ -53,7 +53,6 @@ update                         Updates pathogen and all plugins.
 
 ## Plugins Used
 
-* [Dockerfile](https://github.com/docker/docker/tree/master/contrib/syntax/vim)
 * [github.com/neoclide/coc.nvim](https://github.com/neoclide/coc.nvim.git)
 * [github.com/ctrlpvim/ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim.git)
 * [github.com/Raimondi/delimitMate](https://github.com/Raimondi/delimitMate.git)
