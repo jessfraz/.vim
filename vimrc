@@ -62,7 +62,7 @@ autocmd FileType help wincmd L
 " Make Vim to handle long lines nicely.
 set wrap
 set textwidth=80
-set formatoptions=qrn1t
+set formatoptions=qrn1
 
 " Do not use relative numbers to where the cursor is.
 set norelativenumber
@@ -341,8 +341,8 @@ autocmd FileType gitconfig,sh,toml set noexpandtab
 autocmd BufNewFile,BufRead *.py setlocal tabstop=4 softtabstop=4 shiftwidth=4 textwidth=80 smarttab expandtab
 
 " For all text files set 'textwidth' to 80 characters.
-autocmd FileType text setlocal textwidth=80
-autocmd BufNewFile,BufRead *.md,*.txt setlocal textwidth=80
+autocmd FileType text setlocal textwidth=80 fo+=2t
+autocmd BufNewFile,BufRead *.md,*.txt setlocal textwidth=80 fo+=2t
 
 " toml settings
 au BufRead,BufNewFile MAINTAINERS set ft=toml
