@@ -5,7 +5,11 @@ call pathogen#helptags()
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-filetype plugin indent on     " required
+" Enable file type detection.
+" Use the default filetype settings, so that mail gets 'tw' set to 72,
+" 'cindent' is on in C files, etc.
+" Also load indent files, to automatically do language-dependent indenting.
+filetype plugin indent on
 
 "
 " Settings
@@ -57,9 +61,8 @@ autocmd FileType help wincmd L
 
 " Make Vim to handle long lines nicely.
 set wrap
-set textwidth=79
+set textwidth=80
 set formatoptions=qrn1
-"set colorcolumn=79
 "set relativenumber
 "set norelativenumber
 
@@ -127,40 +130,19 @@ endif
 " file it was loaded from, thus the changes you made.
 " Only define it when not defined already.
 if !exists(":DiffOrig")
-	command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-				\ | wincmd p | diffthis
+  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+        \ | wincmd p | diffthis
 endif
 
-" Only do this part when compiled with support for autocommands.
-if has("autocmd")
-
-  " Enable file type detection.
-  " Use the default filetype settings, so that mail gets 'tw' set to 72,
-  " 'cindent' is on in C files, etc.
-  " Also load indent files, to automatically do language-dependent indenting.
-  filetype plugin indent on
-
-  " Put these in an autocmd group, so that we can delete them easily.
-  augroup vimrcEx
-    au!
-
-    " For all text files set 'textwidth' to 78 characters.
-    autocmd FileType text setlocal textwidth=78
-
-    " When editing a file, always jump to the last known cursor position.
-    " Don't do it when the position is invalid or when inside an event handler
-    " (happens when dropping a file on gvim).
-    " Also don't do it when the mark is in the first line, that is the default
-    " position when opening a file.
-    autocmd BufReadPost *
-          \ if line("'\"") > 1 && line("'\"") <= line("$") |
-          \	exe "normal! g`\"" |
-          \ endif
-
-  augroup END
-else
-endif " has("autocmd")
-
+" When editing a file, always jump to the last known cursor position.
+" Don't do it when the position is invalid or when inside an event handler
+" (happens when dropping a file on gvim).
+" Also don't do it when the mark is in the first line, that is the default
+" position when opening a file.
+autocmd BufReadPost *
+      \ if line("'\"") > 1 && line("'\"") <= line("$") |
+      \	exe "normal! g`\"" |
+      \ endif
 
 syntax enable
 if has('gui_running')
@@ -283,7 +265,7 @@ nnoremap Y y$
 " Do not show stupid q: window
 map q: :q
 
-" sometimes this happens and I hate it
+" Sometimes this happens and I hate it
 map :Vs :vs
 map :Sp :sp
 
@@ -305,7 +287,7 @@ function! XTermPasteBegin()
   return ""
 endfunction
 
-" set 80 character line limit
+" Set 80 character line limit
 if exists('+colorcolumn')
   set colorcolumn=80
 else
@@ -354,6 +336,10 @@ autocmd FileType gitconfig,sh,toml set noexpandtab
 
 " python indent
 autocmd BufNewFile,BufRead *.py setlocal tabstop=4 softtabstop=4 shiftwidth=4 textwidth=80 smarttab expandtab
+
+" For all text files set 'textwidth' to 80 characters.
+autocmd FileType text setlocal textwidth=80
+autocmd BufNewFile,BufRead *.md,*.txt setlocal textwidth=80
 
 " toml settings
 au BufRead,BufNewFile MAINTAINERS set ft=toml
