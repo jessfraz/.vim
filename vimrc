@@ -324,9 +324,6 @@ au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
 " scala settings
 autocmd BufNewFile,BufReadPost *.scala setl shiftwidth=2 expandtab
 
-" Markdown Settings
-autocmd BufNewFile,BufReadPost *.md setl ts=4 sw=4 sts=4 expandtab
-
 " lua settings
 autocmd BufNewFile,BufRead *.lua setlocal noet ts=4 sw=4 sts=4
 
@@ -341,8 +338,8 @@ autocmd FileType gitconfig,sh,toml set noexpandtab
 autocmd BufNewFile,BufRead *.py setlocal tabstop=4 softtabstop=4 shiftwidth=4 textwidth=80 smarttab expandtab
 
 " For all text files set 'textwidth' to 80 characters.
-autocmd FileType text setlocal textwidth=80 fo+=2t
-autocmd BufNewFile,BufRead *.md,*.txt setlocal textwidth=80 fo+=2t
+autocmd FileType text setlocal textwidth=80 fo+=2t ts=2 sw=2 sts=2 expandtab
+autocmd BufNewFile,BufRead *.md,*.txt setlocal textwidth=80 fo+=2t ts=2 sw=2 sts=2 expandtab
 
 " toml settings
 au BufRead,BufNewFile MAINTAINERS set ft=toml
