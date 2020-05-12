@@ -409,6 +409,8 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 
 let g:ctrlp_buftag_types = {'go' : '--language-force=go --golang-types=ftv'}
 
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
+
 func! MyCtrlPTag()
   let g:ctrlp_prompt_mappings = {
         \ 'AcceptSelection("e")': ['<cr>', '<2-LeftMouse>'],
