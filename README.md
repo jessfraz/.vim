@@ -76,6 +76,7 @@ update                         Updates pathogen and all plugins.
 * [github.com/fatih/vim-hclfmt](https://github.com/fatih/vim-hclfmt.git)
 * [github.com/Yggdroot/indentLine](https://github.com/Yggdroot/indentLine.git)
 * [github.com/elzr/vim-json](https://github.com/elzr/vim-json.git)
+* [github.com/mxw/vim-jsx](https://github.com/mxw/vim-jsx)
 * [github.com/plasticboy/vim-markdown](https://github.com/plasticboy/vim-markdown.git)
 * [github.com/harenome/vim-mipssyntax](https://github.com/harenome/vim-mipssyntax.git)
 * [github.com/terryma/vim-multiple-cursors](https://github.com/terryma/vim-multiple-cursors.git)
