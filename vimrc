@@ -225,12 +225,12 @@ function! InsertDate()
   let now = trim(system('date'))
   if cursor_pos[1] == "1"
     if cursor_pos[2] == "1"
-      call append(0, [now, "", ""])
-      call cursor(cursor_pos[1]+2, 1)
+      call append(0, [now, "", "- "])
+      call cursor(cursor_pos[1]+2, 2)
     endif
   else
-    call append(cursor_pos[1], ["", now, "", ""])
-    call cursor(cursor_pos[1]+4, 1)
+    call append(cursor_pos[1], ["", now, "", "- "])
+    call cursor(cursor_pos[1]+4, 2)
   endif
 endfunction
 
