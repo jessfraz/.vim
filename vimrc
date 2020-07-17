@@ -218,8 +218,24 @@ nnoremap <leader>a :cclose<CR>
 " Remove search highlight
 nnoremap <leader><space> :nohlsearch<CR>
 
+function! InsertDate()
+  " Get the position of the cursor, if it is the start of the file we want
+  " a different behavior than if it is elsewhere.
+  let cursor_pos = getpos(".")
+  let now = trim(system('date'))
+  if cursor_pos[1] == "1"
+    if cursor_pos[2] == "1"
+      call append(0, [now, "", ""])
+      call cursor(cursor_pos[1]+2, 1)
+    endif
+  else
+    call append(cursor_pos[1], ["", now, "", ""])
+    call cursor(cursor_pos[1]+4, 1)
+  endif
+endfunction
+
 " Add a date timestamp between two new lines.
-nnoremap <leader>d :r! echo "" && date && echo ""<CR>
+nnoremap <leader>d :call InsertDate()<CR>
 
 " Buffer prev/next
 nnoremap <C-x> :bnext<CR>
