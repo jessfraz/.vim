@@ -113,3 +113,6 @@
 [submodule "bundle/vim-jsx"]
 	path = bundle/vim-jsx
 	url = https://github.com/mxw/vim-jsx
+[submodule "bundle/tabnine-vim"]
+	path = bundle/tabnine-vim
+	url = https://github.com/zxqfl/tabnine-vim.git

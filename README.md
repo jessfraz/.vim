@@ -60,6 +60,7 @@ update                         Updates pathogen and all plugins.
 * [github.com/Xuyuanp/nerdtree-plugin.git](https://github.com/Xuyuanp/nerdtree-git-plugin.git)
 * [github.com/chr4/nginx.vim](https://github.com/chr4/nginx.vim.git)
 * [github.com/rust-lang/rust.vim](https://github.com/rust-lang/rust.vim.git)
+* [github.com/zxqfl/tabnine-vim](https://github.com/zxqfl/tabnine-vim.git)
 * [github.com/godlygeek/tabular](https://github.com/godlygeek/tabular.git)
 * [github.com/vim-airline/vim-airline](https://github.com/vim-airline/vim-airline.git)
 * [github.com/vim-airline/vim-airline-themes](https://github.com/vim-airline/vim-airline-themes.git)
