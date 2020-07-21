@@ -52,13 +52,13 @@ update                         Updates pathogen and all plugins.
 ```
 
 ## Plugins Used
-* [github.com/neoclide/coc.nvim](https://github.com/neoclide/coc.nvim.git)
 * [github.com/ctrlpvim/ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim.git)
 * [github.com/Raimondi/delimitMate](https://github.com/Raimondi/delimitMate.git)
 * [github.com/vivien/vim-linux-coding-style](https://github.com/vivien/vim-linux-coding-style.git)
 * [github.com/scrooloose/nerdtree](https://github.com/scrooloose/nerdtree.git)
 * [github.com/Xuyuanp/nerdtree-plugin.git](https://github.com/Xuyuanp/nerdtree-git-plugin.git)
 * [github.com/chr4/nginx.vim](https://github.com/chr4/nginx.vim.git)
+* [github.com/jessfraz/openai.vim](https://github.com/jessfraz/openai.vim.git)
 * [github.com/rust-lang/rust.vim](https://github.com/rust-lang/rust.vim.git)
 * [github.com/zxqfl/tabnine-vim](https://github.com/zxqfl/tabnine-vim.git)
 * [github.com/godlygeek/tabular](https://github.com/godlygeek/tabular.git)

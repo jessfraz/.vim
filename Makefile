@@ -1,3 +1,5 @@
+SHELL := bash
+
 XDG_CONFIG_HOME ?= $(HOME)/.config
 
 .PHONY: install
@@ -19,7 +21,11 @@ update: update-pathogen update-plugins ## Updates pathogen and all plugins.
 update-plugins: ## Updates all plugins.
 	git submodule update --init --recursive
 	git submodule update --remote
-	@cd $(CURDIR)/bundle/coc.nvim && git checkout release && git reset --hard origin/release
+	@if [[ -d "$(CURDIR)/bundle/coc.vim" ]]; then \
+		cd $(CURDIR)/bundle/coc.nvim; \
+		git checkout release; \
+		git reset --hard origin/release; \
+	fi
 	git submodule foreach 'git pull --recurse-submodules origin `git rev-parse --abbrev-ref HEAD`'
 
 .PHONY: update-pathogen
