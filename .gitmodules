@@ -1,23 +1,23 @@
 [submodule "bundle/nerdtree"]
 	path = bundle/nerdtree
-    url = https://github.com/scrooloose/nerdtree.git
+	url = https://github.com/scrooloose/nerdtree.git
 [submodule "bundle/tabular"]
 	path = bundle/tabular
-    url = https://github.com/godlygeek/tabular.git
+	url = https://github.com/godlygeek/tabular.git
 [submodule "bundle/vim-colors-solarized"]
 	path = bundle/vim-colors-solarized
-    url = https://github.com/altercation/vim-colors-solarized.git
+	url = https://github.com/altercation/vim-colors-solarized.git
 [submodule "bundle/vim-endwise"]
 	path = bundle/vim-endwise
-    url = https://github.com/tpope/vim-endwise.git
+	url = https://github.com/tpope/vim-endwise.git
 [submodule "bundle/vim-fugitive"]
 	path = bundle/vim-fugitive
-    url = https://github.com/tpope/vim-fugitive.git
+	url = https://github.com/tpope/vim-fugitive.git
 [submodule "bundle/vim-less"]
 	path = bundle/vim-less
-    url = https://github.com/groenewege/vim-less.git
+	url = https://github.com/groenewege/vim-less.git
 [submodule "bundle/vim-indent-lines"]
-    path = bundle/vim-indent-lines
+	path = bundle/vim-indent-lines
 	url = https://github.com/Yggdroot/indentLine.git
 [submodule "bundle/vim-go"]
 	path = bundle/vim-go
