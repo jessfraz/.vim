@@ -109,3 +109,6 @@
 [submodule "bundle/openai.vim"]
 	path = bundle/openai.vim
 	url = https://github.com/jessfraz/openai.vim.git
+[submodule "bundle/vim-jsx-pretty"]
+	path = bundle/vim-jsx-pretty
+	url = https://github.com/MaxMEllon/vim-jsx-pretty.git
