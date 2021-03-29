@@ -358,7 +358,7 @@ autocmd FileType text setlocal textwidth=80 fo+=2t ts=2 sw=2 sts=2 expandtab
 autocmd BufNewFile,BufRead *.md,*.txt,*.adoc setlocal textwidth=80 fo+=2t ts=2 sw=2 sts=2 expandtab
 
 " toml settings
-au BufRead,BufNewFile MAINTAINERS set ft=toml
+au BufRead,BufNewFile MAINTAINERS set ft=toml formatprg=toml-fmt
 
 " hcl settings
 au BufRead,BufNewFile *.workflow set ft=hcl
