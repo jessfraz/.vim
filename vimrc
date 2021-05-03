@@ -360,6 +360,8 @@ autocmd BufNewFile,BufRead *.md,*.txt,*.adoc setlocal textwidth=80 fo+=2t ts=2 s
 " toml settings
 au BufRead,BufNewFile MAINTAINERS,*.toml set ft=toml formatprg=toml-fmt
 
+au BufRead,BufNewFile Fastfile,Appfile,Podfile set ft=ruby
+
 " hcl settings
 au BufRead,BufNewFile *.workflow set ft=hcl
 
