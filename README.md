@@ -84,7 +84,6 @@ update                         Updates pathogen and all plugins.
 * [github.com/terryma/vim-multiple-cursors](https://github.com/terryma/vim-multiple-cursors.git)
 * [github.com/uarun/vim-protobuf](https://github.com/uarun/vim-protobuf.git)
 * [github.com/hynek/vim-python-pep8-indent](https://github.com/hynek/vim-python-pep8-indent.git)
-* [github.com/mhinz/vim-sayonara](https://github.com/mhinz/vim-sayonara.git)
 * [github.com/tpope/vim-sensible](https://github.com/tpope/vim-sensible.git)
 * [github.com/tpope/vim-surround](https://github.com/tpope/vim-surround.git)
 * [github.com/wgwoods/vim-systemd-syntax](https://github.com/wgwoods/vim-systemd-syntax.git)
