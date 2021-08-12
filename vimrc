@@ -184,8 +184,6 @@ autocmd FileType qf wincmd J
 map <C-n> :cn<CR>
 map <C-m> :cp<CR>
 
-nnoremap <silent> <leader>q :Sayonara<CR>
-
 " Replace the current buffer with the given new file. That means a new file
 " will be open in a buffer while the old one will be deleted
 com! -nargs=1 -complete=file Breplace edit <args>| bdelete #
