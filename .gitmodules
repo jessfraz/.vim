@@ -115,3 +115,6 @@
 [submodule "bundle/vim-hcl"]
 	path = bundle/vim-hcl
 	url = https://github.com/jvirtanen/vim-hcl.git
+[submodule "bundle/vim-liquid"]
+	path = bundle/vim-liquid
+	url = https://github.com/tpope/vim-liquid.git
