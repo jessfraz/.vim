@@ -420,6 +420,7 @@ if has('nvim')
 
   " Make Ctrl-p work for telescope since we know those keybindings so well.
   nnoremap <C-p> <cmd>Telescope find_files<CR>
+  nnoremap <C-g> <cmd>Telescope live_grep<CR>
 
   if !executable('ripgrep')
     echo "You might want to install ripgrep: https://github.com/BurntSushi/ripgrep#installation"
@@ -479,7 +480,7 @@ augroup END
 
 "==================== NerdTree ====================
 " For toggling
-nmap <C-n> :NERDTreeToggle<CR>
+noremap <C-n> :NERDTreeToggle<CR>
 noremap <Leader>n :NERDTreeToggle<cr>
 noremap <Leader>f :NERDTreeFind<cr>
 

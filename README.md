@@ -3,19 +3,6 @@
 
 My vim dot files. the `.vimrc` file is saved to [vimrc](https://github.com/jessfraz/.vim/blob/master/vimrc).
 
-**Table of Contents**
-
-<!-- toc -->
-
-- [About](#about)
-  * [Installing](#installing)
-  * [Pathogen](#pathogen)
-- [Contributing](#contributing)
-  * [Using the `Makefile`](#using-the-makefile)
-- [Plugins Used](#plugins-used)
-
-<!-- tocstop -->
-
 ## About
 
 ### Installing
@@ -51,23 +38,27 @@ update-plugins                 Updates all plugins.
 update                         Updates pathogen and all plugins.
 ```
 
+## Shortcuts
+
+- `Ctrl-P`: Find files
+- `Ctrl-G`: Live grep
+- `Ctrl-N`: Toggle the file sidebar
+
 ## Plugins Used
 * [github.comhub/copilot.vim.git](https://github.com/github/copilot.vim.git)
-* [github.com/ctrlpvim/ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim.git)
-* [github.com/vivien/vim-linux-coding-style](https://github.com/vivien/vim-linux-coding-style.git)
 * [github.com/scrooloose/nerdtree](https://github.com/scrooloose/nerdtree.git)
 * [github.com/Xuyuanp/nerdtree-plugin.git](https://github.com/Xuyuanp/nerdtree-git-plugin.git)
 * [github.com/chr4/nginx.vim](https://github.com/chr4/nginx.vim.git)
 * [github.com/neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig.git)
+* [github.com/nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim.git)
 * [github.com/rust-lang/rust.vim](https://github.com/rust-lang/rust.vim.git)
-* [github.com/godlygeek/tabular](https://github.com/godlygeek/tabular.git)
+* [github.com/nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git)
 * [github.com/leafgarland/typescript-vim](https://github.com/leafgarland/typescript-vim.git)
 * [github.com/vim-airline/vim-airline](https://github.com/vim-airline/vim-airline.git)
 * [github.com/vim-airline/vim-airline-themes](https://github.com/vim-airline/vim-airline-themes.git)
 * [github.com/moll/vim-bbye](https://github.com/moll/vim-bbye.git)
 * [github.com/ntpeters/vim-better-whitespace](https://github.com/ntpeters/vim-better-whitespace.git)
 * [github.com/ap/vim-buftabline](https://github.com/ap/vim-buftabline.git)
-* [github.com/crosbymichael/vim-cfmt](https://github.com/crosbymichael/vim-cfmt)
 * [github.com/altercation/vim-colors-solarized](https://github.com/altercation/vim-colors-solarized.git)
 * [github.com/tpope/vim-endwise](https://github.com/tpope/vim-endwise.git)
 * [github.com/tpope/vim-five.git](https://github.com/tpope/vim-fugitive.git)
