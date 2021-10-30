@@ -123,10 +123,10 @@
 	url = https://github.com/hrsh7th/cmp-vsnip.git
 [submodule "bundle/gitsigns.nvim"]
 	path = bundle/gitsigns.nvim
-	url = https://github.com/lewis6991/gitsigns.nvim
+	url = https://github.com/lewis6991/gitsigns.nvim.git
 [submodule "bundle/vim-fugitive"]
 	path = bundle/vim-fugitive
-	url = https://github.com/tpope/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive.git
 [submodule "bundle/vim-rhubarb"]
 	path = bundle/vim-rhubarb
 	url = https://github.com/tpope/vim-rhubarb.git
