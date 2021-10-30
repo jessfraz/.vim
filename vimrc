@@ -279,6 +279,9 @@ imap jk <ESC>l
 " spell check
 nnoremap <F6> :setlocal spell! spell?<CR>
 
+" disable the recording macro, drives me nuts.
+map q <Nop>
+
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.
 nnoremap n nzzzv
@@ -286,10 +289,56 @@ nnoremap N Nzzzv
 
 " Set the path to where the current file is.
 nnoremap <leader>. :lcd %:p:h<CR>
+let g:which_key_map['.'] = 'set path as current file'
+
+" When we open vim try and find the project root based on .git.
+function! FindGitRoot()
+  if &buftype ==? ''
+    " The function doesn't work with autochdir
+    set noautochdir
+
+    " The function only works with local directories
+    if expand('%:p') =~? '://'
+      return
+    endif
+
+    " Start in open file's directory
+    silent! lcd %:p:h
+    let l:liststart = 0
+
+    let l:pattern = '.git'
+    let l:fullpath = finddir(l:pattern, ';')
+
+    " Split the directory into path/match
+    let l:match = matchstr(l:fullpath, '\m\C[^\/]*$')
+    let l:path = matchstr(l:fullpath, '\m\C.*\/')
+
+    " $HOME + match
+    let l:home = $HOME . '/' . l:pattern
+
+    " If the search hits home try the next item in the list.
+    " Once a match is found break the loop.
+    if l:fullpath == l:home
+      let l:liststart = l:liststart + 1
+      lcd %:p:h
+    endif
+
+    " If path is anything but blank
+    if l:path !=? ''
+      exe 'lcd' . ' ' l:path
+    endif
+
+    if g:root#echo == 1 && l:match !=? ''
+      echom 'Found' l:match 'in' getcwd()
+    elseif g:root#echo == 1
+      echom 'Root dir not found'
+    endif
+  endif
+endfunction
+
 " Do this on open as well.
 " TODO: Change this to find the git directory.
-autocmd BufEnter * silent! lcd %:p:h
-let g:which_key_map['.'] = 'set path as current file'
+autocmd BufEnter * silent! FindGitRoot
 
 " Do not show stupid q: window
 map q: :q
