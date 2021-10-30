@@ -7,9 +7,6 @@
 [submodule "bundle/vim-less"]
 	path = bundle/vim-less
 	url = https://github.com/groenewege/vim-less.git
-[submodule "bundle/vim-indent-lines"]
-	path = bundle/vim-indent-lines
-	url = https://github.com/Yggdroot/indentLine.git
 [submodule "bundle/vim-go"]
 	path = bundle/vim-go
 	url = https://github.com/fatih/vim-go.git
@@ -133,3 +130,6 @@
 [submodule "bundle/dashboard-nvim"]
 	path = bundle/dashboard-nvim
 	url = https://github.com/glepnir/dashboard-nvim.git
+[submodule "bundle/indent-blankline.nvim"]
+	path = bundle/indent-blankline.nvim
+	url = https://github.com/lukas-reineke/indent-blankline.nvim.git
