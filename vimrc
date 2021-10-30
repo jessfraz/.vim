@@ -25,7 +25,7 @@ set nobackup					          " Don't create annoying backup files
 set nowritebackup
 set splitright                  " Split vertical windows right to the current windows
 set splitbelow                  " Split horizontal windows below to the current windows
-set encoding=utf-8              " Set default encoding to UTF-8
+set encoding=UTF-8              " Set default encoding to UTF-8
 set autowrite                   " Automatically save before :next, :make etc.
 set autoread                    " Automatically reread changed files without asking me anything
 set laststatus=2
@@ -409,6 +409,22 @@ set wildignore+=*.orig                           " Merge resolution files
 " Plugin configs 			    			            "
 " ----------------------------------------- "
 
+" ============================= vim-which-key ============================
+nnoremap <silent> <leader> :WhichKey ','<CR>
+" By default timeoutlen is 1000 ms
+set timeoutlen=500
+
+" ==================== nvim-web-devicons ====================
+if has('nvim')
+lua << EOF
+require'nvim-web-devicons'.setup{
+  -- globally enable default icons (default to false)
+  -- will get overriden by `get_icons` option
+  default = true;
+}
+EOF
+endif
+
 " ==================== telescope.nvim ====================
 if has('nvim')
   nnoremap <leader>ff <cmd>Telescope find_files<CR>
@@ -435,14 +451,12 @@ EOF
 endif
 
 " ==================== fugitive.vim ====================
-
 nnoremap <leader>ga :Git add %:p<CR><CR>
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gp :Gpush<CR>
 vnoremap <leader>gb :Gblame<CR>
 
 " ==================== vim-go ====================
-
 let g:go_fmt_fail_silently = 0
 let g:go_fmt_command = "goimports"
 let g:go_autodetect_gopath = 1
@@ -485,15 +499,7 @@ augroup go
   autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
 augroup END
 
-" ==================== nvim-web-devicons ====================
-if has('nvim')
-lua << EOF
-require'nvim-web-devicons'.setup()
-EOF
-endif
-
 " ==================== nvim-tree.lua ====================
-
 noremap <C-a> :NvimTreeToggle<CR>
 noremap <Leader>n :NvimTreeToggle<cr>
 noremap <Leader>f :NvimTreeFindFile<cr>
@@ -516,11 +522,9 @@ EOF
 endif
 
 " ==================== vim-json ====================
-
 let g:vim_json_syntax_conceal = 0
 
 " ========= vim-better-whitespace ==================
-
 " auto strip whitespace except for file with extention blacklisted
 let blacklist = ['diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown']
 autocmd BufWritePre * if index(blacklist, &ft) < 0 | StripWhitespace

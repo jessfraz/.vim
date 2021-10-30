@@ -109,3 +109,6 @@
 [submodule "bundle/bufferline.nvim"]
 	path = bundle/bufferline.nvim
 	url = https://github.com/akinsho/bufferline.nvim.git
+[submodule "bundle/vim-which-key"]
+	path = bundle/vim-which-key
+	url = https://github.com/liuchengxu/vim-which-key.git
