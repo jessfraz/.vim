@@ -632,4 +632,8 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+" =================== copilot.vim ========================
+
+hi def CopilotSuggestion guifg=#808080 ctermfg=242
+
 " vim:ts=2:sw=2:et
