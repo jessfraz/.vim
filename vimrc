@@ -443,20 +443,15 @@ imap <C-g> <esc>:MyCtrlPTag<cr>
 nmap <C-b> :CtrlPCurWD<cr>
 imap <C-b> <esc>:CtrlPCurWD<cr>
 
-" ==================== Fugitive ====================
+" ==================== fugitive ====================
+
 nnoremap <leader>ga :Git add %:p<CR><CR>
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gp :Gpush<CR>
 vnoremap <leader>gb :Gblame<CR>
 
-" =================== Vim-cfmt ===================
-let g:cfmt_style = '-linux'
-"autocmd BufWritePre *.c,*.h Cfmt
-
-" ================== linuxsty ====================
-"let g:linuxsty_patterns = ['/usr/src/', '/linux']
-
-" ==================== Vim-go ====================
+" ==================== vim-go ====================
+"
 let g:go_fmt_fail_silently = 0
 let g:go_fmt_command = "goimports"
 let g:go_autodetect_gopath = 1
@@ -498,13 +493,6 @@ augroup go
   autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
   autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
 augroup END
-
-" ==================== delimitMate ====================
-let g:delimitMate_expand_cr = 1
-let g:delimitMate_expand_space = 1
-let g:delimitMate_smart_quotes = 1
-let g:delimitMate_expand_inside_quotes = 0
-let g:delimitMate_smart_matchpairs = '^\%(\w\|\$\)'
 
 "==================== NerdTree ====================
 " For toggling
@@ -601,40 +589,10 @@ endif
 " =================== vim-terraform ========================
 
 " Allow vim-terraform to override your .vimrc indentation syntax for matching files.
-"let g:terraform_align=1
+let g:terraform_align=1
 
 " Run terraform fmt on save.
 let g:terraform_fmt_on_save=1
-
-" =================== coc.nvim ========================
-
-" Give more space for displaying messages.
-set cmdheight=2
-
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
-
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
-
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-set signcolumn=yes
-
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
 
 " =================== copilot.vim ========================
 
@@ -651,6 +609,7 @@ local nvim_lsp = require'lspconfig'
 local on_attach = function(client)
     require'completion'.on_attach(client)
 end
+vim.lsp.set_log_level("debug")
 EOF
 
 if executable('rust-analyzer')

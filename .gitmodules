@@ -22,9 +22,6 @@
 [submodule "bundle/vim-go"]
 	path = bundle/vim-go
 	url = https://github.com/fatih/vim-go.git
-[submodule "bundle/vim-cfmt"]
-	path = bundle/vim-cfmt
-	url = https://github.com/crosbymichael/vim-cfmt
 [submodule "bundle/vim-toml"]
 	path = bundle/vim-toml
 	url = https://github.com/cespare/vim-toml.git
