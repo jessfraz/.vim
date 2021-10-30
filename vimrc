@@ -485,8 +485,6 @@ endif
 
 " ==================== gitsigns.nvim ====================
 let g:which_key_map.g = { 'name' : '+git' }
-" TODO: figure out why push and commit fail
-" TODO: autocomplete issues urls collaborators in commit messages
 if has('nvim')
 lua << EOF
 require("gitsigns").setup{
@@ -540,6 +538,39 @@ require("gitsigns").setup{
   yadm = {
     enable = false
   },
+}
+EOF
+endif
+
+" ================== neogit ====================
+nnoremap <leader>gc <cmd>Neogit commit<CR>
+let g:which_key_map.g.c = 'git commit'
+nnoremap <leader>gs <cmd>Neogit kind=split<CR>
+let g:which_key_map.g.s = 'git status'
+if has('nvim')
+" TODO: figure out why push and commit fail
+" TODO: autocomplete issues urls collaborators in commit messages
+lua << EOF
+require('neogit').setup{
+  -- disable since we get them from gitsigns
+  disable_signs = true,
+  auto_refresh = true,
+  commit_popup = {
+      kind = "split",
+  },
+  integrations = {
+    diffview = false
+  },
+  -- Change the default way of opening neogit
+  kind = "tab",
+  -- override/add mappings
+  mappings = {
+    -- modify status buffer mappings
+    status = {
+      -- Removes the default mapping of "s"
+      ["s"] = "",
+    }
+  }
 }
 EOF
 endif
