@@ -22,9 +22,6 @@
 [submodule "bundle/vim-json"]
 	path = bundle/vim-json
 	url = https://github.com/elzr/vim-json.git
-[submodule "bundle/vim-gitgutter"]
-	path = bundle/vim-gitgutter
-	url = https://github.com/airblade/vim-gitgutter.git
 [submodule "bundle/vim-python-pep8-indent"]
 	path = bundle/vim-python-pep8-indent
 	url = https://github.com/hynek/vim-python-pep8-indent.git
@@ -43,9 +40,6 @@
 [submodule "bundle/nginx.vim"]
 	path = bundle/nginx.vim
 	url = https://github.com/chr4/nginx.vim.git
-[submodule "bundle/vim-git"]
-	path = bundle/vim-git
-	url = https://github.com/tpope/vim-git.git
 [submodule "bundle/vim-markdown"]
 	path = bundle/vim-markdown
 	url = https://github.com/plasticboy/vim-markdown.git
@@ -127,9 +121,6 @@
 [submodule "bundle/cmp-vsnip"]
 	path = bundle/cmp-vsnip
 	url = https://github.com/hrsh7th/cmp-vsnip.git
-[submodule "bundle/vim-rhubarb"]
-	path = bundle/vim-rhubarb
-	url = https://github.com/tpope/vim-rhubarb.git
 [submodule "bundle/gitsigns.nvim"]
 	path = bundle/gitsigns.nvim
 	url = https://github.com/lewis6991/gitsigns.nvim
