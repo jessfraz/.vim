@@ -4,9 +4,6 @@
 [submodule "bundle/vim-endwise"]
 	path = bundle/vim-endwise
 	url = https://github.com/tpope/vim-endwise.git
-[submodule "bundle/vim-fugitive"]
-	path = bundle/vim-fugitive
-	url = https://github.com/tpope/vim-fugitive.git
 [submodule "bundle/vim-less"]
 	path = bundle/vim-less
 	url = https://github.com/groenewege/vim-less.git
@@ -130,3 +127,9 @@
 [submodule "bundle/cmp-vsnip"]
 	path = bundle/cmp-vsnip
 	url = https://github.com/hrsh7th/cmp-vsnip.git
+[submodule "bundle/vim-rhubarb"]
+	path = bundle/vim-rhubarb
+	url = https://github.com/tpope/vim-rhubarb.git
+[submodule "bundle/gitsigns.nvim"]
+	path = bundle/gitsigns.nvim
+	url = https://github.com/lewis6991/gitsigns.nvim
