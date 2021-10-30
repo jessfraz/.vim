@@ -177,14 +177,6 @@ autocmd FileType qf wincmd J
 " Because I am using quickfix for errors
 "nmap <leader>m :make<CR><enter>
 
-" Some useful quickfix shortcuts
-":cc      see the current error
-":cn      next error
-":cp      previous error
-":clist   list all errors
-map <C-n> :cn<CR>
-map <C-m> :cp<CR>
-
 " Replace the current buffer with the given new file. That means a new file
 " will be open in a buffer while the old one will be deleted
 com! -nargs=1 -complete=file Breplace edit <args>| bdelete #
@@ -407,7 +399,7 @@ set wildignore+=*.orig                           " Merge resolution files
 
 
 " ----------------------------------------- "
-" Plugin configs 			    			"
+" Plugin configs 			    			            "
 " ----------------------------------------- "
 
 " ==================== telescope.nvim ====================
@@ -422,7 +414,7 @@ if has('nvim')
   nnoremap <C-p> <cmd>Telescope find_files<CR>
   nnoremap <C-g> <cmd>Telescope live_grep<CR>
 
-  if !executable('ripgrep')
+  if !executable('rg')
     echo "You might want to install ripgrep: https://github.com/BurntSushi/ripgrep#installation"
   endif
 endif
@@ -435,7 +427,7 @@ nnoremap <leader>gp :Gpush<CR>
 vnoremap <leader>gb :Gblame<CR>
 
 " ==================== vim-go ====================
-"
+
 let g:go_fmt_fail_silently = 0
 let g:go_fmt_command = "goimports"
 let g:go_autodetect_gopath = 1
@@ -478,9 +470,9 @@ augroup go
   autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
 augroup END
 
-"==================== NerdTree ====================
-" For toggling
-noremap <C-n> :NERDTreeToggle<CR>
+"==================== nerdtree ====================
+
+noremap <C-a> :NERDTreeToggle<CR>
 noremap <Leader>n :NERDTreeToggle<cr>
 noremap <Leader>f :NERDTreeFind<cr>
 
@@ -494,29 +486,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 " ==================== vim-json ====================
 
 let g:vim_json_syntax_conceal = 0
-
-" ==================== Completion =========================
-
-" ==================== vim-multiple-cursors ====================
-let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_next_key='<C-i>'
-let g:multi_cursor_prev_key='<C-y>'
-let g:multi_cursor_skip_key='<C-b>'
-let g:multi_cursor_quit_key='<Esc>'
-
-" Called once right before you start selecting multiple cursors
-function! Multiple_cursors_before()
-  if exists(':NeoCompleteLock')==2
-    exe 'NeoCompleteLock'
-  endif
-endfunction
-
-" Called once only when the multiple selection is canceled (default <Esc>)
-function! Multiple_cursors_after()
-  if exists(':NeoCompleteUnlock')==2
-    exe 'NeoCompleteUnlock'
-  endif
-endfunction
 
 " ========= vim-better-whitespace ==================
 
@@ -582,43 +551,46 @@ let g:terraform_fmt_on_save=1
 
 hi def CopilotSuggestion guifg=#808080 ctermfg=242
 
-" =================== neovim specific settings ========================
-"
-" =================== lsp ========================
+" =================== nvim-lspconfig ========================
 
 if has('nvim-0.5')
+
+" =================== rust-analyzer ========================
+if executable('rust-analyzer')
 lua << EOF
 local nvim_lsp = require'lspconfig'
 
 local on_attach = function(client)
     require'completion'.on_attach(client)
 end
-vim.lsp.set_log_level("debug")
-EOF
 
-if executable('rust-analyzer')
-lua << EOF
 nvim_lsp.rust_analyzer.setup({
-    on_attach=on_attach,
-    settings = {
-        ["rust-analyzer"] = {
-            assist = {
-                importGranularity = "module",
-                importPrefix = "by_self",
-            },
-            cargo = {
-                loadOutDirsFromCheck = true
-            },
-            procMacro = {
-                enable = true
-            },
-        }
+  -- on_attach is a callback called when the language server attachs to the buffer
+  on_attach = on_attach,
+  settings = {
+    ["rust-analyzer"] = {
+      assist = {
+        importGranularity = "module",
+        importPrefix = "by_self",
+      },
+      cargo = {
+        loadOutDirsFromCheck = true
+      },
+      procMacro = {
+        enable = true
+      },
+      -- enable clippy diagnostics on save
+      checkOnSave = {
+        command = "clippy"
+      },
     }
+  }
 })
 EOF
 else
   echo "You might want to install rust-analyzer: https://rust-analyzer.github.io/manual.html#rust-analyzer-language-server-binary"
 endif
+
 endif
 
 " vim:ts=2:sw=2:et
