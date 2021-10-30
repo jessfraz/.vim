@@ -90,6 +90,10 @@ set ttimeoutlen=10
 " By default timeoutlen is 1000 ms
 set timeoutlen=500
 
+" have a fixed column for the diagnostics to appear in
+" this removes the jitter when warnings/errors flow in
+set signcolumn=yes
+
 " Better Completion
 set complete=.,w,b,u,t
 set completeopt=longest,menuone
@@ -336,8 +340,7 @@ function! FindGitRoot()
   endif
 endfunction
 
-" Do this on open as well.
-" TODO: Change this to find the git directory.
+" Find the git directory root on open of vim.
 autocmd BufEnter * silent! FindGitRoot
 
 " Do not show stupid q: window
@@ -514,9 +517,17 @@ require('telescope').setup{
         -- e.g. git_{create, delete, ...}_branch for the git_branches picker
         ["?"] = "which_key"
       }
-    }
+    },
+    file_ignore_patterns = {
+      "^.git/",
+      ".DS_Store",
+    },
   },
   pickers = {
+    find_files = {
+      theme = "dropdown",
+      find_command = {"rg", "--ignore", "--hidden", "--files"},
+      }
   },
   extensions = {
   }
@@ -529,7 +540,11 @@ if has('nvim')
   set termguicolors
 
 lua << EOF
-require("bufferline").setup{}
+require("bufferline").setup{
+  options = {
+    diagnostics = "nvim_lsp",
+    }
+}
 EOF
 endif
 
@@ -811,6 +826,15 @@ endif
 
 endif
 
+" =================== tsserver ========================
+if executable('tsserver')
+lua << EOF
+require'lspconfig'.tsserver.setup{}
+EOF
+else
+  echo "You might want to install tsserver: npm install -g typescript typescript-language-server"
+endif
+
 " =================== nvim-cmp ========================
 
 if has('nvim-0.5')
@@ -850,7 +874,7 @@ cmp.setup ({
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'clangd', 'rust_analyzer' }
+local servers = { 'clangd', 'rust_analyzer', 'tsserver' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     -- on_attach = my_custom_on_attach,
@@ -892,7 +916,45 @@ nnoremap <silent> <C-t> :Lspsaga open_floaterm<CR>
 tnoremap <silent> <C-t> <C-\><C-n>:Lspsaga close_floaterm<CR>
 
 lua << EOF
-require'lspsaga'.init_lsp_saga()
+require'lspsaga'.init_lsp_saga{
+  use_saga_diagnostic_sign = true,
+  error_sign = '',
+  warn_sign = '',
+  hint_sign = '',
+  infor_sign = '',
+  infor_sign = '',
+  dianostic_header_icon = '   ',
+  code_action_icon = ' ',
+  code_action_prompt = {
+    enable = true,
+    sign = true,
+    sign_priority = 20,
+    virtual_text = true,
+    },
+  finder_definition_icon = '  ',
+  finder_reference_icon = '  ',
+  max_preview_lines = 10, -- preview lines of lsp_finder and definition preview
+  finder_action_keys = {
+    open = 'o',
+    vsplit = 's',
+    split = 'i',
+    quit = 'q',
+    scroll_down = '<C-f>',
+    scroll_up = '<C-b>',
+    },
+  code_action_keys = {
+    quit = 'q',
+    exec = '<CR>'
+    },
+  rename_action_keys = {
+    quit = '<C-c>',
+    exec = '<CR>',
+    },
+  definition_preview_icon = '  ',
+  -- "single" "double" "round" "plus"
+  border_style = "single",
+  rename_prompt_prefix = '➤',
+}
 EOF
 endif
 
