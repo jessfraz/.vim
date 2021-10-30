@@ -654,7 +654,7 @@ require("gitsigns").setup{
     follow_files = true
   },
   attach_to_untracked = true,
-  current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
+  current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
   current_line_blame_opts = {
     virt_text = true,
     virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
@@ -790,7 +790,7 @@ let g:terraform_fmt_on_save=1
 
 " =================== copilot.vim ========================
 
-hi def CopilotSuggestion guifg=#808080 ctermfg=242
+hi def CopilotSuggestion guifg=#808080 ctermfg=244
 
 " =================== nvim-lspconfig ========================
 
