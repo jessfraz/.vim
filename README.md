@@ -43,6 +43,7 @@ update                         Updates pathogen and all plugins.
 - `Ctrl-P`: Find files
 - `Ctrl-G`: Live grep
 - `Ctrl-A`: Toggle the file sidebar
+- `Ctrl-R`: Refresh the file sidebar
 - `Ctrl-N`: Multiple cursor support
 - `Ctrl-X`: Switch to the next buffer
 - `Ctrl-Z`: Switch to the previous buffer
@@ -51,6 +52,7 @@ update                         Updates pathogen and all plugins.
 * [github.com/akinsho/bufferline.nvim](https://github.com/akinsho/bufferline.nvim.git)
 * [github.com/hrsh7th/cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp.git)
 * [github.comhub/copilot.vim.git](https://github.com/github/copilot.vim.git)
+* [github.com/glepnir/lspsaga.nvim](https://github.com/glepnir/lspsaga.nvim.git)
 * [github.com/nvim-lualine/lualine.nvim](https://github.com/nvim-lualine/lualine.nvim.git)
 * [github.com/chr4/nginx.vim](https://github.com/chr4/nginx.vim.git)
 * [github.com/hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp.git)

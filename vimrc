@@ -503,6 +503,7 @@ augroup END
 noremap <C-a> :NvimTreeToggle<CR>
 noremap <Leader>n :NvimTreeToggle<cr>
 noremap <Leader>f :NvimTreeFindFile<cr>
+nnoremap <Leader>r :NvimTreeRefresh<CR>
 
 let g:nvim_tree_gitignore = 1
 let g:nvim_tree_add_trailing = 1
@@ -662,6 +663,35 @@ require'cmp'.setup {
 
 EOF
 
+endif
+
+" =================== lspsaga.nvim =========================
+if has('nvim')
+" lsp provider to find the cursor word definition and reference
+nnoremap <silent> gh :Lspsaga lsp_finder<CR>
+" preview definition
+nnoremap <silent> gd :Lspsaga preview_definition<CR>
+" rename
+nnoremap <silent> gr :Lspsaga rename<CR>
+" show signature help
+nnoremap <silent> gs :Lspsaga signature_help<CR>
+" show hover doc
+nnoremap <silent>K :Lspsaga hover_doc<CR>
+" scroll down hover doc or scroll in definition preview
+nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
+" scroll up hover doc
+nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
+" code action
+nnoremap <silent><leader>ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
+vnoremap <silent><leader>ca :<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>
+" float terminal also you can pass the cli command in open_float_terminal function
+nnoremap <silent> <A-d> :Lspsaga open_floaterm<CR>
+tnoremap <silent> <A-d> <C-\><C-n>:Lspsaga close_floaterm<CR>
+
+
+lua << EOF
+require'lspsaga'.init_lsp_saga()
+EOF
 endif
 
 " vim:ts=2:sw=2:et

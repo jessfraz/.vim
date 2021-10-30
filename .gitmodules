@@ -112,3 +112,6 @@
 [submodule "bundle/vim-which-key"]
 	path = bundle/vim-which-key
 	url = https://github.com/liuchengxu/vim-which-key.git
+[submodule "bundle/lspsaga.nvim"]
+	path = bundle/lspsaga.nvim
+	url = https://github.com/glepnir/lspsaga.nvim.git
