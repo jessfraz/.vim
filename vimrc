@@ -560,13 +560,9 @@ if executable('rust-analyzer')
 lua << EOF
 local nvim_lsp = require'lspconfig'
 
-local on_attach = function(client)
-    require'completion'.on_attach(client)
-end
-
 nvim_lsp.rust_analyzer.setup({
   -- on_attach is a callback called when the language server attachs to the buffer
-  on_attach = on_attach,
+  -- on_attach = on_attach,
   settings = {
     ["rust-analyzer"] = {
       assist = {
@@ -591,6 +587,27 @@ else
   echo "You might want to install rust-analyzer: https://rust-analyzer.github.io/manual.html#rust-analyzer-language-server-binary"
 endif
 
+endif
+
+" =================== nvim-cmp ========================
+
+if has('nvim-0.5')
+lua <<EOF
+require'cmp'.setup {
+  sources = {
+    { name = 'nvim_lsp' }
+  }
+}
+
+-- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
+-- The following example advertise capabilities to `clangd`.
+require'lspconfig'.rust_analyzer.setup {
+  capabilities = capabilities,
+}
+EOF
 endif
 
 " vim:ts=2:sw=2:et
