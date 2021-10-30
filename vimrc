@@ -545,6 +545,56 @@ require('telescope').setup{
 EOF
 endif
 
+" ==================== nvim-tree.lua ====================
+noremap <C-a> :NvimTreeToggle<CR>
+
+let g:which_key_map.n = { 'name' : '+file tree' }
+noremap <leader>nn :NvimTreeToggle<cr>
+" find the current file in the tree
+let g:which_key_map.n.n = 'file tree toggle'
+noremap <leader>nf :NvimTreeFindFile<cr>
+let g:which_key_map.n.f = 'file tree find file'
+
+let g:nvim_tree_gitignore = 1
+let g:nvim_tree_add_trailing = 1
+let g:nvim_tree_highlight_opened_files = 1
+let g:nvim_tree_git_hl = 1
+
+if has('nvim')
+lua << EOF
+local tree_cb = require'nvim-tree.config'.nvim_tree_callback
+
+require'nvim-tree'.setup{
+  -- Setting this to true breaks :GBrowse & vim-rhubarb.
+  disable_netrw = false,
+  -- Close nvim-tree and vim on close file
+  auto_close = true,
+  filters = {
+    dotfiles = false,
+    -- TODO: why doesn't this work
+    custom = {
+      '.git',
+      '.DS_Store',
+    },
+    },
+  view = {
+    mappings = {
+      list = {
+        { key = "?", cb = tree_cb("toggle_help") },
+        -- this annoys me when i think I am saving a file and get an error
+        -- so just refresh the tree
+        { key = ":w", cb = tree_cb("refresh") },
+        -- move the file
+        { key = "m", cb = tree_cb("rename") },
+        -- refresh the tree
+        { key = "r", cb = tree_cb("refresh") },
+      }
+    }
+  }
+}
+EOF
+endif
+
 " ==================== bufferline.nvim ====================
 if has('nvim')
   set termguicolors
@@ -674,53 +724,6 @@ augroup go
   autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
   autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
 augroup END
-
-" ==================== nvim-tree.lua ====================
-noremap <C-a> :NvimTreeToggle<CR>
-
-let g:which_key_map.n = { 'name' : '+file tree' }
-noremap <leader>nn :NvimTreeToggle<cr>
-" find the current file in the tree
-let g:which_key_map.n.n = 'file tree toggle'
-noremap <leader>nf :NvimTreeFindFile<cr>
-let g:which_key_map.n.f = 'file tree find file'
-
-let g:nvim_tree_gitignore = 1
-let g:nvim_tree_add_trailing = 1
-let g:nvim_tree_highlight_opened_files = 1
-let g:nvim_tree_git_hl = 1
-
-if has('nvim')
-lua << EOF
-local tree_cb = require'nvim-tree.config'.nvim_tree_callback
-
-require'nvim-tree'.setup{
-  -- Setting this to true breaks :GBrowse & vim-rhubarb.
-  disable_netrw = false,
-  -- Close nvim-tree and vim on close file
-  auto_close = true,
-  -- TODO: Make this work
-  filters = {
-    '.git',
-    '.DS_Store',
-    },
-  view = {
-    mappings = {
-      list = {
-        { key = "?", cb = tree_cb("toggle_help") },
-        -- this annoys me when i think I am saving a file and get an error
-        -- so just refresh the tree
-        { key = ":w", cb = tree_cb("refresh") },
-        -- move the file
-        { key = "m", cb = tree_cb("rename") },
-        -- refresh the tree
-        { key = "r", cb = tree_cb("refresh") },
-      }
-    }
-  }
-}
-EOF
-endif
 
 " ==================== vim-json ====================
 let g:vim_json_syntax_conceal = 0
