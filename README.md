@@ -42,6 +42,7 @@ update                         Updates pathogen and all plugins.
 
 - `Ctrl-P`: Find files
 - `Ctrl-G`: Live grep
+- `Ctrl-B`: Search git branches
 - `Ctrl-A`: Toggle the file sidebar
 - `Ctrl-R`: Refresh the file sidebar
 - `Ctrl-N`: Multiple cursor support
