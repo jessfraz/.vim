@@ -130,3 +130,6 @@
 [submodule "bundle/vim-rhubarb"]
 	path = bundle/vim-rhubarb
 	url = https://github.com/tpope/vim-rhubarb.git
+[submodule "bundle/dashboard-nvim"]
+	path = bundle/dashboard-nvim
+	url = https://github.com/glepnir/dashboard-nvim.git
