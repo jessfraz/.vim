@@ -100,9 +100,6 @@
 [submodule "bundle/vim-surround"]
 	path = bundle/vim-surround
 	url = https://github.com/tpope/vim-surround.git
-[submodule "bundle/openai.vim"]
-	path = bundle/openai.vim
-	url = https://github.com/jessfraz/openai.vim.git
 [submodule "bundle/vim-jsx-pretty"]
 	path = bundle/vim-jsx-pretty
 	url = https://github.com/MaxMEllon/vim-jsx-pretty.git
@@ -118,3 +115,6 @@
 [submodule "bundle/copilot.vim"]
 	path = bundle/copilot.vim
 	url = https://github.com/github/copilot.vim.git
+[submodule "bundle/nvim-lspconfig"]
+	path = bundle/nvim-lspconfig
+	url = https://github.com/neovim/nvim-lspconfig.git
