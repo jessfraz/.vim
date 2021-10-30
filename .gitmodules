@@ -133,3 +133,6 @@
 [submodule "bundle/indent-blankline.nvim"]
 	path = bundle/indent-blankline.nvim
 	url = https://github.com/lukas-reineke/indent-blankline.nvim.git
+[submodule "bundle/octo.nvim"]
+	path = bundle/octo.nvim
+	url = https://github.com/pwntester/octo.nvim.git
