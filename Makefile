@@ -53,6 +53,7 @@ remove-submodule: ## Removes a git submodule (ex MODULE=bundle/nginx.vim).
 	$(RM) -r .git/modules/$(MODULE)
 	git rm -f $(MODULE)
 	$(RM) -r $(MODULE).tmp
+	$(MAKE) README.md
 
 
 .PHONY: help

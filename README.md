@@ -47,12 +47,15 @@ update                         Updates pathogen and all plugins.
 - `Ctrl-N`: Multiple cursor support
 - `Ctrl-X`: Switch to the next buffer
 - `Ctrl-Z`: Switch to the previous buffer
+- `<Space>`: Center the screen to the cursor
 
 ## Plugins Used
 * [github.com/akinsho/bufferline.nvim](https://github.com/akinsho/bufferline.nvim.git)
+* [github.com/hrsh7th/cmp-buffer](https://github.com/hrsh7th/cmp-buffer.git)
 * [github.com/hrsh7th/cmp-cmdline](https://github.com/hrsh7th/cmp-cmdline.git)
 * [github.com/hrsh7th/cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp.git)
 * [github.com/hrsh7th/cmp-path](https://github.com/hrsh7th/cmp-path.git)
+* [github.com/hrsh7th/cmp-vsnip](https://github.com/hrsh7th/cmp-vsnip.git)
 * [github.comhub/copilot.vim.git](https://github.com/github/copilot.vim.git)
 * [github.com/glepnir/lspsaga.nvim](https://github.com/glepnir/lspsaga.nvim.git)
 * [github.com/nvim-lualine/lualine.nvim](https://github.com/nvim-lualine/lualine.nvim.git)
@@ -87,5 +90,6 @@ update                         Updates pathogen and all plugins.
 * [github.com/hashivim/vim-terraform](https://github.com/hashivim/vim-terraform.git)
 * [github.com/cespare/vim-toml](https://github.com/cespare/vim-toml.git)
 * [github.com/mg979/vim-visual-multi](https://github.com/mg979/vim-visual-multi.git)
+* [github.com/hrsh7th/vim-vsnip](https://github.com/hrsh7th/vim-vsnip.git)
 * [github.com/liuchengxu/vim-which-key](https://github.com/liuchengxu/vim-which-key.git)
 * [github.com/stephpy/vim-yaml](https://github.com/stephpy/vim-yaml.git)
