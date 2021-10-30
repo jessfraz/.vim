@@ -483,8 +483,24 @@ require("bufferline").setup{}
 EOF
 endif
 
-" ==================== gitsigns.nvim ====================
+" ================== vim-fugitive ====================
+" TODO: figure out why push and commit fail
+" TODO: autocomplete issues urls collaborators in commit messages
 let g:which_key_map.g = { 'name' : '+git' }
+nnoremap <leader>ga :Git add %:p<CR><CR>
+let g:which_key_map.g.a = 'git add current file'
+nnoremap <leader>gs :Git<CR>
+let g:which_key_map.g.s = 'git status'
+nnoremap <leader>gp :Git push<CR><CR>
+let g:which_key_map.g.p = 'git push'
+nnoremap <leader>gb :Git blame<CR>
+let g:which_key_map.g.b = 'git blame'
+nnoremap <leader>gc :Git commit -sa<CR><CR>
+let g:which_key_map.g.c = 'git commit'
+nnoremap <leader>go :GBrowse<CR><CR>
+let g:which_key_map.g.o = 'open in GitHub'
+
+" ==================== gitsigns.nvim ====================
 if has('nvim')
 lua << EOF
 require("gitsigns").setup{
@@ -538,41 +554,6 @@ require("gitsigns").setup{
   yadm = {
     enable = false
   },
-}
-EOF
-endif
-
-" ================== neogit ====================
-nnoremap <leader>gc <cmd>Neogit commit -s -a<CR>
-let g:which_key_map.g.c = 'git commit'
-nnoremap <leader>gs <cmd>Neogit kind=split<CR>
-let g:which_key_map.g.s = 'git status'
-nnoremap <leader>gp <cmd>Neogit push<CR>
-let g:which_key_map.g.p = 'git push'
-if has('nvim')
-" TODO: figure out why push and commit fail
-" TODO: autocomplete issues urls collaborators in commit messages
-lua << EOF
-require('neogit').setup{
-  -- disable since we get them from gitsigns
-  disable_signs = true,
-  auto_refresh = true,
-  commit_popup = {
-      kind = "split",
-  },
-  integrations = {
-    diffview = false
-  },
-  -- Change the default way of opening neogit
-  kind = "tab",
-  -- override/add mappings
-  mappings = {
-    -- modify status buffer mappings
-    status = {
-      -- Removes the default mapping of "s"
-      ["s"] = "",
-    }
-  }
 }
 EOF
 endif

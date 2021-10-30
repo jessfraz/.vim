@@ -124,6 +124,9 @@
 [submodule "bundle/gitsigns.nvim"]
 	path = bundle/gitsigns.nvim
 	url = https://github.com/lewis6991/gitsigns.nvim
-[submodule "bundle/neogit"]
-	path = bundle/neogit
-	url = https://github.com/TimUntersberger/neogit.git
+[submodule "bundle/vim-fugitive"]
+	path = bundle/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive
+[submodule "bundle/vim-rhubarb"]
+	path = bundle/vim-rhubarb
+	url = https://github.com/tpope/vim-rhubarb.git
