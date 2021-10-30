@@ -539,18 +539,18 @@ let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_toml_frontmatter = 1
 let g:vim_markdown_json_frontmatter = 1
 
-" =================== vim-airline ========================
-
-let g:airline_theme='solarized'
-
-" set to use powerline fonts when not in a ssh session
-let g:remoteSession = ($STY == "")
-if !g:remoteSession
-  let g:airline_powerline_fonts=1
+" =================== lualine.nvim ========================
+if has('nvim')
+lua << EOF
+require('lualine').setup{
+  options = {
+    theme = 'tokyonight'
+    }
+  }
+EOF
 endif
 
 " =================== rust.vim ========================
-
 " Enable automatic running of :RustFmt when a buffer is saved.
 let g:rustfmt_autosave = 1
 
