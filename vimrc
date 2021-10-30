@@ -592,7 +592,11 @@ let g:rustfmt_autosave = 1
 " The :RustPlay command will send the current selection, or if nothing is
 " selected the current buffer, to the Rust playpen. Then copy the url to the
 " clipboard.
-let g:rust_clip_command = 'xclip -selection clipboard'
+if has('macunix')
+  let g:rust_clip_command = 'pbcopy'
+else
+  let g:rust_clip_command = 'xclip -selection clipboard'
+endif
 
 " =================== vim-terraform ========================
 
@@ -635,5 +639,43 @@ endfunction
 " =================== copilot.vim ========================
 
 hi def CopilotSuggestion guifg=#808080 ctermfg=242
+
+" =================== neovim specific settings ========================
+"
+" =================== lsp ========================
+
+if has('nvim-0.5')
+lua << EOF
+local nvim_lsp = require'lspconfig'
+
+local on_attach = function(client)
+    require'completion'.on_attach(client)
+end
+EOF
+
+if executable('rust-analyzer')
+lua << EOF
+nvim_lsp.rust_analyzer.setup({
+    on_attach=on_attach,
+    settings = {
+        ["rust-analyzer"] = {
+            assist = {
+                importGranularity = "module",
+                importPrefix = "by_self",
+            },
+            cargo = {
+                loadOutDirsFromCheck = true
+            },
+            procMacro = {
+                enable = true
+            },
+        }
+    }
+})
+EOF
+else
+  echo "You might want to install rust-analyzer: https://rust-analyzer.github.io/manual.html#rust-analyzer-language-server-binary"
+endif
+endif
 
 " vim:ts=2:sw=2:et

@@ -58,7 +58,7 @@ update                         Updates pathogen and all plugins.
 * [github.com/scrooloose/nerdtree](https://github.com/scrooloose/nerdtree.git)
 * [github.com/Xuyuanp/nerdtree-plugin.git](https://github.com/Xuyuanp/nerdtree-git-plugin.git)
 * [github.com/chr4/nginx.vim](https://github.com/chr4/nginx.vim.git)
-* [github.com/jessfraz/openai.vim](https://github.com/jessfraz/openai.vim.git)
+* [github.com/neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig.git)
 * [github.com/rust-lang/rust.vim](https://github.com/rust-lang/rust.vim.git)
 * [github.com/godlygeek/tabular](https://github.com/godlygeek/tabular.git)
 * [github.com/leafgarland/typescript-vim](https://github.com/leafgarland/typescript-vim.git)
