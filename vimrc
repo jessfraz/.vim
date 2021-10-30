@@ -3,6 +3,7 @@ execute pathogen#infect()
 call pathogen#helptags()
 
 set nocompatible              " be iMproved, required
+set nofoldenable              " disable folding
 filetype off                  " required
 
 " Enable file type detection.
