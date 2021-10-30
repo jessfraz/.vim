@@ -175,12 +175,14 @@ set guioptions-=L
 " i.e: <leader>w saves the current file
 let g:mapleader = ","
 " ============================= vim-which-key ============================
-" Setup WhichKey here.
+" Setup WhichKey here for our leader.
+" TODO: figure out why the timeout doesn't work
 nnoremap <silent> <leader> :<c-u>WhichKey ','<CR>
 call which_key#register(',', "g:which_key_map")
 " Define prefix dictionary
 let g:which_key_map =  {}
-
+nnoremap <leader>? :WhichKey ','<CR>
+let g:which_key_map.['?'] = 'show help'
 
 " This trigger takes advantage of the fact that the quickfix window can be
 " easily distinguished by its file-type, qf. The wincmd J command is
@@ -215,7 +217,6 @@ function! DeleteInactiveBufs()
   endfor
   echomsg nWipeouts . ' buffer(s) wiped out'
 endfunction
-
 command! Ball :call DeleteInactiveBufs()
 
 " Close quickfix easily
@@ -484,7 +485,6 @@ EOF
 endif
 
 " ================== vim-fugitive ====================
-" TODO: figure out why push and commit fail
 " TODO: autocomplete issues urls collaborators in commit messages
 let g:which_key_map.g = { 'name' : '+git' }
 nnoremap <leader>ga :Git add %:p<CR><CR>
@@ -615,17 +615,19 @@ let g:nvim_tree_gitignore = 1
 let g:nvim_tree_add_trailing = 1
 let g:nvim_tree_highlight_opened_files = 1
 let g:nvim_tree_git_hl = 1
-"let NERDTreeShowHidden=1
 
 if has('nvim')
 lua << EOF
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 
 require'nvim-tree'.setup{
+  -- Setting this to true breaks :GBrowse & vim-rhubarb.
+  disable_netrw = false,
   -- Close nvim-tree and vim on close file
   auto_close = true,
+  -- TODO: Make this work
   filters = {
-    '.git/**',
+    '.git',
     '.DS_Store',
     },
   view = {
