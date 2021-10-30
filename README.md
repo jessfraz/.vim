@@ -47,6 +47,7 @@ update                         Updates pathogen and all plugins.
 - `Ctrl-N`: Multiple cursor support
 - `Ctrl-X`: Switch to the next buffer
 - `Ctrl-Z`: Switch to the previous buffer
+- `Ctrl-T`: Open a floating terminal
 - `<Space>`: Center the screen to the cursor
 
 ## Plugins Used
@@ -57,7 +58,9 @@ update                         Updates pathogen and all plugins.
 * [github.com/hrsh7th/cmp-path](https://github.com/hrsh7th/cmp-path.git)
 * [github.com/hrsh7th/cmp-vsnip](https://github.com/hrsh7th/cmp-vsnip.git)
 * [github.comhub/copilot.vim.git](https://github.com/github/copilot.vim.git)
+* [github.com/glepnir/dashboard-nvim](https://github.com/glepnir/dashboard-nvim.git)
 * [github.com/lewis6991signs.nvim](https://github.com/lewis6991/gitsigns.nvim)
+* [github.com/lukas-reineke/indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim.git)
 * [github.com/glepnir/lspsaga.nvim](https://github.com/glepnir/lspsaga.nvim.git)
 * [github.com/nvim-lualine/lualine.nvim](https://github.com/nvim-lualine/lualine.nvim.git)
 * [github.com/chr4/nginx.vim](https://github.com/chr4/nginx.vim.git)
@@ -76,7 +79,6 @@ update                         Updates pathogen and all plugins.
 * [github.com/tpope/vim-endwise](https://github.com/tpope/vim-endwise.git)
 * [github.com/tpope/vim-five](https://github.com/tpope/vim-fugitive)
 * [github.com/fatih/vim-go](https://github.com/fatih/vim-go.git)
-* [github.com/Yggdroot/indentLine](https://github.com/Yggdroot/indentLine.git)
 * [github.com/elzr/vim-json](https://github.com/elzr/vim-json.git)
 * [github.com/MaxMEllon/vim-jsx-pretty](https://github.com/MaxMEllon/vim-jsx-pretty.git)
 * [github.com/plasticboy/vim-markdown](https://github.com/plasticboy/vim-markdown.git)

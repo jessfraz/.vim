@@ -651,8 +651,6 @@ endif
 " ==================== vim-json ====================
 let g:vim_json_syntax_conceal = 0
 
-let g:indentLine_enabled = 0
-
 " ========= vim-better-whitespace ==================
 " do not highlight the whitespace
 let g:better_whitespace_enabled=0
@@ -819,32 +817,53 @@ endif
 if has('nvim')
 " lsp provider to find the cursor word definition and reference
 nnoremap <silent> gh :Lspsaga lsp_finder<CR>
+
 " preview definition
 nnoremap <silent> gd :Lspsaga preview_definition<CR>
+
 " rename
 nnoremap <silent> gr :Lspsaga rename<CR>
+
 " show signature help
 nnoremap <silent> gs :Lspsaga signature_help<CR>
+
 " show hover doc
 nnoremap <silent>K :Lspsaga hover_doc<CR>
 " scroll down hover doc or scroll in definition preview
 nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
 " scroll up hover doc
 nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
+
 " code action
 nnoremap <silent><leader>ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
 vnoremap <silent><leader>ca :<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>
-" float terminal also you can pass the cli command in open_float_terminal function
-nnoremap <silent> <A-d> :Lspsaga open_floaterm<CR>
-tnoremap <silent> <A-d> <C-\><C-n>:Lspsaga close_floaterm<CR>
 
+" float terminal also you can pass the cli command in open_float_terminal function
+nnoremap <silent> <C-t> :Lspsaga open_floaterm<CR>
+tnoremap <silent> <C-t> <C-\><C-n>:Lspsaga close_floaterm<CR>
 
 lua << EOF
 require'lspsaga'.init_lsp_saga()
 EOF
 endif
 
+
+" =================== indent-blankline.nvim ========================
+if has('nvim')
+lua << EOF
+require("indent_blankline").setup {
+  char = "|",
+  buftype_exclude = {"terminal"},
+  filetype_exclude = {"dashboard"},
+  show_end_of_line = false,
+}
+EOF
+endif
+
 " =================== dashboard-nvim ========================
 let g:dashboard_default_executive ='telescope'
+
+" disable the tabline in the dashboard
+autocmd FileType dashboard set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2
 
 " vim:ts=2:sw=2:et
