@@ -260,6 +260,9 @@ map <C-l> <C-W>l
 nmap <leader>w :w!<cr>
 let g:which_key_map.w = 'save'
 
+" Fresh vimrc
+nnoremap <leader>sv :source $MYVIMRC<CR>
+
 " Center the screen
 nnoremap <space> zz
 
@@ -484,12 +487,18 @@ endif
 let g:which_key_map.g = { 'name' : '+git' }
 nnoremap <leader>ga :Git add %:p<CR><CR>
 let g:which_key_map.g.a = 'git add current file'
-nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gs :Git<CR>
 let g:which_key_map.g.s = 'git status'
-nnoremap <leader>gp :Gpush<CR>
+nnoremap <leader>gp :Git push<CR><CR>
 let g:which_key_map.g.p = 'git push'
-vnoremap <leader>gb :Gblame<CR>
+vnoremap <leader>gb :Git blame<CR>
 let g:which_key_map.g.b = 'git blame'
+vnoremap <leader>gc :Git commit -sa<CR><CR>
+let g:which_key_map.g.c = 'git commit'
+vnoremap <leader>go :GBrowse<CR><CR>
+let g:which_key_map.g.o = 'open in GitHub'
+" TODO: figure out why push and commit fail
+" TODO: autocomplete issues urls collaborators in commit messages
 
 " ==================== vim-go ====================
 let g:go_fmt_fail_silently = 0
@@ -539,11 +548,10 @@ noremap <C-a> :NvimTreeToggle<CR>
 
 let g:which_key_map.n = { 'name' : '+file tree' }
 noremap <leader>nn :NvimTreeToggle<cr>
+" find the current file in the tree
 let g:which_key_map.n.n = 'file tree toggle'
 noremap <leader>nf :NvimTreeFindFile<cr>
 let g:which_key_map.n.f = 'file tree find file'
-nnoremap <leader>nr :NvimTreeRefresh<CR>
-let g:which_key_map.n.r = 'file tree refresh'
 
 let g:nvim_tree_gitignore = 1
 let g:nvim_tree_add_trailing = 1
@@ -551,13 +559,31 @@ let g:nvim_tree_highlight_opened_files = 1
 let g:nvim_tree_git_hl = 1
 "let NERDTreeShowHidden=1
 
-"let NERDTreeIgnore=['\.vim$', '\~$', '\.git$', '.DS_Store']
-
 if has('nvim')
 lua << EOF
+local tree_cb = require'nvim-tree.config'.nvim_tree_callback
+
 require'nvim-tree'.setup{
   -- Close nvim-tree and vim on close file
   auto_close = true,
+  filters = {
+    '.git/**',
+    '.DS_Store',
+    },
+  view = {
+    mappings = {
+      list = {
+        { key = "?", cb = tree_cb("toggle_help") },
+        -- this annoys me when i think I am saving a file and get an error
+        -- so just refresh the tree
+        { key = ":w", cb = tree_cb("refresh") },
+        -- move the file
+        { key = "m", cb = tree_cb("rename") },
+        -- refresh the tree
+        { key = "r", cb = tree_cb("refresh") },
+      }
+    }
+  }
 }
 EOF
 endif
