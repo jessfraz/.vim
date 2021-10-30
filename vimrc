@@ -410,7 +410,6 @@ set wildignore+=*.orig                           " Merge resolution files
 " ----------------------------------------- "
 
 " ==================== telescope.nvim ====================
-
 if has('nvim')
   nnoremap <leader>ff <cmd>Telescope find_files<CR>
   nnoremap <leader>fg <cmd>Telescope live_grep<CR>
@@ -424,6 +423,15 @@ if has('nvim')
   if !executable('rg')
     echo "You might want to install ripgrep: https://github.com/BurntSushi/ripgrep#installation"
   endif
+endif
+
+" ==================== bufferline.nvim ====================
+if has('nvim')
+  set termguicolors
+
+lua << EOF
+require("bufferline").setup{}
+EOF
 endif
 
 " ==================== fugitive.vim ====================

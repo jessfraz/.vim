@@ -50,6 +50,7 @@ update                         Updates pathogen and all plugins.
 ## Plugins Used
 * [github.com/hrsh7th/cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp.git)
 * [github.comhub/copilot.vim.git](https://github.com/github/copilot.vim.git)
+* [github.com/nvim-lualine/lualine.nvim](https://github.com/nvim-lualine/lualine.nvim.git)
 * [github.com/chr4/nginx.vim](https://github.com/chr4/nginx.vim.git)
 * [github.com/hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp.git)
 * [github.com/neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig.git)
