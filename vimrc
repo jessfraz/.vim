@@ -87,6 +87,8 @@ set shiftround
 set notimeout
 set ttimeout
 set ttimeoutlen=10
+" By default timeoutlen is 1000 ms
+set timeoutlen=500
 
 " Better Completion
 set complete=.,w,b,u,t
@@ -121,7 +123,7 @@ if has('mouse')
   set mouse=a
 endif
 
-" If linux then set ttymouse
+" If Linux then set ttymouse
 let s:uname = system("echo -n \"$(uname)\"")
 if !v:shell_error && s:uname == "Linux" && !has('nvim')
   set ttymouse=xterm
@@ -171,8 +173,14 @@ set guioptions-=L
 " This comes first, because we have mappings that depend on leader
 " With a map leader it's possible to do extra key combinations
 " i.e: <leader>w saves the current file
-let mapleader = ","
 let g:mapleader = ","
+" ============================= vim-which-key ============================
+" Setup WhichKey here.
+nnoremap <silent> <leader> :<c-u>WhichKey ','<CR>
+call which_key#register(',', "g:which_key_map")
+" Define prefix dictionary
+let g:which_key_map =  {}
+
 
 " This trigger takes advantage of the fact that the quickfix window can be
 " easily distinguished by its file-type, qf. The wincmd J command is
@@ -212,9 +220,11 @@ command! Ball :call DeleteInactiveBufs()
 
 " Close quickfix easily
 nnoremap <leader>a :cclose<CR>
+let g:which_key_map.a = 'close quickfix'
 
 " Remove search highlight
 nnoremap <leader><space> :nohlsearch<CR>
+let g:which_key_map['<space>'] = 'remove search highlight'
 
 function! InsertDate()
   " Get the position of the cursor, if it is the start of the file we want
@@ -234,6 +244,7 @@ endfunction
 
 " Add a date timestamp between two new lines.
 nnoremap <leader>d :call InsertDate()<CR>
+let g:which_key_map.d = 'insert date'
 
 " Buffer prev/next
 nnoremap <C-x> :bnext<CR>
@@ -247,6 +258,7 @@ map <C-l> <C-W>l
 
 " Fast saving
 nmap <leader>w :w!<cr>
+let g:which_key_map.w = 'save'
 
 " Center the screen
 nnoremap <space> zz
@@ -260,6 +272,7 @@ map j gj
 " Just go out in insert mode
 imap jk <ESC>l
 
+" spell check
 nnoremap <F6> :setlocal spell! spell?<CR>
 
 " Search mappings: These will make it so that going to the next one in a
@@ -267,14 +280,12 @@ nnoremap <F6> :setlocal spell! spell?<CR>
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
-"nnoremap <leader>. :lcd %:p:h<CR>
+" Set the path to where the current file is.
+nnoremap <leader>. :lcd %:p:h<CR>
+" Do this on open as well.
+" TODO: Change this to find the git directory.
 autocmd BufEnter * silent! lcd %:p:h
-
-" trim all whitespaces away
-nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
-
-" Act like D and C
-nnoremap Y y$
+let g:which_key_map['.'] = 'set path as current file'
 
 " Do not show stupid q: window
 map q: :q
@@ -409,11 +420,6 @@ set wildignore+=*.orig                           " Merge resolution files
 " Plugin configs 			    			            "
 " ----------------------------------------- "
 
-" ============================= vim-which-key ============================
-nnoremap <silent> <leader> :WhichKey ','<CR>
-" By default timeoutlen is 1000 ms
-set timeoutlen=500
-
 " ==================== nvim-web-devicons ====================
 if has('nvim')
 lua << EOF
@@ -427,10 +433,15 @@ endif
 
 " ==================== telescope.nvim ====================
 if has('nvim')
+  let g:which_key_map.f = { 'name' : '+telescope find' }
   nnoremap <leader>ff <cmd>Telescope find_files<CR>
+  let g:which_key_map.f.f = 'telescope find files'
   nnoremap <leader>fg <cmd>Telescope live_grep<CR>
+  let g:which_key_map.f.g = 'telescope live grep'
   nnoremap <leader>fb <cmd>Telescope buffers<CR>
+  let g:which_key_map.f.b = 'telescope buffers'
   nnoremap <leader>fh <cmd>Telescope help_tags<CR>
+  let g:which_key_map.f.h = 'telescope help tags'
 
   " Make Ctrl-p work for telescope since we know those keybindings so well.
   nnoremap <C-p> <cmd>Telescope find_files<CR>
@@ -439,6 +450,25 @@ if has('nvim')
   if !executable('rg')
     echo "You might want to install ripgrep: https://github.com/BurntSushi/ripgrep#installation"
   endif
+
+lua << EOF
+require('telescope').setup{
+  defaults = {
+    mappings = {
+      i = {
+        -- map actions.which_key to ?
+        -- actions.which_key shows the mappings for your picker,
+        -- e.g. git_{create, delete, ...}_branch for the git_branches picker
+        ["?"] = "which_key"
+      }
+    }
+  },
+  pickers = {
+  },
+  extensions = {
+  }
+}
+EOF
 endif
 
 " ==================== bufferline.nvim ====================
@@ -451,10 +481,15 @@ EOF
 endif
 
 " ==================== fugitive.vim ====================
+let g:which_key_map.g = { 'name' : '+git' }
 nnoremap <leader>ga :Git add %:p<CR><CR>
+let g:which_key_map.g.a = 'git add current file'
 nnoremap <leader>gs :Gstatus<CR>
+let g:which_key_map.g.s = 'git status'
 nnoremap <leader>gp :Gpush<CR>
+let g:which_key_map.g.p = 'git push'
 vnoremap <leader>gb :Gblame<CR>
+let g:which_key_map.g.b = 'git blame'
 
 " ==================== vim-go ====================
 let g:go_fmt_fail_silently = 0
@@ -501,9 +536,14 @@ augroup END
 
 " ==================== nvim-tree.lua ====================
 noremap <C-a> :NvimTreeToggle<CR>
-noremap <Leader>n :NvimTreeToggle<cr>
-noremap <Leader>f :NvimTreeFindFile<cr>
-nnoremap <Leader>r :NvimTreeRefresh<CR>
+
+let g:which_key_map.n = { 'name' : '+file tree' }
+noremap <leader>nn :NvimTreeToggle<cr>
+let g:which_key_map.n.n = 'file tree toggle'
+noremap <leader>nf :NvimTreeFindFile<cr>
+let g:which_key_map.n.f = 'file tree find file'
+nnoremap <leader>nr :NvimTreeRefresh<CR>
+let g:which_key_map.n.r = 'file tree refresh'
 
 let g:nvim_tree_gitignore = 1
 let g:nvim_tree_add_trailing = 1
@@ -642,10 +682,37 @@ if has('nvim-0.5')
 lua << EOF
 -- Add additional capabilities supported by nvim-cmp
 local nvim_lsp = require'lspconfig'
+local cmp = require'cmp'
 
+cmp.setup ({
+  snippet = {
+    -- Enable LSP snippets
+    -- REQUIRED - you must specify a snippet engine
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body)
+    end,
+  },
+  mapping = {
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.close(),
+    ['<CR>'] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
+    }),
+  },
+  -- Installed sources
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'vsnip' },
+    { name = 'path' },
+    { name = 'buffer' },
+    { name = 'cmdline' },
+  },
+})
+
+-- Setup lspconfig.
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
 local servers = { 'clangd', 'rust_analyzer' }
 for _, lsp in ipairs(servers) do
@@ -655,12 +722,6 @@ for _, lsp in ipairs(servers) do
   }
 end
 
-require'cmp'.setup {
-  sources = {
-    { name = 'nvim_lsp' },
-    { name = 'path' }
-  }
-}
 EOF
 
 endif

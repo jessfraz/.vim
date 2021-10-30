@@ -61,9 +61,6 @@
 [submodule "bundle/vim-mipssyntax"]
 	path = bundle/vim-mipssyntax
 	url = https://github.com/harenome/vim-mipssyntax.git
-[submodule "bundle/vim-surround"]
-	path = bundle/vim-surround
-	url = https://github.com/tpope/vim-surround.git
 [submodule "bundle/vim-jsx-pretty"]
 	path = bundle/vim-jsx-pretty
 	url = https://github.com/MaxMEllon/vim-jsx-pretty.git
@@ -121,3 +118,15 @@
 [submodule "bundle/cmp-cmdline"]
 	path = bundle/cmp-cmdline
 	url = https://github.com/hrsh7th/cmp-cmdline.git
+[submodule "bundle/cmp-buffer"]
+	path = bundle/cmp-buffer
+	url = https://github.com/hrsh7th/cmp-buffer.git
+[submodule "bundle/vim-surround"]
+	path = bundle/vim-surround
+	url = https://github.com/tpope/vim-surround.git
+[submodule "bundle/vim-vsnip"]
+	path = bundle/vim-vsnip
+	url = https://github.com/hrsh7th/vim-vsnip.git
+[submodule "bundle/cmp-vsnip"]
+	path = bundle/cmp-vsnip
+	url = https://github.com/hrsh7th/cmp-vsnip.git
