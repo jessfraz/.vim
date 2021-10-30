@@ -543,7 +543,7 @@ EOF
 endif
 
 " ================== neogit ====================
-nnoremap <leader>gc <cmd>Neogit commit -sa<CR>
+nnoremap <leader>gc <cmd>Neogit commit -s -a<CR>
 let g:which_key_map.g.c = 'git commit'
 nnoremap <leader>gs <cmd>Neogit kind=split<CR>
 let g:which_key_map.g.s = 'git status'
