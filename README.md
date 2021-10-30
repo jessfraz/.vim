@@ -51,6 +51,7 @@ update                         Updates pathogen and all plugins.
 ## Plugins Used
 * [github.com/akinsho/bufferline.nvim](https://github.com/akinsho/bufferline.nvim.git)
 * [github.com/hrsh7th/cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp.git)
+* [github.com/hrsh7th/cmp-path](https://github.com/hrsh7th/cmp-path.git)
 * [github.comhub/copilot.vim.git](https://github.com/github/copilot.vim.git)
 * [github.com/glepnir/lspsaga.nvim](https://github.com/glepnir/lspsaga.nvim.git)
 * [github.com/nvim-lualine/lualine.nvim](https://github.com/nvim-lualine/lualine.nvim.git)
