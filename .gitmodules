@@ -40,12 +40,6 @@
 [submodule "bundle/vim-buftabline"]
 	path = bundle/vim-buftabline
 	url = https://github.com/ap/vim-buftabline.git
-[submodule "bundle/vim-multiple-cursors"]
-	path = bundle/vim-multiple-cursors
-	url = https://github.com/terryma/vim-multiple-cursors.git
-[submodule "bundle/vim-hclfmt"]
-	path = bundle/vim-hclfmt
-	url = https://github.com/fatih/vim-hclfmt.git
 [submodule "bundle/vim-airline"]
 	path = bundle/vim-airline
 	url = https://github.com/vim-airline/vim-airline.git
@@ -94,12 +88,6 @@
 [submodule "bundle/typescript-vim"]
 	path = bundle/typescript-vim
 	url = https://github.com/leafgarland/typescript-vim.git
-[submodule "bundle/vim-hcl"]
-	path = bundle/vim-hcl
-	url = https://github.com/jvirtanen/vim-hcl.git
-[submodule "bundle/vim-liquid"]
-	path = bundle/vim-liquid
-	url = https://github.com/tpope/vim-liquid.git
 [submodule "bundle/copilot.vim"]
 	path = bundle/copilot.vim
 	url = https://github.com/github/copilot.vim.git
@@ -112,3 +100,9 @@
 [submodule "bundle/telescope.nvim"]
 	path = bundle/telescope.nvim
 	url = https://github.com/nvim-telescope/telescope.nvim.git
+[submodule "bundle/vim-visual-multi"]
+	path = bundle/vim-visual-multi
+	url = https://github.com/mg979/vim-visual-multi.git
+[submodule "bundle/nvim-treesitter"]
+	path = bundle/nvim-treesitter
+	url = https://github.com/nvim-treesitter/nvim-treesitter.git

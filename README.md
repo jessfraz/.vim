@@ -42,7 +42,8 @@ update                         Updates pathogen and all plugins.
 
 - `Ctrl-P`: Find files
 - `Ctrl-G`: Live grep
-- `Ctrl-N`: Toggle the file sidebar
+- `Ctrl-A`: Toggle the file sidebar
+- `Ctrl-N`: Multiple cursor support
 
 ## Plugins Used
 * [github.comhub/copilot.vim.git](https://github.com/github/copilot.vim.git)
@@ -50,6 +51,7 @@ update                         Updates pathogen and all plugins.
 * [github.com/Xuyuanp/nerdtree-plugin.git](https://github.com/Xuyuanp/nerdtree-git-plugin.git)
 * [github.com/chr4/nginx.vim](https://github.com/chr4/nginx.vim.git)
 * [github.com/neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig.git)
+* [github.com/nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter.git)
 * [github.com/nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim.git)
 * [github.com/rust-lang/rust.vim](https://github.com/rust-lang/rust.vim.git)
 * [github.com/nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git)
@@ -65,15 +67,11 @@ update                         Updates pathogen and all plugins.
 * [github.com/tpope/vim.git](https://github.com/tpope/vim-git.git)
 * [github.com/airblade/vimgutter.git](https://github.com/airblade/vim-gitgutter.git)
 * [github.com/fatih/vim-go](https://github.com/fatih/vim-go.git)
-* [github.com/jvirtanen/vim-hcl](https://github.com/jvirtanen/vim-hcl.git)
-* [github.com/fatih/vim-hclfmt](https://github.com/fatih/vim-hclfmt.git)
 * [github.com/Yggdroot/indentLine](https://github.com/Yggdroot/indentLine.git)
 * [github.com/elzr/vim-json](https://github.com/elzr/vim-json.git)
 * [github.com/MaxMEllon/vim-jsx-pretty](https://github.com/MaxMEllon/vim-jsx-pretty.git)
-* [github.com/tpope/vim-liquid](https://github.com/tpope/vim-liquid.git)
 * [github.com/plasticboy/vim-markdown](https://github.com/plasticboy/vim-markdown.git)
 * [github.com/harenome/vim-mipssyntax](https://github.com/harenome/vim-mipssyntax.git)
-* [github.com/terryma/vim-multiple-cursors](https://github.com/terryma/vim-multiple-cursors.git)
 * [github.com/uarun/vim-protobuf](https://github.com/uarun/vim-protobuf.git)
 * [github.com/hynek/vim-python-pep8-indent](https://github.com/hynek/vim-python-pep8-indent.git)
 * [github.com/tpope/vim-sensible](https://github.com/tpope/vim-sensible.git)
@@ -81,4 +79,5 @@ update                         Updates pathogen and all plugins.
 * [github.com/wgwoods/vim-systemd-syntax](https://github.com/wgwoods/vim-systemd-syntax.git)
 * [github.com/hashivim/vim-terraform](https://github.com/hashivim/vim-terraform.git)
 * [github.com/cespare/vim-toml](https://github.com/cespare/vim-toml.git)
+* [github.com/mg979/vim-visual-multi](https://github.com/mg979/vim-visual-multi.git)
 * [github.com/stephpy/vim-yaml](https://github.com/stephpy/vim-yaml.git)
