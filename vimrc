@@ -343,6 +343,13 @@ endfunction
 " Find the git directory root on open of vim.
 autocmd BufEnter * silent! FindGitRoot
 
+" Support for sessions, this needs to match the dashboard commands
+let g:which_key_map.s = { 'name' : '+session' }
+nmap <Leader>ss :<C-u>SessionSave<CR>
+let g:which_key_map.s.s = 'session save'
+nmap <Leader>sl :<C-u>SessionLoad<CR>
+let g:which_key_map.s.l = 'session load'
+
 " Do not show stupid q: window
 map q: :q
 
@@ -989,6 +996,25 @@ let g:dashboard_default_executive ='telescope'
 
 " disable the tabline in the dashboard
 autocmd FileType dashboard set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2
+
+" Add a custom dashboard items for GitHub
+let g:dashboard_custom_section={
+  \ 'gh_pull_requests': {
+      \ 'description': ['  List pull requests          SPC o p'],
+      \ 'command': 'Octo pr list' },
+  \ 'gh_issues': {
+      \ 'description': ['  List issues                 SPC o i'],
+      \ 'command': 'Octo issue list' },
+  \ 'file_files': {
+      \ 'description': ['  Find files                  SPC f f'],
+      \ 'command': 'Telescope find_files' },
+  \ 'live_grep': {
+      \ 'description': ['  Live grep                   SPC f g'],
+      \ 'command': 'Telescope live_grep' },
+  \ 'book_marks': {
+      \ 'description': ['  Jump to bookmarks           SPC f m'],
+      \ 'command': 'DashboardJumpMarks' },
+      \ }
 
 " =================== vim-airline ========================
 if has('nvim')
