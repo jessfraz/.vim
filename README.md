@@ -48,18 +48,19 @@ update                         Updates pathogen and all plugins.
 - `Ctrl-Z`: Switch to the previous buffer
 
 ## Plugins Used
+* [github.com/hrsh7th/cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp.git)
 * [github.comhub/copilot.vim.git](https://github.com/github/copilot.vim.git)
-* [github.com/scrooloose/nerdtree](https://github.com/scrooloose/nerdtree.git)
-* [github.com/Xuyuanp/nerdtree-plugin.git](https://github.com/Xuyuanp/nerdtree-git-plugin.git)
 * [github.com/chr4/nginx.vim](https://github.com/chr4/nginx.vim.git)
+* [github.com/hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp.git)
 * [github.com/neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig.git)
+* [github.com/kyazdani42/nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua.git)
 * [github.com/nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter.git)
+* [github.com/kyazdani42/nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons.git)
 * [github.com/nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim.git)
 * [github.com/rust-lang/rust.vim](https://github.com/rust-lang/rust.vim.git)
 * [github.com/nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git)
+* [github.com/folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim.git)
 * [github.com/leafgarland/typescript-vim](https://github.com/leafgarland/typescript-vim.git)
-* [github.com/vim-airline/vim-airline](https://github.com/vim-airline/vim-airline.git)
-* [github.com/vim-airline/vim-airline-themes](https://github.com/vim-airline/vim-airline-themes.git)
 * [github.com/ntpeters/vim-better-whitespace](https://github.com/ntpeters/vim-better-whitespace.git)
 * [github.com/ap/vim-buftabline](https://github.com/ap/vim-buftabline.git)
 * [github.com/altercation/vim-colors-solarized](https://github.com/altercation/vim-colors-solarized.git)

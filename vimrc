@@ -152,12 +152,19 @@ if has('gui_running')
   set regexpengine=1
   syntax enable
 endif
-set background=dark
-let g:solarized_termcolors=256
-let g:solarized_termtrans=1
-" let g:hybrid_use_Xresources = 1
-" let g:rehash256 = 1
-colorscheme solarized
+
+if has('nvim')
+  let g:tokyonight_style = "night"
+  let g:tokyonight_italic_functions = 1
+  let g:tokyonight_transparent = 1
+  colorscheme tokyonight
+else
+  set background=dark
+  let g:solarized_termcolors=256
+  let g:solarized_termtrans=1
+  colorscheme solarized
+endif
+
 set guifont=Inconsolata:h15
 set guioptions-=L
 
@@ -470,18 +477,35 @@ augroup go
   autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
 augroup END
 
-"==================== nerdtree ====================
+" ==================== nvim-web-devicons ====================
+if has('nvim')
+lua << EOF
+require'nvim-web-devicons'.setup()
+EOF
+endif
 
-noremap <C-a> :NERDTreeToggle<CR>
-noremap <Leader>n :NERDTreeToggle<cr>
-noremap <Leader>f :NERDTreeFind<cr>
+" ==================== nvim-tree.lua ====================
 
-let NERDTreeShowHidden=1
+noremap <C-a> :NvimTreeToggle<CR>
+noremap <Leader>n :NvimTreeToggle<cr>
+noremap <Leader>f :NvimTreeFindFile<cr>
 
-let NERDTreeIgnore=['\.vim$', '\~$', '\.git$', '.DS_Store']
+let g:nvim_tree_gitignore = 1
+let g:nvim_tree_add_trailing = 1
+let g:nvim_tree_highlight_opened_files = 1
+let g:nvim_tree_git_hl = 1
+"let NERDTreeShowHidden=1
 
-" Close nerdtree and vim on close file
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+"let NERDTreeIgnore=['\.vim$', '\~$', '\.git$', '.DS_Store']
+
+if has('nvim')
+lua << EOF
+require'nvim-tree'.setup{
+  -- Close nvim-tree and vim on close file
+  auto_close = true,
+}
+EOF
+endif
 
 " ==================== vim-json ====================
 
@@ -555,6 +579,24 @@ hi def CopilotSuggestion guifg=#808080 ctermfg=242
 
 if has('nvim-0.5')
 
+" =================== clangd ========================
+if executable('clangd')
+lua << EOF
+require'lspconfig'.clangd.setup{}
+EOF
+else
+  echo "You might want to install clangd: https://clangd.llvm.org/installation.html"
+endif
+
+" =================== gopls ========================
+if executable('gopls')
+lua << EOF
+require'lspconfig'.gopls.setup{}
+EOF
+else
+  echo "You might want to install gopls: https://github.com/golang/tools/tree/master/gopls"
+endif
+
 " =================== rust-analyzer ========================
 if executable('rust-analyzer')
 lua << EOF
@@ -564,17 +606,8 @@ nvim_lsp.rust_analyzer.setup({
   -- on_attach is a callback called when the language server attachs to the buffer
   -- on_attach = on_attach,
   settings = {
+    -- config from: https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
     ["rust-analyzer"] = {
-      assist = {
-        importGranularity = "module",
-        importPrefix = "by_self",
-      },
-      cargo = {
-        loadOutDirsFromCheck = true
-      },
-      procMacro = {
-        enable = true
-      },
       -- enable clippy diagnostics on save
       checkOnSave = {
         command = "clippy"
@@ -592,22 +625,31 @@ endif
 " =================== nvim-cmp ========================
 
 if has('nvim-0.5')
-lua <<EOF
+
+lua << EOF
+-- Add additional capabilities supported by nvim-cmp
+local nvim_lsp = require'lspconfig'
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
+-- Enable some language servers with the additional completion capabilities offered by nvim-cmp
+local servers = { 'clangd', 'rust_analyzer' }
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup {
+    -- on_attach = my_custom_on_attach,
+    capabilities = capabilities,
+  }
+end
+
 require'cmp'.setup {
   sources = {
     { name = 'nvim_lsp' }
   }
 }
 
--- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-
--- The following example advertise capabilities to `clangd`.
-require'lspconfig'.rust_analyzer.setup {
-  capabilities = capabilities,
-}
 EOF
+
 endif
 
 " vim:ts=2:sw=2:et
