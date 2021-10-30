@@ -106,3 +106,6 @@
 [submodule "bundle/tokyonight.nvim"]
 	path = bundle/tokyonight.nvim
 	url = https://github.com/folke/tokyonight.nvim.git
+[submodule "bundle/lualine.nvim"]
+	path = bundle/lualine.nvim
+	url = https://github.com/nvim-lualine/lualine.nvim.git
