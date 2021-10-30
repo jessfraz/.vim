@@ -543,10 +543,12 @@ EOF
 endif
 
 " ================== neogit ====================
-nnoremap <leader>gc <cmd>Neogit commit<CR>
+nnoremap <leader>gc <cmd>Neogit commit -sa<CR>
 let g:which_key_map.g.c = 'git commit'
 nnoremap <leader>gs <cmd>Neogit kind=split<CR>
 let g:which_key_map.g.s = 'git status'
+nnoremap <leader>gp <cmd>Neogit push<CR>
+let g:which_key_map.g.p = 'git push'
 if has('nvim')
 " TODO: figure out why push and commit fail
 " TODO: autocomplete issues urls collaborators in commit messages
