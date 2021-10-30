@@ -44,6 +44,8 @@ update                         Updates pathogen and all plugins.
 - `Ctrl-G`: Live grep
 - `Ctrl-A`: Toggle the file sidebar
 - `Ctrl-N`: Multiple cursor support
+- `Ctrl-X`: Switch to the next buffer
+- `Ctrl-Z`: Switch to the previous buffer
 
 ## Plugins Used
 * [github.comhub/copilot.vim.git](https://github.com/github/copilot.vim.git)
@@ -58,7 +60,6 @@ update                         Updates pathogen and all plugins.
 * [github.com/leafgarland/typescript-vim](https://github.com/leafgarland/typescript-vim.git)
 * [github.com/vim-airline/vim-airline](https://github.com/vim-airline/vim-airline.git)
 * [github.com/vim-airline/vim-airline-themes](https://github.com/vim-airline/vim-airline-themes.git)
-* [github.com/moll/vim-bbye](https://github.com/moll/vim-bbye.git)
 * [github.com/ntpeters/vim-better-whitespace](https://github.com/ntpeters/vim-better-whitespace.git)
 * [github.com/ap/vim-buftabline](https://github.com/ap/vim-buftabline.git)
 * [github.com/altercation/vim-colors-solarized](https://github.com/altercation/vim-colors-solarized.git)
