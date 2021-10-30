@@ -182,7 +182,7 @@ call which_key#register(',', "g:which_key_map")
 " Define prefix dictionary
 let g:which_key_map =  {}
 nnoremap <leader>? :WhichKey ','<CR>
-let g:which_key_map.['?'] = 'show help'
+let g:which_key_map['?'] = 'show help'
 
 " This trigger takes advantage of the fact that the quickfix window can be
 " easily distinguished by its file-type, qf. The wincmd J command is
@@ -651,13 +651,16 @@ endif
 " ==================== vim-json ====================
 let g:vim_json_syntax_conceal = 0
 
+let g:indentLine_enabled = 0
+
 " ========= vim-better-whitespace ==================
+" do not highlight the whitespace
+let g:better_whitespace_enabled=0
 " auto strip whitespace except for file with extention blacklisted
 let blacklist = ['diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown']
 autocmd BufWritePre * if index(blacklist, &ft) < 0 | StripWhitespace
 
 " ========= vim-markdown ==================
-
 " disable folding
 let g:vim_markdown_folding_disabled = 1
 
@@ -840,5 +843,8 @@ lua << EOF
 require'lspsaga'.init_lsp_saga()
 EOF
 endif
+
+" =================== dashboard-nvim ========================
+let g:dashboard_default_executive ='telescope'
 
 " vim:ts=2:sw=2:et
