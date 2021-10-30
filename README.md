@@ -48,6 +48,7 @@ update                         Updates pathogen and all plugins.
 - `Ctrl-Z`: Switch to the previous buffer
 
 ## Plugins Used
+* [github.com/akinsho/bufferline.nvim](https://github.com/akinsho/bufferline.nvim.git)
 * [github.com/hrsh7th/cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp.git)
 * [github.comhub/copilot.vim.git](https://github.com/github/copilot.vim.git)
 * [github.com/nvim-lualine/lualine.nvim](https://github.com/nvim-lualine/lualine.nvim.git)
@@ -63,7 +64,6 @@ update                         Updates pathogen and all plugins.
 * [github.com/folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim.git)
 * [github.com/leafgarland/typescript-vim](https://github.com/leafgarland/typescript-vim.git)
 * [github.com/ntpeters/vim-better-whitespace](https://github.com/ntpeters/vim-better-whitespace.git)
-* [github.com/ap/vim-buftabline](https://github.com/ap/vim-buftabline.git)
 * [github.com/altercation/vim-colors-solarized](https://github.com/altercation/vim-colors-solarized.git)
 * [github.com/tpope/vim-endwise](https://github.com/tpope/vim-endwise.git)
 * [github.com/tpope/vim-five.git](https://github.com/tpope/vim-fugitive.git)
@@ -83,4 +83,5 @@ update                         Updates pathogen and all plugins.
 * [github.com/hashivim/vim-terraform](https://github.com/hashivim/vim-terraform.git)
 * [github.com/cespare/vim-toml](https://github.com/cespare/vim-toml.git)
 * [github.com/mg979/vim-visual-multi](https://github.com/mg979/vim-visual-multi.git)
+* [github.com/liuchengxu/vim-which-key](https://github.com/liuchengxu/vim-which-key.git)
 * [github.com/stephpy/vim-yaml](https://github.com/stephpy/vim-yaml.git)
