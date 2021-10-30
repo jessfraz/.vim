@@ -31,9 +31,6 @@
 [submodule "bundle/vim-python-pep8-indent"]
 	path = bundle/vim-python-pep8-indent
 	url = https://github.com/hynek/vim-python-pep8-indent.git
-[submodule "bundle/vim-buftabline"]
-	path = bundle/vim-buftabline
-	url = https://github.com/ap/vim-buftabline.git
 [submodule "bundle/vim-systemd"]
 	path = bundle/vim-systemd
 	url = https://github.com/wgwoods/vim-systemd-syntax.git
@@ -109,3 +106,6 @@
 [submodule "bundle/lualine.nvim"]
 	path = bundle/lualine.nvim
 	url = https://github.com/nvim-lualine/lualine.nvim.git
+[submodule "bundle/bufferline.nvim"]
+	path = bundle/bufferline.nvim
+	url = https://github.com/akinsho/bufferline.nvim.git
