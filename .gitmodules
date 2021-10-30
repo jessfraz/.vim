@@ -100,9 +100,6 @@
 [submodule "bundle/vim-surround"]
 	path = bundle/vim-surround
 	url = https://github.com/tpope/vim-surround.git
-[submodule "bundle/tabnine-vim"]
-	path = bundle/tabnine-vim
-	url = https://github.com/zxqfl/tabnine-vim.git
 [submodule "bundle/openai.vim"]
 	path = bundle/openai.vim
 	url = https://github.com/jessfraz/openai.vim.git
