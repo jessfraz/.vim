@@ -483,7 +483,7 @@ require("bufferline").setup{}
 EOF
 endif
 
-" ==================== fugitive.vim ====================
+" ==================== gitsigns.nvim ====================
 let g:which_key_map.g = { 'name' : '+git' }
 nnoremap <leader>ga :Git add %:p<CR><CR>
 let g:which_key_map.g.a = 'git add current file'
@@ -499,6 +499,11 @@ vnoremap <leader>go :GBrowse<CR><CR>
 let g:which_key_map.g.o = 'open in GitHub'
 " TODO: figure out why push and commit fail
 " TODO: autocomplete issues urls collaborators in commit messages
+if has('nvim')
+lua << EOF
+--require("gitsigns").setup{}
+EOF
+endif
 
 " ==================== vim-go ====================
 let g:go_fmt_fail_silently = 0
