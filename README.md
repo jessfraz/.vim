@@ -52,6 +52,7 @@ update                         Updates pathogen and all plugins.
 ```
 
 ## Plugins Used
+* [github.comhub/copilot.vim.git](https://github.com/github/copilot.vim.git)
 * [github.com/ctrlpvim/ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim.git)
 * [github.com/vivien/vim-linux-coding-style](https://github.com/vivien/vim-linux-coding-style.git)
 * [github.com/scrooloose/nerdtree](https://github.com/scrooloose/nerdtree.git)
@@ -59,7 +60,6 @@ update                         Updates pathogen and all plugins.
 * [github.com/chr4/nginx.vim](https://github.com/chr4/nginx.vim.git)
 * [github.com/jessfraz/openai.vim](https://github.com/jessfraz/openai.vim.git)
 * [github.com/rust-lang/rust.vim](https://github.com/rust-lang/rust.vim.git)
-* [github.com/zxqfl/tabnine-vim](https://github.com/zxqfl/tabnine-vim.git)
 * [github.com/godlygeek/tabular](https://github.com/godlygeek/tabular.git)
 * [github.com/leafgarland/typescript-vim](https://github.com/leafgarland/typescript-vim.git)
 * [github.com/vim-airline/vim-airline](https://github.com/vim-airline/vim-airline.git)
