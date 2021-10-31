@@ -887,7 +887,34 @@ cmp.setup ({
     { name = 'path' },
     { name = 'buffer' },
     { name = 'cmdline' },
+    { name = "cmp_git" },
   },
+})
+
+
+require("cmp_git").setup({
+    -- defaults
+    filetypes = { "gitcommit" },
+    remote = "origin",
+    git = {
+        commits = {
+            limit = 100,
+        },
+    },
+    github = {
+        issues = {
+            filter = "all", -- assigned, created, mentioned, subscribed, all, repos
+            limit = 100,
+            state = "open", -- open, closed, all
+        },
+        mentions = {
+            limit = 100,
+        },
+        pull_requests = {
+            limit = 100,
+            state = "open", -- open, closed, merged, all
+        },
+    },
 })
 
 -- Setup lspconfig.
@@ -1005,6 +1032,9 @@ let g:dashboard_custom_section={
   \ 'gh_issues': {
       \ 'description': ['  List issues                 SPC o i'],
       \ 'command': 'Octo issue list' },
+  \ 'gh_actions': {
+      \ 'description': ['  List actions                SPC o a'],
+      \ 'command': 'Octo run list' },
   \ 'file_files': {
       \ 'description': ['  Find files                  SPC f f'],
       \ 'command': 'Telescope find_files' },
