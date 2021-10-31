@@ -51,6 +51,8 @@ update                         Updates pathogen and all plugins.
 - `Ctrl-T`: Open a floating terminal
 - `<Space>`: Center the screen to the cursor
 
+There's a lot more if you hit `,?` you can peruse all the ones connected to the leader `,`
+
 ## Plugins Used
 * [github.com/akinsho/bufferline.nvim](https://github.com/akinsho/bufferline.nvim.git)
 * [github.com/hrsh7th/cmp-buffer](https://github.com/hrsh7th/cmp-buffer.git)
