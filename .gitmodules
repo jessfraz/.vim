@@ -136,3 +136,6 @@
 [submodule "bundle/octo.nvim"]
 	path = bundle/octo.nvim
 	url = https://github.com/pwntester/octo.nvim.git
+[submodule "bundle/cmp-git"]
+	path = bundle/cmp-git
+	url = https://github.com/petertriho/cmp-git.git
