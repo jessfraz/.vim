@@ -616,7 +616,6 @@ EOF
 endif
 
 " ================== vim-fugitive ====================
-" TODO: autocomplete issues urls collaborators in commit messages
 let g:which_key_map.g = { 'name' : '+git' }
 nnoremap <leader>ga :Git add %:p<CR><CR>
 let g:which_key_map.g.a = 'git add current file'
