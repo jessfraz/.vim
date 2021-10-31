@@ -616,6 +616,12 @@ EOF
 endif
 
 " ================== vim-fugitive ====================
+" Suggest using pinentry-touchid since it is the least shit option:
+" https://github.com/jorgelbg/pinentry-touchid
+" This is used when unlocking a gpg key for signing or ssh key for commits.
+if !executable('pinentry-touchid')
+  echo "You might want to install pinentry-touchid: https://github.com/jorgelbg/pinentry-touchid"
+endif
 let g:which_key_map.g = { 'name' : '+git' }
 nnoremap <leader>ga :Git add %:p<CR><CR>
 let g:which_key_map.g.a = 'git add current file'
