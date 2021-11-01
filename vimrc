@@ -892,6 +892,7 @@ cmp.setup ({
     { name = 'path' },
     { name = 'buffer' },
     { name = 'cmdline' },
+    { name = 'spell' },
     { name = "cmp_git" },
   },
 })
