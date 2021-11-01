@@ -898,6 +898,8 @@ cmp.setup ({
 })
 
 
+vim.opt.spelllang = { 'en_us' }
+
 require("cmp_git").setup({
     -- defaults
     filetypes = { "gitcommit" },
