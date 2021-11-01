@@ -139,3 +139,6 @@
 [submodule "bundle/cmp-git"]
 	path = bundle/cmp-git
 	url = https://github.com/petertriho/cmp-git.git
+[submodule "bundle/cmp-spell"]
+	path = bundle/cmp-spell
+	url = https://github.com/f3fora/cmp-spell.git
