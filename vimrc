@@ -817,6 +817,15 @@ else
   echo "You might want to install clangd: https://clangd.llvm.org/installation.html"
 endif
 
+" =================== tsserver ========================
+if executable('cmake-language-server')
+lua << EOF
+require'lspconfig'.cmake.setup{}
+EOF
+else
+  echo "You might want to install cmake-language-server: pip3 install cmake-language-server"
+endif
+
 " =================== gopls ========================
 if executable('gopls')
 lua << EOF
@@ -929,7 +938,7 @@ require("cmp_git").setup({
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'clangd', 'rust_analyzer', 'tsserver' }
+local servers = { 'clangd', 'cmake', 'rust_analyzer', 'tsserver' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     -- on_attach = my_custom_on_attach,
@@ -970,6 +979,7 @@ vnoremap <silent><leader>ca :<C-U>lua require('lspsaga.codeaction').range_code_a
 nnoremap <silent> <C-t> :Lspsaga open_floaterm<CR>
 tnoremap <silent> <C-t> <C-\><C-n>:Lspsaga close_floaterm<CR>
 
+" TODO fix why this plugin errors when opening a gitcommit file.
 lua << EOF
 require'lspsaga'.init_lsp_saga{
   use_saga_diagnostic_sign = true,
