@@ -817,15 +817,6 @@ else
   echo "You might want to install clangd: https://clangd.llvm.org/installation.html"
 endif
 
-" =================== tsserver ========================
-if executable('cmake-language-server')
-lua << EOF
-require'lspconfig'.cmake.setup{}
-EOF
-else
-  echo "You might want to install cmake-language-server: pip3 install cmake-language-server"
-endif
-
 " =================== gopls ========================
 if executable('gopls')
 lua << EOF
@@ -938,7 +929,7 @@ require("cmp_git").setup({
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'clangd', 'cmake', 'rust_analyzer', 'tsserver' }
+local servers = { 'clangd', 'rust_analyzer', 'tsserver' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     -- on_attach = my_custom_on_attach,
@@ -1050,9 +1041,6 @@ let g:dashboard_custom_section={
   \ 'gh_issues': {
       \ 'description': ['  List issues                 SPC o i'],
       \ 'command': 'Octo issue list' },
-  \ 'gh_actions': {
-      \ 'description': ['  List actions                SPC o a'],
-      \ 'command': 'Octo run list' },
   \ 'file_files': {
       \ 'description': ['  Find files                  SPC f f'],
       \ 'command': 'Telescope find_files' },
