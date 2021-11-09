@@ -857,7 +857,7 @@ lua << EOF
 require'lspconfig'.tsserver.setup{}
 EOF
 else
-  echo "You might want to install tsserver: npm install -g typescript typescript-language-server"
+  echo "You might want to install tsserver: yarn global add typescript typescript-language-server"
 endif
 
 " =================== nvim-cmp ========================
