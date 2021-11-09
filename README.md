@@ -15,7 +15,15 @@ $ git clone --recursive https://github.com/jessfraz/.vim.git .vim
 $ ln -sf $HOME/.vim/vimrc $HOME/.vimrc
 $ cd $HOME/.vim
 $ git submodule update --init
+
+# To use the same configuration for nvim (neovim
+$ mkdir -p ~/.config/nvim
+$ ln -snf ~/.vimrc ~/.config/nvim/init.vim
+$ mkdir -p ~/.local/share/nvim
+$ ln -snf ~/.vim ~/.local/share/nvim/site
 ```
+
+You will also want a [Nerd Font](https://www.nerdfonts.com/).
 
 ### Pathogen
 The vim dot files make use of the excellent [Pathogen](https://github.com/tpope/vim-pathogen) runtime path manager to install plugins and runtime files into their own private directiories.
