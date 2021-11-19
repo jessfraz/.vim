@@ -963,12 +963,15 @@ nnoremap <silent>K :Lspsaga hover_doc<CR>
 " nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
 
 " code action
-nnoremap <silent><leader>ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
-vnoremap <silent><leader>ca :<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>
+nnoremap <silent><leader>ca :Lspsaga code_action<CR>
+vnoremap <silent><leader>ca :Lspsaga range_code_action<CR>
 
 " float terminal also you can pass the cli command in open_float_terminal function
 nnoremap <silent> <C-t> :Lspsaga open_floaterm<CR>
 tnoremap <silent> <C-t> <C-\><C-n>:Lspsaga close_floaterm<CR>
+
+" diagnostics
+nnoremap <silent><leader>cd :Lspsaga show_line_diagnostics<CR>
 
 " TODO fix why this plugin errors when opening a gitcommit file.
 lua << EOF
