@@ -16,7 +16,7 @@ $ ln -sf $HOME/.vim/vimrc $HOME/.vimrc
 $ cd $HOME/.vim
 $ git submodule update --init
 
-# To use the same configuration for nvim (neovim
+# To use the same configuration for nvim (neovim)
 $ mkdir -p ~/.config/nvim
 $ ln -snf ~/.vimrc ~/.config/nvim/init.vim
 $ mkdir -p ~/.local/share/nvim
