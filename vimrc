@@ -903,26 +903,7 @@ vim.opt.spelllang = { 'en_us' }
 require("cmp_git").setup({
     -- defaults
     filetypes = { "gitcommit" },
-    remote = "origin",
-    git = {
-        commits = {
-            limit = 100,
-        },
-    },
-    github = {
-        issues = {
-            filter = "all", -- assigned, created, mentioned, subscribed, all, repos
-            limit = 100,
-            state = "open", -- open, closed, all
-        },
-        mentions = {
-            limit = 100,
-        },
-        pull_requests = {
-            limit = 100,
-            state = "open", -- open, closed, merged, all
-        },
-    },
+    remotes = { "upstream", "origin" }, -- in order of most to least prioritized
 })
 
 -- Setup lspconfig.
