@@ -443,6 +443,9 @@ au BufRead,BufNewFile *.mips set ft=mips
 " settings for njk
 au BufRead,BufNewFile *.njk,*.hbs set ft=html
 
+" settings for mts
+au BufRead,BufNewFile *.mts set ft=typescript
+
 " Binary settings: edit binary using xxd-format
 augroup Binary
   au!
