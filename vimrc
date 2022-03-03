@@ -565,7 +565,6 @@ let g:which_key_map.n.n = 'file tree toggle'
 noremap <leader>nf :NvimTreeFindFile<cr>
 let g:which_key_map.n.f = 'file tree find file'
 
-let g:nvim_tree_gitignore = 1
 let g:nvim_tree_add_trailing = 1
 let g:nvim_tree_highlight_opened_files = 1
 let g:nvim_tree_git_hl = 1
@@ -575,6 +574,9 @@ lua << EOF
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 
 require'nvim-tree'.setup{
+  git = {
+    ignore = true,
+  },
   -- Setting this to true breaks :GBrowse & vim-rhubarb.
   disable_netrw = false,
   -- Close nvim-tree and vim on close file
@@ -654,16 +656,6 @@ require("gitsigns").setup{
   numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
   linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
   word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
-  keymaps = {
-    -- Default keymap options
-    noremap = true,
-
-    ['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'"},
-    ['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'"},
-
-    ['n <leader>gb'] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
-    ['n <leader>gd'] = '<cmd>lua require"gitsigns".diffthis()<CR>',
-  },
   watch_gitdir = {
     interval = 1000,
     follow_files = true
@@ -674,10 +666,9 @@ require("gitsigns").setup{
     virt_text = true,
     virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
     delay = 1000,
+    ignore_whitespace = false,
   },
-  current_line_blame_formatter_opts = {
-    relative_time = true
-  },
+  current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
   sign_priority = 6,
   update_debounce = 100,
   status_formatter = nil, -- Use default
@@ -693,6 +684,23 @@ require("gitsigns").setup{
   yadm = {
     enable = false
   },
+  on_attach = function(bufnr)
+      local gs = package.loaded.gitsigns
+
+      local function map(mode, l, r, opts)
+        opts = opts or {}
+        opts.buffer = bufnr
+        vim.keymap.set(mode, l, r, opts)
+      end
+
+      map('n', ']c', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", {expr=true})
+      map('n', '[c', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", {expr=true})
+
+      map('n', '<leader>gb', function() gs.blame_line{full=true} end)
+      map('n', '<leader>tb', gs.toggle_current_line_blame)
+
+      map('n', '<leader>gd', gs.diffthis)
+  end
 }
 EOF
 endif
