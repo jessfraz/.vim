@@ -435,7 +435,7 @@ au BufRead,BufNewFile MAINTAINERS,*.toml set ft=toml formatprg=toml-fmt
 au BufRead,BufNewFile Fastfile,Appfile,Podfile set ft=ruby
 
 " hcl settings
-au BufRead,BufNewFile *.workflow set ft=hcl
+au BufRead,BufNewFile *.workflow,*.nomad set ft=hcl
 
 " mips settings
 au BufRead,BufNewFile *.mips set ft=mips
