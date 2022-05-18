@@ -142,3 +142,6 @@
 [submodule "bundle/cmp-spell"]
 	path = bundle/cmp-spell
 	url = https://github.com/f3fora/cmp-spell.git
+[submodule "bundle/vim-hclfmt"]
+	path = bundle/vim-hclfmt
+	url = https://github.com/fatih/vim-hclfmt.git
