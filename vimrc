@@ -811,6 +811,13 @@ let g:terraform_align=1
 " Run terraform fmt on save.
 let g:terraform_fmt_on_save=1
 
+
+" =================== vim-hclfmt ========================
+let g:hcl_fmt_autosave = 1
+" Ignore terraform since we have the terraform plugin
+let g:tf_fmt_autosave = 0
+let g:nomad_fmt_autosave = 1
+
 " =================== copilot.vim ========================
 
 hi def CopilotSuggestion guifg=#808080 ctermfg=244
