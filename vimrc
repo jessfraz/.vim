@@ -565,10 +565,6 @@ let g:which_key_map.n.n = 'file tree toggle'
 noremap <leader>nf :NvimTreeFindFile<cr>
 let g:which_key_map.n.f = 'file tree find file'
 
-let g:nvim_tree_add_trailing = 1
-let g:nvim_tree_highlight_opened_files = 1
-let g:nvim_tree_git_hl = 1
-
 if has('nvim')
 lua << EOF
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
@@ -579,8 +575,6 @@ require'nvim-tree'.setup{
   },
   -- Setting this to true breaks :GBrowse & vim-rhubarb.
   disable_netrw = false,
-  -- Close nvim-tree and vim on close file
-  auto_close = true,
   filters = {
     dotfiles = false,
     -- TODO: why doesn't this work
@@ -588,6 +582,11 @@ require'nvim-tree'.setup{
       '.git',
       '.DS_Store',
     },
+    },
+  renderer = {
+    add_trailing = true,
+    highlight_opened_files = "icon",
+    highlight_git = true,
     },
   view = {
     mappings = {
@@ -983,7 +982,7 @@ require'lspsaga'.init_lsp_saga{
   hint_sign = '',
   infor_sign = '',
   infor_sign = '',
-  dianostic_header_icon = '   ',
+  diagnostic_header_icon = '   ',
   code_action_icon = ' ',
   code_action_prompt = {
     enable = true,
