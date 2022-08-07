@@ -877,6 +877,15 @@ else
   echo "You might want to install tsserver: yarn global add typescript typescript-language-server"
 endif
 
+" =================== ocamllsp ========================
+if executable('ocamllsp')
+lua << EOF
+require'lspconfig'.ocamllsp.setup{}
+EOF
+else
+  echo "You might want to install ocamllsp: opam install ocaml-lsp-server"
+endif
+
 " =================== nvim-cmp ========================
 
 if has('nvim-0.5')
