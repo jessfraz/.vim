@@ -145,3 +145,6 @@
 [submodule "bundle/vim-hclfmt"]
 	path = bundle/vim-hclfmt
 	url = https://github.com/fatih/vim-hclfmt.git
+[submodule "bundle/vim-ocaml"]
+	path = bundle/vim-ocaml
+	url = https://github.com/ocaml/vim-ocaml.git
