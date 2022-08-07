@@ -886,6 +886,14 @@ else
   echo "You might want to install ocamllsp: opam install ocaml-lsp-server"
 endif
 
+" merlin for ocaml
+if executable('dot-merlin-reader')
+  let g:opamshare = substitute(system('opam var share'),'\n$','','''')
+  execute "set rtp+=" . g:opamshare . "/merlin/vim"
+else
+  echo "You might want to install merlin: opam install merlin"
+endif
+
 " =================== nvim-cmp ========================
 
 if has('nvim-0.5')
