@@ -886,14 +886,6 @@ else
   echo "You might want to install ocamllsp: opam install ocaml-lsp-server"
 endif
 
-" merlin for ocaml
-if executable('dot-merlin-reader')
-  let g:opamshare = substitute(system('opam var share'),'\n$','','''')
-  execute "set rtp+=" . g:opamshare . "/merlin/vim"
-else
-  echo "You might want to install merlin: opam install merlin"
-endif
-
 " =================== nvim-cmp ========================
 
 if has('nvim-0.5')
@@ -1244,6 +1236,43 @@ require"octo".setup({
   }
 })
 EOF
+endif
+
+" =================== ocaml ========================
+
+if executable('dot-merlin-reader')
+    let s:opam_share_dir = system("opam var share")
+    let s:opam_share_dir = substitute(s:opam_share_dir, '[\r\n]*$', '', '')
+
+    let s:opam_configuration = {}
+
+    function! OpamConfOcpIndent()
+        execute "set rtp^=" . s:opam_share_dir . "/ocp-indent/vim"
+    endfunction
+    let s:opam_configuration['ocp-indent'] = function('OpamConfOcpIndent')
+
+    function! OpamConfOcpIndex()
+        execute "set rtp+=" . s:opam_share_dir . "/ocp-index/vim"
+    endfunction
+    let s:opam_configuration['ocp-index'] = function('OpamConfOcpIndex')
+
+    function! OpamConfMerlin()
+        let l:dir = s:opam_share_dir . "/merlin/vim"
+        execute "set rtp+=" . l:dir
+    endfunction
+    let s:opam_configuration['merlin'] = function('OpamConfMerlin')
+
+    let s:opam_packages = ["ocp-indent", "ocp-index", "merlin"]
+    let s:opam_check_cmdline = ["opam list --installed --short --safe --color=never"] + s:opam_packages
+    let s:opam_available_tools = split(system(join(s:opam_check_cmdline)))
+    for tool in s:opam_packages
+        " Respect package order (merlin should be after ocp-index)
+        if count(s:opam_available_tools, tool) > 0
+            call s:opam_configuration[tool]()
+        endif
+    endfor
+else
+  echo "You might want to install merlin: opam install merlin"
 endif
 
 " vim:ts=2:sw=2:et
