@@ -446,6 +446,9 @@ au BufRead,BufNewFile *.njk,*.hbs set ft=html
 " settings for mts
 au BufRead,BufNewFile *.mts set ft=typescript
 
+" settings for hujson
+au BufRead,BufNewFile *.hujson set ft=json
+
 " Binary settings: edit binary using xxd-format
 augroup Binary
   au!
