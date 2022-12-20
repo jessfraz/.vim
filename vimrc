@@ -939,7 +939,7 @@ require("cmp_git").setup({
 
 -- Setup lspconfig.
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
 local servers = { 'clangd', 'rust_analyzer', 'tsserver' }
 for _, lsp in ipairs(servers) do
@@ -997,8 +997,6 @@ require'lspsaga'.init_lsp_saga{
   -- when cursor in saga window you config these to move
   move_in_saga = { prev = '<C-p>',next = '<C-n>'},
   diagnostic_header = { " ", " ", " ", "ﴞ " },
-  -- show diagnostic source
-  show_diagnostic_source = true,
   -- add bracket or something with diagnostic source, just have 2 elements
   diagnostic_source_bracket = {},
   -- use emoji lightbulb in default
@@ -1037,7 +1035,6 @@ require'lspsaga'.init_lsp_saga{
   },
   rename_action_quit = "<C-c>",
   rename_in_select = true,
-  definition_preview_icon = "  ",
   -- show symbols in winbar must nightly
   symbol_in_winbar = {
     in_custom = false,
