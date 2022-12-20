@@ -997,8 +997,6 @@ require'lspsaga'.init_lsp_saga{
   -- when cursor in saga window you config these to move
   move_in_saga = { prev = '<C-p>',next = '<C-n>'},
   diagnostic_header = { " ", " ", " ", "ﴞ " },
-  -- add bracket or something with diagnostic source, just have 2 elements
-  diagnostic_source_bracket = {},
   -- use emoji lightbulb in default
   code_action_icon = "",
   -- if true can press number to execute the codeaction in codeaction window
