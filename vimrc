@@ -1004,7 +1004,6 @@ cmp.setup ({
     { name = 'vsnip' },
     { name = 'path' },
     { name = 'buffer' },
-    { name = 'cmdline' },
     { name = 'spell' },
     { name = 'git' },
   },
@@ -1069,7 +1068,7 @@ nnoremap <silent><leader>cd :Lspsaga show_line_diagnostics<CR>
 
 " TODO fix why this plugin errors when opening a gitcommit file.
 lua << EOF
-require'lspsaga'.init_lsp_saga{
+require'lspsaga'.setup({
   -- Options with default value
   -- "single" | "double" | "rounded" | "bold" | "plus"
   border_style = "single",
@@ -1141,7 +1140,7 @@ require'lspsaga'.init_lsp_saga{
   -- the related filetypes into this table
   -- like server_filetype_map = { metals = { "sbt", "scala" } }
   server_filetype_map = {},
-}
+})
 EOF
 endif
 
