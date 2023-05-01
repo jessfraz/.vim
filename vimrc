@@ -686,18 +686,6 @@ require'nvim-tree'.setup{
     highlight_git = true,
     },
   view = {
-    mappings = {
-      list = {
-        { key = "?", cb = tree_cb("toggle_help") },
-        -- this annoys me when i think I am saving a file and get an error
-        -- so just refresh the tree
-        { key = ":w", cb = tree_cb("refresh") },
-        -- move the file
-        { key = "m", cb = tree_cb("rename") },
-        -- refresh the tree
-        { key = "r", cb = tree_cb("refresh") },
-      }
-    }
   }
 }
 EOF
