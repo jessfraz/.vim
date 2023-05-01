@@ -103,9 +103,6 @@
 [submodule "bundle/cmp-path"]
 	path = bundle/cmp-path
 	url = https://github.com/hrsh7th/cmp-path.git
-[submodule "bundle/cmp-cmdline"]
-	path = bundle/cmp-cmdline
-	url = https://github.com/hrsh7th/cmp-cmdline.git
 [submodule "bundle/cmp-buffer"]
 	path = bundle/cmp-buffer
 	url = https://github.com/hrsh7th/cmp-buffer.git
