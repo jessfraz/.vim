@@ -69,7 +69,6 @@ There's a lot more if you hit `,?` you can peruse all the ones connected to the 
 * [github.com/hrsh7th/cmp-path](https://github.com/hrsh7th/cmp-path.git)
 * [github.com/f3fora/cmp-spell](https://github.com/f3fora/cmp-spell.git)
 * [github.com/hrsh7th/cmp-vsnip](https://github.com/hrsh7th/cmp-vsnip.git)
-* [github.comhub/copilot.vim](https://github.com/github/copilot.vim)
 * [github.com/glepnir/dashboard-nvim](https://github.com/glepnir/dashboard-nvim.git)
 * [github.com/lewis6991signs.nvim.git](https://github.com/lewis6991/gitsigns.nvim.git)
 * [github.com/lukas-reineke/indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim.git)
