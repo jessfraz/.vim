@@ -398,6 +398,7 @@ au BufNewFile,BufRead *.jade setlocal expandtab ts=2 sw=2
 augroup filetypedetect
   au BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
   au BufNewFile,BufRead .nginx.conf*,nginx.conf* setf nginx
+  au BufNewFile,BufRead .jinja2* setf jinja
 augroup END
 
 au FileType nginx setlocal noet ts=4 sw=4 sts=4
