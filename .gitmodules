@@ -145,3 +145,6 @@
 [submodule "bundle/copliot.vim"]
 	path = bundle/copliot.vim
 	url = https://github.com/github/copilot.vim.git
+[submodule "bundle/jinja.vim"]
+	path = bundle/jinja.vim
+	url = https://gitlab.com/HiPhish/jinja.vim
