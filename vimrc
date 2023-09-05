@@ -934,11 +934,6 @@ endif
 " =================== kcl-lsp ========================
 if executable('kcl-language-server')
 lua << EOF
-vim.lsp.set_log_level 'trace'
-if vim.fn.has 'nvim-0.5.1' == 1 then
-  require('vim.lsp.log').set_format_func(vim.inspect)
-end
-
 local lspconfig = require 'lspconfig'
 local configs = require 'lspconfig.configs'
 
