@@ -450,6 +450,9 @@ au BufRead,BufNewFile *.mts set ft=typescript
 " settings for hujson
 au BufRead,BufNewFile *.hujson set ft=json
 
+" settings for kcl
+autocmd BufRead,BufNewFile *.kcl set filetype=kcl
+
 " Binary settings: edit binary using xxd-format
 augroup Binary
   au!
@@ -928,6 +931,50 @@ else
   echo "You might want to install gopls: https://github.com/golang/tools/tree/master/gopls"
 endif
 
+" =================== kcl-lsp ========================
+if executable('kcl-language-server')
+lua << EOF
+vim.lsp.set_log_level 'trace'
+if vim.fn.has 'nvim-0.5.1' == 1 then
+  require('vim.lsp.log').set_format_func(vim.inspect)
+end
+
+local lspconfig = require 'lspconfig'
+local configs = require 'lspconfig.configs'
+
+if not configs.kcl_lsp then
+  configs.kcl_lsp = {
+    default_config = {
+      cmd = {'kcl-language-server', 'server', '--stdio'},
+      filetypes = {'kcl'},
+      root_dir = lspconfig.util.root_pattern('.git'),
+    },
+    docs = {
+      description = [=[
+https://github.com/KittyCAD/kcl-lsp
+https://kittycad.io
+
+The KittyCAD Language Server Protocol implementation for the KCL language.
+
+To better detect kcl files, the following can be added:
+
+```
+vim.cmd [[ autocmd BufRead,BufNewFile *.kcl set filetype=kcl ]]
+```
+]=],
+      default_config = {
+        root_dir = [[root_pattern(".git")]],
+      },
+    }
+  }
+end
+
+lspconfig.kcl_lsp.setup{}
+EOF
+else
+  echo "You might want to install kcl-language-server: https://github.com/KittyCAD/kcl-lsp/releases"
+endif
+
 " =================== rust-analyzer ========================
 if executable('rust-analyzer')
 lua << EOF
@@ -1022,7 +1069,7 @@ require("cmp_git").setup({
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'clangd', 'rust_analyzer', 'tsserver' }
+local servers = { 'clangd', 'kcl_lsp', 'ocamllsp', 'rust_analyzer', 'tsserver' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     -- on_attach = my_custom_on_attach,
@@ -1139,7 +1186,7 @@ require'lspsaga'.setup({
   -- if you don't use nvim-lspconfig you must pass your server name and
   -- the related filetypes into this table
   -- like server_filetype_map = { metals = { "sbt", "scala" } }
-  server_filetype_map = {},
+  server_filetype_map = { kcl_lsp = { "kcl" } },
 })
 EOF
 endif
