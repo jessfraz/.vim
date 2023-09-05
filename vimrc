@@ -571,7 +571,6 @@ let g:which_key_map.n.f = 'file tree find file'
 
 if has('nvim')
 lua << EOF
-local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 
 --
 -- This function has been generated from your
