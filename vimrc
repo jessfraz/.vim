@@ -21,7 +21,7 @@ set backspace=indent,eol,start  " Makes backspace key more powerful.
 set showcmd                     " Show me what I'm typing
 
 set noswapfile                  " Don't use swapfile
-set nobackup					          " Don't create annoying backup files
+set nobackup                    " Don't create annoying backup files
 set nowritebackup
 set splitright                  " Split vertical windows right to the current windows
 set splitbelow                  " Split horizontal windows below to the current windows
@@ -43,7 +43,7 @@ set ignorecase                  " Search case insensitive...
 set smartcase                   " ... but not when search pattern contains upper case characters
 set ttyfast
 " set ttyscroll=3               " noop on linux ?
-set lazyredraw          	      " Wait to redraw "
+set lazyredraw                  " Wait to redraw "
 
 " speed up syntax highlighting
 set nocursorcolumn
@@ -118,7 +118,7 @@ if !&sidescrolloff
 endif
 set display+=lastline
 
-" CTRL-U in insert mode deletes a lot.	Use CTRL-G u to first break undo,
+" CTRL-U in insert mode deletes a lot. Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
 inoremap <C-U> <C-G>u<C-U>
 
@@ -148,7 +148,7 @@ endif
 " position when opening a file.
 autocmd BufReadPost *
       \ if line("'\"") > 1 && line("'\"") <= line("$") |
-      \	exe "normal! g`\"" |
+      \ exe "normal! g`\"" |
       \ endif
 
 syntax enable
@@ -383,7 +383,7 @@ else
 endif
 
 " ----------------------------------------- "
-" File Type settings 			    		"
+" File Type settings                        "
 " ----------------------------------------- "
 
 au BufNewFile,BufRead *.vim setlocal noet ts=4 sw=4 sts=4
@@ -490,7 +490,7 @@ set wildignore+=*.orig                           " Merge resolution files
 
 
 " ----------------------------------------- "
-" Plugin configs 			    			            "
+" Plugin configs                            "
 " ----------------------------------------- "
 
 " ==================== nvim-web-devicons ====================
