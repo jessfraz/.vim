@@ -1190,12 +1190,7 @@ endif
 " =================== indent-blankline.nvim ========================
 if has('nvim')
 lua << EOF
-require("indent_blankline").setup {
-  char = "|",
-  buftype_exclude = {"terminal"},
-  filetype_exclude = {"dashboard"},
-  show_end_of_line = false,
-}
+require("ibl").setup()
 EOF
 endif
 
