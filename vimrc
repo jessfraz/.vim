@@ -842,7 +842,7 @@ let g:vim_json_syntax_conceal = 0
 " do not highlight the whitespace
 let g:better_whitespace_enabled=0
 " auto strip whitespace except for file with extention blacklisted
-let blacklist = ['diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown']
+let blacklist = ['diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown', 'rust']
 autocmd BufWritePre * if index(blacklist, &ft) < 0 | StripWhitespace
 
 " ========= vim-markdown ==================
