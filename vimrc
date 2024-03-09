@@ -840,10 +840,10 @@ let g:vim_json_syntax_conceal = 0
 
 " ========= vim-better-whitespace ==================
 " do not highlight the whitespace
-let g:better_whitespace_enabled=0
+let g:better_whitespace_enabled=1
+let g:strip_whitespace_on_save=1
 " auto strip whitespace except for file with extention blacklisted
-let blacklist = ['diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown', 'rust']
-autocmd BufWritePre * if index(blacklist, &ft) < 0 | StripWhitespace
+let g:better_whitespace_filetypes_blacklist = ['diff', 'git', 'gitcommit', 'unite', 'qf', 'help', 'markdown', 'fugitive', 'rust']
 
 " ========= vim-markdown ==================
 " disable folding
@@ -880,6 +880,7 @@ endif
 " =================== rust.vim ========================
 " Enable automatic running of :RustFmt when a buffer is saved.
 let g:rustfmt_autosave = 1
+let g:rustfmt_autosave_if_config_present = 1
 
 " The :RustPlay command will send the current selection, or if nothing is
 " selected the current buffer, to the Rust playpen. Then copy the url to the
