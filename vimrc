@@ -842,6 +842,7 @@ let g:vim_json_syntax_conceal = 0
 " do not highlight the whitespace
 let g:better_whitespace_enabled=1
 let g:strip_whitespace_on_save=1
+let g:strip_whitespace_confirm=0
 " auto strip whitespace except for file with extention blacklisted
 let g:better_whitespace_filetypes_blacklist = ['diff', 'git', 'gitcommit', 'unite', 'qf', 'help', 'markdown', 'fugitive', 'rust']
 
