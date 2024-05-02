@@ -945,6 +945,7 @@ if not configs.kcl_lsp then
       cmd = {'kcl-language-server', 'server', '--stdio'},
       filetypes = {'kcl'},
       root_dir = lspconfig.util.root_pattern('.git'),
+      single_file_support = true,
     },
     docs = {
       description = [=[
