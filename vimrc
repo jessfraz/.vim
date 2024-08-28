@@ -562,6 +562,13 @@ require('telescope').setup{
 EOF
 endif
 
+" =================== avante.nvim ======================
+
+if has('nvim')
+lua << EOF
+require('avante').setup{}
+EOF
+
 " ==================== nvim-tree.lua ====================
 noremap <C-a> :NvimTreeToggle<CR>
 

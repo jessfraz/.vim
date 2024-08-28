@@ -79,9 +79,6 @@
 [submodule "bundle/nvim-tree.lua"]
 	path = bundle/nvim-tree.lua
 	url = https://github.com/kyazdani42/nvim-tree.lua.git
-[submodule "bundle/nvim-web-devicons"]
-	path = bundle/nvim-web-devicons
-	url = https://github.com/kyazdani42/nvim-web-devicons.git
 [submodule "bundle/tokyonight.nvim"]
 	path = bundle/tokyonight.nvim
 	url = https://github.com/folke/tokyonight.nvim.git
@@ -151,3 +148,9 @@
 [submodule "bundle/avante.nvim"]
 	path = bundle/avante.nvim
 	url = https://github.com/yetone/avante.nvim.git
+[submodule "bundle/nui.nvim"]
+	path = bundle/nui.nvim
+	url = https://github.com/MunifTanjim/nui.nvim.git
+[submodule "bundle/dressing.nvim"]
+	path = bundle/dressing.nvim
+	url = https://github.com/stevearc/dressing.nvim.git
