@@ -562,6 +562,16 @@ require('telescope').setup{
 EOF
 endif
 
+" =================== render-markdown =================
+if has('nvim')
+lua << EOF
+require('render-markdown').setup{
+  file_types = { 'markdown', 'Avante' },
+}
+vim.treesitter.language.register('markdown', 'Avante')
+EOF
+endif
+
 " =================== avante.nvim ======================
 
 if has('nvim')
