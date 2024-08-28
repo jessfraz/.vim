@@ -568,6 +568,7 @@ if has('nvim')
 lua << EOF
 require('avante').setup{}
 EOF
+endif
 
 " ==================== nvim-tree.lua ====================
 noremap <C-a> :NvimTreeToggle<CR>
