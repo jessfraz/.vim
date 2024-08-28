@@ -157,3 +157,6 @@
 [submodule "bundle/render-markdown.nvim"]
 	path = bundle/render-markdown.nvim
 	url = https://github.com/MeanderingProgrammer/render-markdown.nvim.git
+[submodule "bundle/lspsaga.nvim"]
+	path = bundle/lspsaga.nvim
+	url = https://github.com/nvimdev/lspsaga.nvim.git

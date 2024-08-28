@@ -76,6 +76,7 @@ There's a lot more if you hit `,?` you can peruse all the ones connected to the 
 * [github.com/lewis6991signs.nvim.git](https://github.com/lewis6991/gitsigns.nvim.git)
 * [github.com/lukas-reineke/indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim.git)
 * [gitlab.com/HiPhish/jinja.vim](https://gitlab.com/HiPhish/jinja.vim)
+* [github.com/nvimdev/lspsaga.nvim](https://github.com/nvimdev/lspsaga.nvim.git)
 * [github.com/nvim-lualine/lualine.nvim](https://github.com/nvim-lualine/lualine.nvim.git)
 * [github.com/chr4/nginx.vim](https://github.com/chr4/nginx.vim.git)
 * [github.com/MunifTanjim/nui.nvim](https://github.com/MunifTanjim/nui.nvim.git)
