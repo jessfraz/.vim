@@ -154,3 +154,9 @@
 [submodule "bundle/dressing.nvim"]
 	path = bundle/dressing.nvim
 	url = https://github.com/stevearc/dressing.nvim.git
+[submodule "bundle/nvim-web-devicons"]
+	path = bundle/nvim-web-devicons
+	url = https://github.com/nvim-tree/nvim-web-devicons.git
+[submodule "bundle/render-markdown.nvim"]
+	path = bundle/render-markdown.nvim
+	url = https://github.com/MeanderingProgrammer/render-markdown.nvim.git
