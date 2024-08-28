@@ -148,3 +148,6 @@
 [submodule "bundle/jinja.vim"]
 	path = bundle/jinja.vim
 	url = https://gitlab.com/HiPhish/jinja.vim
+[submodule "bundle/avante.nvim"]
+	path = bundle/avante.nvim
+	url = https://github.com/yetone/avante.nvim.git

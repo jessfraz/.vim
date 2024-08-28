@@ -62,6 +62,7 @@ update                         Updates pathogen and all plugins.
 There's a lot more if you hit `,?` you can peruse all the ones connected to the leader `,`
 
 ## Plugins Used
+* [github.com/yetone/avante.nvim](https://github.com/yetone/avante.nvim.git)
 * [github.com/akinsho/bufferline.nvim](https://github.com/akinsho/bufferline.nvim.git)
 * [github.com/hrsh7th/cmp-buffer](https://github.com/hrsh7th/cmp-buffer.git)
 * [github.com/petertriho/cmp.git](https://github.com/petertriho/cmp-git.git)
