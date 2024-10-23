@@ -576,6 +576,7 @@ endif
 
 if has('nvim')
 lua << EOF
+require('avante_lib').load()
 require('avante').setup{}
 EOF
 endif
