@@ -27,6 +27,7 @@ update-plugins: ## Updates all plugins.
 		git reset --hard origin/release; \
 	fi
 	git submodule foreach 'git pull --recurse-submodules origin `git rev-parse --abbrev-ref HEAD`'
+	cd bundle/avante.vim; make  BUILD_FROM_SOURCE=true
 
 .PHONY: update-pathogen
 update-pathogen: ## Updates pathogen.
