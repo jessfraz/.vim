@@ -15,7 +15,7 @@ install: ## Sets up symlink for user and root .vimrc for vim and neovim.
 	sudo ln -snf "$(HOME)/.vimrc" /root/.config/nvim/init.vim
 
 .PHONY: update
-update: update-pathogen update-plugins ## Updates pathogen and all plugins.
+update: update-pathogen update-plugins avante-build ## Updates pathogen and all plugins.
 
 .PHONY: update-plugins
 update-plugins: ## Updates all plugins.
@@ -27,7 +27,10 @@ update-plugins: ## Updates all plugins.
 		git reset --hard origin/release; \
 	fi
 	git submodule foreach 'git pull --recurse-submodules origin `git rev-parse --abbrev-ref HEAD`'
-	cd bundle/avante.vim; make  BUILD_FROM_SOURCE=true
+
+.PHONY: avante-build
+avante-build: ## Builds avante.vim from source.
+	$(MAKE) -C bundle/avante.nvim BUILD_FROM_SOURCE=true
 
 .PHONY: update-pathogen
 update-pathogen: ## Updates pathogen.
