@@ -102,6 +102,7 @@ There's a lot more if you hit `,?` you can peruse all the ones connected to the 
 * [github.com/MaxMEllon/vim-jsx-pretty](https://github.com/MaxMEllon/vim-jsx-pretty.git)
 * [github.com/plasticboy/vim-markdown](https://github.com/plasticboy/vim-markdown.git)
 * [github.com/harenome/vim-mipssyntax](https://github.com/harenome/vim-mipssyntax.git)
+* [github.com/LnL7/vim-nix](https://github.com/LnL7/vim-nix.git)
 * [github.com/uarun/vim-protobuf](https://github.com/uarun/vim-protobuf.git)
 * [github.com/hynek/vim-python-pep8-indent](https://github.com/hynek/vim-python-pep8-indent.git)
 * [github.com/tpope/vim-rhubarb](https://github.com/tpope/vim-rhubarb.git)

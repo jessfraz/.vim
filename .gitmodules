@@ -157,3 +157,6 @@
 [submodule "bundle/lspsaga.nvim"]
 	path = bundle/lspsaga.nvim
 	url = https://github.com/nvimdev/lspsaga.nvim.git
+[submodule "bundle/vim-nix"]
+	path = bundle/vim-nix
+	url = https://github.com/LnL7/vim-nix.git
