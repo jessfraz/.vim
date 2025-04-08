@@ -453,6 +453,9 @@ au BufRead,BufNewFile *.hujson set ft=json
 " settings for kcl
 autocmd BufRead,BufNewFile *.kcl set filetype=kcl
 
+" Auto-format Nix files with Alejandra on save
+autocmd BufWritePre *.nix silent! execute ":%!alejandra -qq"
+
 " Binary settings: edit binary using xxd-format
 augroup Binary
   au!
