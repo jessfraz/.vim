@@ -53,6 +53,10 @@
           modules = [
             {
               home = {
+                username = "jessfraz"; # Adapt this if needed
+                homeDirectory = "/Users/jessfraz"; # Adapt this if needed
+                stateVersion = "25.05";
+
                 # Install required packages
                 packages = with pkgs; [
                   alejandra.defaultPackage.${system}
@@ -67,45 +71,45 @@
                 # Set up the vim configuration directories and files
                 file = {
                   # Copy the vimrc file
-                  ".vimrc".source = ./vimrc;
-                  ".config/nvim/init.vim".source = ./vimrc;
+                  "${homeDirectory}/.vimrc".source = ./vimrc;
+                  "${homeDirectory}/.config/nvim/init.vim".source = ./vimrc;
 
                   # Copy all bundle - this creates a directory with all the contents
-                  ".vim/bundle".source =
+                  "${homeDirectory}/.vim/bundle".source =
                     if builtins.pathExists ./bundle
                     then ./bundle
                     else null;
-                  ".config/nvim/bundle".source =
+                  "${homeDirectory}/.config/nvim/bundle".source =
                     if builtins.pathExists ./bundle
                     then ./bundle
                     else null;
 
                   # Copy all autoload
-                  ".vim/autoload".source =
+                  "${homeDirectory}/.vim/autoload".source =
                     if builtins.pathExists ./autoload
                     then ./autoload
                     else null;
-                  ".config/nvim/autoload".source =
+                  "${homeDirectory}/.config/nvim/autoload".source =
                     if builtins.pathExists ./autoload
                     then ./autoload
                     else null;
 
                   # Copy all colors
-                  ".vim/colors".source =
+                  "${homeDirectory}/.vim/colors".source =
                     if builtins.pathExists ./colors
                     then ./colors
                     else null;
-                  ".config/nvim/colors".source =
+                  "${homeDirectory}/.config/nvim/colors".source =
                     if builtins.pathExists ./colors
                     then ./colors
                     else null;
 
                   # Copy all indent
-                  ".vim/indent".source =
+                  "${homeDirectory}/.vim/indent".source =
                     if builtins.pathExists ./indent
                     then ./indent
                     else null;
-                  ".config/nvim/indent".source =
+                  "${homeDirectory}/.config/nvim/indent".source =
                     if builtins.pathExists ./indent
                     then ./indent
                     else null;
