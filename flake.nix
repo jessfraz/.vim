@@ -32,7 +32,7 @@
     alejandra,
     ...
   }: let
-    # List supported systems (Linux & Darwin on x86_64 and aarch64)&#8203;:contentReference[oaicite:6]{index=6}
+    # List supported systems (Linux & Darwin on x86_64 and aarch64)
     supportedSystems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
 
     # Helper to apply a function to all supported systems, producing an attrset
