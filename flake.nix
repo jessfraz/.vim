@@ -42,25 +42,15 @@
         })
         supportedSystems);
 
-    # Create packages for each system
-    let
-      # Apply allowUnfree to all package sets
-      pkgs = import nixpkgs {
-        inherit system;
-        config = {
-          allowUnfree = true;
-          allowUnfreePredicate = _: true;
-        };
-      };
-      unstablePkgs = import unstable {
-        inherit system;
-        config = {
-          allowUnfree = true;
-          allowUnfreePredicate = _: true;
-        };
-      };
-      fenixPkgs = fenix.packages.${system};
-      alejandraPkg = alejandra.defaultPackage.${system};
+    # Apply allowUnfree to all package sets
+    pkgs = import nixpkgs {
+      inherit system;
+    };
+    unstablePkgs = import unstable {
+      inherit system;
+    };
+    fenixPkgs = fenix.packages.${system};
+    alejandraPkg = alejandra.defaultPackage.${system};
   in {
     # Home Manager module defining the Vim/Neovim setup
     homeManagerModules = {
