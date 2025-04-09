@@ -46,6 +46,10 @@
       system: let
         pkgs = import nixpkgs {inherit system;};
         unstablePkgs = import unstable {inherit system;};
+        homeDir =
+          if pkgs.stdenv.isLinux
+          then "/home/jessfraz"
+          else "/Users/jessfraz";
       in
         home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
@@ -54,7 +58,7 @@
             {
               home = {
                 username = "jessfraz"; # Adapt this if needed
-                homeDirectory = "/Users/jessfraz"; # Adapt this if needed
+                homeDirectory = homeDir; # Adapt this if needed
                 stateVersion = "25.05";
 
                 # Install required packages
@@ -71,45 +75,45 @@
                 # Set up the vim configuration directories and files
                 file = {
                   # Copy the vimrc file
-                  "${homeDirectory}/.vimrc".source = ./vimrc;
-                  "${homeDirectory}/.config/nvim/init.vim".source = ./vimrc;
+                  "${homeDir}/.vimrc".source = ./vimrc;
+                  "${homeDir}/.config/nvim/init.vim".source = ./vimrc;
 
                   # Copy all bundle - this creates a directory with all the contents
-                  "${homeDirectory}/.vim/bundle".source =
+                  "${homeDir}/.vim/bundle".source =
                     if builtins.pathExists ./bundle
                     then ./bundle
                     else null;
-                  "${homeDirectory}/.config/nvim/bundle".source =
+                  "${homeDir}/.config/nvim/bundle".source =
                     if builtins.pathExists ./bundle
                     then ./bundle
                     else null;
 
                   # Copy all autoload
-                  "${homeDirectory}/.vim/autoload".source =
+                  "${homeDir}/.vim/autoload".source =
                     if builtins.pathExists ./autoload
                     then ./autoload
                     else null;
-                  "${homeDirectory}/.config/nvim/autoload".source =
+                  "${homeDir}/.config/nvim/autoload".source =
                     if builtins.pathExists ./autoload
                     then ./autoload
                     else null;
 
                   # Copy all colors
-                  "${homeDirectory}/.vim/colors".source =
+                  "${homeDir}/.vim/colors".source =
                     if builtins.pathExists ./colors
                     then ./colors
                     else null;
-                  "${homeDirectory}/.config/nvim/colors".source =
+                  "${homeDir}/.config/nvim/colors".source =
                     if builtins.pathExists ./colors
                     then ./colors
                     else null;
 
                   # Copy all indent
-                  "${homeDirectory}/.vim/indent".source =
+                  "${homeDir}/.vim/indent".source =
                     if builtins.pathExists ./indent
                     then ./indent
                     else null;
-                  "${homeDirectory}/.config/nvim/indent".source =
+                  "${homeDir}/.config/nvim/indent".source =
                     if builtins.pathExists ./indent
                     then ./indent
                     else null;
