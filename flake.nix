@@ -51,6 +51,7 @@
       home.packages = with pkgs; [
         alejandraPkg
         rustAnalyzer
+        gh
         go
         gopls
         typescript
