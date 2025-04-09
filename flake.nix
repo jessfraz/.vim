@@ -42,27 +42,16 @@
         supportedSystems);
   in {
     # Home Manager module
-    homeManagerModules.default = {
-      config,
-      lib,
-      pkgs,
-      ...
-    }: let
-      # Get the appropriate packages based on system
-      system = pkgs.stdenv.hostPlatform.system;
-      unstablePkgs = import unstable {inherit system;};
-      fenixPkgs = fenix.packages.${system};
-      alejandraPkg = alejandra.defaultPackage.${system};
-    in {
-      # Define the module options
-      options = {};
-
+    homeManagerModules.default = {pkgs, ...}: {
       # Module configuration
-      config = {
+      home = {
+        # Set stateVersion to avoid warnings
+        stateVersion = "23.11";
+
         # Install required packages
-        home.packages = with pkgs; [
-          alejandraPkg
-          fenixPkgs.rust-analyzer
+        packages = with pkgs; [
+          alejandra.defaultPackage.${pkgs.system}
+          fenix.packages.${pkgs.system}.rust-analyzer
           go
           gopls
           typescript
@@ -70,16 +59,8 @@
           ripgrep
         ];
 
-        # Configure Neovim program
-        programs.neovim = {
-          enable = true;
-          defaultEditor = true;
-          viAlias = true;
-          vimAlias = true;
-        };
-
         # Set up the vim configuration directories and files
-        home.file = {
+        file = {
           # Copy the vimrc file
           ".vimrc".source = ./vimrc;
           ".config/nvim/init.vim".source = ./vimrc;
@@ -124,6 +105,14 @@
             then ./indent
             else null;
         };
+      };
+
+      # Configure Neovim program
+      programs.neovim = {
+        enable = true;
+        defaultEditor = true;
+        viAlias = true;
+        vimAlias = true;
       };
     };
 
