@@ -40,7 +40,64 @@
           value = f system;
         })
         supportedSystems);
+
+    # Helper function for conditional file paths
+    mkNeovimModule = pkgs: let
+      system = pkgs.stdenv.hostPlatform.system;
+
+      # Helper function to create path only if source exists
+      ifExists = path:
+        if builtins.pathExists path
+        then path
+        else pkgs.emptyFile; # Use a valid empty file instead of null
+    in {
+      home.packages = with pkgs; [
+        alejandra.defaultPackage.${system}
+        fenix.packages.${system}.rust-analyzer
+        go
+        gopls
+        typescript
+        typescript-language-server
+        ripgrep
+      ];
+
+      # Configure Neovim program
+      programs.neovim = {
+        enable = true;
+        defaultEditor = true;
+        viAlias = true;
+        vimAlias = true;
+      };
+
+      # Set up the vim configuration directories and files
+      home.file = {
+        # Copy the vimrc file
+        ".vimrc".source = ./vimrc;
+        ".config/nvim/init.vim".source = ./vimrc;
+
+        # Copy all bundle - this creates a directory with all the contents
+        ".vim/bundle".source = ifExists ./bundle;
+        ".config/nvim/bundle".source = ifExists ./bundle;
+
+        # Copy all autoload
+        ".vim/autoload".source = ifExists ./autoload;
+        ".config/nvim/autoload".source = ifExists ./autoload;
+
+        # Copy all colors
+        ".vim/colors".source = ifExists ./colors;
+        ".config/nvim/colors".source = ifExists ./colors;
+
+        # Copy all indent
+        ".vim/indent".source = ifExists ./indent;
+        ".config/nvim/indent".source = ifExists ./indent;
+      };
+    };
   in {
+    # Add the homeManagerModules output
+    homeManagerModules = {
+      default = {pkgs, ...}: mkNeovimModule pkgs;
+    };
+
     # Home Manager configuration for each system
     homeConfigurations = forAllSystems (
       system: let
@@ -62,56 +119,11 @@
                 username = "jessfraz";
                 homeDirectory = homeDir;
                 stateVersion = "25.05";
-
-                # Install required packages
-                packages = with pkgs; [
-                  alejandra.defaultPackage.${system}
-                  fenix.packages.${system}.rust-analyzer
-                  go
-                  gopls
-                  typescript
-                  typescript-language-server
-                  ripgrep
-                ];
-
-                # Set up the vim configuration directories and files
-                file = let
-                  # Helper function to create path only if source exists
-                  ifExists = path:
-                    if builtins.pathExists path
-                    then path
-                    else pkgs.emptyFile; # Use a valid empty file instead of null
-                in {
-                  # Copy the vimrc file
-                  ".vimrc".source = ./vimrc;
-                  ".config/nvim/init.vim".source = ./vimrc;
-
-                  # Copy all bundle - this creates a directory with all the contents
-                  ".vim/bundle".source = ifExists ./bundle;
-                  ".config/nvim/bundle".source = ifExists ./bundle;
-
-                  # Copy all autoload
-                  ".vim/autoload".source = ifExists ./autoload;
-                  ".config/nvim/autoload".source = ifExists ./autoload;
-
-                  # Copy all colors
-                  ".vim/colors".source = ifExists ./colors;
-                  ".config/nvim/colors".source = ifExists ./colors;
-
-                  # Copy all indent
-                  ".vim/indent".source = ifExists ./indent;
-                  ".config/nvim/indent".source = ifExists ./indent;
-                };
-              };
-
-              # Configure Neovim program
-              programs.neovim = {
-                enable = true;
-                defaultEditor = true;
-                viAlias = true;
-                vimAlias = true;
               };
             }
+
+            # Use the same Neovim module
+            (mkNeovimModule pkgs)
           ];
         }
     );
