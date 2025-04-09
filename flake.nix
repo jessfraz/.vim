@@ -3,28 +3,24 @@
   description = "Home Manager module for Jessfraz's Vim configuration (Neovim-ready)";
 
   inputs = {
-    # Nixpkgs (stable or follow an unstable channel as needed)
     nixpkgs.url = "github:nixos/nixpkgs";
-    # Optionally use unstable for latest packages:
-    # unstable.url = "nixpkgs/nixos-unstable";
+    unstable.url = "nixpkgs/nixos-unstable";
 
     # Home Manager for user-level configuration management
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-      # If using unstable: inputs.nixpkgs.follows = "unstable";
+      inputs.nixpkgs.follows = "unstable";
     };
 
-    # Fenix provides nightly Rust toolchains and rust-analyzer&#8203;:contentReference[oaicite:5]{index=5}
     fenix = {
       url = "github:nix-community/fenix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "unstable";
     };
 
     # Alejandra (code formatter) flake for package
     alejandra = {
       url = "github:kamadorueda/alejandra/3.1.0";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "unstable";
     };
   };
 
