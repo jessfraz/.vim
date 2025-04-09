@@ -1,5 +1,5 @@
 {
-  description = "Home Manager module for Jessfraz's Vim configuration (Neovim-ready)";
+  description = "Home Manager module for jessfraz's Vim configuration (Neovim-ready)";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs";
