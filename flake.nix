@@ -79,7 +79,8 @@
         };
 
         # Set up the vim configuration directories and files
-        home.file = {
+        /*
+          home.file = {
           # Copy the vimrc file
           ".vimrc".source = ./vimrc;
           ".config/nvim/init.vim".source = ./vimrc;
@@ -124,6 +125,7 @@
             then ./indent
             else null;
         };
+        */
       };
     };
 
