@@ -6,18 +6,17 @@
     nixpkgs.url = "github:nixos/nixpkgs";
     unstable.url = "nixpkgs/nixos-unstable";
 
-    # Home Manager for user-level configuration management
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "unstable";
     };
 
+    # rust, see https://github.com/nix-community/fenix#usage
     fenix = {
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "unstable";
     };
 
-    # Alejandra (code formatter) flake for package
     alejandra = {
       url = "github:kamadorueda/alejandra/3.1.0";
       inputs.nixpkgs.follows = "unstable";
@@ -35,15 +34,33 @@
     # List supported systems (Linux & Darwin on x86_64 and aarch64)
     supportedSystems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
 
-    # Helper to apply a function to all supported systems, producing an attrset
+    # Helper function to generate attributes for each system
     forAllSystems = f:
-      builtins.listToAttrs (
-        map (system: {
+      builtins.listToAttrs (map (system: {
           name = system;
           value = f system;
         })
-        supportedSystems
-      );
+        supportedSystems);
+
+    # Create packages for each system
+    mkPackages = system: let
+      # Apply allowUnfree to all package sets
+      pkgs = import nixpkgs {
+        inherit system;
+        config = {
+          allowUnfree = true;
+          allowUnfreePredicate = _: true;
+        };
+      };
+      unstablePkgs = import unstable {
+        inherit system;
+        config = {
+          allowUnfree = true;
+          allowUnfreePredicate = _: true;
+        };
+      };
+      fenixPkgs = fenix.packages.${system};
+      alejandraPkg = alejandra.defaultPackage.${system};
   in {
     # Home Manager module defining the Vim/Neovim setup
     homeManagerModules = {
@@ -57,8 +74,8 @@
         # 1. Install necessary packages in the user environment
         home.packages = with pkgs; [
           # Neovim will be installed via programs.neovim below (so we omit pkgs.neovim here)
-          alejandra.defaultPackage.${pkgs.stdenv.hostPlatform.system} # Alejandra formatter
-          fenix.packages.${pkgs.stdenv.hostPlatform.system}.rust-analyzer # Rust analyzer via Fenix
+          alejandraPkg # Alejandra formatter
+          fenixPkg.rust-analyzer # Rust analyzer via Fenix
           go # Go compiler
           gopls # Go language server
           typescript # TypeScript (tsc)
