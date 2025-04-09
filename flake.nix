@@ -57,8 +57,8 @@
         # 1. Install necessary packages in the user environment
         home.packages = with pkgs; [
           # Neovim will be installed via programs.neovim below (so we omit pkgs.neovim here)
-          alejandra.defaultPackage.${pkgs.stdenv.hostPlatform.system} # Alejandra formatter&#8203;:contentReference[oaicite:8]{index=8}
-          fenix.packages.${pkgs.stdenv.hostPlatform.system}.rust-analyzer # Rust analyzer via Fenix&#8203;:contentReference[oaicite:9]{index=9}
+          alejandra.defaultPackage.${pkgs.stdenv.hostPlatform.system} # Alejandra formatter
+          fenix.packages.${pkgs.stdenv.hostPlatform.system}.rust-analyzer # Rust analyzer via Fenix
           go # Go compiler
           gopls # Go language server
           typescript # TypeScript (tsc)
