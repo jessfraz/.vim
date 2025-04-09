@@ -43,7 +43,7 @@
         supportedSystems);
 
     # Create packages for each system
-    mkPackages = system: let
+    let
       # Apply allowUnfree to all package sets
       pkgs = import nixpkgs {
         inherit system;
