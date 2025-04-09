@@ -1,4 +1,5 @@
-description = "Neovim configured for jessfraz";
+{
+  description = "Neovim configured for jessfraz";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs";
@@ -57,23 +58,24 @@ description = "Neovim configured for jessfraz";
         ];
 
         # Create a wrapper script that sets up the environment
-        buildInputs = [ pkgs.makeWrapper ];
+        buildInputs = [pkgs.makeWrapper];
         postBuild = ''
           mkdir -p $out/bin
           # Create a wrapper for nvim
           makeWrapper ${pkgs.neovim}/bin/nvim $out/bin/nvim \
             --prefix PATH : ${pkgs.lib.makeBinPath [
-              alejandraPkg
-              fenixPkgs.rust-analyzer
-              pkgs.go
-              pkgs.gopls
-              pkgs.typescript
-              pkgs.typescript-language-server
-              pkgs.ripgrep
-            ]}
+            alejandraPkg
+            fenixPkgs.rust-analyzer
+            pkgs.go
+            pkgs.gopls
+            pkgs.typescript
+            pkgs.typescript-language-server
+            pkgs.ripgrep
+          ]}
         '';
       };
-    in neovim-jessfraz;
+    in
+      neovim-jessfraz;
   in {
     # Packages for each system
     packages = forAllSystems (system: {
@@ -94,7 +96,8 @@ description = "Neovim configured for jessfraz";
       pkgs = import nixpkgs {inherit system;};
     in {
       default = pkgs.mkShell {
-        packages = [ self.packages.${system}.default ];
+        packages = [self.packages.${system}.default];
       };
     });
   };
+}
