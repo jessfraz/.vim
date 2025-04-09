@@ -57,21 +57,7 @@
           ripgrep
         ];
 
-        # Create a wrapper script that sets up the environment
-        buildInputs = [pkgs.makeWrapper];
         postBuild = ''
-          mkdir -p $out/bin
-          # Create a wrapper for nvim
-          makeWrapper ${pkgs.neovim}/bin/nvim $out/bin/nvim \
-            --prefix PATH : ${pkgs.lib.makeBinPath [
-            alejandraPkg
-            fenixPkgs.rust-analyzer
-            pkgs.go
-            pkgs.gopls
-            pkgs.typescript
-            pkgs.typescript-language-server
-            pkgs.ripgrep
-          ]}
         '';
       };
     in
