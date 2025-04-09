@@ -41,87 +41,86 @@
         })
         supportedSystems);
   in {
-    # Home Manager module
-    homeManagerModules.default = {pkgs, ...}: {
-      # Module configuration
-      home = {
-        # Set stateVersion to avoid warnings
-        stateVersion = "23.11";
-
-        # Install required packages
-        packages = with pkgs; [
-          alejandra.defaultPackage.${pkgs.system}
-          fenix.packages.${pkgs.system}.rust-analyzer
-          go
-          gopls
-          typescript
-          typescript-language-server
-          ripgrep
-        ];
-
-        # Set up the vim configuration directories and files
-        file = {
-          # Copy the vimrc file
-          ".vimrc".source = ./vimrc;
-          ".config/nvim/init.vim".source = ./vimrc;
-
-          # Copy all bundle - this creates a directory with all the contents
-          ".vim/bundle".source =
-            if builtins.pathExists ./bundle
-            then ./bundle
-            else null;
-          ".config/nvim/bundle".source =
-            if builtins.pathExists ./bundle
-            then ./bundle
-            else null;
-
-          # Copy all autoload
-          ".vim/autoload".source =
-            if builtins.pathExists ./autoload
-            then ./autoload
-            else null;
-          ".config/nvim/autoload".source =
-            if builtins.pathExists ./autoload
-            then ./autoload
-            else null;
-
-          # Copy all colors
-          ".vim/colors".source =
-            if builtins.pathExists ./colors
-            then ./colors
-            else null;
-          ".config/nvim/colors".source =
-            if builtins.pathExists ./colors
-            then ./colors
-            else null;
-
-          # Copy all indent
-          ".vim/indent".source =
-            if builtins.pathExists ./indent
-            then ./indent
-            else null;
-          ".config/nvim/indent".source =
-            if builtins.pathExists ./indent
-            then ./indent
-            else null;
-        };
-      };
-
-      # Configure Neovim program
-      programs.neovim = {
-        enable = true;
-        defaultEditor = true;
-        viAlias = true;
-        vimAlias = true;
-      };
-    };
-
     # Home Manager configuration for each system
     homeConfigurations = forAllSystems (
-      system:
+      system: let
+        pkgs = import nixpkgs {inherit system;};
+        unstablePkgs = import unstable {inherit system;};
+      in
         home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs {inherit system;};
-          modules = [self.homeManagerModules.default];
+          inherit pkgs;
+
+          modules = [
+            {
+              home = {
+                # Install required packages
+                packages = with pkgs; [
+                  alejandra.defaultPackage.${system}
+                  fenix.packages.${system}.rust-analyzer
+                  go
+                  gopls
+                  typescript
+                  typescript-language-server
+                  ripgrep
+                ];
+
+                # Set up the vim configuration directories and files
+                file = {
+                  # Copy the vimrc file
+                  ".vimrc".source = ./vimrc;
+                  ".config/nvim/init.vim".source = ./vimrc;
+
+                  # Copy all bundle - this creates a directory with all the contents
+                  ".vim/bundle".source =
+                    if builtins.pathExists ./bundle
+                    then ./bundle
+                    else null;
+                  ".config/nvim/bundle".source =
+                    if builtins.pathExists ./bundle
+                    then ./bundle
+                    else null;
+
+                  # Copy all autoload
+                  ".vim/autoload".source =
+                    if builtins.pathExists ./autoload
+                    then ./autoload
+                    else null;
+                  ".config/nvim/autoload".source =
+                    if builtins.pathExists ./autoload
+                    then ./autoload
+                    else null;
+
+                  # Copy all colors
+                  ".vim/colors".source =
+                    if builtins.pathExists ./colors
+                    then ./colors
+                    else null;
+                  ".config/nvim/colors".source =
+                    if builtins.pathExists ./colors
+                    then ./colors
+                    else null;
+
+                  # Copy all indent
+                  ".vim/indent".source =
+                    if builtins.pathExists ./indent
+                    then ./indent
+                    else null;
+                  ".config/nvim/indent".source =
+                    if builtins.pathExists ./indent
+                    then ./indent
+                    else null;
+                };
+              };
+
+              # Configure Neovim program
+              programs.neovim = {
+                enable = true;
+                defaultEditor = true;
+                viAlias = true;
+                vimAlias = true;
+              };
+            }
+          ];
         }
     );
   };
