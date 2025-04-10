@@ -50,13 +50,14 @@
     in {
       home.packages = with pkgs; [
         alejandraPkg
-        rustAnalyzer
+        clang-tools
         gh
         go
         gopls
         typescript
         typescript-language-server
         ripgrep
+        rustAnalyzer
       ];
 
       programs.neovim = {
