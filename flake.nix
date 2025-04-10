@@ -97,6 +97,8 @@
             mv $lib $out/bundle/avante.nvim/build/$(basename $lib | sed 's/^lib//');
           done
         '';
+
+        buildInputs = [pkgs.openssl pkgs.pkg-config pkgs.perl];
       };
       default = self.packages.${system}.avante-nvim-lib;
     });
