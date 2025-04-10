@@ -116,6 +116,7 @@
     in {
       home.packages = with pkgs; [
         alejandraPkg
+self.packages.${pkgs.system}.avante-nvim-lib
         clang-tools
         gh
         go
