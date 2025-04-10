@@ -91,7 +91,11 @@
           mkdir -p $out/bundle/avante.nvim
           cp -r ${selfClone}/bundle/* $out/bundle/
           mkdir -p $out/bundle/avante.nvim/build
-          mv $out/lib/* $out/bundle/avante.nvim/build/
+          # We want to rename all the libs in $out/lib/libavante* to avante*
+          # and move them to $out/bundle/avante.nvim/build
+          for lib in $out/lib/libavante*; do
+            mv $lib $out/bundle/avante.nvim/build/$(basename $lib | sed 's/^lib//');
+          done
         '';
       };
       default = self.packages.${system}.avante-nvim-lib;
