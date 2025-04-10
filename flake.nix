@@ -98,12 +98,14 @@
           source = mkIfExists ./bundle;
         };
 
-        ".vim/bundle/bundle/avante.nvim/build" = {
+        /*
+          ".vim/bundle/bundle/avante.nvim/build" = {
           source = mkIfExists ./avante.nvim-build;
         };
         ".config/nvim/bundle/avante.nvim/build" = {
           source = mkIfExists ./avante.nvim-build;
         };
+        */
 
         ".vim/colors" = {
           source = mkIfExists ./colors;
