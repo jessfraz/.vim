@@ -24,6 +24,11 @@
       url = "github:kittycad/modeling-app?ref=repetitive-structs";
       inputs.nixpkgs.follows = "unstable";
     };
+
+    naersk = {
+      url = "github:nix-community/naersk";
+      inputs.nixpkgs.follows = "unstable";
+    };
   };
 
   outputs = {
@@ -34,17 +39,42 @@
     fenix,
     alejandra,
     modeling-app,
+    naersk,
     ...
   }: let
     supportedSystems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
 
     forAllSystems = f:
-      builtins.listToAttrs (map (system: {
-          name = system;
-          value = f system;
-        })
-        supportedSystems);
+      nixpkgs.lib.genAttrs supportedSystems (system:
+        f {
+          pkgs = import nixpkgs {
+            inherit system;
+          };
+          system = system;
+        });
   in {
+    packages = forAllSystems ({
+      pkgs,
+      system,
+      ...
+    }: let
+      naersk-lib = pkgs.callPackage naersk {
+        cargo = pkgs.rustToolchain;
+        rustc = pkgs.rustToolchain;
+      };
+    in {
+      avante-nvim-lib = naersk-lib.buildPackage {
+        pname = "avante-nvim-lib";
+        version = "0.1.0";
+        release = true;
+
+        src = ./bundle/avante.nvim;
+
+        cargoBuildOptions = opt: opt ++ ["--all" "--features=luajit"];
+      };
+      default = self.packages.${system}.avante-nvim-lib;
+    });
+
     homeManagerModules.default = {
       pkgs,
       config,
@@ -58,6 +88,11 @@
 
       alejandraPkg = alejandra.defaultPackage.${pkgs.system};
       rustAnalyzer = fenix.packages.${pkgs.system}.rust-analyzer;
+      fenixPkgs = fenix.packages.${pkgs.system};
+      rustToolchain = fenixPkgs.stable.withComponents [
+        "cargo"
+        "rustc"
+      ];
       kclLsp = modeling-app.packages.${pkgs.system}.kcl-language-server;
     in {
       home.packages = with pkgs; [
@@ -115,7 +150,7 @@
     };
 
     homeConfigurations = forAllSystems (
-      system:
+      {system, ...}:
         home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {inherit system;};
           modules = [self.homeManagerModules.default];
