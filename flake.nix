@@ -112,11 +112,12 @@
       rustAnalyzer = fenix.packages.${pkgs.system}.rust-analyzer;
       kclLsp = modeling-app.packages.${pkgs.system}.kcl-language-server;
 
-      builtBundle = self.packages.${pkgs.system}.avante-nvim-lib + "/bundle";
+      avanteNvimLib = self.packages.${pkgs.system}.avante-nvim-lib;
+      builtBundle = avanteNvimLib + "/bundle";
     in {
       home.packages = with pkgs; [
         alejandraPkg
-        self.packages.${pkgs.system}.avante-nvim-lib
+        avanteNvimLib
         clang-tools
         gh
         go
