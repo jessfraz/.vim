@@ -88,28 +88,42 @@
         ".vimrc".source = ./vimrc;
         ".config/nvim/init.vim".source = ./vimrc;
 
-        ".vim/autoload".source = mkIfExists ./autoload;
-        ".config/nvim/autoload".source = mkIfExists ./autoload;
+        ".vim/autoload" = {
+          source = mkIfExists ./autoload;
+          recursive = true;
+        };
+        ".config/nvim/autoload" = {
+          source = mkIfExists ./autoload;
+          recursive = true;
+        };
 
         # Use copy instead of symlink for bundle to allow building
         ".vim/bundle" = {
           source = mkIfExists ./bundle;
           recursive = true;
-          # This is the key change - copy instead of symlink
-          copy = true;
         };
         ".config/nvim/bundle" = {
           source = mkIfExists ./bundle;
           recursive = true;
-          # This is the key change - copy instead of symlink
-          copy = true;
         };
 
-        ".vim/colors".source = mkIfExists ./colors;
-        ".config/nvim/colors".source = mkIfExists ./colors;
+        ".vim/colors" = {
+          source = mkIfExists ./colors;
+          recursive = true;
+        };
+        ".config/nvim/colors" = {
+          source = mkIfExists ./colors;
+          recursive = true;
+        };
 
-        ".vim/indent".source = mkIfExists ./indent;
-        ".config/nvim/indent".source = mkIfExists ./indent;
+        ".vim/indent" = {
+          source = mkIfExists ./indent;
+          recursive = true;
+        };
+        ".config/nvim/indent" = {
+          source = mkIfExists ./indent;
+          recursive = true;
+        };
       };
 
       # Add an activation script to run make in the avante.nvim directory
