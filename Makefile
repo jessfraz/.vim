@@ -30,7 +30,8 @@ update-plugins: ## Updates all plugins.
 
 .PHONY: avante-build
 avante-build: ## Builds avante.vim from source.
-	$(MAKE) -C bundle/avante.nvim BUILD_FROM_SOURCE=true
+	$(MAKE) -C bundle/avante.nvim
+	cp -r bundle/avante.nvim/build/* avante.nvim-build/
 
 .PHONY: update-pathogen
 update-pathogen: ## Updates pathogen.

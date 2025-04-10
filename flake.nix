@@ -70,7 +70,6 @@
 
         # No specific build inputs needed beyond the default
         buildInputs = with pkgs; [
-          gnumake
         ];
 
         # Use a temporary directory for the build
@@ -82,8 +81,6 @@
 
             # Build in the temporary directory
             cd $buildDir
-            export PATH="${pkgs.curl}/bin:${pkgs.git}/bin:${pkgs.gnumake}/bin:${pkgs.gnutar}/bin:$PATH"
-            ${pkgs.gnumake}/bin/make
 
             # Create the output directory and copy the built files back
             mkdir -p $out/avante.nvim
@@ -126,12 +123,6 @@
         typescript-language-server
         ripgrep
         rustAnalyzer
-
-        # Build tools
-        curl
-        git
-        gnumake
-        gnutar
       ];
 
       programs.neovim = {
