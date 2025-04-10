@@ -72,6 +72,7 @@
         # Create avante.nvim/build directory and copy build files if they exist
         if [ -e ${./avante.nvim-build} ]; then
           mkdir -p $out/avante.nvim
+          mkdir -p $out/avante.nvim/build
           cp -r ${./avante.nvim-build}/* $out/avante.nvim/build/
         fi
       '';
