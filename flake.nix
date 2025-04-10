@@ -29,6 +29,10 @@
       url = "github:nix-community/naersk";
       inputs.nixpkgs.follows = "unstable";
     };
+
+    selfClone = {
+      url = "git+https://github.com/jessfraz/.vim?submodules=1";
+    };
   };
 
   outputs = {
@@ -40,6 +44,7 @@
     alejandra,
     modeling-app,
     naersk,
+    selfClone,
     ...
   }: let
     supportedSystems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
@@ -58,9 +63,14 @@
       system,
       ...
     }: let
+      fenixPkgs = fenix.packages.${pkgs.system};
+      rustToolchain = fenixPkgs.stable.withComponents [
+        "cargo"
+        "rustc"
+      ];
       naersk-lib = pkgs.callPackage naersk {
-        cargo = pkgs.rustToolchain;
-        rustc = pkgs.rustToolchain;
+        cargo = rustToolchain;
+        rustc = rustToolchain;
       };
     in {
       avante-nvim-lib = naersk-lib.buildPackage {
@@ -69,8 +79,8 @@
         release = true;
         gitSubmodules = true;
 
-        src = self;
-        root = self + /bundle/avante.nvim;
+        src = selfClone;
+        root = selfClone + /bundle/avante.nvim;
         copyLibs = true;
 
         cargoBuildOptions = opt: opt ++ ["--all" "--features=luajit"];
@@ -91,11 +101,6 @@
 
       alejandraPkg = alejandra.defaultPackage.${pkgs.system};
       rustAnalyzer = fenix.packages.${pkgs.system}.rust-analyzer;
-      fenixPkgs = fenix.packages.${pkgs.system};
-      rustToolchain = fenixPkgs.stable.withComponents [
-        "cargo"
-        "rustc"
-      ];
       kclLsp = modeling-app.packages.${pkgs.system}.kcl-language-server;
     in {
       home.packages = with pkgs; [
