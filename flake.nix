@@ -66,44 +66,26 @@
       # Function to build avante.vim in the source directory
       buildAvanteVim = pkgs.stdenv.mkDerivation {
         name = "avante-vim-built";
-        src = ./bundle;
+        src = ./.;
 
-        # No specific build inputs needed beyond the default
-        buildInputs = with pkgs; [
-        ];
-
-        # Use a temporary directory for the build
         buildPhase = ''
-          if [ -d "./avante.nvim" ]; then
-            # Create a temporary writable directory for the build process
-            buildDir=$(mktemp -d)
-            cp -r ./avante.nvim/* $buildDir/
+          # Create the destination directory if it doesn't exist
+          mkdir -p $out/bundle/avante.nvim/build
 
-            # Build in the temporary directory
-            cd $buildDir
+          # Check if the source directory exists
+          if [ -d ./avante.nvim-build ]; then
+            # Copy all files from avante.nvim-build to the build directory
+            cp -r ./avante.nvim-build/* $out/bundle/avante.nvim/build/
+          fi
 
-            # Create the output directory and copy the built files back
-            mkdir -p $out/avante.nvim
-            cp -r ./* $out/avante.nvim/
+          # Copy the rest of the bundle directory if it exists
+          if [ -d ./bundle ]; then
+            cp -r ./bundle/* $out/bundle/
           fi
         '';
 
-        # Copy all other bundle files that weren't built
-        installPhase = ''
-          # Copy everything except avante.nvim to the output
-          for item in $(ls -A ${./bundle}); do
-            if [ "$item" != "avante.nvim" ]; then
-              mkdir -p $out/$item
-              cp -r ${./bundle}/$item/* $out/$item/
-            fi
-          done
-
-          # If we didn't build avante.nvim in the build phase, copy it directly
-          if [ ! -d "$out/avante.nvim" ] && [ -d "${./bundle}/avante.nvim" ]; then
-            mkdir -p $out/avante.nvim
-            cp -r ${./bundle}/avante.nvim/* $out/avante.nvim/
-          fi
-        '';
+        # Skip the default install phase as we handle it in buildPhase
+        installPhase = "true";
       };
 
       # Get the built bundle directory or fall back to the original
