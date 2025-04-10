@@ -74,7 +74,7 @@
         # Build tools
         curl
         gnumake
-        tar
+        gnutar
       ];
 
       programs.neovim = {
