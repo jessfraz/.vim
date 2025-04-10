@@ -82,6 +82,7 @@
 
             # Build in the temporary directory
             cd $buildDir
+            export PATH="${pkgs.curl}/bin:${pkgs.git}/bin:${pkgs.gnumake}/bin:${pkgs.gnutar}/bin:$PATH"
             ${pkgs.gnumake}/bin/make
 
             # Create the output directory and copy the built files back
