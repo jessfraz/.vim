@@ -105,18 +105,20 @@
       home.activation.buildAvanteVim = let
         vimBundleDir = "${config.home.homeDirectory}/.vim/bundle";
         nvimBundleDir = "${config.home.homeDirectory}/.config/nvim/bundle";
+        # Explicitly reference the make binary from nixpkgs
+        makeBin = "${pkgs.gnumake}/bin/make";
       in
         home-manager.lib.hm.dag.entryAfter ["linkGeneration"] ''
           # Run make in avante.nvim for vim
           if [ -d "${vimBundleDir}/avante.nvim" ]; then
             echo "Building avante.nvim in vim directory..."
-            cd "${vimBundleDir}/avante.nvim" && $DRY_RUN_CMD make
+            cd "${vimBundleDir}/avante.nvim" && $DRY_RUN_CMD ${makeBin}
           fi
 
           # Run make in avante.nvim for neovim
           if [ -d "${nvimBundleDir}/avante.nvim" ]; then
             echo "Building avante.nvim in neovim directory..."
-            cd "${nvimBundleDir}/avante.nvim" && $DRY_RUN_CMD make
+            cd "${nvimBundleDir}/avante.nvim" && $DRY_RUN_CMD ${makeBin}
           fi
         '';
     };
