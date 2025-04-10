@@ -64,18 +64,49 @@
       sourceBundleDir = ./bundle;
 
       # Function to build avante.vim in the source directory
-      buildAvanteVim = pkgs.runCommand "avante-vim-built" {} ''
-        # Create the output directory
-        mkdir -p $out
+      buildAvanteVim = pkgs.stdenv.mkDerivation {
+        name = "avante-vim-built";
+        src = ./bundle;
 
-        # Copy the source bundle directory
-        cp -r ${sourceBundleDir}/* $out/
+        # No specific build inputs needed beyond the default
+        buildInputs = with pkgs; [
+          gnumake
+        ];
 
-        # Build avante.nvim if it exists
-        if [ -d "$out/avante.nvim" ]; then
-          cd "$out/avante.nvim" && ${pkgs.gnumake}/bin/make
-        fi
-      '';
+        # Use a temporary directory for the build
+        buildPhase = ''
+          if [ -d "./avante.nvim" ]; then
+            # Create a temporary writable directory for the build process
+            buildDir=$(mktemp -d)
+            cp -r ./avante.nvim/* $buildDir/
+
+            # Build in the temporary directory
+            cd $buildDir
+            ${pkgs.gnumake}/bin/make
+
+            # Create the output directory and copy the built files back
+            mkdir -p $out/avante.nvim
+            cp -r ./* $out/avante.nvim/
+          fi
+        '';
+
+        # Copy all other bundle files that weren't built
+        installPhase = ''
+          # Copy everything except avante.nvim to the output
+          for item in $(ls -A ${./bundle}); do
+            if [ "$item" != "avante.nvim" ]; then
+              mkdir -p $out/$item
+              cp -r ${./bundle}/$item/* $out/$item/
+            fi
+          done
+
+          # If we didn't build avante.nvim in the build phase, copy it directly
+          if [ ! -d "$out/avante.nvim" ] && [ -d "${./bundle}/avante.nvim" ]; then
+            mkdir -p $out/avante.nvim
+            cp -r ${./bundle}/avante.nvim/* $out/avante.nvim/
+          fi
+        '';
+      };
 
       # Get the built bundle directory or fall back to the original
       builtBundleDir =
