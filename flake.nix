@@ -59,6 +59,22 @@
       alejandraPkg = alejandra.defaultPackage.${pkgs.system};
       rustAnalyzer = fenix.packages.${pkgs.system}.rust-analyzer;
       kclLsp = modeling-app.packages.${pkgs.system}.kcl-language-server;
+
+      # Create a custom bundle directory with avante.nvim build files in place
+      bundleWithAvanteBuild = pkgs.runCommand "vim-bundle-with-avante-build" {} ''
+        mkdir -p $out
+
+        # Copy the original bundle directory if it exists
+        if [ -e ${./bundle} ]; then
+          cp -r ${./bundle}/* $out/
+        fi
+
+        # Create avante.nvim/build directory and copy build files if they exist
+        if [ -e ${./avante.nvim-build} ]; then
+          mkdir -p $out/avante.nvim
+          cp -r ${./avante.nvim-build}/* $out/avante.nvim/build/
+        fi
+      '';
     in {
       home.packages = with pkgs; [
         alejandraPkg
@@ -92,21 +108,11 @@
         };
 
         ".vim/bundle" = {
-          source = mkIfExists ./bundle;
+          source = bundleWithAvanteBuild;
         };
         ".config/nvim/bundle" = {
-          source = mkIfExists ./bundle;
+          source = bundleWithAvanteBuild;
         };
-
-        /*
-          ".vim/bundle/bundle/avante.nvim/build" = {
-          source = mkIfExists ./avante.nvim-build;
-        };
-        ".config/nvim/bundle/avante.nvim/build" = {
-          source = mkIfExists ./avante.nvim-build;
-        };
-        */
-
         ".vim/colors" = {
           source = mkIfExists ./colors;
         };
