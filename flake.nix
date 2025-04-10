@@ -129,7 +129,6 @@
       };
     };
 
-    # Optional: Provide buildable homeConfigurations for testing
     homeConfigurations = forAllSystems (
       system:
         home-manager.lib.homeManagerConfiguration {
