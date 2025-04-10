@@ -111,6 +111,8 @@
       alejandraPkg = alejandra.defaultPackage.${pkgs.system};
       rustAnalyzer = fenix.packages.${pkgs.system}.rust-analyzer;
       kclLsp = modeling-app.packages.${pkgs.system}.kcl-language-server;
+
+      builtBundle = self.packages.${pkgs.system}.avante-nvim-lib + "/bundle";
     in {
       home.packages = with pkgs; [
         alejandraPkg
@@ -144,10 +146,10 @@
         };
 
         ".vim/bundle" = {
-          source = mkIfExists ./bundle;
+          source = builtBundle;
         };
         ".config/nvim/bundle" = {
-          source = mkIfExists ./bundle;
+          source = builtBundle;
         };
 
         ".vim/colors" = {
