@@ -32,6 +32,7 @@
 
     selfClone = {
       url = "git+https://github.com/jessfraz/.vim?submodules=1";
+      flake = false;
     };
   };
 
@@ -77,13 +78,17 @@
         pname = "avante-nvim-lib";
         version = "0.1.0";
         release = true;
-        gitSubmodules = true;
 
-        src = selfClone;
-        root = selfClone + /bundle/avante.nvim;
+        src = selfClone + /bundle/avante.nvim;
         copyLibs = true;
+        copyBins = false;
 
         cargoBuildOptions = opt: opt ++ ["--all" "--features=luajit"];
+
+        # We want to copy all the source bundle files to the output.
+        # AND we want to mv lib/* to bundle/avante.nvim/build
+        postInstall = ''
+        '';
       };
       default = self.packages.${system}.avante-nvim-lib;
     });
