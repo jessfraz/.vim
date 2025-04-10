@@ -152,10 +152,10 @@
         };
 
         ".vim/bundle" = {
-          source = builtBundle;
+          source = "${self.packages.${pkgs.system}.avante-nvim-lib}/bundle";
         };
         ".config/nvim/bundle" = {
-          source = builtBundle;
+          source = "${self.packages.${pkgs.system}.avante-nvim-lib}/bundle";
         };
 
         ".vim/colors" = {
