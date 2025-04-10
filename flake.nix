@@ -91,8 +91,19 @@
         ".vim/autoload".source = mkIfExists ./autoload;
         ".config/nvim/autoload".source = mkIfExists ./autoload;
 
-        ".vim/bundle".source = mkIfExists ./bundle;
-        ".config/nvim/bundle".source = mkIfExists ./bundle;
+        # Use copy instead of symlink for bundle to allow building
+        ".vim/bundle" = {
+          source = mkIfExists ./bundle;
+          recursive = true;
+          # This is the key change - copy instead of symlink
+          copy = true;
+        };
+        ".config/nvim/bundle" = {
+          source = mkIfExists ./bundle;
+          recursive = true;
+          # This is the key change - copy instead of symlink
+          copy = true;
+        };
 
         ".vim/colors".source = mkIfExists ./colors;
         ".config/nvim/colors".source = mkIfExists ./colors;
@@ -105,7 +116,7 @@
       home.activation.buildAvanteVim = let
         vimBundleDir = "${config.home.homeDirectory}/.vim/bundle";
         nvimBundleDir = "${config.home.homeDirectory}/.config/nvim/bundle";
-        # Explicitly reference the make binary from nixpkgs
+        # Get the path to make directly
         makeBin = "${pkgs.gnumake}/bin/make";
       in
         home-manager.lib.hm.dag.entryAfter ["linkGeneration"] ''
