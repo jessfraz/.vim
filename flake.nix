@@ -59,45 +59,6 @@
       alejandraPkg = alejandra.defaultPackage.${pkgs.system};
       rustAnalyzer = fenix.packages.${pkgs.system}.rust-analyzer;
       kclLsp = modeling-app.packages.${pkgs.system}.kcl-language-server;
-
-      bundleCustom = pkgs.stdenv.mkDerivation {
-        name = "vim-bundle-custom";
-
-        # No build phase needed
-        dontBuild = true;
-
-        # Make both source directories available
-        srcs = [
-          (
-            if builtins.pathExists ./bundle
-            then ./bundle
-            else ./.
-          )
-          (
-            if builtins.pathExists ./avante.nvim-build
-            then ./avante.nvim-build
-            else ./.
-          )
-        ];
-
-        unpackPhase = "true"; # Skip unpacking
-
-        # In the installation phase, we copy things to their correct locations
-        installPhase = ''
-          mkdir -p $out
-
-          # Copy the entire bundle directory if it exists
-          if [ -d ${./bundle} ]; then
-            cp -r ${./bundle}/* $out/
-          fi
-
-          # Create avante.nvim/build and copy the build files
-          if [ -d ${./avante.nvim-build} ]; then
-            mkdir -p $out/avante.nvim/build
-            cp -r ${./avante.nvim-build}/* $out/avante.nvim/build/
-          fi
-        '';
-      };
     in {
       home.packages = with pkgs; [
         alejandraPkg
@@ -131,10 +92,10 @@
         };
 
         ".vim/bundle" = {
-          source = bundleCustom;
+          source = mkIfExists ./bundle;
         };
         ".config/nvim/bundle" = {
-          source = bundleCustom;
+          source = mkIfExists ./bundle;
         };
 
         ".vim/colors" = {
