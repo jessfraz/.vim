@@ -67,8 +67,11 @@
         pname = "avante-nvim-lib";
         version = "0.1.0";
         release = true;
+        gitSubmodules = true;
 
-        src = ./bundle/avante.nvim;
+        src = self;
+        root = self + /bundle/avante.nvim;
+        copyLibs = true;
 
         cargoBuildOptions = opt: opt ++ ["--all" "--features=luajit"];
       };
