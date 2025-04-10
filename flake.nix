@@ -128,6 +128,7 @@
 
         # Build tools
         curl
+        git
         gnumake
         gnutar
       ];
