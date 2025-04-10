@@ -59,40 +59,6 @@
       alejandraPkg = alejandra.defaultPackage.${pkgs.system};
       rustAnalyzer = fenix.packages.${pkgs.system}.rust-analyzer;
       kclLsp = modeling-app.packages.${pkgs.system}.kcl-language-server;
-
-      # Get the path to the source bundle directory
-      sourceBundleDir = ./bundle;
-
-      # Function to build avante.vim in the source directory
-      buildAvanteVim = pkgs.stdenv.mkDerivation {
-        name = "avante-vim-built";
-        src = ./.;
-
-        buildPhase = ''
-          # Create the destination directory if it doesn't exist
-          mkdir -p $out/bundle/avante.nvim/build
-
-          # Check if the source directory exists
-          if [ -d ./avante.nvim-build ]; then
-            # Copy all files from avante.nvim-build to the build directory
-            cp -r ./avante.nvim-build/* $out/bundle/avante.nvim/build/
-          fi
-
-          # Copy the rest of the bundle directory if it exists
-          if [ -d ./bundle ]; then
-            cp -r ./bundle/* $out/bundle/
-          fi
-        '';
-
-        # Skip the default install phase as we handle it in buildPhase
-        installPhase = "true";
-      };
-
-      # Get the built bundle directory or fall back to the original
-      builtBundleDir =
-        if builtins.pathExists ./bundle && builtins.pathExists "${./bundle}/avante.nvim"
-        then buildAvanteVim
-        else mkIfExists ./bundle;
     in {
       home.packages = with pkgs; [
         alejandraPkg
@@ -120,39 +86,37 @@
 
         ".vim/autoload" = {
           source = mkIfExists ./autoload;
-          recursive = true;
         };
         ".config/nvim/autoload" = {
           source = mkIfExists ./autoload;
-          recursive = true;
         };
 
-        # Use the built bundle directory instead of the original
         ".vim/bundle" = {
-          source = builtBundleDir;
-          recursive = true;
+          source = mkIfExists ./bundle;
         };
         ".config/nvim/bundle" = {
-          source = builtBundleDir;
-          recursive = true;
+          source = mkIfExists ./bundle;
+        };
+
+        ".vim/bundle/bundle/avante.nvim/build" = {
+          source = mkIfExists ./avante.nvim-build
+        };
+        ".config/nvim/bundle/avante.nvim/build" = {
+          source = mkIfExists ./avante.nvim-build
         };
 
         ".vim/colors" = {
           source = mkIfExists ./colors;
-          recursive = true;
         };
         ".config/nvim/colors" = {
           source = mkIfExists ./colors;
-          recursive = true;
         };
 
         ".vim/indent" = {
           source = mkIfExists ./indent;
-          recursive = true;
         };
         ".config/nvim/indent" = {
           source = mkIfExists ./indent;
-          recursive = true;
         };
       };
     };
