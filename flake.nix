@@ -19,6 +19,11 @@
       url = "github:kamadorueda/alejandra/3.1.0";
       inputs.nixpkgs.follows = "unstable";
     };
+
+    modeling-app = {
+      url = "github:kittycad/modeling-app?ref=repetitive-structs";
+      inputs.nixpkgs.follows = "unstable";
+    };
   };
 
   outputs = {
@@ -28,6 +33,7 @@
     home-manager,
     fenix,
     alejandra,
+    modeling-app,
     ...
   }: let
     supportedSystems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
@@ -47,6 +53,7 @@
 
       alejandraPkg = alejandra.defaultPackage.${pkgs.system};
       rustAnalyzer = fenix.packages.${pkgs.system}.rust-analyzer;
+      kclLsp = modeling-app.packages.${pkgs.system}.kcl-language-server;
     in {
       home.packages = with pkgs; [
         alejandraPkg
@@ -54,6 +61,7 @@
         gh
         go
         gopls
+        kclLsp
         typescript
         typescript-language-server
         ripgrep
