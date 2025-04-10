@@ -60,22 +60,44 @@
       rustAnalyzer = fenix.packages.${pkgs.system}.rust-analyzer;
       kclLsp = modeling-app.packages.${pkgs.system}.kcl-language-server;
 
-      # Create a custom bundle directory with avante.nvim build files in place
-      bundleWithAvanteBuild = pkgs.runCommand "vim-bundle-with-avante-build" {} ''
-        mkdir -p $out
+      bundleCustom = pkgs.stdenv.mkDerivation {
+        name = "vim-bundle-custom";
 
-        # Copy the original bundle directory if it exists
-        if [ -e ${./bundle} ]; then
-          cp -r ${./bundle}/* $out/
-        fi
+        # No build phase needed
+        dontBuild = true;
 
-        # Create avante.nvim/build directory and copy build files if they exist
-        if [ -e ${./avante.nvim-build} ]; then
-          mkdir -p $out/avante.nvim
-          mkdir -p $out/avante.nvim/build
-          cp -r ${./avante.nvim-build}/* $out/avante.nvim/build/
-        fi
-      '';
+        # Make both source directories available
+        srcs = [
+          (
+            if builtins.pathExists ./bundle
+            then ./bundle
+            else ./.
+          )
+          (
+            if builtins.pathExists ./avante.nvim-build
+            then ./avante.nvim-build
+            else ./.
+          )
+        ];
+
+        unpackPhase = "true"; # Skip unpacking
+
+        # In the installation phase, we copy things to their correct locations
+        installPhase = ''
+          mkdir -p $out
+
+          # Copy the entire bundle directory if it exists
+          if [ -d ${./bundle} ]; then
+            cp -r ${./bundle}/* $out/
+          fi
+
+          # Create avante.nvim/build and copy the build files
+          if [ -d ${./avante.nvim-build} ]; then
+            mkdir -p $out/avante.nvim/build
+            cp -r ${./avante.nvim-build}/* $out/avante.nvim/build/
+          fi
+        '';
+      };
     in {
       home.packages = with pkgs; [
         alejandraPkg
@@ -109,11 +131,12 @@
         };
 
         ".vim/bundle" = {
-          source = bundleWithAvanteBuild;
+          source = bundleCustom;
         };
         ".config/nvim/bundle" = {
-          source = bundleWithAvanteBuild;
+          source = bundleCustom;
         };
+
         ".vim/colors" = {
           source = mkIfExists ./colors;
         };
