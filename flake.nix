@@ -48,6 +48,7 @@
     homeManagerModules.default = {
       pkgs,
       config,
+      lib,
       ...
     }: let
       mkIfExists = path:
@@ -58,6 +59,29 @@
       alejandraPkg = alejandra.defaultPackage.${pkgs.system};
       rustAnalyzer = fenix.packages.${pkgs.system}.rust-analyzer;
       kclLsp = modeling-app.packages.${pkgs.system}.kcl-language-server;
+
+      # Get the path to the source bundle directory
+      sourceBundleDir = ./bundle;
+
+      # Function to build avante.vim in the source directory
+      buildAvanteVim = pkgs.runCommand "avante-vim-built" {} ''
+        # Create the output directory
+        mkdir -p $out
+
+        # Copy the source bundle directory
+        cp -r ${sourceBundleDir}/* $out/
+
+        # Build avante.nvim if it exists
+        if [ -d "$out/avante.nvim" ]; then
+          cd "$out/avante.nvim" && ${pkgs.gnumake}/bin/make
+        fi
+      '';
+
+      # Get the built bundle directory or fall back to the original
+      builtBundleDir =
+        if builtins.pathExists ./bundle && builtins.pathExists "${./bundle}/avante.nvim"
+        then buildAvanteVim
+        else mkIfExists ./bundle;
     in {
       home.packages = with pkgs; [
         alejandraPkg
@@ -97,13 +121,13 @@
           recursive = true;
         };
 
-        # Use copy instead of symlink for bundle to allow building
+        # Use the built bundle directory instead of the original
         ".vim/bundle" = {
-          source = mkIfExists ./bundle;
+          source = builtBundleDir;
           recursive = true;
         };
         ".config/nvim/bundle" = {
-          source = mkIfExists ./bundle;
+          source = builtBundleDir;
           recursive = true;
         };
 
@@ -125,27 +149,6 @@
           recursive = true;
         };
       };
-
-      # Add an activation script to run make in the avante.nvim directory
-      home.activation.buildAvanteVim = let
-        vimBundleDir = "${config.home.homeDirectory}/.vim/bundle";
-        nvimBundleDir = "${config.home.homeDirectory}/.config/nvim/bundle";
-        # Get the path to make directly
-        makeBin = "${pkgs.gnumake}/bin/make";
-      in
-        home-manager.lib.hm.dag.entryAfter ["linkGeneration"] ''
-          # Run make in avante.nvim for vim
-          if [ -d "${vimBundleDir}/avante.nvim" ]; then
-            echo "Building avante.nvim in vim directory..."
-            cd "${vimBundleDir}/avante.nvim" && $DRY_RUN_CMD ${makeBin}
-          fi
-
-          # Run make in avante.nvim for neovim
-          if [ -d "${nvimBundleDir}/avante.nvim" ]; then
-            echo "Building avante.nvim in neovim directory..."
-            cd "${nvimBundleDir}/avante.nvim" && $DRY_RUN_CMD ${makeBin}
-          fi
-        '';
     };
 
     # Optional: Provide buildable homeConfigurations for testing
