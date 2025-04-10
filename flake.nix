@@ -88,6 +88,10 @@
         # We want to copy all the source bundle files to the output.
         # AND we want to mv lib/* to bundle/avante.nvim/build
         postInstall = ''
+          mkdir -p $out/bundle/avante.nvim
+          cp -r ${selfClone}/bundle/* $out/bundle/
+          mkdir -p $out/bundle/avante.nvim/build
+          mv $out/lib/* $out/bundle/avante.nvim/build/
         '';
       };
       default = self.packages.${system}.avante-nvim-lib;
