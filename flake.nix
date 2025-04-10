@@ -45,7 +45,11 @@
         })
         supportedSystems);
   in {
-    homeManagerModules.default = {pkgs, ...}: let
+    homeManagerModules.default = {
+      pkgs,
+      config,
+      ...
+    }: let
       mkIfExists = path:
         if builtins.pathExists path
         then path
@@ -66,6 +70,11 @@
         typescript-language-server
         ripgrep
         rustAnalyzer
+
+        # Build tools
+        curl
+        gnumake
+        tar
       ];
 
       programs.neovim = {
@@ -91,6 +100,25 @@
         ".vim/indent".source = mkIfExists ./indent;
         ".config/nvim/indent".source = mkIfExists ./indent;
       };
+
+      # Add an activation script to run make in the avante.vim directory
+      home.activation.buildAvanteVim = let
+        vimBundleDir = "${config.home.homeDirectory}/.vim/bundle";
+        nvimBundleDir = "${config.home.homeDirectory}/.config/nvim/bundle";
+      in
+        home-manager.lib.hm.dag.entryAfter ["linkGeneration"] ''
+          # Run make in avante.vim for vim
+          if [ -d "${vimBundleDir}/avante.vim" ]; then
+            echo "Building avante.vim in vim directory..."
+            cd "${vimBundleDir}/avante.vim" && $DRY_RUN_CMD make
+          fi
+
+          # Run make in avante.vim for neovim
+          if [ -d "${nvimBundleDir}/avante.vim" ]; then
+            echo "Building avante.vim in neovim directory..."
+            cd "${nvimBundleDir}/avante.vim" && $DRY_RUN_CMD make
+          fi
+        '';
     };
 
     # Optional: Provide buildable homeConfigurations for testing
