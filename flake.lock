@@ -89,11 +89,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1744307861,
-        "narHash": "sha256-c4i69OsEMi3e5+HuWrwgcx9sOsn1Z1hxLlyiQOiWJi8=",
+        "lastModified": 1744316889,
+        "narHash": "sha256-qS0BhvsL9J7gt4cOpBZdzT0EqylGPKyKnU9v/6SJvFI=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "140a7df916f6257c755b8663fb27ed79e81c8e89",
+        "rev": "543caa313abe45b56520efdaa35d379703f79e3a",
         "type": "github"
       },
       "original": {
@@ -111,16 +111,15 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1744303989,
-        "narHash": "sha256-9BzZ7FDXZ/tAg5QkX8ovXTSS6l2yUL5Ip00UrghK558=",
+        "lastModified": 1744339985,
+        "narHash": "sha256-+m4gfF0mZ2LJCrHXh1iJ3fd7+JtNNS/sidmh1Wbd9/0=",
         "owner": "kittycad",
         "repo": "modeling-app",
-        "rev": "c2f999f305b4dca1cc82ee2e3b8f556ce2f1e65b",
+        "rev": "1b8eee86a1113f0d170aa80f11e17cf44492c580",
         "type": "github"
       },
       "original": {
         "owner": "kittycad",
-        "ref": "repetitive-structs",
         "repo": "modeling-app",
         "type": "github"
       }
@@ -197,11 +196,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1744311219,
-        "narHash": "sha256-J6nv74SQj+0MmG2pY3O5ywc7jz2d/oBJSKk3Hdpgny8=",
+        "lastModified": 1744340397,
+        "narHash": "sha256-oIfpWVSJuVZpGhrTNnQ7X+JhI3quHqzFXYdhXP7KQSs=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "5997b997dc3766386dd7a8a867ba925d61b3f7f1",
+        "rev": "daa1933a4122110654a86459e458f6fa2dabbe9f",
         "type": "github"
       },
       "original": {
@@ -277,11 +276,11 @@
     "selfClone": {
       "flake": false,
       "locked": {
-        "lastModified": 1744311054,
-        "narHash": "sha256-24ARpxrVuePWVCbTLjqO1jXg+NzUQ7mXafkon7drfOw=",
-        "ref": "refs/heads/master",
-        "rev": "465add08e74175c11f1aa0657d5797019403a101",
-        "revCount": 667,
+        "lastModified": 1744340336,
+        "narHash": "sha256-TrC1NtX0MexydzgSbR/9NWENFb0duk3bD34B2o+w9mo=",
+        "ref": "refs/heads/main",
+        "rev": "95df8c745f85e928f4c05e5d2b5df2ed0ac464c3",
+        "revCount": 677,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/jessfraz/.vim"
