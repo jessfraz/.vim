@@ -14,11 +14,9 @@ jobs:
         with:
           submodules: recursive
 
-      - uses: cachix/install-nix-action@v26
+      - uses: cachix/install-nix-action@v30
         with:
-          nix_path: nixpkgs=channel:nixpkgs-unstable
-          extra_nix_config: |
-            experimental-features = nix-command flakes
+          nix_path: nixpkgs=channel:nixos-unstable
 
       - name: nix flake check for all platforms
         run: |
