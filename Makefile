@@ -52,11 +52,11 @@ __check_defined = \
 .PHONY: remove-submodule
 remove-submodule: ## Removes a git submodule (ex MODULE=bundle/nginx.vim).
 	@:$(call check_defined, MODULE, path of module to remove)
-	mv $(MODULE) $(MODULE).tmp
-	git submodule deinit -f -- $(MODULE)
-	$(RM) -r .git/modules/$(MODULE)
-	git rm -f $(MODULE)
-	$(RM) -r $(MODULE).tmp
+	mv $(MODULE) $(MODULE).tmp || true
+	git submodule deinit -f -- $(MODULE) || true
+	$(RM) -r .git/modules/$(MODULE) || true
+	git rm -f $(MODULE) || true
+	$(RM) -r $(MODULE).tmp || true
 	$(MAKE) README.md
 
 
