@@ -5,3 +5,12 @@ updates:
     schedule:
       # Check for updates to GitHub Actions every week
       interval: "weekly"
+    reviewers:
+      - jessfraz
+  - package-ecosystem: "gitsubmodule"
+    directory: "/"
+    schedule:
+      # Check for updates to GitHub Actions every week
+      interval: "weekly"
+    reviewers:
+      - jessfraz
