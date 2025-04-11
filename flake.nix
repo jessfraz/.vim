@@ -21,7 +21,7 @@
     };
 
     modeling-app = {
-      url = "github:kittycad/modeling-app?ref=repetitive-structs";
+      url = "github:kittycad/modeling-app";
       inputs.nixpkgs.follows = "unstable";
     };
 
