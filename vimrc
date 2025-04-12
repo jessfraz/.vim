@@ -1010,6 +1010,15 @@ else
   echo "You might want to install tsserver: yarn global add typescript typescript-language-server"
 endif
 
+" =================== nixd ========================
+if executable('nixd')
+lua << EOF
+require'lspconfig'.nixd.setup{}
+EOF
+else
+  echo "You might want to install nixd: https://github.com/nix-community/nixd"
+endif
+
 " =================== nvim-cmp ========================
 
 if has('nvim-0.5')

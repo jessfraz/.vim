@@ -129,6 +129,7 @@
         go
         gopls
         kclLsp
+        nixd
         typescript
         typescript-language-server
         ripgrep
