@@ -455,7 +455,7 @@ autocmd BufRead,BufNewFile *.kcl set filetype=kcl
 
 " Auto-format Nix files with Alejandra on save
 if executable('alejandra')
-autocmd BufWritePre *.nix silent! write | silent! execute ":%!alejandra -qq"
+autocmd BufWritePost *.nix silent! execute "!alejandra -qq %" | edit!
 endif
 
 " Binary settings: edit binary using xxd-format
