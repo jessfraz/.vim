@@ -5,7 +5,7 @@
         "fenix": "fenix",
         "flakeCompat": "flakeCompat",
         "nixpkgs": [
-          "unstable"
+          "nixpkgs"
         ]
       },
       "locked": {
@@ -48,7 +48,7 @@
     "fenix_2": {
       "inputs": {
         "nixpkgs": [
-          "unstable"
+          "nixpkgs"
         ],
         "rust-analyzer-src": "rust-analyzer-src_2"
       },
@@ -85,7 +85,7 @@
     "home-manager": {
       "inputs": {
         "nixpkgs": [
-          "unstable"
+          "nixpkgs"
         ]
       },
       "locked": {
@@ -106,16 +106,16 @@
       "inputs": {
         "naersk": "naersk",
         "nixpkgs": [
-          "unstable"
+          "nixpkgs"
         ],
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1744426189,
-        "narHash": "sha256-yjja4VcCLcjIvYt9c7LxKbwU7mZDdPI5WXmmXk24s10=",
+        "lastModified": 1744481833,
+        "narHash": "sha256-UvwF9CCJUnRDarkWOFurL1twPdKWvC3V/+3GRevAx5U=",
         "owner": "kittycad",
         "repo": "modeling-app",
-        "rev": "167445ef8adaa22d2195f75e49345dbc239ea9f5",
+        "rev": "c8cee6a0dcaedf24e3cd851b487c4a68ff57dafd",
         "type": "github"
       },
       "original": {
@@ -145,7 +145,7 @@
     "naersk_2": {
       "inputs": {
         "nixpkgs": [
-          "unstable"
+          "nixpkgs"
         ]
       },
       "locked": {
@@ -196,17 +196,17 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1744427317,
-        "narHash": "sha256-quy0WwmYByovvoATunSrItduluPgdydjQsDBqPJryuw=",
-        "owner": "nixos",
+        "lastModified": 1744232761,
+        "narHash": "sha256-gbl9hE39nQRpZaLjhWKmEu5ejtQsgI5TWYrIVVJn30U=",
+        "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "9663c3e85ab9798d4655d67b3306cbdb6f643373",
+        "rev": "f675531bc7e6657c10a18b565cfebd8aa9e24c14",
         "type": "github"
       },
       "original": {
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "type": "github"
+        "id": "nixpkgs",
+        "ref": "nixos-unstable",
+        "type": "indirect"
       }
     },
     "root": {
@@ -217,8 +217,7 @@
         "modeling-app": "modeling-app",
         "naersk": "naersk_2",
         "nixpkgs": "nixpkgs_3",
-        "selfClone": "selfClone",
-        "unstable": "unstable"
+        "selfClone": "selfClone"
       }
     },
     "rust-analyzer-src": {
@@ -276,11 +275,11 @@
     "selfClone": {
       "flake": false,
       "locked": {
-        "lastModified": 1744353605,
-        "narHash": "sha256-xHBO9TikxQYLx7qWcTcmMzH5q7xRVvB0C9tOIxolWUo=",
+        "lastModified": 1744429046,
+        "narHash": "sha256-9n9z4gbwDvCuKyYhpzoEGZRU7xPreLc/ZcZ534fSGf8=",
         "ref": "refs/heads/main",
-        "rev": "51df4d34cc9ed3655b02f70837f39ddb802111c2",
-        "revCount": 692,
+        "rev": "57b77904fe73f6af391422e8fab87d4159b39958",
+        "revCount": 694,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/jessfraz/.vim"
@@ -289,21 +288,6 @@
         "submodules": true,
         "type": "git",
         "url": "https://github.com/jessfraz/.vim"
-      }
-    },
-    "unstable": {
-      "locked": {
-        "lastModified": 1744232761,
-        "narHash": "sha256-gbl9hE39nQRpZaLjhWKmEu5ejtQsgI5TWYrIVVJn30U=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "f675531bc7e6657c10a18b565cfebd8aa9e24c14",
-        "type": "github"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "ref": "nixos-unstable",
-        "type": "indirect"
       }
     }
   },
