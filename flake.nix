@@ -2,32 +2,31 @@
   description = "Home Manager module for jessfraz's Vim configuration (Neovim-ready)";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs";
-    unstable.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "nixpkgs/nixos-nixpkgs";
 
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     fenix = {
       url = "github:nix-community/fenix";
-      inputs.nixpkgs.follows = "unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     alejandra = {
       url = "github:kamadorueda/alejandra/3.1.0";
-      inputs.nixpkgs.follows = "unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     modeling-app = {
       url = "github:kittycad/modeling-app";
-      inputs.nixpkgs.follows = "unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     naersk = {
       url = "github:nix-community/naersk";
-      inputs.nixpkgs.follows = "unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     selfClone = {
@@ -39,7 +38,6 @@
   outputs = {
     self,
     nixpkgs,
-    unstable,
     home-manager,
     fenix,
     alejandra,
