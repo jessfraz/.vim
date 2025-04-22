@@ -9,16 +9,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1730688725,
-        "narHash": "sha256-g0SSfTWZ5mtMOpQic+eqq9sXMy1E/7yKxxfupZd9V4A=",
+        "lastModified": 1744324181,
+        "narHash": "sha256-Oi1n2ncF4/AWeY6X55o2FddIRICokbciqFYK64XorYk=",
         "owner": "kamadorueda",
         "repo": "alejandra",
-        "rev": "2bb91e309ca99656addff5c74545acbf5813636d",
+        "rev": "3e2a85506627062313e131bf8a85315f3387c8e0",
         "type": "github"
       },
       "original": {
         "owner": "kamadorueda",
-        "ref": "3.1.0",
+        "ref": "4.0.0",
         "repo": "alejandra",
         "type": "github"
       }
@@ -89,11 +89,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1745350245,
-        "narHash": "sha256-KK0LZX8O73DVIcI5qnxuDeSh3b4RrkDfC6lvIjzEyzc=",
+        "lastModified": 1745362344,
+        "narHash": "sha256-R4d7j2urn/W+K9crKJaxJvZOsVX5v7uCAymaDBq97SE=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "6899001a762b0e089ad7b8ec7637d0a678640b8e",
+        "rev": "b99e3e46b86aefc01f229e0a29d0c03c1079aaed",
         "type": "github"
       },
       "original": {
@@ -111,11 +111,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1745353493,
-        "narHash": "sha256-xthPaNA5hHiTINNZwELx+b8Y00r5IEWnIf7sG532Z84=",
+        "lastModified": 1745362715,
+        "narHash": "sha256-x0dkr3gqnb/+tah3SOD68m8IJiAlRN92G2g/96Sg0q0=",
         "owner": "kittycad",
         "repo": "modeling-app",
-        "rev": "9730e3f5b32c087c2d21dbf6000e5eb89cadca89",
+        "rev": "b7385d5f25a8a94db1f625a3c356dccde1f90560",
         "type": "github"
       },
       "original": {
@@ -275,11 +275,11 @@
     "selfClone": {
       "flake": false,
       "locked": {
-        "lastModified": 1744489098,
-        "narHash": "sha256-jEFw/9j289FMgPZy43gIgPJGVHG+8J2Y0Jh2C7i8DLs=",
+        "lastModified": 1745354907,
+        "narHash": "sha256-kdE6Mui5VtHAo/En58AMIfaAVJVjEviXU6mhU3hsaiw=",
         "ref": "refs/heads/main",
-        "rev": "68f272a39dc47d41b0584d10e143b9607b543865",
-        "revCount": 698,
+        "rev": "a95779fb4ae89d2875dc6670f23bf41dc324b41d",
+        "revCount": 699,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/jessfraz/.vim"
