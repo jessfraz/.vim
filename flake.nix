@@ -112,7 +112,7 @@
         then path
         else pkgs.emptyFile;
 
-      alejandraPkg = alejandra.defaultPackage.${pkgs.system};
+      alejandraPkg = alejandra.packages.${pkgs.system};
       rustAnalyzer = fenix.packages.${pkgs.system}.rust-analyzer;
       kclLsp = modeling-app.packages.${pkgs.system}.kcl-language-server;
 
