@@ -111,11 +111,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1746042595,
-        "narHash": "sha256-shHwcddjnI0eeeW3CX/u2WAbHZOFhHwQXdfYB0Z7/VI=",
+        "lastModified": 1746046726,
+        "narHash": "sha256-0gHJOnp9cAUTNLa5ci0gtiYKMBfUP8WjLVrczPuO+e0=",
         "owner": "kittycad",
         "repo": "modeling-app",
-        "rev": "1a6b147107eff12b4c44557c3c818f59eb8ccab7",
+        "rev": "012102fe86fe8fbf36624e7c0c65dbc81f9ebf8c",
         "type": "github"
       },
       "original": {
@@ -275,11 +275,11 @@
     "selfClone": {
       "flake": false,
       "locked": {
-        "lastModified": 1745851992,
-        "narHash": "sha256-JFIEkiUGbLGS+j3gFXGCH/N4afbDzR66GaaRnIt70Qg=",
+        "lastModified": 1746046522,
+        "narHash": "sha256-SAryTF1lpjOj/3OfiGsbR5jqz0JzUszEc/L7xZicjoo=",
         "ref": "refs/heads/main",
-        "rev": "81957d71bee51bef509c583f5cc75ab4644f4ced",
-        "revCount": 707,
+        "rev": "ee16ec9869bbca136592b77fe93979f524900e3c",
+        "revCount": 708,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/jessfraz/.vim"
