@@ -1090,7 +1090,10 @@ if has('nvim')
 nnoremap <silent> gh :Lspsaga lsp_finder<CR>
 
 " preview definition
-nnoremap <silent> gd :Lspsaga preview_definition<CR>
+nnoremap <silent> gp :Lspsaga peek_definition<CR>
+
+" jump definition
+nnoremap <silent> gd :Lspsaga goto_definition<CR>
 
 " rename
 nnoremap <silent> gr :Lspsaga rename<CR>
