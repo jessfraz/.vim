@@ -157,3 +157,6 @@
 [submodule "bundle/vim-nix"]
 	path = bundle/vim-nix
 	url = https://github.com/LnL7/vim-nix.git
+[submodule "bundle/lazy.nvim"]
+	path = bundle/lazy.nvim
+	url = https://github.com/folke/lazy.nvim.git

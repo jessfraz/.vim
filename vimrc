@@ -1,10 +1,36 @@
 " load plugins
-execute pathogen#infect()
-call pathogen#helptags()
+
+if has('nvim')
+lua << EOF
+-- bootstrap lazy.nvim (same snippet as before) ----------------------------
+local lazypath = vim.fn.stdpath("config") .. "/bundle/lazy.nvim" 
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({ "git", "clone", "--filter=blob:none",
+                  "--branch=stable", "https://github.com/folke/lazy.nvim.git",
+                  lazypath })
+end
+vim.opt.rtp:prepend(lazypath)
+
+-- AUTO-SCAN a directory ---------------------------------------------------
+local function pathogen2lazy(dir)
+  local list = {}
+  for _, name in ipairs(vim.fn.readdir(dir)) do
+    local path = dir .. "/" .. name
+    if vim.fn.isdirectory(path) == 1 then
+      -- Tell lazy “this is a local plugin; load it at startup”
+      table.insert(list, { dir = path, name = name, lazy = false })
+    end
+  end
+  return list
+end
+
+require("lazy").setup(pathogen2lazy(vim.fn.stdpath("config") .. "/bundle"))
+
+EOF
+endif
 
 set nocompatible              " be iMproved, required
 set nofoldenable              " disable folding
-filetype off                  " required
 
 " Enable file type detection.
 " Use the default filetype settings, so that mail gets 'tw' set to 72,

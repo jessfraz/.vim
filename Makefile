@@ -15,7 +15,8 @@ install: ## Sets up symlink for user and root .vimrc for vim and neovim.
 	sudo ln -snf "$(HOME)/.vimrc" /root/.config/nvim/init.vim
 
 .PHONY: update
-update: update-pathogen update-plugins avante-build ## Updates pathogen and all plugins.
+update: update-plugins avante-build ## Updates all plugins and the nix flake.
+	nix flake update
 
 .PHONY: update-plugins
 update-plugins: ## Updates all plugins.
@@ -31,10 +32,6 @@ update-plugins: ## Updates all plugins.
 .PHONY: avante-build
 avante-build: ## Builds avante.vim from source.
 	$(MAKE) -C bundle/avante.nvim
-
-.PHONY: update-pathogen
-update-pathogen: ## Updates pathogen.
-	curl -LSso $(CURDIR)/autoload/pathogen.vim https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim
 
 .PHONY: README.md
 README.md: ## Generates and updates plugin info in README.md.
