@@ -881,19 +881,7 @@ require('lualine').setup{
 EOF
 endif
 
-" =================== rust.vim ========================
-" Enable automatic running of :RustFmt when a buffer is saved.
-let g:rustfmt_autosave = 1
-let g:rustfmt_autosave_if_config_present = 1
-
-" The :RustPlay command will send the current selection, or if nothing is
-" selected the current buffer, to the Rust playpen. Then copy the url to the
-" clipboard.
-if has('macunix')
-  let g:rust_clip_command = 'pbcopy'
-else
-  let g:rust_clip_command = 'xclip -selection clipboard'
-endif
+" =================== rustaceanvim ========================
 
 " =================== vim-terraform ========================
 

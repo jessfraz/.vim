@@ -88,7 +88,7 @@ There's a lot more if you hit `,?` you can peruse all the ones connected to the 
 * [github.com/pwntester/octo.nvim](https://github.com/pwntester/octo.nvim.git)
 * [github.com/nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim.git)
 * [github.com/MeanderingProgrammer/render-markdown.nvim](https://github.com/MeanderingProgrammer/render-markdown.nvim.git)
-* [github.com/rust-lang/rust.vim](https://github.com/rust-lang/rust.vim.git)
+* [github.com/mrcjkb/rustaceanvim](https://github.com/mrcjkb/rustaceanvim.git)
 * [github.com/nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git)
 * [github.com/folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim.git)
 * [github.com/leafgarland/typescript-vim](https://github.com/leafgarland/typescript-vim.git)
