@@ -41,7 +41,6 @@ set incsearch                   " Shows the match while typing
 set hlsearch                    " Highlight found searches
 set ignorecase                  " Search case insensitive...
 set smartcase                   " ... but not when search pattern contains upper case characters
-set ttyfast
 " set ttyscroll=3               " noop on linux ?
 set lazyredraw          	      " Wait to redraw "
 
@@ -51,7 +50,7 @@ set nocursorline
 
 syntax sync minlines=256
 set synmaxcol=300
-set re=1
+set re=0
 
 " do not hide markdown
 set conceallevel=0
@@ -90,10 +89,6 @@ set ttimeoutlen=10
 " By default timeoutlen is 1000 ms
 set timeoutlen=500
 
-" have a fixed column for the diagnostics to appear in
-" this removes the jitter when warnings/errors flow in
-set signcolumn=yes
-
 " Better Completion
 set complete=.,w,b,u,t
 set completeopt=longest,menuone
@@ -104,10 +99,6 @@ endif
 
 if &tabpagemax < 50
   set tabpagemax=50
-endif
-
-if !empty(&viminfo)
-  set viminfo^=!
 endif
 
 if !&scrolloff
@@ -364,9 +355,6 @@ let g:netrw_dirhistmax=0
 cmap w!! w !sudo tee > /dev/null %
 
 " never do this again --> :set paste <ctrl-v> :set no paste
-let &t_SI .= "\<Esc>[?2004h"
-let &t_EI .= "\<Esc>[?2004l"
-
 inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 
 function! XTermPasteBegin()
@@ -812,7 +800,7 @@ let g:go_fmt_autosave = 1
 au FileType go nmap <Leader>s <Plug>(go-def-split)
 au FileType go nmap <Leader>v <Plug>(go-def-vertical)
 au FileType go nmap <Leader>i <Plug>(go-info)
-au FileType go nmap <Leader>l <Plug>(go-metalinter)
+au FileType go nmap <Leader>l <Plug>(go-lint)
 
 au FileType go nmap <leader>r  <Plug>(go-run)
 
@@ -1004,7 +992,7 @@ endif
 " =================== tsserver ========================
 if executable('tsserver')
 lua << EOF
-require'lspconfig'.ts_ls.setup{}
+require'lspconfig'.tsserver.setup{}
 EOF
 else
   echo "You might want to install tsserver: yarn global add typescript typescript-language-server"
@@ -1070,7 +1058,7 @@ require("cmp_git").setup({
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'clangd', 'kcl_lsp', 'rust_analyzer', 'ts_ls' }
+local servers = { 'clangd', 'kcl_lsp', 'rust_analyzer', 'tsserver' }
 for _, lsp in ipairs(servers) do
   if not nvim_lsp[lsp] then
     nvim_lsp[lsp].setup {
@@ -1117,7 +1105,7 @@ nnoremap <silent> <C-t> :Lspsaga open_floaterm<CR>
 tnoremap <silent> <C-t> <C-\><C-n>:Lspsaga close_floaterm<CR>
 
 " diagnostics
-nnoremap <silent><leader>cd :Lspsaga show_line_diagnostics<CR>
+nnoremap <silent><leader>cd :Lspsaga show_diagnostics<CR>
 
 " TODO fix why this plugin errors when opening a gitcommit file.
 lua << EOF
