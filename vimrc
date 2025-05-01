@@ -964,31 +964,6 @@ else
   echo "You might want to install kcl-language-server: https://github.com/KittyCAD/kcl-lsp/releases"
 endif
 
-" =================== rust-analyzer ========================
-if executable('rust-analyzer')
-lua << EOF
-local nvim_lsp = require'lspconfig'
-
-nvim_lsp.rust_analyzer.setup({
-  -- on_attach is a callback called when the language server attachs to the buffer
-  -- on_attach = on_attach,
-  settings = {
-    -- config from: https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
-    ["rust-analyzer"] = {
-      -- enable clippy diagnostics on save
-      checkOnSave = {
-        command = "clippy"
-      },
-    }
-  }
-})
-EOF
-else
-  echo "You might want to install rust-analyzer: https://rust-analyzer.github.io/manual.html#rust-analyzer-language-server-binary"
-endif
-
-endif
-
 " =================== tsserver ========================
 if executable('tsserver')
 lua << EOF
