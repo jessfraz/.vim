@@ -67,6 +67,7 @@ set incsearch                   " Shows the match while typing
 set hlsearch                    " Highlight found searches
 set ignorecase                  " Search case insensitive...
 set smartcase                   " ... but not when search pattern contains upper case characters
+set signcolumn=yes              " Always show the sign column
 " set ttyscroll=3               " noop on linux ?
 set lazyredraw          	      " Wait to redraw "
 
