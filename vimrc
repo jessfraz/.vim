@@ -992,7 +992,7 @@ endif
 " =================== tsserver ========================
 if executable('tsserver')
 lua << EOF
-require'lspconfig'.tsserver.setup{}
+require'lspconfig'.ts_ls.setup{}
 EOF
 else
   echo "You might want to install tsserver: yarn global add typescript typescript-language-server"
@@ -1058,7 +1058,7 @@ require("cmp_git").setup({
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'clangd', 'kcl_lsp', 'rust_analyzer', 'tsserver' }
+local servers = { 'clangd', 'kcl_lsp', 'rust_analyzer', 'ts_ls' }
 for _, lsp in ipairs(servers) do
   if not nvim_lsp[lsp] then
     nvim_lsp[lsp].setup {
