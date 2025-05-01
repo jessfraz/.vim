@@ -22,6 +22,9 @@
 [submodule "bundle/vim-systemd"]
 	path = bundle/vim-systemd
 	url = https://github.com/wgwoods/vim-systemd-syntax.git
+[submodule "bundle/rust.vim"]
+	path = bundle/rust.vim
+	url = https://github.com/rust-lang/rust.vim.git
 [submodule "bundle/vim-terraform"]
 	path = bundle/vim-terraform
 	url = https://github.com/hashivim/vim-terraform.git
@@ -154,6 +157,3 @@
 [submodule "bundle/vim-nix"]
 	path = bundle/vim-nix
 	url = https://github.com/LnL7/vim-nix.git
-[submodule "bundle/rustaceanvim"]
-	path = bundle/rustaceanvim
-	url = https://github.com/mrcjkb/rustaceanvim.git
