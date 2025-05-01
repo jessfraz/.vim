@@ -960,13 +960,9 @@ end
 
 lspconfig.kcl_lsp.setup{}
 EOF
-
-endif
-
 else
   echo "You might want to install kcl-language-server: https://github.com/KittyCAD/kcl-lsp/releases"
 endif
-
 
 " =================== tsserver ========================
 if executable('tsserver')
@@ -1037,7 +1033,7 @@ require("cmp_git").setup({
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'clangd', 'kcl_lsp', 'ts_ls' }
+local servers = { 'clangd', 'kcl_lsp', 'rust_analyzer', 'ts_ls' }
 for _, lsp in ipairs(servers) do
   if not nvim_lsp[lsp] then
     nvim_lsp[lsp].setup {
