@@ -1,61 +1,8 @@
 SHELL := bash
 
-XDG_CONFIG_HOME ?= $(HOME)/.config
-
-.PHONY: install
-install: ## Sets up symlink for user and root .vimrc for vim and neovim.
-	ln -snf "$(HOME)/.vim/vimrc" "$(HOME)/.vimrc"
-	mkdir -p "$(XDG_CONFIG_HOME)"
-	ln -snf "$(HOME)/.vim" "$(XDG_CONFIG_HOME)/nvim"
-	ln -snf "$(HOME)/.vimrc" "$(XDG_CONFIG_HOME)/nvim/init.vim"
-	sudo ln -snf "$(HOME)/.vim" /root/.vim
-	sudo ln -snf "$(HOME)/.vimrc" /root/.vimrc
-	sudo mkdir -p /root/.config
-	sudo ln -snf "$(HOME)/.vim" /root/.config/nvim
-	sudo ln -snf "$(HOME)/.vimrc" /root/.config/nvim/init.vim
-
 .PHONY: update
-update: update-plugins avante-build ## Updates all plugins and the nix flake.
+update: ## Updates the nix flake.
 	nix flake update
-
-.PHONY: update-plugins
-update-plugins: ## Updates all plugins.
-	git submodule update --init --recursive
-	git submodule update --remote
-	@if [[ -d "$(CURDIR)/bundle/coc.vim" ]]; then \
-		cd $(CURDIR)/bundle/coc.nvim; \
-		git checkout release; \
-		git reset --hard origin/release; \
-	fi
-	git submodule foreach 'git pull --recurse-submodules origin `git rev-parse --abbrev-ref HEAD`'
-
-.PHONY: avante-build
-avante-build: ## Builds avante.vim from source.
-	$(MAKE) -C bundle/avante.nvim
-
-.PHONY: README.md
-README.md: ## Generates and updates plugin info in README.md.
-	@sed -i '/## Plugins Used/q' $@
-	@git  submodule --quiet foreach bash -c "echo -e \"* [\$$(git config --get remote.origin.url | sed 's#https://##' | sed 's#git://##' | sed 's/.git//')](\$$(git config --get remote.origin.url))\"" >> $@
-
-check_defined = \
-				$(strip $(foreach 1,$1, \
-				$(call __check_defined,$1,$(strip $(value 2)))))
-__check_defined = \
-				  $(if $(value $1),, \
-				  $(error Undefined $1$(if $2, ($2))$(if $(value @), \
-				  required by target `$@')))
-
-.PHONY: remove-submodule
-remove-submodule: ## Removes a git submodule (ex MODULE=bundle/nginx.vim).
-	@:$(call check_defined, MODULE, path of module to remove)
-	mv $(MODULE) $(MODULE).tmp || true
-	git submodule deinit -f -- $(MODULE) || true
-	$(RM) -r .git/modules/$(MODULE) || true
-	git rm -f $(MODULE) || true
-	$(RM) -r $(MODULE).tmp || true
-	$(MAKE) README.md
-
 
 .PHONY: help
 help:
