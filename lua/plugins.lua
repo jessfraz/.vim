@@ -171,7 +171,7 @@ return {
       end
       -- JavaScript/TypeScript (tsserver via typescript-language-server)
       if vim.fn.executable("typescript-language-server") == 1 then
-        lspconfig.tsserver.setup({ on_attach = on_attach, capabilities = capabilities })
+        lspconfig.ts_ls.setup({ on_attach = on_attach, capabilities = capabilities })
       end
 	  -- C/C++ (clangd)
 	  if vim.fn.executable("clangd") == 1 then
@@ -270,14 +270,15 @@ return {
   { "tpope/vim-endwise", ft = { "ruby", "vim", "lua", "bash" } },    -- Automatically add "end" in certain filetypes (Ruby, etc.)
   { "mg979/vim-visual-multi", branch = "master", keys = { "<C-n>", "<C-down>", "<C-up>" } },  -- Multi-cursor editing (Ctrl-N to add cursors)
   { "stevearc/dressing.nvim", event = "VeryLazy", config = true },   -- Better UI for vim.ui (input/select) dialogs
-  { "lukas-reineke/indent-blankline.nvim", event = "BufReadPost",
-    config = function()
-      require("indent_blankline").setup {
-        show_trailing_blankline_indent = false,  -- Don't show indent guide on empty lines
-        use_treesitter = true,
-      }
-    end
+{
+  "lukas-reineke/indent-blankline.nvim",
+  main = "ibl",                       -- tells lazy.nvim the module name changed
+  event = "BufReadPost",
+  opts = {
+    indent = { char = "│" },          -- or leave blank for default ▏
+    scope  = { enabled = false },     -- disable rainbow scope lines if you like
   },
+},
 
   -- Syntax and Language Support (Tree-sitter and filetype plugins)
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate", event = { "BufReadPost", "BufNewFile" },
