@@ -79,6 +79,7 @@
         jq
         kclLsp
         mdformat
+        neovim-nightly
         nixd
         pyright
         ripgrep
