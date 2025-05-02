@@ -34,6 +34,7 @@
     self,
     nixpkgs,
     home-manager,
+    neovim-nightly,
     fenix,
     alejandra,
     modeling-app,
