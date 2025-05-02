@@ -84,23 +84,26 @@ return {
 
 	-- Dashboard (start screen)
 	{
-		"glepnir/dashboard-nvim",
-		event = "VimEnter",
+		"nvimdev/dashboard-nvim", -- new repo name
+		lazy = false, -- load immediately
+		priority = 1001, -- after colorscheme (1000), before the rest
 		config = function()
-			-- Configure a simple dashboard with custom header and shortcuts
-			vim.g.dashboard_default_executive = "telescope"
-			vim.g.dashboard_custom_header = {
-				"Neovim Configuration (Lua + lazy.nvim)",
-				"===================================",
-			}
-			vim.g.dashboard_custom_section = {
-				a = { description = { "  Find File          <C-P>" }, command = "Telescope find_files" },
-				b = { description = { "  Live Grep          <C-G>" }, command = "Telescope live_grep" },
-				c = { description = { "  Git Branches       <C-B>" }, command = "Telescope git_branches" },
-				d = { description = { "  File Explorer      <C-A>" }, command = "NvimTreeToggle" },
-				e = { description = { "  Quit Neovim        ,q" }, command = "qa" },
-			}
+			local db = require("dashboard")
+			db.setup({
+				theme = "doom",
+				config = {
+					header = { "     🦖  Baby Yosh Dashboard  🦖" },
+					center = {
+						{ desc = "  Find File           ", action = "Telescope find_files" },
+						{ desc = "  Live Grep           ", action = "Telescope live_grep" },
+						{ desc = "  File Explorer       ", action = "NvimTreeToggle" },
+						{ desc = "  Git Branches        ", action = "Telescope git_branches" },
+						{ desc = "  Quit                ", action = "qa" },
+					},
+				},
+			})
 		end,
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
 
 	-- Statusline and Bufferline
