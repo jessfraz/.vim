@@ -63,7 +63,6 @@
     in {
       home.packages = with pkgs; [
         alejandraPkg
-        avanteNvimLib
         biome
         clang-tools
         gh
