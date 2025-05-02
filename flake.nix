@@ -77,6 +77,7 @@
         gopls
         jq
         kclLsp
+        luajitPackages.luarocks
         mdformat
         nixd
         pyright
