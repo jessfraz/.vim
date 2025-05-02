@@ -53,7 +53,6 @@
   in {
     homeManagerModules.default = {
       pkgs,
-      neovim-nightly,
       config,
       lib,
       ...
