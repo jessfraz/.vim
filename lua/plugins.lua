@@ -28,6 +28,7 @@ return {
 
   -- Which-Key (leader cheat-sheet)
   { "folke/which-key.nvim",
+        dependencies = { "echasnovski/mini.icons" },  -- Icons for which-key
   event = "VeryLazy",
   config = function()
     require("which-key").setup({ plugins = { spelling = { enabled = true } } })
@@ -260,7 +261,7 @@ return {
   { "zbirenbaum/copilot.lua", cmd = "Copilot", event = "InsertEnter",
     config = function()
       require("copilot").setup({
-        suggestion = { auto_trigger = true, keymap = { accept = "<C-l>" } }
+        suggestion = { auto_trigger = true, keymap = { accept = "<Tab>" } }
       })
     end
   },

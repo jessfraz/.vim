@@ -85,6 +85,7 @@
         rustAnalyzer
         ruff
         stylua
+        tree-sitter
         typescript
         typescript-language-server
         yamlfmt
