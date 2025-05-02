@@ -53,11 +53,11 @@
         "rust-analyzer-src": "rust-analyzer-src_2"
       },
       "locked": {
-        "lastModified": 1746081462,
-        "narHash": "sha256-WmJBaktb33WwqNn5BwdJghAoiBnvnPhgHSBksTrF5K8=",
+        "lastModified": 1746167999,
+        "narHash": "sha256-18XGHsjk/5H8F0OGUCG56CeeW1u6qQ7tAfQK3azlwWg=",
         "owner": "nix-community",
         "repo": "fenix",
-        "rev": "e3be528e4f03538852ba49b413ec4ac843edeb60",
+        "rev": "bcbc23a4f3391c1c3657f1847cb693aaea3aed76",
         "type": "github"
       },
       "original": {
@@ -89,11 +89,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1746040799,
-        "narHash": "sha256-osgPX/SzIpkR50vev/rqoTEAVkEcOWXoQXmbzsaI4KU=",
+        "lastModified": 1746204974,
+        "narHash": "sha256-Evu4H0/kzaQoCNLGQTp+JGTqkywzPx0IAo20Ci2zNck=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "5f217e5a319f6c186283b530f8c975e66c028433",
+        "rev": "1e8c62c651242fc685b10efc4a48ab777635fb7f",
         "type": "github"
       },
       "original": {
@@ -111,11 +111,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1746122468,
-        "narHash": "sha256-7vRJSFKChRrh2CDcPr2eBpL9WjAq6YXQepHV76VmN5c=",
+        "lastModified": 1746207674,
+        "narHash": "sha256-5PZIVoky4SilZvX9xa8zlFHbEYWf6ichmichS/ffLRM=",
         "owner": "kittycad",
         "repo": "modeling-app",
-        "rev": "e8e7c22b95360a3796c54040513fcf5131b6db63",
+        "rev": "ace9a59a456ee128e9d2393f2e904cf079d65d65",
         "type": "github"
       },
       "original": {
@@ -196,11 +196,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1745930157,
-        "narHash": "sha256-y3h3NLnzRSiUkYpnfvnS669zWZLoqqI6NprtLQ+5dck=",
+        "lastModified": 1746141548,
+        "narHash": "sha256-IgBWhX7A2oJmZFIrpRuMnw5RAufVnfvOgHWgIdds+hc=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "46e634be05ce9dc6d4db8e664515ba10b78151ae",
+        "rev": "f02fddb8acef29a8b32f10a335d44828d7825b78",
         "type": "github"
       },
       "original": {
@@ -240,11 +240,11 @@
     "rust-analyzer-src_2": {
       "flake": false,
       "locked": {
-        "lastModified": 1746024678,
-        "narHash": "sha256-Q5J7+RoTPH4zPeu0Ka7iSXtXty228zKjS0Ed4R+ohpA=",
+        "lastModified": 1746093169,
+        "narHash": "sha256-3gmUmzIzfzlgF/b4HXvtoBIP4bKofVeEubX7LcPBYLo=",
         "owner": "rust-lang",
         "repo": "rust-analyzer",
-        "rev": "5d66d45005fef79751294419ab9a9fa304dfdf5c",
+        "rev": "298fa81aacda7b06de4db55c377b1aa081906bc9",
         "type": "github"
       },
       "original": {
@@ -275,11 +275,11 @@
     "selfClone": {
       "flake": false,
       "locked": {
-        "lastModified": 1746122338,
-        "narHash": "sha256-jOZIJFrzRZO1z/trJU70DQvlY6EnaBFbSwbis0Y4IW8=",
+        "lastModified": 1746138820,
+        "narHash": "sha256-1fRdpaD3TjPXbA2ojH/g4GQohLQZNQqf9Z0Ucq5gNyQ=",
         "ref": "refs/heads/main",
-        "rev": "dac55f509956f542e392eda263e853a9fc77a524",
-        "revCount": 726,
+        "rev": "7068a11238c0200f210e52888b23871e7d8490a2",
+        "revCount": 728,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/jessfraz/.vim"

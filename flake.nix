@@ -139,6 +139,9 @@
         defaultEditor = true;
         viAlias = true;
         vimAlias = true;
+
+        # use the neovim-nightly package
+        package = pkgs.neovim-nightly;
       };
 
       home.file = {
