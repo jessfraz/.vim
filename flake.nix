@@ -79,7 +79,6 @@
         jq
         kclLsp
         mdformat
-        neovim-nightly
         nixd
         pyright
         ripgrep
@@ -113,7 +112,10 @@
     homeConfigurations = forAllSystems (
       {system, ...}:
         home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs {inherit system;};
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = [neovim-nightly.overlay];
+          };
           modules = [self.homeManagerModules.default];
         }
     );
