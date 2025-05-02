@@ -283,7 +283,7 @@ return {
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate", event = { "BufReadPost", "BufNewFile" },
     config = function()
       require("nvim-treesitter.configs").setup {
-        ensure_installed = { "bash", "c","cmake", "cpp","css",, "csv", "diff", "dockerfile","gitcommit", "gitignore", "go", "javascript","jinja", "json","lua", "markdown", "markdown_inline","nginx", "nix","proto", "python", "rust","terraform", "toml",  "tsx", "typescript",  "yaml",  },
+        ensure_installed = { "bash", "c","cmake", "cpp","css","csv", "diff", "dockerfile","gitcommit", "gitignore", "go", "javascript","jinja", "json","lua", "markdown", "markdown_inline","nginx", "nix","proto", "python", "rust","terraform", "toml",  "tsx", "typescript",  "yaml",  },
         highlight = { enable = true },
         indent = { enable = true }
       }
