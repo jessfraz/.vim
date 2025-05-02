@@ -9,6 +9,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    neovim-nightly = {
+      url = "github:nix-community/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     fenix = {
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -29,6 +34,7 @@
     self,
     nixpkgs,
     home-manager,
+    neovim-nightly,
     fenix,
     alejandra,
     modeling-app,
@@ -39,6 +45,7 @@
     forAllSystems = f:
       nixpkgs.lib.genAttrs supportedSystems (system:
         f {
+          overlays = [neovim-nightly.overlay];
           pkgs = import nixpkgs {
             inherit system;
           };
