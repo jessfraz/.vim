@@ -92,7 +92,7 @@ return {
 			db.setup({
 				theme = "doom",
 				config = {
-					header = { "     🦖  Baby Yosh Dashboard  🦖" },
+					header = { "🦖  Baby Yosh Dashboard  🦖" },
 					center = {
 						{ desc = "  Find File           ", action = "Telescope find_files" },
 						{ desc = "  Live Grep           ", action = "Telescope live_grep" },
