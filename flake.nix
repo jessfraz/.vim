@@ -58,7 +58,6 @@
 
       alejandraPkg = alejandra.packages.${pkgs.system}.default;
       rustAnalyzer = fenix.packages.${pkgs.system}.rust-analyzer;
-      rustFmt = fenix.packages.${pkgs.system}.minimal.toolchain.rustfmt;
       kclLsp = modeling-app.packages.${pkgs.system}.kcl-language-server;
     in {
       home.packages = with pkgs; [
@@ -77,7 +76,6 @@
         pyright
         ripgrep
         rustAnalyzer
-        rustFmt
         ruff
         stylua
         typescript
