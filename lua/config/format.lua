@@ -7,17 +7,17 @@ require("conform").setup({
   end,
   formatters_by_ft = {
     go         = { "goimports", "gofumpt" }, -- fallback chain
-	javascript = { "biome-organize-imports", "biome" }
+	javascript = { "biome-organize-imports", "biome" },
     json       = { "jq" },
-	jsx        = { "biome-organize-imports", "biome" }
+	jsx        = { "biome-organize-imports", "biome" },
     lua        = { "stylua" },             -- needs stylua in $PATH
 	python     = { "ruff_format", "ruff_fix" },              -- needs ruff in $PATH
     nix        = { "alejandra" },
     markdown   = { "mdformat" },
     rust       = { "rustfmt", lsp_format = "fallback" },
-	tsx        = { "biome-organize-imports", "biome" }
-	typescript = { "biome-organize-imports", "biome" }
-	yaml       = { "yamlfmt" }
+	tsx        = { "biome-organize-imports", "biome" },
+	typescript = { "biome-organize-imports", "biome" },
+	yaml       = { "yamlfmt" },
 	-- Use the "_" filetype to run formatters on filetypes that don't
     -- have other formatters configured.
     ["_"] = { "trim_whitespace" },
