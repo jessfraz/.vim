@@ -23,16 +23,6 @@
       url = "github:kittycad/modeling-app";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    naersk = {
-      url = "github:nix-community/naersk";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    selfClone = {
-      url = "git+https://github.com/jessfraz/.vim?submodules=1";
-      flake = false;
-    };
   };
 
   outputs = {
@@ -57,50 +47,6 @@
           system = system;
         });
   in {
-    packages = forAllSystems ({
-      pkgs,
-      system,
-      ...
-    }: let
-      fenixPkgs = fenix.packages.${pkgs.system};
-      rustToolchain = fenixPkgs.stable.withComponents [
-        "cargo"
-        "rustc"
-      ];
-      naersk-lib = pkgs.callPackage naersk {
-        cargo = rustToolchain;
-        rustc = rustToolchain;
-      };
-    in {
-      avante-nvim-lib = naersk-lib.buildPackage {
-        pname = "avante-nvim-lib";
-        version = "0.1.0";
-        release = true;
-
-        src = selfClone + /bundle/avante.nvim;
-        copyLibs = true;
-        copyBins = false;
-
-        cargoBuildOptions = opt: opt ++ ["--all" "--features=luajit"];
-
-        # We want to copy all the source bundle files to the output.
-        # AND we want to mv lib/* to bundle/avante.nvim/build
-        postInstall = ''
-          mkdir -p $out/bundle/avante.nvim
-          cp -r ${selfClone}/bundle/* $out/bundle/
-          mkdir -p $out/bundle/avante.nvim/build
-          # We want to rename all the libs in $out/lib/libavante* to avante*
-          # and move them to $out/bundle/avante.nvim/build
-          for lib in $out/lib/libavante*; do
-            mv $lib $out/bundle/avante.nvim/build/$(basename $lib | sed 's/^lib//');
-          done
-        '';
-
-        buildInputs = [pkgs.openssl pkgs.pkg-config pkgs.perl];
-      };
-      default = self.packages.${system}.avante-nvim-lib;
-    });
-
     homeManagerModules.default = {
       pkgs,
       config,
@@ -115,9 +61,6 @@
       alejandraPkg = alejandra.packages.${pkgs.system}.default;
       rustAnalyzer = fenix.packages.${pkgs.system}.rust-analyzer;
       kclLsp = modeling-app.packages.${pkgs.system}.kcl-language-server;
-
-      avanteNvimLib = self.packages.${pkgs.system}.avante-nvim-lib;
-      builtBundle = avanteNvimLib + "/bundle";
     in {
       home.packages = with pkgs; [
         alejandraPkg
@@ -126,12 +69,17 @@
         gh
         go
         gopls
+        jq
         kclLsp
+        mdformat
         nixd
-        typescript
-        typescript-language-server
+        pyright
         ripgrep
         rustAnalyzer
+        ruff
+        stylua
+        typescript
+        typescript-language-server
       ];
 
       programs.neovim = {
@@ -145,35 +93,10 @@
       };
 
       home.file = {
-        ".vimrc".source = ./vimrc;
-        ".config/nvim/init.vim".source = ./vimrc;
+        ".config/nvim/init.lua".source = ./init.lua;
 
-        ".vim/autoload" = {
-          source = mkIfExists ./autoload;
-        };
-        ".config/nvim/autoload" = {
-          source = mkIfExists ./autoload;
-        };
-
-        ".vim/bundle" = {
-          source = "${self.packages.${pkgs.system}.avante-nvim-lib}/bundle";
-        };
-        ".config/nvim/bundle" = {
-          source = "${self.packages.${pkgs.system}.avante-nvim-lib}/bundle";
-        };
-
-        ".vim/colors" = {
-          source = mkIfExists ./colors;
-        };
-        ".config/nvim/colors" = {
-          source = mkIfExists ./colors;
-        };
-
-        ".vim/indent" = {
-          source = mkIfExists ./indent;
-        };
-        ".config/nvim/indent" = {
-          source = mkIfExists ./indent;
+        ".config/nvim/lua" = {
+          source = mkIfExists ./lua;
         };
       };
     };
