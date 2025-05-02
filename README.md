@@ -16,4 +16,4 @@ My vim dot files.
 - `Ctrl-T`: Open a floating terminal
 - `<Space>`: Center the screen to the cursor
 
-There's a lot more if you hit `,?` you can peruse all the ones connected to the leader `,`
+There's a lot more if you hit `,` you can peruse all the ones connected to the leader `,`
