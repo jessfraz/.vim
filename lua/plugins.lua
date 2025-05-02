@@ -209,6 +209,9 @@ return {
     filetypes = { "gitcommit" },
     remotes = { "upstream", "origin" }, -- in order of most to least prioritized
     },
+	init = function()
+        table.insert(require("cmp").get_config().sources, { name = "git" })
+    end
 },
   { "hrsh7th/nvim-cmp", event = "InsertEnter",
     dependencies = {
@@ -248,7 +251,6 @@ return {
         }, {
           { name = "buffer" },
           { name = "spell" }
-			{ name = 'git' },
         })
       })
     end
@@ -289,7 +291,7 @@ return {
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate", event = { "BufReadPost", "BufNewFile" },
     config = function()
       require("nvim-treesitter.configs").setup {
-        ensure_installed = { "c", "cpp", "go", "lua", "python", "rust", "javascript", "typescript", "tsx", "json", "bash", "yaml", "markdown", "markdown_inline" },
+        ensure_installed = { "bash", "c","cmake", "cpp","css",, "csv", "diff", "dockerfile","gitcommit", "gitignore", "go", "javascript","jinja", "json","lua", "markdown", "markdown_inline","nix","proto", "python", "rust","terraform", "toml",  "tsx", "typescript",  "yaml",  },
         highlight = { enable = true },
         indent = { enable = true }
       }

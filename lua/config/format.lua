@@ -12,7 +12,7 @@ require("conform").setup({
 	python     = { "ruff_format", "ruff_fix" },              -- needs ruff in $PATH
     nix        = { "alejandra" },
     markdown   = { "mdformat" },
-    rust       = { "rustfmt" },
+    rust       = { "rustfmt", lsp_format = "fallback" },
   },
   -- extra-exe overrides (binary names differ on Nix sometimes):
   formatters = {
