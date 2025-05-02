@@ -2,9 +2,6 @@
 -- 𝗔𝘂𝘁𝗼-𝗳𝗼𝗿𝗺𝗮𝘁 𝗼𝗻 𝗦𝗮𝘃𝗲  –  Conform.nvim wraps every tool behind one API
 -- https://github.com/stevearc/conform.nvim
 require("conform").setup({
-  format_on_save = function(buf)
-    return true
-  end,
   formatters_by_ft = {
     go         = { "goimports", "gofumpt" }, -- fallback chain
 	javascript = { "biome-organize-imports", "biome" },
