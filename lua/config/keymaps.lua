@@ -9,13 +9,11 @@ end
 -- (Additional leader mappings can be added here if needed)
 
 -- Normal mode mappings
-map("n", "<Space>", "zz", "Center screen on cursor") -- Press Space to center the screen at the cursor line:contentReference[oaicite:2]{index=2}
-map("n", "<C-x>", ":bnext<CR>", "Next buffer") -- Ctrl-X: switch to next buffer:contentReference[oaicite:3]{index=3}
-map("n", "<C-z>", ":bprevious<CR>", "Previous buffer") -- Ctrl-Z: switch to previous buffer (repurposed, was suspend):contentReference[oaicite:4]{index=4}
-map("n", "<C-t>", "<cmd>Lspsaga open_floaterm<CR>", "Toggle floating terminal") -- Ctrl-T: open a floating terminal (via LspSaga):contentReference[oaicite:5]{index=5}
-map("t", "<C-t>", [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], "Close floating terminal") -- Ctrl-T: in terminal mode, close it:contentReference[oaicite:6]{index=6}
-map("n", "<C-a>", "<cmd>NvimTreeToggle<CR>", "Toggle file tree") -- Ctrl-A: open/close file explorer sidebar:contentReference[oaicite:7]{index=7}
-map("n", "<C-r>", "<cmd>NvimTreeRefresh<CR>", "Refresh file tree") -- Ctrl-R: refresh file explorer (e.g., after changes):contentReference[oaicite:8]{index=8}
+map("n", "<Space>", "zz", "Center screen on cursor") -- Press Space to center the screen at the cursor line
+map("n", "<C-x>", ":bnext<CR>", "Next buffer") -- Ctrl-X: switch to next buffer
+map("n", "<C-z>", ":bprevious<CR>", "Previous buffer") -- Ctrl-Z: switch to previous buffer (repurposed, was suspend)
+map("n", "<C-a>", "<cmd>NvimTreeToggle<CR>", "Toggle file tree") -- Ctrl-A: open/close file explorer sidebar
+map("n", "<C-r>", "<cmd>NvimTreeRefresh<CR>", "Refresh file tree") -- Ctrl-R: refresh file explorer (e.g., after changes)
 
 -- Multiple cursors (vim-visual-multi) will use <C-n> by default:
 -- In normal mode <C-n> starts adding a cursor at current word, in visual it adds another selection.
@@ -34,3 +32,6 @@ map("i", "jk", "<Esc>", "Exit insert mode quickly") -- Press 'jk' fast in insert
 -- Save and quit shortcuts
 map("n", "<Leader>w", ":w<CR>", "Save file")
 map("n", "<Leader>q", ":q<CR>", "Quit")
+
+local map = vim.keymap.set
+map({ "n", "t" }, "<C-t>", "<cmd>Lspsaga term_toggle<CR>", { desc = "Toggle float term", silent = true })
