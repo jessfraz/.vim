@@ -34,7 +34,6 @@
     self,
     nixpkgs,
     home-manager,
-    neovim-nightly,
     fenix,
     alejandra,
     modeling-app,
@@ -45,7 +44,6 @@
     forAllSystems = f:
       nixpkgs.lib.genAttrs supportedSystems (system:
         f {
-          overlays = [neovim-nightly.overlay];
           pkgs = import nixpkgs {
             inherit system;
           };
@@ -54,6 +52,7 @@
   in {
     homeManagerModules.default = {
       pkgs,
+      neovim-nightly,
       config,
       lib,
       ...
@@ -97,7 +96,7 @@
         vimAlias = true;
 
         # use the neovim-nightly package
-        package = pkgs.neovim-nightly;
+        package = neovim-nightly.packages.${pkgs.system}.default;
       };
 
       home.file = {
@@ -114,7 +113,6 @@
         home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
             inherit system;
-            overlays = [neovim-nightly.overlay];
           };
           modules = [self.homeManagerModules.default];
         }
