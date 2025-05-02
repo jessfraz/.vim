@@ -77,6 +77,7 @@
         gopls
         jq
         kclLsp
+        luajitPackages.jsregexp
         luajitPackages.luarocks
         mdformat
         nixd
