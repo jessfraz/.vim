@@ -111,11 +111,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1746214461,
-        "narHash": "sha256-A41rrkoSXOr0jp2+VbjaCTNFatIryF9iE6BuLlIAkrY=",
+        "lastModified": 1746218918,
+        "narHash": "sha256-ZbVzzroYK5eBXAeUyaBN4D2zylmU0YHr67JWH30q+lY=",
         "owner": "kittycad",
         "repo": "modeling-app",
-        "rev": "00553c34ab164d227a8261d3fb9845f16ff1c14a",
+        "rev": "75916d4300d5049aaa5683278cd5795ea95451fb",
         "type": "github"
       },
       "original": {
@@ -127,26 +127,6 @@
     "naersk": {
       "inputs": {
         "nixpkgs": "nixpkgs"
-      },
-      "locked": {
-        "lastModified": 1745925850,
-        "narHash": "sha256-cyAAMal0aPrlb1NgzMxZqeN1mAJ2pJseDhm2m6Um8T0=",
-        "owner": "nix-community",
-        "repo": "naersk",
-        "rev": "38bc60bbc157ae266d4a0c96671c6c742ee17a5f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "naersk",
-        "type": "github"
-      }
-    },
-    "naersk_2": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
       },
       "locked": {
         "lastModified": 1745925850,
@@ -215,9 +195,7 @@
         "fenix": "fenix_2",
         "home-manager": "home-manager",
         "modeling-app": "modeling-app",
-        "naersk": "naersk_2",
-        "nixpkgs": "nixpkgs_3",
-        "selfClone": "selfClone"
+        "nixpkgs": "nixpkgs_3"
       }
     },
     "rust-analyzer-src": {
@@ -270,24 +248,6 @@
         "owner": "oxalica",
         "repo": "rust-overlay",
         "type": "github"
-      }
-    },
-    "selfClone": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1746138820,
-        "narHash": "sha256-1fRdpaD3TjPXbA2ojH/g4GQohLQZNQqf9Z0Ucq5gNyQ=",
-        "ref": "refs/heads/main",
-        "rev": "7068a11238c0200f210e52888b23871e7d8490a2",
-        "revCount": 728,
-        "submodules": true,
-        "type": "git",
-        "url": "https://github.com/jessfraz/.vim"
-      },
-      "original": {
-        "submodules": true,
-        "type": "git",
-        "url": "https://github.com/jessfraz/.vim"
       }
     }
   },
