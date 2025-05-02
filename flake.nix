@@ -64,9 +64,12 @@
       home.packages = with pkgs; [
         alejandraPkg
         avanteNvimLib
+        biome
         clang-tools
         gh
         go
+        gofumpt
+        gotools
         gopls
         jq
         kclLsp
@@ -80,6 +83,7 @@
         stylua
         typescript
         typescript-language-server
+        yamlfmt
       ];
 
       programs.neovim = {

@@ -278,20 +278,12 @@ return {
       }
     end
   },
-  { "ntpeters/vim-better-whitespace", event = "BufReadPost",
-    config = function()
-      vim.g.better_whitespace_enabled = 1   -- Highlight trailing whitespace
-      vim.g.strip_whitespace_on_save = 1    -- Strip trailing whitespace on save:contentReference[oaicite:19]{index=19}
-	  vim.g.strip_whitespace_confirm=0
-      vim.g.better_whitespace_filetypes_blacklist = { "diff", "git", "gitcommit", "markdown", "rust", "qf", "help", "unite" }  -- Don't strip in diff, git commits, markdown (where trailing space is meaningful)
-    end
-  },
 
   -- Syntax and Language Support (Tree-sitter and filetype plugins)
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate", event = { "BufReadPost", "BufNewFile" },
     config = function()
       require("nvim-treesitter.configs").setup {
-        ensure_installed = { "bash", "c","cmake", "cpp","css",, "csv", "diff", "dockerfile","gitcommit", "gitignore", "go", "javascript","jinja", "json","lua", "markdown", "markdown_inline","nix","proto", "python", "rust","terraform", "toml",  "tsx", "typescript",  "yaml",  },
+        ensure_installed = { "bash", "c","cmake", "cpp","css",, "csv", "diff", "dockerfile","gitcommit", "gitignore", "go", "javascript","jinja", "json","lua", "markdown", "markdown_inline","nginx", "nix","proto", "python", "rust","terraform", "toml",  "tsx", "typescript",  "yaml",  },
         highlight = { enable = true },
         indent = { enable = true }
       }
