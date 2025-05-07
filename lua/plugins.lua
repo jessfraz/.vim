@@ -77,6 +77,21 @@ return {
 				defaults = {
 					prompt_prefix = "🔍 ",
 					mappings = { i = { ["<Esc>"] = require("telescope.actions").close } },
+					file_ignore_patterns = {
+						"^%.git/", -- .git    ← stay gone
+						"^%.idea/", -- JetBrains IDE crap
+						"^%.vscode/", -- VSCode settings
+						"^%.venv/", -- Python virtualenv
+						"^node_modules/", -- npm black hole
+						"^%.cache/",
+					},
+					pickers = {
+						find_files = {
+							hidden = true, -- show hidden files
+							follow = true, -- follow symlinks
+							no_ignore = false, -- still respect .gitignore
+						},
+					},
 				},
 			})
 		end,
