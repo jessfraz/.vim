@@ -46,61 +46,94 @@ return {
 
 	-- Fuzzy Finder (files, grep, etc.)
 	{
-		"nvim-telescope/telescope.nvim", -- Telescope finder (fuzzy search for files, text, git, etc.)
+		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
-		keys = { -- Lazy-load on these keymaps
+		dependencies = { "nvim-lua/plenary.nvim" },
+
+		-- Lazy‑load on these keymaps -------------------------------------------
+		keys = {
 			{
 				"<C-p>",
 				function()
-					require("telescope.builtin").find_files()
+					-- Prefer git_files for speed, fall back to find_files if we’re not
+					-- inside a Git work‑tree.
+					local builtin = require("telescope.builtin")
+					local ok = pcall(builtin.git_files, { show_untracked = true })
+					if not ok then
+						builtin.find_files()
+					end
 				end,
-				desc = "Find Files",
-			}, -- Ctrl-P: open file finder:contentReference[oaicite:13]{index=13}
+				desc = "Find files (incl. dot‑files)",
+			},
 			{
 				"<C-g>",
 				function()
 					require("telescope.builtin").live_grep()
 				end,
 				desc = "Live Grep",
-			}, -- Ctrl-G: live grep in project:contentReference[oaicite:14]{index=14}
+			},
 			{
 				"<C-b>",
 				function()
 					require("telescope.builtin").git_branches()
 				end,
 				desc = "Git Branches",
-			}, -- Ctrl-B: list git branches:contentReference[oaicite:15]{index=15}
+			},
 		},
-		dependencies = { "nvim-lua/plenary.nvim" },
+
 		config = function()
-			require("telescope").setup({
+			local telescope = require("telescope")
+			local actions = require("telescope.actions")
+
+			telescope.setup({
+				---------------------------------------------------------------------
+				-- Defaults apply to *all* pickers ----------------------------------
+				---------------------------------------------------------------------
 				defaults = {
 					prompt_prefix = "🔍 ",
-					mappings = { i = { ["<Esc>"] = require("telescope.actions").close } },
+					mappings = { i = { ["<Esc>"] = actions.close } },
 					file_ignore_patterns = {
-						"^%.git/", -- .git    ← stay gone
-						"^%.idea/", -- JetBrains IDE crap
-						"^%.vscode/", -- VSCode settings
-						"^%.venv/", -- Python virtualenv
-						"^node_modules/", -- npm black hole
+						"^%.git/", -- keep .git ignored
+						"^%.idea/",
+						"^%.vscode/",
+						"^%.venv/",
+						"^node_modules/",
 						"^%.cache/",
-						".DS_Store",
+						"%.DS_Store$",
 					},
-					pickers = {
-						find_files = {
-							hidden = true, -- show hidden files
-							follow = true, -- follow symlinks
-							no_ignore = false, -- still respect .gitignore
-							find_command = {
-								"rg",
-								"--files",
+				},
+
+				---------------------------------------------------------------------
+				-- Picker‑specific overrides ----------------------------------------
+				---------------------------------------------------------------------
+				pickers = {
+					-- :Telescope find_files
+					find_files = {
+						hidden = true, -- include dot‑files / dot‑dirs
+						follow = true, -- follow symlinks
+						no_ignore = false, -- still respect .gitignore & friends
+						find_command = {
+							"rg",
+							"--files",
+							"--hidden",
+							"--glob",
+							"!.git/*", -- keep .git out
+							"--glob",
+							".github/**", -- BUT keep everything under .github
+						},
+					},
+
+					-- :Telescope live_grep
+					live_grep = {
+						additional_args = function()
+							return {
 								"--hidden",
 								"--glob",
-								"!.git/*", -- keep .git ignored
+								"!.git/*",
 								"--glob",
-								".github/**", -- but DO include .github },
-							},
-						},
+								".github/**",
+							}
+						end,
 					},
 				},
 			})
