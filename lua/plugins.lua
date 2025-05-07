@@ -100,7 +100,7 @@ return {
 						"^node_modules/",
 						"^%.cache/",
 						"%.DS_Store$",
-						"^%docs/html/",
+						"^docs/html/",
 					},
 				},
 
@@ -121,6 +121,8 @@ return {
 							"!.git/*", -- keep .git out
 							"--glob",
 							".github/**", -- BUT keep everything under .github
+							"--exclude",
+							"docs/html/**",
 						},
 					},
 
@@ -133,6 +135,8 @@ return {
 								"!.git/*",
 								"--glob",
 								".github/**",
+								"--exclude",
+								"docs/html/**",
 							}
 						end,
 					},
