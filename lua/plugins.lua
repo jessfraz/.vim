@@ -91,7 +91,15 @@ return {
 							hidden = true, -- show hidden files
 							follow = true, -- follow symlinks
 							no_ignore = false, -- still respect .gitignore
-							find_command = { "rg", "--ignore", "--hidden", "--files" },
+							find_command = {
+								"rg",
+								"--files",
+								"--hidden",
+								"--glob",
+								"!.git/*", -- keep .git ignored
+								"--glob",
+								".github/**", -- but DO include .github },
+							},
 						},
 					},
 				},
