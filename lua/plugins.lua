@@ -100,6 +100,7 @@ return {
 						"^node_modules/",
 						"^%.cache/",
 						"%.DS_Store$",
+						"^%docs/html/",
 					},
 				},
 
