@@ -84,12 +84,14 @@ return {
 						"^%.venv/", -- Python virtualenv
 						"^node_modules/", -- npm black hole
 						"^%.cache/",
+						".DS_Store",
 					},
 					pickers = {
 						find_files = {
 							hidden = true, -- show hidden files
 							follow = true, -- follow symlinks
 							no_ignore = false, -- still respect .gitignore
+							find_command = { "rg", "--ignore", "--hidden", "--files" },
 						},
 					},
 				},
