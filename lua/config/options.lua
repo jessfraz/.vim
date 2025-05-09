@@ -30,13 +30,6 @@ vim.opt.termguicolors = true -- True color support
 
 -- Clipboard
 vim.opt.clipboard = "unnamedplus" -- Use system clipboard for all yank, delete, paste, etc.
--- Do NOT clobber the clipboard on destructive actions
-for _, cmd in ipairs({ "d", "c", "x", "s", "C", "S", "D" }) do
-	-- normal-mode
-	vim.keymap.set({ "n" }, cmd, '"_' .. cmd, { noremap = true })
-	-- visual-mode
-	vim.keymap.set({ "v" }, cmd, '"_' .. cmd, { noremap = true })
-end
 
 -- Disable backup, swap and restore (handled by git/Nix, and to avoid swap files)
 vim.opt.swapfile = false
