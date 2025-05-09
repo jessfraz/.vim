@@ -55,10 +55,17 @@ return {
 			{
 				"<C-p>",
 				function()
-					-- Prefer git_files for speed, fall back to find_files if we’re not
-					-- inside a Git work‑tree.
 					local builtin = require("telescope.builtin")
-					local ok = pcall(builtin.git_files, { show_untracked = true })
+					-- recurse_submodules = true so git submodule contents are listed
+					-- Try submodules first (requires *no* --others flag)
+					local ok = pcall(builtin.git_files, { recurse_submodules = true })
+					if not ok then
+						-- Fallback: root-only but include untracked files
+						ok = pcall(builtin.git_files, { show_untracked = true })
+					end
+					if not ok then
+						builtin.find_files()
+					end
 					if not ok then
 						builtin.find_files()
 					end
