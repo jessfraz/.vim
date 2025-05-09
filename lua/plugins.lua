@@ -108,6 +108,12 @@ return {
 				-- Picker‑specific overrides ----------------------------------------
 				---------------------------------------------------------------------
 				pickers = {
+					-- :Telescope git_files — include submodule contents
+					git_files = {
+						show_untracked = true,
+						recurse_submodules = true,
+					},
+
 					-- :Telescope find_files
 					find_files = {
 						hidden = true, -- include dot‑files / dot‑dirs
