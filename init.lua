@@ -6,6 +6,7 @@ vim.g.maplocalleader = ","
 require("config.options") -- vim options (replaces vim-sensible defaults)
 require("config.keymaps") -- global keymaps (replaces old mappings)
 require("config.autocmds") -- autocmds (replaces old autocommands)
+require("config.filetypes") -- filetype settings (replaces old filetype settings)
 
 -- Bootstrap lazy.nvim plugin manager if not already installed
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
