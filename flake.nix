@@ -2,7 +2,7 @@
   description = "Home Manager module for jessfraz's Vim configuration (Neovim-ready)";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager";
