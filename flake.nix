@@ -86,6 +86,7 @@
         rustAnalyzer
         ruff
         stylua
+        taplo
         tree-sitter
         typescript
         typescript-language-server
