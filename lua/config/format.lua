@@ -17,6 +17,7 @@ require("conform").setup({
 		nix = { "alejandra" },
 		markdown = { "mdformat" },
 		rust = { "rustfmt", lsp_format = "fallback" },
+		toml = { "taplo" },
 		tsx = { "biome-organize-imports", "biome" },
 		typescript = { "biome-organize-imports", "biome" },
 		yaml = { "yamlfmt" },
