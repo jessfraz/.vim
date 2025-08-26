@@ -63,7 +63,11 @@
         else pkgs.emptyFile;
 
       alejandraPkg = alejandra.packages.${pkgs.system}.default;
-      rustAnalyzer = fenix.packages.${pkgs.system}.rust-analyzer;
+      # Temporary fix for apple sdks
+      rustAnalyzer =
+        if pkgs.stdenv.isDarwin
+        then pkgs.rust-analyzer
+        else fenix.packages.${pkgs.system}.rust-analyzer;
       kclLsp = modeling-app.packages.${pkgs.system}.kcl-language-server;
     in {
       home.packages = with pkgs; [
