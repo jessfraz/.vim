@@ -14,8 +14,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    fenix = {
-      url = "github:nix-community/fenix";
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -35,19 +35,24 @@
     nixpkgs,
     home-manager,
     neovim-nightly,
-    fenix,
+    rust-overlay,
     alejandra,
     modeling-app,
     ...
   }: let
     supportedSystems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
 
+    overlays = [rust-overlay.overlays.default];
+
+    mkPkgs = system:
+      import nixpkgs {
+        inherit system overlays;
+      };
+
     forAllSystems = f:
       nixpkgs.lib.genAttrs supportedSystems (system:
         f {
-          pkgs = import nixpkgs {
-            inherit system;
-          };
+          pkgs = mkPkgs system;
           system = system;
         });
   in {
@@ -67,7 +72,7 @@
       rustAnalyzer =
         if pkgs.stdenv.isDarwin
         then pkgs.rust-analyzer
-        else fenix.packages.${pkgs.system}.rust-analyzer;
+        else pkgs.rust-analyzer-nightly;
       kclLsp = modeling-app.packages.${pkgs.system}.kcl-language-server;
     in {
       home.packages = with pkgs; [
@@ -119,9 +124,7 @@
     homeConfigurations = forAllSystems (
       {system, ...}:
         home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs {
-            inherit system;
-          };
+          pkgs = mkPkgs system;
           modules = [self.homeManagerModules.default];
         }
     );
