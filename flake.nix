@@ -9,11 +9,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    neovim-nightly = {
-      url = "github:nix-community/neovim-nightly-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -34,7 +29,6 @@
     self,
     nixpkgs,
     home-manager,
-    neovim-nightly,
     rust-overlay,
     alejandra,
     modeling-app,
@@ -108,8 +102,7 @@
         viAlias = true;
         vimAlias = true;
 
-        # use the neovim-nightly package
-        package = neovim-nightly.packages.${pkgs.system}.default;
+        package = pkgs.neovim;
       };
 
       home.file = {
