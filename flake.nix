@@ -102,7 +102,7 @@
         viAlias = true;
         vimAlias = true;
 
-        package = pkgs.neovim;
+        package = pkgs.neovim-unwrapped;
       };
 
       home.file = {
