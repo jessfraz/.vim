@@ -61,13 +61,13 @@
         then path
         else pkgs.emptyFile;
 
-      alejandraPkg = alejandra.packages.${pkgs.system}.default;
+      alejandraPkg = alejandra.packages.${pkgs.stdenv.hostPlatform.system}.default;
       # Temporary fix for apple sdks
       rustAnalyzer =
         if pkgs.stdenv.isDarwin
         then pkgs.rust-analyzer
         else pkgs.rust-analyzer-nightly;
-      kclLsp = modeling-app.packages.${pkgs.system}.kcl-language-server;
+      kclLsp = modeling-app.packages.${pkgs.stdenv.hostPlatform.system}.kcl-language-server;
     in {
       home.packages = with pkgs; [
         alejandraPkg
