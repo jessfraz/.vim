@@ -113,11 +113,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1779821912,
-        "narHash": "sha256-mKXTB5i4ZfiX1jezrvTJD8y2UdXf90+U2L+9IjVouXg=",
+        "lastModified": 1779903589,
+        "narHash": "sha256-et+FE0z4bGpEC6XC0ivaednDNIdKhLx7G6XEdQKQyYk=",
         "owner": "kittycad",
         "repo": "modeling-app",
-        "rev": "671c3fc0844ffc1d7d0f3fa403df1dc7c7d5a218",
+        "rev": "4cca91b0a3b882748c100b1406ddc80baa0ca96d",
         "type": "github"
       },
       "original": {
@@ -261,11 +261,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1779765539,
-        "narHash": "sha256-2QxuD5gJcfCFsnqv54LGEHQKvd+K+DW/ecERwAvuA7w=",
+        "lastModified": 1779851998,
+        "narHash": "sha256-UkkMh3bX9QW4Luqkm98nUaOqKWrU6i65mUnph3WeSSw=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "09889992e640378f7008c3302b9d4892579df610",
+        "rev": "6cddd512fa2bf7231f098d3a2f92f6e4cff71e0a",
         "type": "github"
       },
       "original": {
