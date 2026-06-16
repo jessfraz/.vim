@@ -89,11 +89,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1781635397,
-        "narHash": "sha256-rfef8xTnnY+zEI1rcVcrECA589F3/8KTaQ//n+wMAv0=",
+        "lastModified": 1781636657,
+        "narHash": "sha256-yZ1Ui3pncDpqSfVK3v7tGbtpWArSWwba+gweg2Rl36w=",
         "owner": "kittycad",
         "repo": "modeling-app",
-        "rev": "3686cbc27e237c0eb48aebb253cc8901784de4f6",
+        "rev": "8ba6b10ac7968ee97850663553002d4c2ccadfa1",
         "type": "github"
       },
       "original": {
