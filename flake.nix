@@ -64,7 +64,7 @@
       alejandraPkg = alejandra.packages.${pkgs.stdenv.hostPlatform.system}.default;
       # Temporary fix for apple sdks
       rustAnalyzer =
-        if pkgs.stdenv.isDarwin
+        if pkgs.stdenv.hostPlatform.isDarwin
         then pkgs.rust-analyzer
         else pkgs.rust-analyzer-nightly;
       kclLsp = modeling-app.packages.${pkgs.stdenv.hostPlatform.system}.kcl-language-server;
