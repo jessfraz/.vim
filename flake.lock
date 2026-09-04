@@ -68,11 +68,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1788458226,
-        "narHash": "sha256-UZTAlg8iKVEmyEXakzKmukrzFIKrXezYsRy9vajDrGw=",
+        "lastModified": 1788487777,
+        "narHash": "sha256-Ro/e1N4ZR8/XaFF+sF9SgfPK79HM5YNEppzFj8p+0Ak=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "aa308770461dcf22c333a5e8a31c8bddbde5bee9",
+        "rev": "693e8ce0fb240a73c116a03cfd7b19269c87af88",
         "type": "github"
       },
       "original": {
@@ -89,11 +89,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1788484067,
-        "narHash": "sha256-QuHSg7fvXiSAoP6VknzI6XuRsZI2pSAwY4okE9li3FU=",
+        "lastModified": 1788497458,
+        "narHash": "sha256-2ImpzyuS0uXzk5mEN90rQ0+3d3ZU0D25/sJGS5da+Xw=",
         "owner": "kittycad",
         "repo": "modeling-app",
-        "rev": "d2e2a8a5c56024c60d00f11b3a9efd4933aa47a6",
+        "rev": "e2c1e87acecb18c97b034547ae7cd1f081309713",
         "type": "github"
       },
       "original": {
