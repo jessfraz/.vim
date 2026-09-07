@@ -3,7 +3,7 @@
   package,
 }: let
   checkSourceReferences = pkgs.writeText "check-rust-source-references.py" (
-    builtins.readFile ./check-source-references.py
+    builtins.readFile ./check_source_references.py
   );
   toolchains = pkgs.lib.unique (
     builtins.filter

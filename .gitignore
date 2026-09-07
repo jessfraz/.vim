@@ -4,3 +4,4 @@ bundle/*/doc/tags
 init.vim
 view
 result
+__pycache__/

@@ -135,6 +135,14 @@
       system,
     }: {
       home = self.homeConfigurations.${system}.activationPackage;
+      source-references =
+        pkgs.runCommand "rust-source-references-check" {
+          nativeBuildInputs = [pkgs.python3];
+        } ''
+          cd ${self}
+          python -m unittest discover -s tests -p test_source_references.py
+          touch "$out"
+        '';
       telescope =
         pkgs.runCommand "telescope-search-check" {
           nativeBuildInputs = [pkgs.neovim pkgs.ripgrep];
