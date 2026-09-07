@@ -3,6 +3,15 @@
 
 My vim dot files. 
 
+The flake supports `x86_64-linux`, `aarch64-linux`, and `aarch64-darwin`.
+Current nixpkgs no longer supports `x86_64-darwin`.
+
+`nix flake check` builds a standalone Home Manager fixture and runs real
+Telescope search and KCL language-server checks. CI builds these checks on
+Linux and Apple silicon, using the shared binary cache for downloads.
+`packages.<system>.editor-tools` contains only executable packages suitable
+for caching, without Home Manager activation files or user configuration.
+
 ## Shortcuts
 
 - `Ctrl-P`: Find files

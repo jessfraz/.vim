@@ -66,9 +66,6 @@ return {
 					if not ok then
 						builtin.find_files()
 					end
-					if not ok then
-						builtin.find_files()
-					end
 				end,
 				desc = "Find files (incl. dot‑files)",
 			},
@@ -127,9 +124,7 @@ return {
 							"--glob",
 							"!.git/*", -- keep .git out
 							"--glob",
-							".github/**", -- BUT keep everything under .github
-							"--exclude",
-							"docs/html/**",
+							"!docs/html/**",
 						},
 					},
 
@@ -141,9 +136,7 @@ return {
 								"--glob",
 								"!.git/*",
 								"--glob",
-								".github/**",
-								"--exclude",
-								"docs/html/**",
+								"!docs/html/**",
 							}
 						end,
 					},

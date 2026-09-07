@@ -14,14 +14,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    alejandra = {
-      url = "github:kamadorueda/alejandra/4.0.0";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     modeling-app = {
       url = "github:kittycad/modeling-app";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.rust-overlay.follows = "rust-overlay";
     };
   };
 
@@ -29,18 +25,14 @@
     self,
     nixpkgs,
     home-manager,
-    rust-overlay,
-    alejandra,
     modeling-app,
     ...
   }: let
-    supportedSystems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
-
-    overlays = [rust-overlay.overlays.default];
+    supportedSystems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin"];
 
     mkPkgs = system:
       import nixpkgs {
-        inherit system overlays;
+        inherit system;
       };
 
     forAllSystems = f:
@@ -49,28 +41,9 @@
           pkgs = mkPkgs system;
           system = system;
         });
-  in {
-    homeManagerModules.default = {
-      pkgs,
-      config,
-      lib,
-      ...
-    }: let
-      mkIfExists = path:
-        if builtins.pathExists path
-        then path
-        else pkgs.emptyFile;
-
-      alejandraPkg = alejandra.packages.${pkgs.stdenv.hostPlatform.system}.default;
-      # Temporary fix for apple sdks
-      rustAnalyzer =
-        if pkgs.stdenv.hostPlatform.isDarwin
-        then pkgs.rust-analyzer
-        else pkgs.rust-analyzer-nightly;
-      kclLsp = modeling-app.packages.${pkgs.stdenv.hostPlatform.system}.kcl-language-server;
-    in {
-      home.packages = with pkgs; [
-        alejandraPkg
+    mkEditorPackages = pkgs:
+      with pkgs; [
+        alejandra
         biome
         clang-tools
         gh
@@ -79,14 +52,14 @@
         gotools
         gopls
         jq
-        kclLsp
+        self.packages.${stdenv.hostPlatform.system}.kcl-language-server
         luajitPackages.jsregexp
         luajitPackages.luarocks
         mdformat
         nixd
         pyright
         ripgrep
-        rustAnalyzer
+        rust-analyzer
         ruff
         stylua
         taplo
@@ -95,12 +68,20 @@
         typescript-language-server
         yamlfmt
       ];
+  in {
+    homeManagerModules.default = {
+      pkgs,
+      lib,
+      ...
+    }: {
+      home.packages = mkEditorPackages pkgs;
 
       programs.neovim = {
         enable = true;
         defaultEditor = true;
         viAlias = true;
         vimAlias = true;
+        sideloadInitLua = lib.mkDefault true;
         withPython3 = true;
         withRuby = true;
 
@@ -111,17 +92,69 @@
         ".config/nvim/init.lua".source = ./init.lua;
 
         ".config/nvim/lua" = {
-          source = mkIfExists ./lua;
+          source = ./lua;
         };
       };
     };
 
     homeConfigurations = forAllSystems (
-      {system, ...}:
+      {pkgs, ...}:
         home-manager.lib.homeManagerConfiguration {
-          pkgs = mkPkgs system;
-          modules = [self.homeManagerModules.default];
+          inherit pkgs;
+          modules = [
+            self.homeManagerModules.default
+            {
+              home.username = "nvim-check";
+              home.homeDirectory =
+                if pkgs.stdenv.hostPlatform.isDarwin
+                then "/Users/nvim-check"
+                else "/home/nvim-check";
+              home.stateVersion = "26.05";
+            }
+          ];
         }
     );
+
+    packages = forAllSystems ({
+      pkgs,
+      system,
+    }: {
+      kcl-language-server = import ./nix/kcl-language-server.nix {
+        inherit pkgs;
+        package = modeling-app.packages.${system}.kcl-language-server;
+      };
+      # Only executable packages belong in the shared binary cache.
+      editor-tools = pkgs.buildEnv {
+        name = "editor-tools";
+        paths = mkEditorPackages pkgs ++ [pkgs.neovim];
+      };
+    });
+
+    checks = forAllSystems ({
+      pkgs,
+      system,
+    }: {
+      home = self.homeConfigurations.${system}.activationPackage;
+      telescope =
+        pkgs.runCommand "telescope-search-check" {
+          nativeBuildInputs = [pkgs.neovim pkgs.ripgrep];
+        } ''
+          export HOME="$TMPDIR/home"
+          mkdir -p "$HOME"
+          cd ${self}
+          nvim --headless -u NONE \
+            --cmd 'set rtp+=${pkgs.vimPlugins.plenary-nvim}' \
+            --cmd 'set rtp+=${pkgs.vimPlugins.telescope-nvim}' \
+            -l tests/telescope.lua
+          touch "$out"
+        '';
+      kcl-language-server =
+        pkgs.runCommand "kcl-language-server-check" {
+          nativeBuildInputs = [pkgs.python3];
+        } ''
+          python ${./tests/kcl_lsp.py} ${self.packages.${system}.kcl-language-server}/bin/kcl-language-server
+          touch "$out"
+        '';
+    });
   };
 }
