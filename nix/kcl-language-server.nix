@@ -16,9 +16,10 @@ in
       nativeBuildInputs = previous.nativeBuildInputs ++ [pkgs.python3 pkgs.removeReferencesTo];
       # Rust embeds standard-library source locations in the executable. They
       # retain the compiler and its docs despite not being runtime dependencies.
-      # Validate before removing them, and run before Darwin signs the binary.
-      postInstall =
-        (previous.postInstall or "")
+      # Run after stripping linker/debug records. removeReferencesTo re-signs
+      # Darwin executables after patching them.
+      postFixup =
+        (previous.postFixup or "")
         + ''
           python ${checkSourceReferences} "$out/bin/kcl-language-server" ${builtins.head toolchains}
           remove-references-to -t ${builtins.head toolchains} "$out/bin/kcl-language-server"
