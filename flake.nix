@@ -159,6 +159,7 @@
       kcl-language-server =
         pkgs.runCommand "kcl-language-server-check" {
           nativeBuildInputs = [pkgs.python3];
+          SSL_CERT_FILE = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
         } ''
           python ${./tests/kcl_lsp.py} ${self.packages.${system}.kcl-language-server}/bin/kcl-language-server
           touch "$out"

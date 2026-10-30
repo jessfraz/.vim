@@ -2,6 +2,7 @@
 
 import asyncio
 import json
+import os
 import sys
 
 
@@ -13,7 +14,7 @@ async def check(executable: str) -> None:
         stdin=asyncio.subprocess.PIPE,
         stdout=asyncio.subprocess.PIPE,
         stderr=asyncio.subprocess.PIPE,
-        env={"PATH": ""},
+        env={**os.environ, "PATH": ""},
     )
     assert process.stdin is not None
     assert process.stdout is not None
